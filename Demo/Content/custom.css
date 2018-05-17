@@ -1,0 +1,24 @@
+﻿.create-account {
+    background-color:#F66201 !important
+
+}
+
+.custom-pointer {
+   cursor: pointer !important
+}
+
+.dt-centered th{
+
+    text-align:center;
+}
+
+.tooltipster-custom {
+    background: #F66201;
+    color: white;
+}
+
+
+.form-control {
+
+    text-transform:uppercase;
+}

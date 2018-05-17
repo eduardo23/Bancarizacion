@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fb5f0ed57f2b496fb05dd2924aa64bce" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.AfiliacionSeguro" Width="1.5" PointX="14.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.AfiliacionSeguroAlumno" Width="1.5" PointX="14.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.AfiliacionSeguroPadre" Width="1.5" PointX="14.25" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Grado" Width="1.5" PointX="9.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Padre" Width="1.5" PointX="12" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.TipoPadre" Width="1.5" PointX="9.75" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.C__RefactorLog" Width="1.5" PointX="10.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Menu" Width="1.5" PointX="5.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Parametros" Width="1.5" PointX="8.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Permisos" Width="1.5" PointX="10.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.sysdiagrams" Width="1.5" PointX="15.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Banco" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.BancoParametro" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.BancoParametroTipo" Width="1.5" PointX="0.75" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CaracterEspecial" Width="1.5" PointX="17" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CaracterEspecialTipo" Width="1.5" PointX="14.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CargaTxtParametro" Width="1.5" PointX="4" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CIASeguro" Width="1.5" PointX="0.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CIASeguroProducto" Width="1.5" PointX="6" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.ConfiguracionArchivo" Width="1.5" PointX="3.75" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.ConfiguracionArchivoDetalle" Width="1.5" PointX="6" PointY="48.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.ConfiguracionArchivoTipo" Width="1.5" PointX="1.5" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Contacto" Width="1.5" PointX="8" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Cuenta" Width="1.5" PointX="6" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.InstitucionEducativa" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Moneda" Width="1.5" PointX="0.75" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Producto" Width="1.5" PointX="0.75" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.TipoDocumento" Width="1.5" PointX="1.5" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.TipoInstitucionEducativa" Width="1.5" PointX="1.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Asociacion" Width="1.5" PointX="9" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.AsociacionDetalle" Width="1.5" PointX="11.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Campania" Width="1.5" PointX="0.75" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CampaniaDetalle" Width="1.5" PointX="11.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CargaHistorial" Width="1.5" PointX="11.25" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Cheque" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Codigo" Width="1.5" PointX="14.25" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CodigoDetalle" Width="1.5" PointX="15.375" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.CodigoDetallePago" Width="1.5" PointX="18.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Mail" Width="1.5" PointX="10.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.MailAdjunto" Width="1.5" PointX="13" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Trama" Width="1.5" PointX="17.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Roles" Width="1.5" PointX="5.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.UserClaims" Width="1.5" PointX="5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.UserLogins" Width="1.5" PointX="5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.UserRoles" Width="1.5" PointX="8" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Users" Width="1.5" PointX="2.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Ubigeo" Width="1.5" PointX="18.75" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Afiliacio__Afili__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Afiliacio__Afili__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Afiliacio__Coleg__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CodigoDetalle_AfiliacionSeguro" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CodigoDetalle_AfiliacionSeguroAlumno" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Afiliacio__Padre__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CodigoDetalle_AfiliacionSeguroPadre" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Padre__TipoDocum__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Padre__TipoPadre__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_BancoParametro_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CargaTxtParametro_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cheque_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CodigoDetalle_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Contacto_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cuenta_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_BancoParametro_BancoParametroTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_BancoParametro_CIASeguro" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CargaTxtParametro_BancoParametroTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CaracterEspecial_CaracterEspecialTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Asociacio__CIASe__2180FB33" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Asociacio__Recau__22751F6C" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cheque_CIASeguro" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CIASeguroProducto_CIASeguro" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Codigo_CIASeguro" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cuenta_CIASeguro" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CIASeguroProducto_ConfiguracionArchivo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CIASeguroProducto_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_ConfiguracionArchivo_ConfiguracionArchivoTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_ConfiguracionArchivoDetalle_ConfiguracionArchivo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Contacto_InstitucionEducativa" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Cuenta__TipoMone__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_AsociacionDetalle_Cuenta" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Asociacio__Coleg__208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cheque_InstitucionEducativa" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Codigo_InstitucionEducativa" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_InstitucionEducativa_TipoDocumento" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_InstitucionEducativa_TipoInstitucionEducativa" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Asociacion_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cheque_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CodigoDetalle_Moneda" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Asociacio__Produ__236943A5" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cheque_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Codigo_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Asociacio__Asoci__2645B050" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CampaniaDetalle_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CargaHistorial_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Codigo_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CampaniaDetalle_Campania" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Cheque_Campania" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CodigoDetalle_Codigo" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_CodigoDetallePago_CodigoDetalle" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_MailAdjunto_Mail" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_UserRoles_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Seguridad_UserClaims_Seguridad_Users_IdentityUser_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Seguridad_UserLogins_Seguridad_Users_IdentityUser_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_UserRoles_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.PersonaDatosAdic" Width="1.5" PointX="16.375" PointY="13.75" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Reg_Online" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.Alumno" Width="1.5" PointX="19" PointY="15" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Afiliacio__Alumn__72910220" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK__Alumno__GradoID__531856C7" />
+        <AssociationConnector Association="BD_HermesBancarizacionModel.FK_Alumno_TipoDocumento" />
+        <EntityTypeShape EntityType="BD_HermesBancarizacionModel.PersonaPreg" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

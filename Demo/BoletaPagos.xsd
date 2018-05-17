@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BoletaPagos" targetNamespace="http://tempuri.org/BoletaPagos.xsd" xmlns:mstns="http://tempuri.org/BoletaPagos.xsd" xmlns="http://tempuri.org/BoletaPagos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BoletaPagos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="BoletaPagos" msprop:Generator_UserDSName="BoletaPagos">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BoletaDePagos" msprop:Generator_TableClassName="BoletaDePagosDataTable" msprop:Generator_TableVarName="tableBoletaDePagos" msprop:Generator_TablePropName="BoletaDePagos" msprop:Generator_RowDeletingName="BoletaDePagosRowDeleting" msprop:Generator_RowChangingName="BoletaDePagosRowChanging" msprop:Generator_RowEvHandlerName="BoletaDePagosRowChangeEventHandler" msprop:Generator_RowDeletedName="BoletaDePagosRowDeleted" msprop:Generator_UserTableName="BoletaDePagos" msprop:Generator_RowChangedName="BoletaDePagosRowChanged" msprop:Generator_RowEvArgName="BoletaDePagosRowChangeEvent" msprop:Generator_RowClassName="BoletaDePagosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Asegurado" msprop:Generator_ColumnVarNameInTable="columnAsegurado" msprop:Generator_ColumnPropNameInRow="Asegurado" msprop:Generator_ColumnPropNameInTable="AseguradoColumn" msprop:Generator_UserColumnName="Asegurado" type="xs:string" minOccurs="0" />
+              <xs:element name="Beneficiario" msprop:Generator_ColumnVarNameInTable="columnBeneficiario" msprop:Generator_ColumnPropNameInRow="Beneficiario" msprop:Generator_ColumnPropNameInTable="BeneficiarioColumn" msprop:Generator_UserColumnName="Beneficiario" type="xs:string" minOccurs="0" />
+              <xs:element name="NroDocumento" msprop:Generator_ColumnVarNameInTable="columnNroDocumento" msprop:Generator_ColumnPropNameInRow="NroDocumento" msprop:Generator_ColumnPropNameInTable="NroDocumentoColumn" msprop:Generator_UserColumnName="NroDocumento" type="xs:string" minOccurs="0" />
+              <xs:element name="FechaNacimiento" msprop:Generator_ColumnVarNameInTable="columnFechaNacimiento" msprop:Generator_ColumnPropNameInRow="FechaNacimiento" msprop:Generator_ColumnPropNameInTable="FechaNacimientoColumn" msprop:Generator_UserColumnName="FechaNacimiento" type="xs:string" minOccurs="0" />
+              <xs:element name="Seguro" msprop:Generator_ColumnVarNameInTable="columnSeguro" msprop:Generator_ColumnPropNameInRow="Seguro" msprop:Generator_ColumnPropNameInTable="SeguroColumn" msprop:Generator_UserColumnName="Seguro" type="xs:string" minOccurs="0" />
+              <xs:element name="Prima" msprop:Generator_ColumnVarNameInTable="columnPrima" msprop:Generator_ColumnPropNameInRow="Prima" msprop:Generator_ColumnPropNameInTable="PrimaColumn" msprop:Generator_UserColumnName="Prima" type="xs:string" minOccurs="0" />
+              <xs:element name="CiaSeguros" msprop:Generator_ColumnVarNameInTable="columnCiaSeguros" msprop:Generator_ColumnPropNameInRow="CiaSeguros" msprop:Generator_ColumnPropNameInTable="CiaSegurosColumn" msprop:Generator_UserColumnName="CiaSeguros" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

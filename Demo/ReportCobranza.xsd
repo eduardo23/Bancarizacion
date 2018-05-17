@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportCobranza" targetNamespace="http://tempuri.org/ReportCobranza.xsd" xmlns:mstns="http://tempuri.org/ReportCobranza.xsd" xmlns="http://tempuri.org/ReportCobranza.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportCobranza" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportCobranza" msprop:Generator_UserDSName="ReportCobranza">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Cobranza" msprop:Generator_TableClassName="CobranzaDataTable" msprop:Generator_TableVarName="tableCobranza" msprop:Generator_RowChangedName="CobranzaRowChanged" msprop:Generator_TablePropName="Cobranza" msprop:Generator_RowDeletingName="CobranzaRowDeleting" msprop:Generator_RowChangingName="CobranzaRowChanging" msprop:Generator_RowEvHandlerName="CobranzaRowChangeEventHandler" msprop:Generator_RowDeletedName="CobranzaRowDeleted" msprop:Generator_RowClassName="CobranzaRow" msprop:Generator_UserTableName="Cobranza" msprop:Generator_RowEvArgName="CobranzaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CampaniaID" msprop:Generator_ColumnVarNameInTable="columnCampaniaID" msprop:Generator_ColumnPropNameInRow="CampaniaID" msprop:Generator_ColumnPropNameInTable="CampaniaIDColumn" msprop:Generator_UserColumnName="CampaniaID" type="xs:int" minOccurs="0" />
+              <xs:element name="CampaniaNm" msprop:Generator_ColumnVarNameInTable="columnCampaniaNm" msprop:Generator_ColumnPropNameInRow="CampaniaNm" msprop:Generator_ColumnPropNameInTable="CampaniaNmColumn" msprop:Generator_UserColumnName="CampaniaNm" type="xs:string" minOccurs="0" />
+              <xs:element name="ProductoID" msprop:Generator_ColumnVarNameInTable="columnProductoID" msprop:Generator_ColumnPropNameInRow="ProductoID" msprop:Generator_ColumnPropNameInTable="ProductoIDColumn" msprop:Generator_UserColumnName="ProductoID" type="xs:int" minOccurs="0" />
+              <xs:element name="ProductoNm" msprop:Generator_ColumnVarNameInTable="columnProductoNm" msprop:Generator_ColumnPropNameInRow="ProductoNm" msprop:Generator_ColumnPropNameInTable="ProductoNmColumn" msprop:Generator_UserColumnName="ProductoNm" type="xs:string" minOccurs="0" />
+              <xs:element name="CIASeguroID" msprop:Generator_ColumnVarNameInTable="columnCIASeguroID" msprop:Generator_ColumnPropNameInRow="CIASeguroID" msprop:Generator_ColumnPropNameInTable="CIASeguroIDColumn" msprop:Generator_UserColumnName="CIASeguroID" type="xs:int" minOccurs="0" />
+              <xs:element name="CIASeguroNm" msprop:Generator_ColumnVarNameInTable="columnCIASeguroNm" msprop:Generator_ColumnPropNameInRow="CIASeguroNm" msprop:Generator_ColumnPropNameInTable="CIASeguroNmColumn" msprop:Generator_UserColumnName="CIASeguroNm" type="xs:string" minOccurs="0" />
+              <xs:element name="InstitucionEducativaID" msprop:Generator_ColumnVarNameInTable="columnInstitucionEducativaID" msprop:Generator_ColumnPropNameInRow="InstitucionEducativaID" msprop:Generator_ColumnPropNameInTable="InstitucionEducativaIDColumn" msprop:Generator_UserColumnName="InstitucionEducativaID" type="xs:int" minOccurs="0" />
+              <xs:element name="InstitucionEducativaNm" msprop:Generator_ColumnVarNameInTable="columnInstitucionEducativaNm" msprop:Generator_ColumnPropNameInRow="InstitucionEducativaNm" msprop:Generator_ColumnPropNameInTable="InstitucionEducativaNmColumn" msprop:Generator_UserColumnName="InstitucionEducativaNm" type="xs:string" minOccurs="0" />
+              <xs:element name="PrimaMon1" msprop:Generator_ColumnVarNameInTable="columnPrimaMon1" msprop:Generator_ColumnPropNameInRow="PrimaMon1" msprop:Generator_ColumnPropNameInTable="PrimaMon1Column" msprop:Generator_UserColumnName="PrimaMon1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NAsegMon1" msprop:Generator_ColumnVarNameInTable="columnNAsegMon1" msprop:Generator_ColumnPropNameInRow="NAsegMon1" msprop:Generator_ColumnPropNameInTable="NAsegMon1Column" msprop:Generator_UserColumnName="NAsegMon1" type="xs:int" minOccurs="0" />
+              <xs:element name="PrimaMon2" msprop:Generator_ColumnVarNameInTable="columnPrimaMon2" msprop:Generator_ColumnPropNameInRow="PrimaMon2" msprop:Generator_ColumnPropNameInTable="PrimaMon2Column" msprop:Generator_UserColumnName="PrimaMon2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NAsegMon2" msprop:Generator_ColumnVarNameInTable="columnNAsegMon2" msprop:Generator_ColumnPropNameInRow="NAsegMon2" msprop:Generator_ColumnPropNameInTable="NAsegMon2Column" msprop:Generator_UserColumnName="NAsegMon2" type="xs:int" minOccurs="0" />
+              <xs:element name="MRecaMon1" msprop:Generator_ColumnVarNameInTable="columnMRecaMon1" msprop:Generator_ColumnPropNameInRow="MRecaMon1" msprop:Generator_ColumnPropNameInTable="MRecaMon1Column" msprop:Generator_UserColumnName="MRecaMon1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MRecaMon2" msprop:Generator_ColumnVarNameInTable="columnMRecaMon2" msprop:Generator_ColumnPropNameInRow="MRecaMon2" msprop:Generator_ColumnPropNameInTable="MRecaMon2Column" msprop:Generator_UserColumnName="MRecaMon2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MPagaMon1" msprop:Generator_ColumnVarNameInTable="columnMPagaMon1" msprop:Generator_ColumnPropNameInRow="MPagaMon1" msprop:Generator_ColumnPropNameInTable="MPagaMon1Column" msprop:Generator_UserColumnName="MPagaMon1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MPagaMon2" msprop:Generator_ColumnVarNameInTable="columnMPagaMon2" msprop:Generator_ColumnPropNameInRow="MPagaMon2" msprop:Generator_ColumnPropNameInTable="MPagaMon2Column" msprop:Generator_UserColumnName="MPagaMon2" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MPendMon1" msprop:Generator_ColumnVarNameInTable="columnMPendMon1" msprop:Generator_ColumnPropNameInRow="MPendMon1" msprop:Generator_ColumnPropNameInTable="MPendMon1Column" msprop:Generator_UserColumnName="MPendMon1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="MPendMon2" msprop:Generator_ColumnVarNameInTable="columnMPendMon2" msprop:Generator_ColumnPropNameInRow="MPendMon2" msprop:Generator_ColumnPropNameInTable="MPendMon2Column" msprop:Generator_UserColumnName="MPendMon2" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

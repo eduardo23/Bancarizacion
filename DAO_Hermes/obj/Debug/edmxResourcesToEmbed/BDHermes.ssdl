@@ -1,0 +1,2535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDHermesBancarizacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AfiliacionSeguro">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InstitucionEducativaID" Type="int" />
+    <Property Name="CodigoPago" Type="varchar" MaxLength="14" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AfiliacionSeguroAlumno">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AfiliacionSeguroID" Type="int" />
+    <Property Name="AlumnoID" Type="int" />
+  </EntityType>
+  <EntityType Name="AfiliacionSeguroPadre">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AfiliacionSeguroID" Type="int" />
+    <Property Name="PadreID" Type="int" />
+  </EntityType>
+  <EntityType Name="Alumno">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApellidoPaternno" Type="varchar" MaxLength="100" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="100" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TipoDocumentoID" Type="int" />
+    <Property Name="NumeroDocumento" Type="varchar" MaxLength="25" />
+    <Property Name="FechaNacimiento" Type="date" />
+    <Property Name="CodigoAlumno" Type="varchar" MaxLength="50" />
+    <Property Name="Carrera" Type="varchar" MaxLength="200" />
+    <Property Name="Sexo" Type="int" />
+    <Property Name="GradoID" Type="int" />
+    <Property Name="Seccion" Type="varchar" MaxLength="50" />
+    <Property Name="BeneficiarioID" Type="int" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="date" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="date" />
+  </EntityType>
+  <EntityType Name="Grado">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="char" MaxLength="2" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Padre">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="100" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="100" />
+    <Property Name="Nombre" Type="varchar" MaxLength="255" />
+    <Property Name="TipoDocumentoID" Type="int" />
+    <Property Name="NumeroDocumento" Type="varchar" MaxLength="25" />
+    <Property Name="FechaNacimiento" Type="datetime" />
+    <Property Name="BeneficiarioID" Type="int" />
+    <Property Name="TipoPadreID" Type="int" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TipoPadre">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="255" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="__RefactorLog">
+    <Key>
+      <PropertyRef Name="OperationKey" />
+    </Key>
+    <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Categoria" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Valor" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Banco">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="NombreCorto" Type="varchar" MaxLength="200" />
+    <Property Name="RUC" Type="varchar" MaxLength="11" />
+    <Property Name="Direccion" Type="varchar" MaxLength="500" />
+    <Property Name="CodigoUbigeo" Type="char" MaxLength="6" />
+    <Property Name="NombreAdj" Type="varchar" MaxLength="150" />
+    <Property Name="TipoContenidoAdj" Type="varchar" MaxLength="250" />
+    <Property Name="TamanioAdj" Type="bigint" />
+    <Property Name="DatoAdj" Type="varbinary(max)" />
+    <Property Name="ProcesoAfiliacion" Type="bit" Nullable="false" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BancoParametro">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BancoParametroID" Type="int" />
+    <Property Name="BancoID" Type="int" />
+    <Property Name="CIASeguroID" Type="int" />
+    <Property Name="BancoParametroTipoID" Type="int" />
+    <Property Name="Orden" Type="int" />
+    <Property Name="Etiqueta" Type="varchar" MaxLength="255" />
+    <Property Name="Valor" Type="varchar" MaxLength="255" />
+    <Property Name="Longitud" Type="int" />
+    <Property Name="PopertyName" Type="varchar" MaxLength="255" />
+    <Property Name="FuncionValidacion" Type="varchar" MaxLength="255" />
+    <Property Name="PadDir" Type="char" MaxLength="1" />
+    <Property Name="PadCaracter" Type="char" MaxLength="1" />
+    <Property Name="EsEditableEnIU" Type="bit" />
+    <Property Name="GeneraTrama" Type="bit" />
+    <Property Name="ValorFijo" Type="bit" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="BancoParametroTipo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="CaracterEspecial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CaracterEspecialTipoID" Type="int" />
+    <Property Name="Caracter" Type="varchar" MaxLength="2" />
+    <Property Name="Reemplazo" Type="varchar" MaxLength="2" />
+    <Property Name="PermiteIngreso" Type="bit" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="CaracterEspecialTipo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="CargaTxtParametro">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BancoID" Type="int" Nullable="false" />
+    <Property Name="BancoParametroTipoID" Type="int" Nullable="false" />
+    <Property Name="Orden" Type="int" Nullable="false" />
+    <Property Name="NombreColumna" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="DescripcionColumna" Type="varchar" MaxLength="255" />
+    <Property Name="PopertyName" Type="varchar" MaxLength="255" />
+    <Property Name="Valor" Type="varchar" MaxLength="255" />
+    <Property Name="Longitud" Type="int" Nullable="false" />
+    <Property Name="PosicionStart" Type="int" Nullable="false" />
+    <Property Name="PosicionEnd" Type="int" Nullable="false" />
+    <Property Name="IsMappingEntity" Type="bit" Nullable="false" />
+    <Property Name="Actvo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CIASeguro">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="255" />
+    <Property Name="RUC" Type="varchar" MaxLength="11" />
+    <Property Name="Direccion" Type="varchar" MaxLength="500" />
+    <Property Name="CodigoUbigeo" Type="char" MaxLength="6" />
+    <Property Name="NombreAdj" Type="varchar" MaxLength="150" />
+    <Property Name="TipoContenidoAdj" Type="varchar" MaxLength="250" />
+    <Property Name="TamanioAdj" Type="bigint" />
+    <Property Name="DatoAdj" Type="varbinary(max)" />
+    <Property Name="IsEmpresaRecaudadora" Type="bit" Nullable="false" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="Codigo" Type="varchar" MaxLength="10" />
+    <Property Name="TerminosCondiciones" Type="varchar(max)" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CIASeguroProducto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CIASeguroID" Type="int" Nullable="false" />
+    <Property Name="ProductoID" Type="int" Nullable="false" />
+    <Property Name="ConfiguracionArchivoID" Type="int" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="ConfiguracionArchivo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConfiguracionArchivoTipoID" Type="int" />
+    <Property Name="CIASeguroID" Type="int" />
+    <Property Name="ProductoID" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" />
+    <Property Name="Descripcion" Type="varchar(max)" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="ConfiguracionArchivoDetalle">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConfiguracionArchivoID" Type="int" />
+    <Property Name="IndiceColumna" Type="int" />
+    <Property Name="NombreColumna" Type="varchar" MaxLength="255" />
+    <Property Name="DescripcionColumna" Type="varchar" MaxLength="255" />
+    <Property Name="TamannioColumna" Type="int" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="ConfiguracionArchivoTipo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" />
+    <Property Name="Descripcion" Type="varchar(max)" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="Contacto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BancoID" Type="int" />
+    <Property Name="InstitucionEducativaID" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="100" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="500" />
+    <Property Name="Cargo" Type="varchar" MaxLength="500" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="200" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizado" Type="varchar" MaxLength="200" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoCIASeguro" Type="int" />
+    <Property Name="Numero" Type="varchar(max)" />
+    <Property Name="TipoMonedaID" Type="int" />
+    <Property Name="BancoID" Type="int" />
+    <Property Name="Predeterminado" Type="bit" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="InstitucionEducativa">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoInstitucionEducativaID" Type="int" />
+    <Property Name="TipoDocumentoID" Type="int" />
+    <Property Name="Codigo" Type="varchar" MaxLength="100" />
+    <Property Name="Nombre" Type="varchar(max)" />
+    <Property Name="RazonSocial" Type="varchar(max)" />
+    <Property Name="TipoEmpresa" Type="int" />
+    <Property Name="NumeroDocumento" Type="varchar" MaxLength="250" />
+    <Property Name="CodigoUbigeo" Type="char" MaxLength="6" />
+    <Property Name="Direccion" Type="varchar" MaxLength="250" />
+    <Property Name="Telefono" Type="varchar" MaxLength="250" />
+    <Property Name="Fax" Type="varchar" MaxLength="250" />
+    <Property Name="ApellidoPaternno" Type="varchar" MaxLength="100" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="100" />
+    <Property Name="NombreNatural" Type="varchar" MaxLength="100" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="Moneda">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="255" />
+    <Property Name="Simbolo" Type="varchar" MaxLength="5" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="10" />
+    <Property Name="Nombre" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TipoDocumento">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="char" MaxLength="1" />
+    <Property Name="CodigoRenta" Type="char" MaxLength="1" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="RegistroUsuarioAsegurado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Estado" Type="bit" />
+  </EntityType>
+  <EntityType Name="TipoInstitucionEducativa">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="500" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDHermesBancarizacionTesting.Maestro.Ubigeo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Ubigeo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoUbigeo" Type="char" MaxLength="6" />
+    <Property Name="CodigoDepartamento" Type="char" MaxLength="2" />
+    <Property Name="CodigoProvincia" Type="char" MaxLength="2" />
+    <Property Name="CodigoDistrito" Type="char" MaxLength="2" />
+    <Property Name="Nombre" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Asociacion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InstitucionEducativaID" Type="int" Nullable="false" />
+    <Property Name="CIASeguroID" Type="int" Nullable="false" />
+    <Property Name="RecaudadorID" Type="int" Nullable="false" />
+    <Property Name="MonedaID" Type="int" />
+    <Property Name="ProductoID" Type="int" Nullable="false" />
+    <Property Name="TipoPrima" Type="bit" />
+    <Property Name="FilePlanSeguro" Type="varbinary(max)" />
+    <Property Name="Prima" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="NroPoliza" Type="varchar" MaxLength="50" />
+    <Property Name="CodigoContratante" Type="varchar" MaxLength="50" />
+    <Property Name="NombreContratante" Type="varchar" MaxLength="100" />
+    <Property Name="FechaVigenciaInicio" Type="datetime" />
+    <Property Name="FechaVigenciaFin" Type="datetime" />
+    <Property Name="FechaVigenciaPolizaInicio" Type="datetime" />
+    <Property Name="FechaVigenciaPolizaFin" Type="datetime" />
+    <Property Name="GastoCuracion" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="InvalidezPermanenteTotal" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="InvalidezPermanenteParcial" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="MuerteAccidental" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="GastosSepelio" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PensionMensual" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="MesesPension" Type="int" />
+    <Property Name="AnniosPension" Type="int" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="AsociacionDetalle">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AsociacionID" Type="int" Nullable="false" />
+    <Property Name="CuentaID" Type="int" Nullable="false" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Campania">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="150" />
+    <Property Name="InicioVigencia" Type="date" />
+    <Property Name="FinVigencia" Type="date" />
+    <Property Name="Estado" Type="bit" Nullable="false" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CampaniaDetalle">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CampaniaID" Type="int" />
+    <Property Name="AsociacionID" Type="int" />
+    <Property Name="Estado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CargaHistorial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoID" Type="int" />
+    <Property Name="AsociacionID" Type="int" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="Cheque">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CampaniaID" Type="int" Nullable="false" />
+    <Property Name="InstitucionEducativaID" Type="int" Nullable="false" />
+    <Property Name="CIASeguroID" Type="int" Nullable="false" />
+    <Property Name="ProductoID" Type="int" Nullable="false" />
+    <Property Name="BancoID" Type="int" />
+    <Property Name="MonedaID" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="NroCheque" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Concepto" Type="varchar" MaxLength="255" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Codigo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AsociacionID" Type="int" Nullable="false" />
+    <Property Name="InstitucionEducativaID" Type="int" Nullable="false" />
+    <Property Name="ProductoID" Type="int" Nullable="false" />
+    <Property Name="CIASeguroID" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CodigoDetalle">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoID" Type="int" />
+    <Property Name="CargaHistorialID" Type="int" />
+    <Property Name="ProductoID" Type="int" />
+    <Property Name="AfiliacionSeguroID" Type="int" />
+    <Property Name="AfiliacionSeguroAlumnoID" Type="int" />
+    <Property Name="AfiliacionSeguroPadreID" Type="int" />
+    <Property Name="Correlativo" Type="int" />
+    <Property Name="Codigo" Type="char" MaxLength="14" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="255" />
+    <Property Name="RecibidoBanco" Type="bit" />
+    <Property Name="TipoCarga" Type="bit" />
+    <Property Name="Observacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaPago" Type="date" />
+    <Property Name="OperacionBancaria" Type="varchar" MaxLength="150" />
+    <Property Name="MonedaPagoID" Type="int" />
+    <Property Name="BancoPagoID" Type="int" />
+    <Property Name="IsPagado" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CodigoDetallePago">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodigoDetalleID" Type="int" Nullable="false" />
+    <Property Name="FechaPago" Type="datetime" Nullable="false" />
+    <Property Name="OperacionBancaria" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="MonedaPagoID" Type="int" Nullable="false" />
+    <Property Name="BancoPagoID" Type="int" Nullable="false" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Destinatarios" Type="varchar(max)" Nullable="false" />
+    <Property Name="DestinatariosCopia" Type="varchar(max)" />
+    <Property Name="Asunto" Type="varchar(max)" Nullable="false" />
+    <Property Name="Cuerpo" Type="varchar(max)" Nullable="false" />
+    <Property Name="Enviando" Type="bit" Nullable="false" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MailAdjunto">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MailID" Type="int" Nullable="false" />
+    <Property Name="Path" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trama">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BancoID" Type="int" />
+    <Property Name="MonedaID" Type="int" />
+    <Property Name="CIASeguroID" Type="int" />
+    <Property Name="TipoGeneracion" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
+    <Property Name="FechaActualizacion" Type="datetime" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="UserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar(max)" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+    <Property Name="IdentityUser_Id" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="UserLogins">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LoginProvider" Type="nvarchar(max)" />
+    <Property Name="ProviderKey" Type="nvarchar(max)" />
+    <Property Name="IdentityUser_Id" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="UserRoles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IdentityRole_Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="IdentityUser_Id" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="CustomPasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="ApellidoPaterno" Type="nvarchar(max)" />
+    <Property Name="ApellidoMaterno" Type="nvarchar(max)" />
+    <Property Name="Nombre" Type="nvarchar(max)" />
+    <Property Name="TipoDocumento" Type="int" />
+    <Property Name="NumeroDocumento" Type="nvarchar(max)" />
+    <Property Name="Colegio" Type="int" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Afiliacio__Afili__4D94879B">
+    <End Role="AfiliacionSeguro" Type="Self.AfiliacionSeguro" Multiplicity="0..1" />
+    <End Role="AfiliacionSeguroPadre" Type="Self.AfiliacionSeguroPadre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AfiliacionSeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AfiliacionSeguroPadre">
+        <PropertyRef Name="AfiliacionSeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Afiliacio__Afili__6FE99F9F">
+    <End Role="AfiliacionSeguro" Type="Self.AfiliacionSeguro" Multiplicity="0..1" />
+    <End Role="AfiliacionSeguroAlumno" Type="Self.AfiliacionSeguroAlumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AfiliacionSeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AfiliacionSeguroAlumno">
+        <PropertyRef Name="AfiliacionSeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Afiliacio__Alumn__72910220">
+    <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+    <End Role="AfiliacionSeguroAlumno" Type="Self.AfiliacionSeguroAlumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumno">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AfiliacionSeguroAlumno">
+        <PropertyRef Name="AlumnoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Afiliacio__Coleg__7F2BE32F">
+    <End Role="InstitucionEducativa" Type="Self.InstitucionEducativa" Multiplicity="0..1" />
+    <End Role="AfiliacionSeguro" Type="Self.AfiliacionSeguro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InstitucionEducativa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AfiliacionSeguro">
+        <PropertyRef Name="InstitucionEducativaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Afiliacio__Padre__7A672E12">
+    <End Role="Padre" Type="Self.Padre" Multiplicity="0..1" />
+    <End Role="AfiliacionSeguroPadre" Type="Self.AfiliacionSeguroPadre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Padre">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AfiliacionSeguroPadre">
+        <PropertyRef Name="PadreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Alumno__GradoID__531856C7">
+    <End Role="Grado" Type="Self.Grado" Multiplicity="0..1" />
+    <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grado">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Alumno">
+        <PropertyRef Name="GradoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Asociacio__Asoci__2645B050">
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="1" />
+    <End Role="AsociacionDetalle" Type="Self.AsociacionDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asociacion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AsociacionDetalle">
+        <PropertyRef Name="AsociacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Asociacio__CIASe__2180FB33">
+    <End Role="CIASeguro" Type="Self.CIASeguro" Multiplicity="1" />
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIASeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Asociacion">
+        <PropertyRef Name="CIASeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Asociacio__Coleg__208CD6FA">
+    <End Role="InstitucionEducativa" Type="Self.InstitucionEducativa" Multiplicity="1" />
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InstitucionEducativa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Asociacion">
+        <PropertyRef Name="InstitucionEducativaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Asociacio__Produ__236943A5">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Asociacion">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Asociacio__Recau__22751F6C">
+    <End Role="CIASeguro" Type="Self.CIASeguro" Multiplicity="1" />
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIASeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Asociacion">
+        <PropertyRef Name="RecaudadorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cuenta__TipoMone__22AA2996">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="TipoMonedaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Padre__TipoDocum__7C4F7684">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+    <End Role="Padre" Type="Self.Padre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Padre">
+        <PropertyRef Name="TipoDocumentoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Padre__TipoPadre__7D439ABD">
+    <End Role="TipoPadre" Type="Self.TipoPadre" Multiplicity="0..1" />
+    <End Role="Padre" Type="Self.Padre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoPadre">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Padre">
+        <PropertyRef Name="TipoPadreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Alumno_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+    <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Alumno">
+        <PropertyRef Name="TipoDocumentoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asociacion_Moneda">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Asociacion">
+        <PropertyRef Name="MonedaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AsociacionDetalle_Cuenta">
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+    <End Role="AsociacionDetalle" Type="Self.AsociacionDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AsociacionDetalle">
+        <PropertyRef Name="CuentaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BancoParametro_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+    <End Role="BancoParametro" Type="Self.BancoParametro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BancoParametro">
+        <PropertyRef Name="BancoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BancoParametro_BancoParametroTipo">
+    <End Role="BancoParametroTipo" Type="Self.BancoParametroTipo" Multiplicity="0..1" />
+    <End Role="BancoParametro" Type="Self.BancoParametro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BancoParametroTipo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BancoParametro">
+        <PropertyRef Name="BancoParametroTipoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BancoParametro_CIASeguro">
+    <End Role="CIASeguro" Type="Self.CIASeguro" Multiplicity="0..1" />
+    <End Role="BancoParametro" Type="Self.BancoParametro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIASeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BancoParametro">
+        <PropertyRef Name="CIASeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CampaniaDetalle_Asociacion">
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+    <End Role="CampaniaDetalle" Type="Self.CampaniaDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asociacion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CampaniaDetalle">
+        <PropertyRef Name="AsociacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CampaniaDetalle_Campania">
+    <End Role="Campania" Type="Self.Campania" Multiplicity="0..1" />
+    <End Role="CampaniaDetalle" Type="Self.CampaniaDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campania">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CampaniaDetalle">
+        <PropertyRef Name="CampaniaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CaracterEspecial_CaracterEspecialTipo">
+    <End Role="CaracterEspecialTipo" Type="Self.CaracterEspecialTipo" Multiplicity="0..1" />
+    <End Role="CaracterEspecial" Type="Self.CaracterEspecial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CaracterEspecialTipo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CaracterEspecial">
+        <PropertyRef Name="CaracterEspecialTipoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CargaHistorial_Asociacion">
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+    <End Role="CargaHistorial" Type="Self.CargaHistorial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asociacion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CargaHistorial">
+        <PropertyRef Name="AsociacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CargaTxtParametro_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="1" />
+    <End Role="CargaTxtParametro" Type="Self.CargaTxtParametro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CargaTxtParametro">
+        <PropertyRef Name="BancoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CargaTxtParametro_BancoParametroTipo">
+    <End Role="BancoParametroTipo" Type="Self.BancoParametroTipo" Multiplicity="1" />
+    <End Role="CargaTxtParametro" Type="Self.CargaTxtParametro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BancoParametroTipo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CargaTxtParametro">
+        <PropertyRef Name="BancoParametroTipoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cheque_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+    <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cheque">
+        <PropertyRef Name="BancoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cheque_Campania">
+    <End Role="Campania" Type="Self.Campania" Multiplicity="1" />
+    <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campania">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cheque">
+        <PropertyRef Name="CampaniaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cheque_CIASeguro">
+    <End Role="CIASeguro" Type="Self.CIASeguro" Multiplicity="1" />
+    <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIASeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cheque">
+        <PropertyRef Name="CIASeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cheque_InstitucionEducativa">
+    <End Role="InstitucionEducativa" Type="Self.InstitucionEducativa" Multiplicity="1" />
+    <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InstitucionEducativa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cheque">
+        <PropertyRef Name="InstitucionEducativaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cheque_Moneda">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
+    <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cheque">
+        <PropertyRef Name="MonedaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cheque_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cheque">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CIASeguroProducto_CIASeguro">
+    <End Role="CIASeguro" Type="Self.CIASeguro" Multiplicity="1" />
+    <End Role="CIASeguroProducto" Type="Self.CIASeguroProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIASeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CIASeguroProducto">
+        <PropertyRef Name="CIASeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CIASeguroProducto_ConfiguracionArchivo">
+    <End Role="ConfiguracionArchivo" Type="Self.ConfiguracionArchivo" Multiplicity="0..1" />
+    <End Role="CIASeguroProducto" Type="Self.CIASeguroProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConfiguracionArchivo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CIASeguroProducto">
+        <PropertyRef Name="ConfiguracionArchivoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CIASeguroProducto_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="CIASeguroProducto" Type="Self.CIASeguroProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CIASeguroProducto">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Codigo_Asociacion">
+    <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="1" />
+    <End Role="Codigo" Type="Self.Codigo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asociacion">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Codigo">
+        <PropertyRef Name="AsociacionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Codigo_CIASeguro">
+    <End Role="CIASeguro" Type="Self.CIASeguro" Multiplicity="1" />
+    <End Role="Codigo" Type="Self.Codigo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIASeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Codigo">
+        <PropertyRef Name="CIASeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Codigo_InstitucionEducativa">
+    <End Role="InstitucionEducativa" Type="Self.InstitucionEducativa" Multiplicity="1" />
+    <End Role="Codigo" Type="Self.Codigo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InstitucionEducativa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Codigo">
+        <PropertyRef Name="InstitucionEducativaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Codigo_Producto">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="Codigo" Type="Self.Codigo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Codigo">
+        <PropertyRef Name="ProductoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CodigoDetalle_AfiliacionSeguro">
+    <End Role="AfiliacionSeguro" Type="Self.AfiliacionSeguro" Multiplicity="0..1" />
+    <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AfiliacionSeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CodigoDetalle">
+        <PropertyRef Name="AfiliacionSeguroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CodigoDetalle_AfiliacionSeguroAlumno">
+    <End Role="AfiliacionSeguroAlumno" Type="Self.AfiliacionSeguroAlumno" Multiplicity="0..1" />
+    <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AfiliacionSeguroAlumno">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CodigoDetalle">
+        <PropertyRef Name="AfiliacionSeguroAlumnoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CodigoDetalle_AfiliacionSeguroPadre">
+    <End Role="AfiliacionSeguroPadre" Type="Self.AfiliacionSeguroPadre" Multiplicity="0..1" />
+    <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AfiliacionSeguroPadre">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CodigoDetalle">
+        <PropertyRef Name="AfiliacionSeguroPadreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CodigoDetalle_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+    <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CodigoDetalle">
+        <PropertyRef Name="BancoPagoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CodigoDetalle_Codigo">
+    <End Role="Codigo" Type="Self.Codigo" Multiplicity="0..1" />
+    <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Codigo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CodigoDetalle">
+        <PropertyRef Name="CodigoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CodigoDetalle_Moneda">
+    <End Role="Moneda" Type="Self.Moneda" Multiplicity="0..1" />
+    <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Moneda">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CodigoDetalle">
+        <PropertyRef Name="MonedaPagoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CodigoDetallePago_CodigoDetalle">
+    <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="1" />
+    <End Role="CodigoDetallePago" Type="Self.CodigoDetallePago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CodigoDetalle">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CodigoDetallePago">
+        <PropertyRef Name="CodigoDetalleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConfiguracionArchivo_ConfiguracionArchivoTipo">
+    <End Role="ConfiguracionArchivoTipo" Type="Self.ConfiguracionArchivoTipo" Multiplicity="0..1" />
+    <End Role="ConfiguracionArchivo" Type="Self.ConfiguracionArchivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConfiguracionArchivoTipo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ConfiguracionArchivo">
+        <PropertyRef Name="ConfiguracionArchivoTipoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConfiguracionArchivoDetalle_ConfiguracionArchivo">
+    <End Role="ConfiguracionArchivo" Type="Self.ConfiguracionArchivo" Multiplicity="0..1" />
+    <End Role="ConfiguracionArchivoDetalle" Type="Self.ConfiguracionArchivoDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConfiguracionArchivo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ConfiguracionArchivoDetalle">
+        <PropertyRef Name="ConfiguracionArchivoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contacto_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+    <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Contacto">
+        <PropertyRef Name="BancoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contacto_InstitucionEducativa">
+    <End Role="InstitucionEducativa" Type="Self.InstitucionEducativa" Multiplicity="0..1" />
+    <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InstitucionEducativa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Contacto">
+        <PropertyRef Name="InstitucionEducativaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuenta_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="BancoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cuenta_CIASeguro">
+    <End Role="CIASeguro" Type="Self.CIASeguro" Multiplicity="0..1" />
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CIASeguro">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cuenta">
+        <PropertyRef Name="CodigoCIASeguro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstitucionEducativa_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
+    <End Role="InstitucionEducativa" Type="Self.InstitucionEducativa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InstitucionEducativa">
+        <PropertyRef Name="TipoDocumentoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstitucionEducativa_TipoInstitucionEducativa">
+    <End Role="TipoInstitucionEducativa" Type="Self.TipoInstitucionEducativa" Multiplicity="0..1" />
+    <End Role="InstitucionEducativa" Type="Self.InstitucionEducativa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoInstitucionEducativa">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="InstitucionEducativa">
+        <PropertyRef Name="TipoInstitucionEducativaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MailAdjunto_Mail">
+    <End Role="Mail" Type="Self.Mail" Multiplicity="1" />
+    <End Role="MailAdjunto" Type="Self.MailAdjunto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mail">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MailAdjunto">
+        <PropertyRef Name="MailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seguridad_UserClaims_Seguridad_Users_IdentityUser_Id">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="UserClaims" Type="Self.UserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserClaims">
+        <PropertyRef Name="IdentityUser_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seguridad_UserLogins_Seguridad_Users_IdentityUser_Id">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="UserLogins" Type="Self.UserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserLogins">
+        <PropertyRef Name="IdentityUser_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRoles_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Usp_Sel_AlumnoEnCampania" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Afiliacion">
+    <Parameter Name="NumeroDocumento" Type="varchar" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_PadreEnCampania" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Afiliacion">
+    <Parameter Name="NumeroDocumento" Type="varchar" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_AfiliacionSeguroAlumnoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="AfiliacionSeguroID" Type="int" Mode="In" />
+    <Parameter Name="AlumnoID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_AfiliacionSeguroInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="CodigoPago" Type="varchar" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_AfiliacionSeguroPadreInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="AfiliacionSeguroID" Type="int" Mode="In" />
+    <Parameter Name="PadreID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_AlumnoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="ApellidoPaternno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="TipoDocumentoID" Type="int" Mode="In" />
+    <Parameter Name="NumeroDocumento" Type="varchar" Mode="In" />
+    <Parameter Name="FechaNacimiento" Type="datetime" Mode="In" />
+    <Parameter Name="CodigoAlumno" Type="varchar" Mode="In" />
+    <Parameter Name="Carrera" Type="varchar" Mode="In" />
+    <Parameter Name="Sexo" Type="int" Mode="In" />
+    <Parameter Name="GradoID" Type="int" Mode="In" />
+    <Parameter Name="Seccion" Type="varchar" Mode="In" />
+    <Parameter Name="BeneficiarioID" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_AsociacionDetalleInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="AsociacionID" Type="int" Mode="In" />
+    <Parameter Name="CuentaID" Type="int" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_AsociacionInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="RecaudadorID" Type="int" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="TipoPrima" Type="bit" Mode="In" />
+    <Parameter Name="FilePlanSeguro" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="Prima" Type="decimal" Mode="In" />
+    <Parameter Name="NroPoliza" Type="varchar" Mode="In" />
+    <Parameter Name="CodigoContratante" Type="varchar" Mode="In" />
+    <Parameter Name="NombreContratante" Type="varchar" Mode="In" />
+    <Parameter Name="FechaVigenciaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaVigenciaFin" Type="datetime" Mode="In" />
+    <Parameter Name="FechaVigenciaPolizaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaVigenciaPolizaFin" Type="datetime" Mode="In" />
+    <Parameter Name="GastoCuracion" Type="decimal" Mode="In" />
+    <Parameter Name="InvalidezPermanenteTotal" Type="decimal" Mode="In" />
+    <Parameter Name="InvalidezPermanenteParcial" Type="decimal" Mode="In" />
+    <Parameter Name="MuerteAccidental" Type="decimal" Mode="In" />
+    <Parameter Name="GastosSepelio" Type="decimal" Mode="In" />
+    <Parameter Name="PensionMensual" Type="decimal" Mode="In" />
+    <Parameter Name="MesesPension" Type="int" Mode="In" />
+    <Parameter Name="AnniosPension" Type="int" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_BancoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="NombreCorto" Type="varchar" Mode="In" />
+    <Parameter Name="RUC" Type="varchar" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+    <Parameter Name="CodigoUbigeo" Type="char" Mode="In" />
+    <Parameter Name="NombreAdj" Type="varchar" Mode="In" />
+    <Parameter Name="TipoContenidoAdj" Type="varchar" Mode="In" />
+    <Parameter Name="TamanioAdj" Type="bigint" Mode="In" />
+    <Parameter Name="DatoAdj" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="ProcesoAfiliacion" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_BancoParametroInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="BancoParametroID" Type="int" Mode="In" />
+    <Parameter Name="BancoID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="BancoParametroTipoID" Type="int" Mode="In" />
+    <Parameter Name="Orden" Type="int" Mode="In" />
+    <Parameter Name="Etiqueta" Type="varchar" Mode="In" />
+    <Parameter Name="Valor" Type="varchar" Mode="In" />
+    <Parameter Name="Longitud" Type="int" Mode="In" />
+    <Parameter Name="PopertyName" Type="varchar" Mode="In" />
+    <Parameter Name="FuncionValidacion" Type="varchar" Mode="In" />
+    <Parameter Name="PadDir" Type="char" Mode="In" />
+    <Parameter Name="PadCaracter" Type="char" Mode="In" />
+    <Parameter Name="EsEditableEnIU" Type="bit" Mode="In" />
+    <Parameter Name="GeneraTrama" Type="bit" Mode="In" />
+    <Parameter Name="ValorFijo" Type="bit" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_BancoParametroTipoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_BancoselectALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="USP_CampaniaDetalleInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="AsociacionID" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_CampaniaInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="InicioVigencia" Type="date" Mode="In" />
+    <Parameter Name="FinVigencia" Type="date" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_CaracterEspecialInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CaracterEspecialTipoID" Type="int" Mode="In" />
+    <Parameter Name="Caracter" Type="varchar" Mode="In" />
+    <Parameter Name="Reemplazo" Type="varchar" Mode="In" />
+    <Parameter Name="PermiteIngreso" Type="bit" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_CaracterEspecialTipoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_CargaHistorialInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CodigoID" Type="int" Mode="In" />
+    <Parameter Name="AsociacionID" Type="int" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_CargaTxtParametroInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="BancoID" Type="int" Mode="In" />
+    <Parameter Name="BancoParametroTipoID" Type="int" Mode="In" />
+    <Parameter Name="Orden" Type="int" Mode="In" />
+    <Parameter Name="NombreColumna" Type="varchar" Mode="In" />
+    <Parameter Name="DescripcionColumna" Type="varchar" Mode="In" />
+    <Parameter Name="PopertyName" Type="varchar" Mode="In" />
+    <Parameter Name="Valor" Type="varchar" Mode="In" />
+    <Parameter Name="Longitud" Type="int" Mode="In" />
+    <Parameter Name="PosicionStart" Type="int" Mode="In" />
+    <Parameter Name="PosicionEnd" Type="int" Mode="In" />
+    <Parameter Name="IsMappingEntity" Type="bit" Mode="In" />
+    <Parameter Name="Actvo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_ChequeInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="BancoID" Type="int" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+    <Parameter Name="NroCheque" Type="varchar" Mode="In" />
+    <Parameter Name="Monto" Type="decimal" Mode="In" />
+    <Parameter Name="Concepto" Type="varchar" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_CIASeguroInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="RUC" Type="varchar" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+    <Parameter Name="CodigoUbigeo" Type="char" Mode="In" />
+    <Parameter Name="NombreAdj" Type="varchar" Mode="In" />
+    <Parameter Name="TipoContenidoAdj" Type="varchar" Mode="In" />
+    <Parameter Name="TamanioAdj" Type="bigint" Mode="In" />
+    <Parameter Name="DatoAdj" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="IsEmpresaRecaudadora" Type="bit" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="TerminosCondiciones" Type="varchar(max)" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_CIASeguroProductoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="ConfiguracionArchivoID" Type="int" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_CodigoDetalleInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CodigoID" Type="int" Mode="In" />
+    <Parameter Name="CargaHistorialID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="AfiliacionSeguroID" Type="int" Mode="In" />
+    <Parameter Name="AfiliacionSeguroAlumnoID" Type="int" Mode="In" />
+    <Parameter Name="AfiliacionSeguroPadreID" Type="int" Mode="In" />
+    <Parameter Name="Correlativo" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="char" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="RecibidoBanco" Type="bit" Mode="In" />
+    <Parameter Name="TipoCarga" Type="bit" Mode="In" />
+    <Parameter Name="Observacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaPago" Type="date" Mode="In" />
+    <Parameter Name="OperacionBancaria" Type="varchar" Mode="In" />
+    <Parameter Name="MonedaPagoID" Type="int" Mode="In" />
+    <Parameter Name="BancoPagoID" Type="int" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_CodigoDetallePagoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CodigoDetalleID" Type="int" Mode="In" />
+    <Parameter Name="FechaPago" Type="datetime" Mode="In" />
+    <Parameter Name="OperacionBancaria" Type="varchar" Mode="In" />
+    <Parameter Name="MonedaPagoID" Type="int" Mode="In" />
+    <Parameter Name="BancoPagoID" Type="int" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_CodigoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="AsociacionID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="Cantidad" Type="int" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_ConfiguracionArchivoDetalleInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="ConfiguracionArchivoID" Type="int" Mode="In" />
+    <Parameter Name="IndiceColumna" Type="int" Mode="In" />
+    <Parameter Name="NombreColumna" Type="varchar" Mode="In" />
+    <Parameter Name="DescripcionColumna" Type="varchar" Mode="In" />
+    <Parameter Name="TamannioColumna" Type="int" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_ConfiguracionArchivoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="ConfiguracionArchivoTipoID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_ConfiguracionArchivoTipoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar(max)" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_ContactoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="BancoID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Cargo" Type="varchar" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizado" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_CuentaInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CodigoCIASeguro" Type="int" Mode="In" />
+    <Parameter Name="Numero" Type="varchar(max)" Mode="In" />
+    <Parameter Name="TipoMonedaID" Type="int" Mode="In" />
+    <Parameter Name="BancoID" Type="int" Mode="In" />
+    <Parameter Name="Predeterminado" Type="bit" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_GradoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="char" Mode="In" />
+    <Parameter Name="Orden" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_InstitucionEducativaInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="TipoInstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="TipoDocumentoID" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar(max)" Mode="In" />
+    <Parameter Name="RazonSocial" Type="varchar(max)" Mode="In" />
+    <Parameter Name="TipoEmpresa" Type="int" Mode="In" />
+    <Parameter Name="NumeroDocumento" Type="varchar" Mode="In" />
+    <Parameter Name="CodigoUbigeo" Type="char" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="varchar" Mode="In" />
+    <Parameter Name="Fax" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaternno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="NombreNatural" Type="varchar" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_InstitucionEducativaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="TipoInstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="TipoDocumentoID" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar(max)" Mode="In" />
+    <Parameter Name="RazonSocial" Type="varchar(max)" Mode="In" />
+    <Parameter Name="TipoEmpresa" Type="int" Mode="In" />
+    <Parameter Name="NumeroDocumento" Type="varchar" Mode="In" />
+    <Parameter Name="CodigoUbigeo" Type="char" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="varchar" Mode="In" />
+    <Parameter Name="Fax" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaternno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="NombreNatural" Type="varchar" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARBANCO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDCUENTA" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARCIASEGURO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="USP_LISTARCONTACTOS_BANCO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDBANCO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARCONTACTOS_INST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINSTITUCION" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARCUENTAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDCUENTA" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARINSTITUCIONES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TipInstEduID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARINSTITUCIONES_NOMBRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARINSTITUCIONESXNOMBRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
+    <Parameter Name="TipInstEduID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTARUBIGEO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DEPARTAMENTO" Type="char" Mode="In" />
+    <Parameter Name="PROVINCIA" Type="char" Mode="In" />
+    <Parameter Name="DISTRITO" Type="char" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTATIPOSEGURO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CODIGO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_LISTATIPOSEGUROS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CODIGO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_MailAdjuntoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="MailID" Type="int" Mode="In" />
+    <Parameter Name="Path" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="USP_MailInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Destinatarios" Type="varchar(max)" Mode="In" />
+    <Parameter Name="DestinatariosCopia" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Asunto" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Cuerpo" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Enviando" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_MonedaInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Simbolo" Type="varchar" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_OBTENER_PRODUCTOS_IE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IE" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_OBTENERIMAGEN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_PadreInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="TipoDocumentoID" Type="int" Mode="In" />
+    <Parameter Name="NumeroDocumento" Type="varchar" Mode="In" />
+    <Parameter Name="FechaNacimiento" Type="datetime" Mode="In" />
+    <Parameter Name="BeneficiarioID" Type="int" Mode="In" />
+    <Parameter Name="TipoPadreID" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_ParametrosDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_ParametrosInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Categoria" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Valor" Type="nvarchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="USP_ParametrosSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="USP_ParametrosSelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="USP_ParametrosUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="Categoria" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar" Mode="In" />
+    <Parameter Name="Valor" Type="nvarchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="USP_ProductoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_RolesInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="nvarchar" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="USP_TipoDocumentoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="char" Mode="In" />
+    <Parameter Name="CodigoRenta" Type="char" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="RegistroUsuarioAsegurado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_TipoInstitucionEducativaInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_TipoPadreInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Estado" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="USP_TipoProductoSelectALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="USP_TramaInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="BancoID" Type="int" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="TipoGeneracion" Type="bit" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="USP_UbigeoInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="CodigoUbigeo" Type="char" Mode="In" />
+    <Parameter Name="CodigoDepartamento" Type="char" Mode="In" />
+    <Parameter Name="CodigoProvincia" Type="char" Mode="In" />
+    <Parameter Name="CodigoDistrito" Type="char" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="USP_UserClaimsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ClaimType" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ClaimValue" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IdentityUser_Id" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USP_UserLoginsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+    <Parameter Name="LoginProvider" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ProviderKey" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="IdentityUser_Id" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USP_UserRolesInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RoleId" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+    <Parameter Name="IdentityRole_Id" Type="nvarchar" Mode="In" />
+    <Parameter Name="IdentityUser_Id" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USP_UsersInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EmailConfirmed" Type="bit" Mode="In" />
+    <Parameter Name="PasswordHash" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="CustomPasswordHash" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="SecurityStamp" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PhoneNumber" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="PhoneNumberConfirmed" Type="bit" Mode="In" />
+    <Parameter Name="TwoFactorEnabled" Type="bit" Mode="In" />
+    <Parameter Name="LockoutEndDateUtc" Type="datetime" Mode="In" />
+    <Parameter Name="LockoutEnabled" Type="bit" Mode="In" />
+    <Parameter Name="AccessFailedCount" Type="int" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ApellidoPaterno" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="TipoDocumento" Type="int" Mode="In" />
+    <Parameter Name="NumeroDocumento" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Colegio" Type="int" Mode="In" />
+    <Parameter Name="Discriminator" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="USP_InstitucionEducativaUpdate1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Maestro" StoreFunctionName="USP_InstitucionEducativaUpdate">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="TipoInstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="TipoDocumentoID" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar(max)" Mode="In" />
+    <Parameter Name="RazonSocial" Type="varchar(max)" Mode="In" />
+    <Parameter Name="TipoEmpresa" Type="int" Mode="In" />
+    <Parameter Name="NumeroDocumento" Type="varchar" Mode="In" />
+    <Parameter Name="CodigoUbigeo" Type="char" Mode="In" />
+    <Parameter Name="Direccion" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="varchar" Mode="In" />
+    <Parameter Name="Fax" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoPaternno" Type="varchar" Mode="In" />
+    <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+    <Parameter Name="NombreNatural" Type="varchar" Mode="In" />
+    <Parameter Name="UsuarioCreacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+    <Parameter Name="UsuarioActualizacion" Type="varchar" Mode="In" />
+    <Parameter Name="FechaActualizacion" Type="datetime" Mode="In" />
+    <Parameter Name="Activo" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_ExisteProducto_By_CIASeguro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="bit">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_ExisteProducto_By_InstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="bit">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_Prima_By_InstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="varchar">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_Producto_By_InstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="varchar">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalAsegurados_By_InstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="int">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalPagado_By_CIASeguro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalPagado_By_InstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalPagado_By_InstitucionEducativaAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalPagado_By_Producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalRecaudo_By_CIASeguro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalRecaudo_By_InstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalRecaudo_By_InstitucionEducativaAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="fn_Sel_TotalRecaudo_By_Producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion" ReturnType="decimal">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicio" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFin" Type="datetime" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Usp_Del_Asociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="IdAsociacion" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Usp_Del_RollbackCodigoDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="CargaHistorialID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_CodigoDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="FiltrarFechaVigencia" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_CodigoDetalle_By_Afiliado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="IdAsociacion" Type="int" Mode="In" />
+    <Parameter Name="textoBusqueda" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_CodigoDetalle_By_Pagos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="InstitucionEducativaId" Type="int" Mode="In" />
+    <Parameter Name="ProductoId" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="IsPagado" Type="bit" Mode="In" />
+    <Parameter Name="BancoID" Type="int" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+    <Parameter Name="TextoBusqueda" Type="varchar" Mode="In" />
+    <Parameter Name="FiltrarFechaVigencia" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_CodigoDetalleByInstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="StartDate" Type="datetime" Mode="In" />
+    <Parameter Name="EndDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_MaxTotales_CIASeguro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_MaxTotales_InstitucionEducativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_MaxTotales_Producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="TipoCambio" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_Reporte_Cobranza" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="TipoReporte" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioProducto" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinProducto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_Reporte_Cobranza_ProductoAccidentes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="TipoReporte" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioProducto" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinProducto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_Reporte_Cobranza_ProductoAccidentesData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="TipoReporte" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioProducto" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinProducto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_Reporte_Cobranza_ProductoRenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="TipoReporte" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioProducto" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinProducto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_Reporte_Cobranza_ProductoRentaData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="TipoReporte" Type="int" Mode="In" />
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinCIASeguro" Type="datetime" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinInstitucionEducativa" Type="datetime" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioProducto" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinProducto" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_ValidarCierreInstitucion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="AsociacionID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Usp_Sel_ValidarMontoCheque" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Operacion">
+    <Parameter Name="CampaniaID" Type="int" Mode="In" />
+    <Parameter Name="InstitucionEducativaID" Type="int" Mode="In" />
+    <Parameter Name="CIASeguroID" Type="int" Mode="In" />
+    <Parameter Name="ProductoID" Type="int" Mode="In" />
+    <Parameter Name="MonedaID" Type="int" Mode="In" />
+    <Parameter Name="ChequeID" Type="int" Mode="In" />
+    <Parameter Name="MontoCheque" Type="decimal" Mode="In" />
+  </Function>
+  <EntityContainer Name="BDHermesBancarizacionModelStoreContainer">
+    <EntitySet Name="AfiliacionSeguro" EntityType="Self.AfiliacionSeguro" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="AfiliacionSeguroAlumno" EntityType="Self.AfiliacionSeguroAlumno" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="AfiliacionSeguroPadre" EntityType="Self.AfiliacionSeguroPadre" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="Grado" EntityType="Self.Grado" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="Padre" EntityType="Self.Padre" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="TipoPadre" EntityType="Self.TipoPadre" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banco" EntityType="Self.Banco" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="BancoParametro" EntityType="Self.BancoParametro" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="BancoParametroTipo" EntityType="Self.BancoParametroTipo" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="CaracterEspecial" EntityType="Self.CaracterEspecial" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="CaracterEspecialTipo" EntityType="Self.CaracterEspecialTipo" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="CargaTxtParametro" EntityType="Self.CargaTxtParametro" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="CIASeguro" EntityType="Self.CIASeguro" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="CIASeguroProducto" EntityType="Self.CIASeguroProducto" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="ConfiguracionArchivo" EntityType="Self.ConfiguracionArchivo" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="ConfiguracionArchivoDetalle" EntityType="Self.ConfiguracionArchivoDetalle" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="ConfiguracionArchivoTipo" EntityType="Self.ConfiguracionArchivoTipo" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="InstitucionEducativa" EntityType="Self.InstitucionEducativa" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="TipoInstitucionEducativa" EntityType="Self.TipoInstitucionEducativa" Schema="Maestro" store:Type="Tables" />
+    <EntitySet Name="Asociacion" EntityType="Self.Asociacion" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="AsociacionDetalle" EntityType="Self.AsociacionDetalle" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="Campania" EntityType="Self.Campania" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="CampaniaDetalle" EntityType="Self.CampaniaDetalle" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="CargaHistorial" EntityType="Self.CargaHistorial" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="Codigo" EntityType="Self.Codigo" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="CodigoDetalle" EntityType="Self.CodigoDetalle" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="CodigoDetallePago" EntityType="Self.CodigoDetallePago" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="Mail" EntityType="Self.Mail" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="MailAdjunto" EntityType="Self.MailAdjunto" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="Trama" EntityType="Self.Trama" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="Seguridad" store:Type="Tables" />
+    <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="Seguridad" store:Type="Tables" />
+    <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="Seguridad" store:Type="Tables" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="Seguridad" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="Seguridad" store:Type="Tables" />
+    <EntitySet Name="Ubigeo" EntityType="Self.Ubigeo" store:Type="Tables" store:Schema="Maestro">
+      <DefiningQuery>SELECT 
+    [Ubigeo].[ID] AS [ID], 
+    [Ubigeo].[CodigoUbigeo] AS [CodigoUbigeo], 
+    [Ubigeo].[CodigoDepartamento] AS [CodigoDepartamento], 
+    [Ubigeo].[CodigoProvincia] AS [CodigoProvincia], 
+    [Ubigeo].[CodigoDistrito] AS [CodigoDistrito], 
+    [Ubigeo].[Nombre] AS [Nombre]
+    FROM [Maestro].[Ubigeo] AS [Ubigeo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Afiliacio__Afili__4D94879B" Association="Self.FK__Afiliacio__Afili__4D94879B">
+      <End Role="AfiliacionSeguro" EntitySet="AfiliacionSeguro" />
+      <End Role="AfiliacionSeguroPadre" EntitySet="AfiliacionSeguroPadre" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Afiliacio__Afili__6FE99F9F" Association="Self.FK__Afiliacio__Afili__6FE99F9F">
+      <End Role="AfiliacionSeguro" EntitySet="AfiliacionSeguro" />
+      <End Role="AfiliacionSeguroAlumno" EntitySet="AfiliacionSeguroAlumno" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Afiliacio__Alumn__72910220" Association="Self.FK__Afiliacio__Alumn__72910220">
+      <End Role="Alumno" EntitySet="Alumno" />
+      <End Role="AfiliacionSeguroAlumno" EntitySet="AfiliacionSeguroAlumno" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Afiliacio__Coleg__7F2BE32F" Association="Self.FK__Afiliacio__Coleg__7F2BE32F">
+      <End Role="InstitucionEducativa" EntitySet="InstitucionEducativa" />
+      <End Role="AfiliacionSeguro" EntitySet="AfiliacionSeguro" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Afiliacio__Padre__7A672E12" Association="Self.FK__Afiliacio__Padre__7A672E12">
+      <End Role="Padre" EntitySet="Padre" />
+      <End Role="AfiliacionSeguroPadre" EntitySet="AfiliacionSeguroPadre" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Alumno__GradoID__531856C7" Association="Self.FK__Alumno__GradoID__531856C7">
+      <End Role="Grado" EntitySet="Grado" />
+      <End Role="Alumno" EntitySet="Alumno" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Asociacio__Asoci__2645B050" Association="Self.FK__Asociacio__Asoci__2645B050">
+      <End Role="Asociacion" EntitySet="Asociacion" />
+      <End Role="AsociacionDetalle" EntitySet="AsociacionDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Asociacio__CIASe__2180FB33" Association="Self.FK__Asociacio__CIASe__2180FB33">
+      <End Role="CIASeguro" EntitySet="CIASeguro" />
+      <End Role="Asociacion" EntitySet="Asociacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Asociacio__Coleg__208CD6FA" Association="Self.FK__Asociacio__Coleg__208CD6FA">
+      <End Role="InstitucionEducativa" EntitySet="InstitucionEducativa" />
+      <End Role="Asociacion" EntitySet="Asociacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Asociacio__Produ__236943A5" Association="Self.FK__Asociacio__Produ__236943A5">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Asociacion" EntitySet="Asociacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Asociacio__Recau__22751F6C" Association="Self.FK__Asociacio__Recau__22751F6C">
+      <End Role="CIASeguro" EntitySet="CIASeguro" />
+      <End Role="Asociacion" EntitySet="Asociacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cuenta__TipoMone__22AA2996" Association="Self.FK__Cuenta__TipoMone__22AA2996">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Padre__TipoDocum__7C4F7684" Association="Self.FK__Padre__TipoDocum__7C4F7684">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Padre" EntitySet="Padre" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Padre__TipoPadre__7D439ABD" Association="Self.FK__Padre__TipoPadre__7D439ABD">
+      <End Role="TipoPadre" EntitySet="TipoPadre" />
+      <End Role="Padre" EntitySet="Padre" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Alumno_TipoDocumento" Association="Self.FK_Alumno_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Alumno" EntitySet="Alumno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asociacion_Moneda" Association="Self.FK_Asociacion_Moneda">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="Asociacion" EntitySet="Asociacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AsociacionDetalle_Cuenta" Association="Self.FK_AsociacionDetalle_Cuenta">
+      <End Role="Cuenta" EntitySet="Cuenta" />
+      <End Role="AsociacionDetalle" EntitySet="AsociacionDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BancoParametro_Banco" Association="Self.FK_BancoParametro_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="BancoParametro" EntitySet="BancoParametro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BancoParametro_BancoParametroTipo" Association="Self.FK_BancoParametro_BancoParametroTipo">
+      <End Role="BancoParametroTipo" EntitySet="BancoParametroTipo" />
+      <End Role="BancoParametro" EntitySet="BancoParametro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BancoParametro_CIASeguro" Association="Self.FK_BancoParametro_CIASeguro">
+      <End Role="CIASeguro" EntitySet="CIASeguro" />
+      <End Role="BancoParametro" EntitySet="BancoParametro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CampaniaDetalle_Asociacion" Association="Self.FK_CampaniaDetalle_Asociacion">
+      <End Role="Asociacion" EntitySet="Asociacion" />
+      <End Role="CampaniaDetalle" EntitySet="CampaniaDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CampaniaDetalle_Campania" Association="Self.FK_CampaniaDetalle_Campania">
+      <End Role="Campania" EntitySet="Campania" />
+      <End Role="CampaniaDetalle" EntitySet="CampaniaDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CaracterEspecial_CaracterEspecialTipo" Association="Self.FK_CaracterEspecial_CaracterEspecialTipo">
+      <End Role="CaracterEspecialTipo" EntitySet="CaracterEspecialTipo" />
+      <End Role="CaracterEspecial" EntitySet="CaracterEspecial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CargaHistorial_Asociacion" Association="Self.FK_CargaHistorial_Asociacion">
+      <End Role="Asociacion" EntitySet="Asociacion" />
+      <End Role="CargaHistorial" EntitySet="CargaHistorial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CargaTxtParametro_Banco" Association="Self.FK_CargaTxtParametro_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="CargaTxtParametro" EntitySet="CargaTxtParametro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CargaTxtParametro_BancoParametroTipo" Association="Self.FK_CargaTxtParametro_BancoParametroTipo">
+      <End Role="BancoParametroTipo" EntitySet="BancoParametroTipo" />
+      <End Role="CargaTxtParametro" EntitySet="CargaTxtParametro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cheque_Banco" Association="Self.FK_Cheque_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="Cheque" EntitySet="Cheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cheque_Campania" Association="Self.FK_Cheque_Campania">
+      <End Role="Campania" EntitySet="Campania" />
+      <End Role="Cheque" EntitySet="Cheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cheque_CIASeguro" Association="Self.FK_Cheque_CIASeguro">
+      <End Role="CIASeguro" EntitySet="CIASeguro" />
+      <End Role="Cheque" EntitySet="Cheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cheque_InstitucionEducativa" Association="Self.FK_Cheque_InstitucionEducativa">
+      <End Role="InstitucionEducativa" EntitySet="InstitucionEducativa" />
+      <End Role="Cheque" EntitySet="Cheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cheque_Moneda" Association="Self.FK_Cheque_Moneda">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="Cheque" EntitySet="Cheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cheque_Producto" Association="Self.FK_Cheque_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Cheque" EntitySet="Cheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CIASeguroProducto_CIASeguro" Association="Self.FK_CIASeguroProducto_CIASeguro">
+      <End Role="CIASeguro" EntitySet="CIASeguro" />
+      <End Role="CIASeguroProducto" EntitySet="CIASeguroProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CIASeguroProducto_ConfiguracionArchivo" Association="Self.FK_CIASeguroProducto_ConfiguracionArchivo">
+      <End Role="ConfiguracionArchivo" EntitySet="ConfiguracionArchivo" />
+      <End Role="CIASeguroProducto" EntitySet="CIASeguroProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CIASeguroProducto_Producto" Association="Self.FK_CIASeguroProducto_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="CIASeguroProducto" EntitySet="CIASeguroProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Codigo_Asociacion" Association="Self.FK_Codigo_Asociacion">
+      <End Role="Asociacion" EntitySet="Asociacion" />
+      <End Role="Codigo" EntitySet="Codigo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Codigo_CIASeguro" Association="Self.FK_Codigo_CIASeguro">
+      <End Role="CIASeguro" EntitySet="CIASeguro" />
+      <End Role="Codigo" EntitySet="Codigo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Codigo_InstitucionEducativa" Association="Self.FK_Codigo_InstitucionEducativa">
+      <End Role="InstitucionEducativa" EntitySet="InstitucionEducativa" />
+      <End Role="Codigo" EntitySet="Codigo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Codigo_Producto" Association="Self.FK_Codigo_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Codigo" EntitySet="Codigo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CodigoDetalle_AfiliacionSeguro" Association="Self.FK_CodigoDetalle_AfiliacionSeguro">
+      <End Role="AfiliacionSeguro" EntitySet="AfiliacionSeguro" />
+      <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CodigoDetalle_AfiliacionSeguroAlumno" Association="Self.FK_CodigoDetalle_AfiliacionSeguroAlumno">
+      <End Role="AfiliacionSeguroAlumno" EntitySet="AfiliacionSeguroAlumno" />
+      <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CodigoDetalle_AfiliacionSeguroPadre" Association="Self.FK_CodigoDetalle_AfiliacionSeguroPadre">
+      <End Role="AfiliacionSeguroPadre" EntitySet="AfiliacionSeguroPadre" />
+      <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CodigoDetalle_Banco" Association="Self.FK_CodigoDetalle_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CodigoDetalle_Codigo" Association="Self.FK_CodigoDetalle_Codigo">
+      <End Role="Codigo" EntitySet="Codigo" />
+      <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CodigoDetalle_Moneda" Association="Self.FK_CodigoDetalle_Moneda">
+      <End Role="Moneda" EntitySet="Moneda" />
+      <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CodigoDetallePago_CodigoDetalle" Association="Self.FK_CodigoDetallePago_CodigoDetalle">
+      <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
+      <End Role="CodigoDetallePago" EntitySet="CodigoDetallePago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConfiguracionArchivo_ConfiguracionArchivoTipo" Association="Self.FK_ConfiguracionArchivo_ConfiguracionArchivoTipo">
+      <End Role="ConfiguracionArchivoTipo" EntitySet="ConfiguracionArchivoTipo" />
+      <End Role="ConfiguracionArchivo" EntitySet="ConfiguracionArchivo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConfiguracionArchivoDetalle_ConfiguracionArchivo" Association="Self.FK_ConfiguracionArchivoDetalle_ConfiguracionArchivo">
+      <End Role="ConfiguracionArchivo" EntitySet="ConfiguracionArchivo" />
+      <End Role="ConfiguracionArchivoDetalle" EntitySet="ConfiguracionArchivoDetalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contacto_Banco" Association="Self.FK_Contacto_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="Contacto" EntitySet="Contacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contacto_InstitucionEducativa" Association="Self.FK_Contacto_InstitucionEducativa">
+      <End Role="InstitucionEducativa" EntitySet="InstitucionEducativa" />
+      <End Role="Contacto" EntitySet="Contacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuenta_Banco" Association="Self.FK_Cuenta_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cuenta_CIASeguro" Association="Self.FK_Cuenta_CIASeguro">
+      <End Role="CIASeguro" EntitySet="CIASeguro" />
+      <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstitucionEducativa_TipoDocumento" Association="Self.FK_InstitucionEducativa_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="InstitucionEducativa" EntitySet="InstitucionEducativa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstitucionEducativa_TipoInstitucionEducativa" Association="Self.FK_InstitucionEducativa_TipoInstitucionEducativa">
+      <End Role="TipoInstitucionEducativa" EntitySet="TipoInstitucionEducativa" />
+      <End Role="InstitucionEducativa" EntitySet="InstitucionEducativa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MailAdjunto_Mail" Association="Self.FK_MailAdjunto_Mail">
+      <End Role="Mail" EntitySet="Mail" />
+      <End Role="MailAdjunto" EntitySet="MailAdjunto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seguridad_UserClaims_Seguridad_Users_IdentityUser_Id" Association="Self.FK_Seguridad_UserClaims_Seguridad_Users_IdentityUser_Id">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserClaims" EntitySet="UserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seguridad_UserLogins_Seguridad_Users_IdentityUser_Id" Association="Self.FK_Seguridad_UserLogins_Seguridad_Users_IdentityUser_Id">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserLogins" EntitySet="UserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Roles" Association="Self.FK_UserRoles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRoles_Users" Association="Self.FK_UserRoles_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
