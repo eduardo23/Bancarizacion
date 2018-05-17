@@ -118,14 +118,6 @@ namespace Demo
         private Institucion_Educativa PreparaFiltros() {
             Institucion_Educativa oInstitucionEducativa = new Institucion_Educativa();
 
-            if (DDLTipoSeguro.SelectedValue == "0")
-            {
-                txtmensaje.Text = "Debe de seleccionar el tipo de seguro.";
-                string jss = "openModal()";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss, true);
-                return oInstitucionEducativa;
-            }
-
             oInstitucionEducativa.cod_IEducativa = Convert.ToInt32(ddlInstitucion.SelectedValue);
             oInstitucionEducativa.Cod_ProductId = Convert.ToInt32(DDLTipoSeguro.SelectedValue);
             oInstitucionEducativa.Cod_CiaSeguro = Convert.ToInt32(DDLCiaSeguro.SelectedValue);
@@ -160,8 +152,16 @@ namespace Demo
         protected void btnbuscar_Click(object sender, EventArgs e)
         {
             Institucion_Educativa Filtros = PreparaFiltros();
+            if (Filtros.Cod_ProductId == 0)
+            {
+                txtmensaje.Text = "Debe de seleccionar el tipo de seguro.";
+                string jss = "openModal()";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss, true);
+                return;
+            }
             grvSeguros.DataSource = objn_InstitucionEducativa.ListarCodigosDetallesPagos(Filtros);
             grvSeguros.DataBind();
+            Session["grvSeguros"] = grvSeguros.DataSource;
         }
 
 

@@ -65,15 +65,15 @@ namespace DAO_Hermes.Repositorios
                     DateTime fin = Convert.ToDateTime(I_Educativa.FechaFinal);
 
 
-                    if (ini == null)
-                    {
-                        inidate = ini.ToString("yyyyMMdd");
-                    }
-                    if (fin == null)
-                    {
-                        inidate = fin.ToString("yyyyMMdd");
-                    }
-
+                    //if (ini != null)
+                    //{
+                    //    inidate = ini.ToString("yyyyMMdd");
+                    //}
+                    //if (fin == null)
+                    //{
+                    //    inidate = fin.ToString("yyyyMMdd");
+                    //}
+                    cmd.CommandTimeout = 4000;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@InstitucionEducativaId", I_Educativa.cod_IEducativa);
                     cmd.Parameters.AddWithValue("@ProductoId", I_Educativa.Cod_ProductId);
@@ -81,8 +81,8 @@ namespace DAO_Hermes.Repositorios
                     cmd.Parameters.AddWithValue("@IsPagado", I_Educativa.EstadoIsPagado);
                     cmd.Parameters.AddWithValue("@BancoID", I_Educativa.Cod_Banco);
                     cmd.Parameters.AddWithValue("@MonedaID", I_Educativa.Cod_Moneda);
-                    cmd.Parameters.AddWithValue("@StartDate", inidate);
-                    cmd.Parameters.AddWithValue("@EndDate", findate);
+                    cmd.Parameters.AddWithValue("@StartDate", I_Educativa.FechaInicial);
+                    cmd.Parameters.AddWithValue("@EndDate", I_Educativa.FechaFinal);
                     cmd.Parameters.AddWithValue("@TextoBusqueda", I_Educativa.TextoBusqueda);
                     //cmd.Parameters.AddWithValue("@FiltrarFechaVigencia", I_Educativa.FiltrarFechaVigencia);
                     cn.Open();

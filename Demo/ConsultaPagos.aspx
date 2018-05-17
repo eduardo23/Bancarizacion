@@ -17,10 +17,61 @@
  <%--Fin Autocompele script id   --%>   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">       
-<%--    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods = "true">
+<style>
+    .actualizando_principal
+    {
+        background-color: #333333;
+        filter: alpha(opacity=60); 
+        opacity: 0.60; 
+        width: 100%;
+        top: 0px; 
+        left: 0px; 
+        position: fixed; 
+        height: 100%;
+    }
+
+    .actualizando
+    {
+        margin:auto;
+        filter: alpha(opacity=100);
+        opacity: 1;
+        font-size:small;
+        vertical-align: middle;
+        top: 35%;
+        position: fixed;
+        right: 45%;
+        margin-left:auto;
+        margin-right:auto;
+        text-align: center;
+        background-color: #ffffff;
+        height: 128px;
+        width:128px;
+        -webkit-border-radius: 10px 10px 10px 10px;
+        border-radius: 10px 10px 10px 10px;
+    }
+
+    .actualizando img
+    {
+        /*width:60px;
+        height:64px;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:32px;*/
+    }
+    </style>
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods = "true" AsyncPostBackTimeOut= "360000">
     </asp:ScriptManager>
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+        <ProgressTemplate>
+            <div class="actualizando_principal">
+                <div class="actualizando">
+                    <asp:Image ID="imgEsperando" ImageUrl="Images/cargando.gif" runat="server" />
+                </div>
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>--%>
+        <ContentTemplate>
             <div class="panel-group" id="accordion">                 
                  <div class="panel panel-default">
                  <div class="panel-primary">
@@ -102,7 +153,7 @@
                         <label for="VigenciaBanco" class="col-lg-3 control-label">Fecha  Inicio</label>
                             <div class="col-lg-9">
                                 <asp:TextBox runat="server" class="form-control" id="txtFechaInicio" ToolTip="Fecha Inicio"   data-placement="left"  Width="250"
-                                             placeholder="Ingrese Fecha Inicio" data-date-format="dd/mm/yyyy" />
+                                             placeholder="Ingrese Fecha Inicio" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')"/>
                             </div>
                     </div>
 
@@ -110,7 +161,7 @@
                         <label for="VigenciaBanco" class="col-lg-3 control-label">Fecha Final</label>
                             <div class="col-lg-9">
                                 <asp:TextBox runat="server" class="form-control" id="txtFechaFinal" ToolTip="Fecha Final"   data-placement="left"  Width="250"
-                                             placeholder="Ingrese Fecha Final" data-date-format="dd/mm/yyyy" />
+                                             placeholder="Ingrese Fecha Final" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')"/>
                             </div>
                     </div>
 
@@ -183,7 +234,7 @@
             </div>
         </div>
     </div>
-<%--        </ContentTemplate>
-    </asp:UpdatePanel>--%>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <asp:Button class="btn btn-soundcloud" runat="server" ID="btnExportarExcel" Text="Exportar Excel" OnClick="btnExportarExcel_Click" />
 </asp:Content>
