@@ -83,12 +83,12 @@ C:\Users\Hermes\Desktop\HERMES\HermesBancarizacion\Hermes\DAO_Hermes\obj\Debug\D
 C:\Bancarizacion\DAO_Hermes\bin\Debug\DAO_Hermes.dll.config
 C:\Bancarizacion\DAO_Hermes\bin\Debug\DAO_Hermes.dll
 C:\Bancarizacion\DAO_Hermes\bin\Debug\DAO_Hermes.pdb
-C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.dll
-C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.SqlServer.dll
 C:\Bancarizacion\DAO_Hermes\bin\Debug\Newtonsoft.Json.dll
-C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.xml
-C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.SqlServer.xml
 C:\Bancarizacion\DAO_Hermes\bin\Debug\Newtonsoft.Json.xml
-C:\Bancarizacion\DAO_Hermes\obj\Debug\DAO_Hermes.csprojResolveAssemblyReference.cache
 C:\Bancarizacion\DAO_Hermes\obj\Debug\DAO_Hermes.dll
 C:\Bancarizacion\DAO_Hermes\obj\Debug\DAO_Hermes.pdb
+C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.dll
+C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.SqlServer.dll
+C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.xml
+C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.SqlServer.xml
+C:\Bancarizacion\DAO_Hermes\obj\Debug\DAO_Hermes.csprojResolveAssemblyReference.cache

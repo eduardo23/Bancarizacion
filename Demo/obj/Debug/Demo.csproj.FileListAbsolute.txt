@@ -125,7 +125,6 @@ C:\Bancarizacion\Demo\bin\ICSharpCode.SharpZipLib.dll
 C:\Bancarizacion\Demo\bin\Newtonsoft.Json.dll
 C:\Bancarizacion\Demo\bin\Microsoft.SqlServer.Types.dll
 C:\Bancarizacion\Demo\bin\DAO_Hermes.pdb
-C:\Bancarizacion\Demo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Bancarizacion\Demo\bin\Newtonsoft.Json.xml
 C:\Bancarizacion\Demo\bin\de\Microsoft.SqlServer.Types.resources.dll
 C:\Bancarizacion\Demo\bin\es\Microsoft.SqlServer.Types.resources.dll
