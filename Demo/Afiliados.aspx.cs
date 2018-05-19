@@ -174,7 +174,7 @@ namespace Demo
 
         void CargarGradosEdit()
         {
-            ddlGradoEdit.Items.Clear();
+            ddlGradoEdit.Items.Clear();            
             using (GradoDAO db = new GradoDAO())
             {
                 ddlGradoEdit.DataSource = db.Listar();
@@ -182,6 +182,11 @@ namespace Demo
                 ddlGradoEdit.DataValueField = "Id";
                 ddlGradoEdit.DataBind();
             }
+            ListItem itm = new ListItem();
+            itm.Value = "0";
+            itm.Text = "--Seleccione--";
+
+            ddlGradoEdit.Items.Add(itm);
         }
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
@@ -263,6 +268,7 @@ namespace Demo
                 ViewState["FechaDepago"] = grvSeguros.Rows[ifila].Cells[12].Text;
 
                 ViewState["TipoAsociacion"] = grvSeguros.Rows[ifila].Cells[14].Text;
+                ViewState["TipoInstitucionEducativaID"] = grvSeguros.Rows[ifila].Cells[15].Text;
                 try
                 {
                     List<USP_OBTENER_PRODUCTOS_IE_Result> ff = (List<USP_OBTENER_PRODUCTOS_IE_Result>)Session["AfiliacionProducto"];
@@ -325,6 +331,26 @@ namespace Demo
 
                 //MuestraFormAfiliacion();
                 CargaAcciREnt();
+
+                txtSeccion.Visible = true;
+                DDLGrado.Visible = true;
+                txtFacultad.Visible = false;
+                txtCarrera.Visible = false;
+                ddlOncTitGrado.Visible = true;
+                txtOncTitFacultad.Visible = false;
+                txtOncTitCarrera.Visible = false;
+
+                if (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"])==4 || Convert.ToInt32(ViewState["TipoInstitucionEducativaID"])== 5){
+                    txtSeccion.Visible = false;
+                    DDLGrado.Visible = false;
+                    DDLGrado.SelectedValue = "18"; //No Especificado
+                    txtFacultad.Visible = true;
+                    txtCarrera.Visible = true;
+                    ddlOncTitGrado.Visible = false;
+                    ddlOncTitGrado.SelectedValue = "18"; //No Especificado
+                    txtOncTitFacultad.Visible = true;
+                    txtOncTitCarrera.Visible = true;
+                }
             }
             catch (Exception ex)
             {
@@ -378,7 +404,7 @@ namespace Demo
                         return;
                     }
 
-                    if (DDLGrado.SelectedValue == "0")
+                    if (DDLGrado.SelectedValue == "0" && (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) != 4 && Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) != 5))
                     {
                         string jssc = "openModalcombo();";
                         lblcombo.Text = "Debe Seleccionar el Grado del Alumno";
@@ -601,6 +627,8 @@ namespace Demo
                     Reg.UsuarioCreacion = Session["Usuario"].ToString();
                     Reg.Bene_Seccion = txtSeccion.Text.ToUpper();
                     Reg.Bene_Grado = DDLGrado.SelectedValue;
+                    Reg.Facultad = txtFacultad.Text.ToUpper(); ;
+                    Reg.Carrera = txtCarrera.Text.ToUpper(); ;
 
                     Reg.TipoSeguro = HttpUtility.HtmlDecode(hdnProducto.Value);
                     Reg.Prima = hdnPrima.Value;
@@ -644,6 +672,8 @@ namespace Demo
                         Reg.UsuarioCreacion = Session["Usuario"].ToString();
                         Reg.Bene_Seccion = txtSeccion.Text.ToUpper();
                         Reg.Bene_Grado = DDLGrado.SelectedValue;
+                        Reg.Facultad = txtFacultad.Text.ToUpper(); ;
+                        Reg.Carrera = txtCarrera.Text.ToUpper(); ;
 
                         Reg.Padre_Nombres = txtNomPadre.Text.ToUpper();
                         Reg.Padre_ApePaterno = txtApePadre.Text.ToUpper();
@@ -697,6 +727,8 @@ namespace Demo
                         Reg.UsuarioCreacion = Session["Usuario"].ToString();
                         Reg.Bene_Seccion = txtSeccion.Text.ToUpper();
                         Reg.Bene_Grado = DDLGrado.SelectedValue;
+                        Reg.Facultad = txtFacultad.Text.ToUpper(); ;
+                        Reg.Carrera = txtCarrera.Text.ToUpper(); ;
 
                         Reg.Padre_Nombres = txtNomPadre.Text.ToUpper();
                         Reg.Padre_ApePaterno = txtApePadre.Text.ToUpper();
@@ -729,6 +761,8 @@ namespace Demo
                         RegRS.Bene_Sexo = rbtSexo.SelectedIndex + 1;
                         RegRS.Bene_Seccion = txtSeccion.Text.ToUpper();
                         RegRS.Bene_Grado = DDLGrado.SelectedValue;
+                        RegRS.Facultad = txtFacultad.Text.ToUpper(); ;
+                        RegRS.Carrera = txtCarrera.Text.ToUpper(); ;
                         RegRS.Padre_Nombres = "RESERVADO";
                         RegRS.Padre_ApePaterno = "RESERVADO";
                         RegRS.Padre_ApeMaterno = "RESERVADO";
@@ -780,6 +814,8 @@ namespace Demo
                         Reg.UsuarioCreacion = Session["Usuario"].ToString();
                         Reg.Bene_Seccion = txtSeccion.Text;
                         Reg.Bene_Grado = DDLGrado.SelectedValue;
+                        Reg.Facultad = txtFacultad.Text.ToUpper(); ;
+                        Reg.Carrera = txtCarrera.Text.ToUpper(); ;
 
                         Reg.Padre_Nombres = txtNomPadre.Text.ToUpper();
                         Reg.Padre_ApePaterno = txtApePadre.Text.ToUpper();
@@ -811,6 +847,8 @@ namespace Demo
                         RegRS.Bene_Sexo = rbtSexo.SelectedIndex + 1;
                         RegRS.Bene_Seccion = txtSeccion.Text;
                         RegRS.Bene_Grado = DDLGrado.SelectedValue;
+                        RegRS.Facultad = txtFacultad.Text.ToUpper(); ;
+                        RegRS.Carrera = txtCarrera.Text.ToUpper(); ;
 
                         RegRS.Padre_Nombres = txtNombreMadre.Text.ToUpper(); ;
                         RegRS.Padre_ApePaterno = txtApePatMadre.Text.ToUpper(); ;
@@ -867,6 +905,8 @@ namespace Demo
                     Reg.Bene_FechaNacimiento = txtOncTitFecNac.Text;
                     Reg.Bene_Grado = ddlOncTitGrado.SelectedValue;
                     Reg.Bene_Sexo = rblOncTitGenero.SelectedIndex + 1;
+                    Reg.Facultad = txtOncTitFacultad.Text.ToUpper(); ;
+                    Reg.Carrera = txtOncTitCarrera.Text.ToUpper(); ;
                     Reg.FechaCreacion = DateTime.Now;
                     Reg.UsuarioCreacion = Session["Usuario"].ToString();
 
@@ -1021,6 +1061,24 @@ namespace Demo
                         txtFechaNacEdit.Text = d["Bene_FechaNacimiento"].ToString();
                         ddlGradoEdit.SelectedValue = d["Bene_Grado"].ToString();
                         txtSeccionEdit.Text = d["Bene_seccion"].ToString();
+                        txtFacultadEdit.Text = d["Facultad"].ToString();
+                        txtCarreraEdit.Text = d["Carrera"].ToString();
+
+                        txtSeccionEdit.Visible = true;
+                        ddlGradoEdit.Visible = true;
+                        txtFacultadEdit.Visible = false;
+                        txtCarreraEdit.Visible = false;
+
+                        if (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 4 || Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 5)
+                        {
+                            txtSeccionEdit.Visible = false;
+                            ddlGradoEdit.Visible = false;
+                            ddlGradoEdit.SelectedValue = "18";
+
+                            txtFacultadEdit.Visible = true;
+                            txtCarreraEdit.Visible = true;
+                        }
+
                         //   txtBeneficiarioSeccionEdit.Text = d[""].ToString();
                         if (DDLTipoDocEdit.SelectedValue == "2")
                         {
@@ -1069,6 +1127,23 @@ namespace Demo
                             txtBeneficiarioFechaNacEdit.Text = d["Bene_FechaNacimiento"].ToString();
                             DDLBeneficiarioGradoEdit.SelectedValue = d["Bene_Grado"].ToString();
                             txtBeneficiarioSeccionEdit.Text = d["Bene_seccion"].ToString();
+                            txtBeneficiarioFacultadEdit.Text = d["Facultad"].ToString();
+                            txtBeneficiarioCarreraEdit.Text = d["Carrera"].ToString();
+
+                            txtBeneficiarioSeccionEdit.Visible = true;
+                            DDLBeneficiarioGradoEdit.Visible = true;
+                            txtBeneficiarioFacultadEdit.Visible = false;
+                            txtBeneficiarioCarreraEdit.Visible = false;
+
+                            if (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 4 || Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 5)
+                            {
+                                txtBeneficiarioSeccionEdit.Visible = false;
+                                DDLBeneficiarioGradoEdit.Visible = false;
+                                DDLBeneficiarioGradoEdit.SelectedValue = "18";
+                                txtBeneficiarioFacultadEdit.Visible = true;
+                                txtBeneficiarioCarreraEdit.Visible = true;
+                            }
+
                             //   txtBeneficiarioSeccionEdit.Text = d[""].ToString();
                             if (DDLBeneficiarioTipoDocuEdit.SelectedValue == "1")
                             {
@@ -1109,6 +1184,23 @@ namespace Demo
                             txtBeneficiarioFechaNacEdit.Text = d["Bene_FechaNacimiento"].ToString();
                             DDLBeneficiarioGradoEdit.SelectedValue = d["Bene_Grado"].ToString();
                             txtBeneficiarioSeccionEdit.Text = d["Bene_seccion"].ToString();
+                            txtBeneficiarioFacultadEdit.Text = d["Facultad"].ToString();
+                            txtBeneficiarioCarreraEdit.Text = d["Carrera"].ToString();
+
+                            txtBeneficiarioSeccionEdit.Visible = true;
+                            DDLBeneficiarioGradoEdit.Visible = true;
+                            txtBeneficiarioFacultadEdit.Visible = false;
+                            txtBeneficiarioCarreraEdit.Visible = false;
+
+                            if (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 4 || Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 5)
+                            {
+                                txtBeneficiarioSeccionEdit.Visible = false;
+                                DDLBeneficiarioGradoEdit.Visible = false;
+                                DDLBeneficiarioGradoEdit.SelectedValue = "18";
+                                txtBeneficiarioFacultadEdit.Visible = true;
+                                txtBeneficiarioCarreraEdit.Visible = true;
+                            }
+
                             //   txtBeneficiarioSeccionEdit.Text = d[""].ToString();
                             if (DDLBeneficiarioTipoDocuEdit.SelectedValue == "1")
                             {
@@ -1149,6 +1241,23 @@ namespace Demo
                         txtBeneficiarioFechaNacEdit.Text = d["Bene_FechaNacimiento"].ToString();
                         DDLBeneficiarioGradoEdit.SelectedValue = d["Bene_Grado"].ToString();
                         txtBeneficiarioSeccionEdit.Text = d["Bene_seccion"].ToString();
+                        txtBeneficiarioFacultadEdit.Text = d["Facultad"].ToString();
+                        txtBeneficiarioCarreraEdit.Text = d["Carrera"].ToString();
+
+                        txtBeneficiarioSeccionEdit.Visible = true;
+                        DDLBeneficiarioGradoEdit.Visible = true;
+                        txtBeneficiarioFacultadEdit.Visible = false;
+                        txtBeneficiarioCarreraEdit.Visible = false;
+
+                        if (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 4 || Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 5)
+                        {
+                            txtBeneficiarioSeccionEdit.Visible = false;
+                            DDLBeneficiarioGradoEdit.Visible = false;
+                            DDLBeneficiarioGradoEdit.SelectedValue = "18";
+                            txtBeneficiarioFacultadEdit.Visible = true;
+                            txtBeneficiarioCarreraEdit.Visible = true;
+                        }
+
                         //   txtBeneficiarioSeccionEdit.Text = d[""].ToString();
                         if (DDLBeneficiarioTipoDocuEdit.SelectedValue == "1")
                         {
@@ -1189,6 +1298,23 @@ namespace Demo
                         txtBeneficiarioFechaNacEdit.Text = d["Bene_FechaNacimiento"].ToString();
                         DDLBeneficiarioGradoEdit.SelectedValue = d["Bene_Grado"].ToString();
                         //   txtBeneficiarioSeccionEdit.Text = d[""].ToString();
+                        txtBeneficiarioFacultadEdit.Text = d["Facultad"].ToString();
+                        txtBeneficiarioCarreraEdit.Text = d["Carrera"].ToString();
+
+                        txtBeneficiarioSeccionEdit.Visible = true;
+                        DDLBeneficiarioGradoEdit.Visible = true;
+                        txtBeneficiarioFacultadEdit.Visible = false;
+                        txtBeneficiarioCarreraEdit.Visible = false;
+
+                        if (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 4 || Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 5)
+                        {
+                            txtBeneficiarioSeccionEdit.Visible = false;
+                            DDLBeneficiarioGradoEdit.Visible = false;
+                            DDLBeneficiarioGradoEdit.SelectedValue = "18";
+                            txtBeneficiarioFacultadEdit.Visible = true;
+                            txtBeneficiarioCarreraEdit.Visible = true;
+                        }
+
                         if (DDLBeneficiarioTipoDocuEdit.SelectedValue == "1")
                         {
                             txtBeneficiarioNumeroDocuEdit.MaxLength = 8;
@@ -1230,6 +1356,21 @@ namespace Demo
                         txtOncTitEdtNroDoc.Text = d["Bene_NumDocumento"].ToString();
                         txtOncTitEdtFecNac.Text = d["Bene_FechaNacimiento"].ToString();
                         ddlOncTitEdtGrado.SelectedValue = d["Bene_Grado"].ToString();
+                        txtOncTitEdtFacultad.Text = d["Facultad"].ToString();
+                        txtOncTitEdtCarrera.Text = d["Carrera"].ToString();
+                        
+                        ddlOncTitEdtGrado.Visible = true;
+                        txtOncTitEdtFacultad.Visible = false;
+                        txtOncTitEdtCarrera.Visible = false;
+
+                        if (Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 4 || Convert.ToInt32(ViewState["TipoInstitucionEducativaID"]) == 5)
+                        {
+                            ddlOncTitEdtGrado.Visible = false;
+                            ddlOncTitEdtGrado.SelectedValue = "18";
+                            txtOncTitEdtFacultad.Visible = true;
+                            txtOncTitEdtCarrera.Visible = true;
+                        }
+
                         rblOncTitEdtGenero.SelectedValue = d["Bene_Sexo"].ToString();
 
                         rblOncConEdtPar.SelectedValue = d["Padre_TipoPadre"].ToString();
@@ -1350,7 +1491,11 @@ namespace Demo
                     Reg.Bene_FechaNacimiento = txtFechaNacEdit.Text;
                     Reg.Bene_Seccion = txtSeccionEdit.Text;
                     Reg.UsuarioCreacion = Session["Usuario"].ToString();                   
-                    Reg.Bene_Grado = ddlGradoEdit.SelectedValue;             
+                    Reg.Bene_Grado = ddlGradoEdit.SelectedValue;
+
+                    Reg.Facultad = txtFacultadEdit.Text;
+                    Reg.Carrera = txtCarreraEdit.Text;
+
 
                     dbOnline.EditarOnline(Reg);
                     GrvConfirmar.DataSource = dbOnline.LISTAR_AFILIACION_ACCIDENTES(Session["Usuario"].ToString());
@@ -1445,6 +1590,10 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                     //Reg.Bene_Sexo = rbtSexo.SelectedIndex + 1;
                     //Reg.Bene_Seccion = dt.Rows[ind]["Seccion"].ToString();                        
                     Reg.Bene_Grado = DDLBeneficiarioGradoEdit.SelectedValue;
+
+                    Reg.Facultad = txtBeneficiarioFacultadEdit.Text.ToUpper();
+                    Reg.Carrera = txtBeneficiarioCarreraEdit.Text.ToUpper();
+
                     Reg.Padre_Nombres = txtPadNombresEdit.Text.ToUpper();
                     Reg.Padre_ApePaterno = txtPadApePaternoEdit.Text.ToUpper();
                     Reg.Padre_ApeMaterno = txtPadApeMaternoEdit.Text.ToUpper();
@@ -1478,6 +1627,9 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                     //Reg.Bene_Seccion = dt.Rows[ind]["Seccion"].ToString();                        
                     Reg.Bene_Grado = DDLBeneficiarioGradoEdit.SelectedValue;
 
+                    Reg.Facultad = txtBeneficiarioFacultadEdit.Text.ToUpper();
+                    Reg.Carrera = txtBeneficiarioCarreraEdit.Text.ToUpper();
+
                     Reg.Padre_Nombres = txtPadNombresEdit.Text.ToUpper();
                     Reg.Padre_ApePaterno = txtPadApePaternoEdit.Text.ToUpper();
                     Reg.Padre_ApeMaterno = txtPadApeMaternoEdit.Text.ToUpper();
@@ -1498,7 +1650,10 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                     RegRS.Bene_Seccion = txtBeneficiarioSeccionEdit.Text.ToUpper();
                     RegRS.Bene_FechaNacimiento = txtBeneficiarioFechaNacEdit.Text;
                     RegRS.Bene_Grado = DDLBeneficiarioGradoEdit.SelectedValue;
-            
+
+                    RegRS.Facultad = txtBeneficiarioFacultadEdit.Text.ToUpper();
+                    RegRS.Carrera = txtBeneficiarioCarreraEdit.Text.ToUpper();
+
                     dbAfilidos.EditarOnline(Reg);
                     GrvConfirmar.DataSource = dbAfilidos.LISTAR_AFILIACION_ONLINE(UsuarioCreacion);
                     GrvConfirmar.DataBind();           
@@ -1532,6 +1687,9 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
             //Reg.Bene_Sexo = rbtSexo.SelectedIndex + 1;
             //Reg.Bene_Seccion = dt.Rows[ind]["Seccion"].ToString();                        
             Reg.Bene_Grado = DDLBeneficiarioGradoEdit.SelectedValue;
+
+            Reg.Facultad = txtBeneficiarioFacultadEdit.Text.ToUpper();
+            Reg.Carrera = txtBeneficiarioCarreraEdit.Text.ToUpper();
 
             Reg.Padre_Nombres = txtPadNombresEdit.Text.ToUpper();
             Reg.Padre_ApePaterno = txtPadApePaternoEdit.Text.ToUpper();
@@ -1793,6 +1951,10 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
             txtSeccion.Text = "";
             DDLTipoDocumento.SelectedValue = "0";
             txtNumeroDocumento.Text = "";
+            txtFacultad.Text = "";
+            txtCarrera.Text = "";
+            txtOncTitFacultad.Text = "";
+            txtOncTitCarrera.Text = "";
 
             //TxtApeMateEdit.Text = "";
             //TxtApePateEdit.Text = "";
@@ -1953,7 +2115,8 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                             alu1.Estado = true;
                             alu1.Seccion = item["Bene_Seccion"].ToString();
                             alu1.GradoID = Convert.ToInt32(item["Bene_Grado"]);
-                            alu1.Carrera = "";
+                            alu1.Carrera = item["Carrera"].ToString();
+                            alu1.Facultad = item["Facultad"].ToString();
 
                             AfiliacionSeguro afiseguro1 = new AfiliacionSeguro();
                             afiseguro1.InstitucionEducativaID = Convert.ToInt32(hdnInstitucionEducativa.Value);
@@ -2003,7 +2166,8 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                                 alu1.Estado = true;
                                 alu1.Seccion = item["Bene_Seccion"].ToString();
                                 alu1.GradoID = Convert.ToInt32(item["Bene_Grado"]);
-                                alu1.Carrera = "";
+                                alu1.Carrera = item["Carrera"].ToString();
+                                alu1.Facultad = item["Facultad"].ToString();
 
                                 Padre padre1 = new Padre();
                                 padre1.Nombre = item["Padre_Nombres"].ToString();
@@ -2072,8 +2236,9 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                                     alu.Estado = true;
                                     alu.Seccion = item["Bene_Seccion"].ToString();
                                     alu.GradoID = Convert.ToInt32(item["Bene_Grado"]);
-                                    alu.Carrera = "";
-                                
+                                    alu.Carrera = item["Carrera"].ToString();
+                                    alu.Facultad = item["Facultad"].ToString();
+
                                     padre.Nombre = item["Padre_Nombres"].ToString();
                                     padre.ApellidoPaterno = item["Padre_ApePaterno"].ToString();
                                     padre.ApellidoMaterno = item["Padre_ApeMaterno"].ToString();
@@ -2105,8 +2270,9 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                                     alu.Estado = true;
                                     alu.Seccion = item["Bene_Seccion"].ToString();
                                     alu.GradoID = Convert.ToInt32(item["Bene_Grado"]);
-                                    alu.Carrera = "";
-                                  
+                                    alu.Carrera = item["Carrera"].ToString();
+                                    alu.Facultad = item["Facultad"].ToString();
+
                                     padre.Nombre = item["Padre_Nombres"].ToString();
                                     padre.ApellidoPaterno = item["Padre_ApePaterno"].ToString();
                                     padre.ApellidoMaterno = item["Padre_ApeMaterno"].ToString();
@@ -2168,7 +2334,8 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                                     alu.Estado = true;
                                     alu.Seccion = item["Bene_Seccion"].ToString();
                                     alu.GradoID = Convert.ToInt32(item["Bene_Grado"]);
-                                    alu.Carrera = "";
+                                    alu.Carrera = item["Carrera"].ToString();
+                                    alu.Facultad = item["Facultad"].ToString();
 
                                     padre.Nombre = item["Padre_Nombres"].ToString();
                                     padre.ApellidoPaterno = item["Padre_ApePaterno"].ToString();
@@ -2233,6 +2400,8 @@ protected void btnActualizarPadre_Click(object sender, EventArgs e)
                         alu.NumeroDocumento = item["Bene_NumDocumento"].ToString();
                         alu.FechaNacimiento = Convert.ToDateTime(item["Bene_FechaNacimiento"]);
                         alu.GradoID = Convert.ToInt32(item["Bene_Grado"]);
+                        alu.Carrera = item["Carrera"].ToString();
+                        alu.Facultad = item["Facultad"].ToString();
                         alu.Sexo = Convert.ToInt32(item["Bene_sexo"]);
                         alu.UsuarioCreacion = Session["Usuario"].ToString();
                         alu.FechaCreacion = DateTime.Now.Date;

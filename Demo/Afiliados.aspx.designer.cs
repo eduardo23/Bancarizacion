@@ -238,6 +238,15 @@ namespace Demo {
         protected global::System.Web.UI.WebControls.DropDownList DDLGrado;
         
         /// <summary>
+        /// Control txtFacultad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFacultad;
+        
+        /// <summary>
         /// Control txtSeccion.
         /// </summary>
         /// <remarks>
@@ -245,6 +254,15 @@ namespace Demo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSeccion;
+        
+        /// <summary>
+        /// Control txtCarrera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCarrera;
         
         /// <summary>
         /// Control rbtSexo.
@@ -344,6 +362,24 @@ namespace Demo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOncTitGrado;
+        
+        /// <summary>
+        /// Control txtOncTitFacultad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOncTitFacultad;
+        
+        /// <summary>
+        /// Control txtOncTitCarrera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOncTitCarrera;
         
         /// <summary>
         /// Control rblOncTitGenero.
@@ -1057,6 +1093,15 @@ namespace Demo {
         protected global::System.Web.UI.WebControls.DropDownList ddlGradoEdit;
         
         /// <summary>
+        /// Control txtFacultadEdit.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFacultadEdit;
+        
+        /// <summary>
         /// Control txtSeccionEdit.
         /// </summary>
         /// <remarks>
@@ -1064,6 +1109,15 @@ namespace Demo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSeccionEdit;
+        
+        /// <summary>
+        /// Control txtCarreraEdit.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCarreraEdit;
         
         /// <summary>
         /// Control btnEditarAlumnos.
@@ -1300,6 +1354,15 @@ namespace Demo {
         protected global::System.Web.UI.WebControls.DropDownList DDLBeneficiarioGradoEdit;
         
         /// <summary>
+        /// Control txtBeneficiarioFacultadEdit.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBeneficiarioFacultadEdit;
+        
+        /// <summary>
         /// Control txtBeneficiarioSeccionEdit.
         /// </summary>
         /// <remarks>
@@ -1307,6 +1370,15 @@ namespace Demo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBeneficiarioSeccionEdit;
+        
+        /// <summary>
+        /// Control txtBeneficiarioCarreraEdit.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBeneficiarioCarreraEdit;
         
         /// <summary>
         /// Control btnActualizarPadre.
@@ -1397,6 +1469,24 @@ namespace Demo {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOncTitEdtGrado;
+        
+        /// <summary>
+        /// Control txtOncTitEdtFacultad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOncTitEdtFacultad;
+        
+        /// <summary>
+        /// Control txtOncTitEdtCarrera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOncTitEdtCarrera;
         
         /// <summary>
         /// Control rblOncTitEdtGenero.

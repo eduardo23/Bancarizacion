@@ -7,7 +7,7 @@
 <script src="Scripts/moment.js"></script>
 
 <%--<script>   
-    $('#txtNumeroDocumento').prop('type', 'number'); 
+    $('#txtNumeroDocumento').propddlOncTitEdtGradotype', 'number'); 
 </script>--%>
 <script>
     $(document).ready(function () {
@@ -353,7 +353,7 @@
         if ($(varTitTDoc).val() == 1 || $(varTitTDoc).val() == 2) {
 
             var charCode = (evt.which) ? evt.which : event.keyCode
-            if (((charCode == 8) || (charCode == 46)
+            if (((charCode == 9) || (charCode == 8) || (charCode == 46)
             || (charCode >= 35 && charCode <= 40)
                 || (charCode >= 48 && charCode <= 57)
                 || (charCode >= 96 && charCode <= 105))) {
@@ -370,7 +370,7 @@
         if ($(varConTDoc).val() == 1 || $(varConTDoc).val() == 2) {
 
             var charCode = (evt.which) ? evt.which : event.keyCode
-            if (((charCode == 8) || (charCode == 46)
+            if (((charCode == 9) || (charCode == 8) || (charCode == 46)
             || (charCode >= 35 && charCode <= 40)
                 || (charCode >= 48 && charCode <= 57)
                 || (charCode >= 96 && charCode <= 105))) {
@@ -387,7 +387,7 @@ function validNumericos(evt) {
     if ($(varid).val() == 1 || $(varid).val() == 2) {
 
         var charCode = (evt.which) ? evt.which : event.keyCode
-        if (((charCode == 8) || (charCode == 46)
+        if (((charCode == 9) || (charCode == 8) || (charCode == 46)
         || (charCode >= 35 && charCode <= 40)
             || (charCode >= 48 && charCode <= 57)
             || (charCode >= 96 && charCode <= 105))) {
@@ -406,7 +406,7 @@ function validNumericos1(evt) {
     if ($(varid1).val() == 1) {
 
         var charCode = (evt.which) ? evt.which : event.keyCode
-        if (((charCode == 8) || (charCode == 46)
+        if (((charCode == 9) ||(charCode == 8) || (charCode == 46)
         || (charCode >= 35 && charCode <= 40)
             || (charCode >= 48 && charCode <= 57)
             || (charCode >= 96 && charCode <= 105))) {
@@ -426,7 +426,7 @@ function validNumericos2(evt) {
     if ($(varid2).val() == 1) {
 
         var charCode = (evt.which) ? evt.which : event.keyCode
-        if (((charCode == 8) || (charCode == 46)
+        if (((charCode == 9) || (charCode == 8) || (charCode == 46)
         || (charCode >= 35 && charCode <= 40)
             || (charCode >= 48 && charCode <= 57)
             || (charCode >= 96 && charCode <= 105))) {
@@ -778,6 +778,12 @@ function valeditBenef(evt) {
                                              <ItemStyle CssClass="oculto" />
                                             </asp:BoundField>
 
+                                            <asp:BoundField DataField="TipoInstitucionEducativaID" HeaderText="TipoInstitucionEducativaID" >
+                                             <HeaderStyle CssClass="oculto" />
+                                             <ItemStyle CssClass="oculto" />
+                                            </asp:BoundField>
+                                            
+
 
                                         </Columns>
                                     </asp:GridView>
@@ -865,7 +871,8 @@ function valeditBenef(evt) {
                                         <div class="col-lg-12">
                                             <asp:DropDownList ID="DDLGrado" runat="server" CssClass="combo" Width="100%" AppendDataBoundItems="True" required>
                                                 <asp:ListItem Selected="True" Value="0">Seleccione el Grado</asp:ListItem>
-                                            </asp:DropDownList>                                                                                             
+                                            </asp:DropDownList>
+                                            <asp:TextBox runat="server" class="form-control" id="txtFacultad" placeholder="Ingrese Facultad" Style="text-transform: uppercase"/>
                                         </div>
                                         </div>
 
@@ -873,6 +880,7 @@ function valeditBenef(evt) {
                                         <%-- <label for="Carrera" class="col-lg-4 control-label">Sección</label>--%>
                                         <div class="col-lg-12">
                                             <asp:TextBox runat="server" class="form-control" id="txtSeccion" placeholder="Ingrese la sección" Style="text-transform: uppercase"/>
+                                            <asp:TextBox runat="server" class="form-control" id="txtCarrera" placeholder="Ingrese Carrera" Style="text-transform: uppercase"/>
                                         </div>
                                     </div>
 
@@ -943,7 +951,14 @@ function valeditBenef(evt) {
         <div class="col-lg-12">
             <asp:DropDownList ID="ddlOncTitGrado" runat="server" CssClass="combo" Width="100%" AppendDataBoundItems="True" required>
                 <asp:ListItem Selected="True" Value="0">Seleccione el Grado</asp:ListItem>
-            </asp:DropDownList>                                                                                             
+            </asp:DropDownList>
+            <asp:TextBox runat="server" class="form-control" id="txtOncTitFacultad" placeholder="Ingrese Facultad" Style="text-transform: uppercase"/>                                                                                             
+        </div>
+        </div>
+
+        <div class="form-group">
+        <div class="col-lg-12">
+            <asp:TextBox runat="server" class="form-control" id="txtOncTitCarrera" placeholder="Ingrese Carrera" Style="text-transform: uppercase"/>                                                                                             
         </div>
         </div>
 
@@ -955,8 +970,8 @@ function valeditBenef(evt) {
             </asp:RadioButtonList>
             </div>
         </div>    
-        <div class="form-group" style="height:75px;">                                                                                    
-        </div>  
+        <%--<div class="form-group" style="height:75px;">                                                                                    
+        </div>  --%>
 </div>
 </div>
 </div>
@@ -1573,7 +1588,8 @@ function valeditBenef(evt) {
                                              <div class="col-lg-10">
                                                 <asp:DropDownList runat="server" class="form-control" id="ddlGradoEdit" placeholder="Grado"  CssClass="combo"  Width="100%" AppendDataBoundItems="True">
                                                                 <asp:ListItem Selected="True" Value="0">Seleccione Grado</asp:ListItem>
-                                                               </asp:DropDownList>             
+                                                               </asp:DropDownList>
+                                                 <asp:TextBox  runat="server" class="form-control" id="txtFacultadEdit" placeholder="Facultad" />
                                             </div>
                                       </div>
 
@@ -1581,6 +1597,7 @@ function valeditBenef(evt) {
                                           <label for="Seccion" class="col-lg-2 control-label">Sección</label>
                                           <div class="col-lg-10">
                                                <asp:TextBox  runat="server" class="form-control" id="txtSeccionEdit" placeholder="Sección" />
+                                              <asp:TextBox  runat="server" class="form-control" id="txtCarreraEdit" placeholder="Carrera" />
                                           </div>
                                   </div>
                                      
@@ -1806,7 +1823,8 @@ function valeditBenef(evt) {
                                              <div class="col-lg-7">
                                                 <asp:DropDownList runat="server" class="form-control" id="DDLBeneficiarioGradoEdit" placeholder="Grado"  CssClass="combo"  Width="100%" AppendDataBoundItems="True">
                                                                 <asp:ListItem Selected="True" Value="0">Seleccione Grado</asp:ListItem>
-                                                               </asp:DropDownList>             
+                                                               </asp:DropDownList>
+                                                 <asp:TextBox  runat="server" class="form-control" id="txtBeneficiarioFacultadEdit" Style="text-transform: uppercase" placeholder="Facultad" />
                                             </div>
                                       </div>
 
@@ -1814,6 +1832,7 @@ function valeditBenef(evt) {
                                           <label for="Seccion" class="col-lg-5 control-label">Sección</label>
                                           <div class="col-lg-7">
                                                <asp:TextBox  runat="server" class="form-control" id="txtBeneficiarioSeccionEdit" Style="text-transform: uppercase" placeholder="Sección" />
+                                              <asp:TextBox  runat="server" class="form-control" id="txtBeneficiarioCarreraEdit" Style="text-transform: uppercase" placeholder="Carrera" />
                                          </div>
                                   </div>
                                        
@@ -1901,7 +1920,14 @@ function valeditBenef(evt) {
                                         <div class="col-lg-12">
                                             <asp:DropDownList ID="ddlOncTitEdtGrado" runat="server" CssClass="combo" Width="100%" AppendDataBoundItems="True">
                                                 <asp:ListItem Selected="True" Value="0">Seleccione el Grado</asp:ListItem>
-                                            </asp:DropDownList>                                                                                             
+                                            </asp:DropDownList>
+                                            <asp:TextBox runat="server" class="form-control" id="txtOncTitEdtFacultad" placeholder="Ingrese Facultad" ></asp:TextBox>
+                                        </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <asp:TextBox runat="server" class="form-control" id="txtOncTitEdtCarrera" placeholder="Ingrese Carrera" ></asp:TextBox>
                                         </div>
                                         </div>
 

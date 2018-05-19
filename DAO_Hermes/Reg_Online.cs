@@ -58,5 +58,7 @@ namespace DAO_Hermes
         public string ad1DirMail { get; set; }
         public Nullable<int> ad1Sexo { get; set; }
         public string ad1Carrera { get; set; }
+        public string Facultad { get; set; }
+        public string Carrera { get; set; }
     }
 }

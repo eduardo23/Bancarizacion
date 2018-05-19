@@ -1938,29 +1938,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="USP_OBTENER_Plan_Asociacion" FunctionName="BD_HermesBancarizacionModel.Store.USP_OBTENER_Plan_Asociacion" />
-    <FunctionImportMapping FunctionImportName="USP_OBTENER_PRODUCTOS_IE" FunctionName="BD_HermesBancarizacionModel.Store.USP_OBTENER_PRODUCTOS_IE">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="BD_HermesBancarizacionModel.USP_OBTENER_PRODUCTOS_IE_Result">
-          <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
-          <ScalarProperty Name="InstitucionEducativaID" ColumnName="InstitucionEducativaID" />
-          <ScalarProperty Name="NombreNatural" ColumnName="NombreNatural" />
-          <ScalarProperty Name="Producto" ColumnName="Producto" />
-          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-          <ScalarProperty Name="IDAsociacion" ColumnName="IDAsociacion" />
-          <ScalarProperty Name="Aseguradora" ColumnName="Aseguradora" />
-          <ScalarProperty Name="Prima" ColumnName="Prima" />
-          <ScalarProperty Name="MonedaID" ColumnName="MonedaID" />
-          <ScalarProperty Name="Colegio" ColumnName="Colegio" />
-          <ScalarProperty Name="FechaVigenciaPolizaInicio" ColumnName="FechaVigenciaPolizaInicio" />
-          <ScalarProperty Name="FechaVigenciaPolizaFin" ColumnName="FechaVigenciaPolizaFin" />
-          <ScalarProperty Name="FechaVigenciaFin" ColumnName="FechaVigenciaFin" />
-          <ScalarProperty Name="FilePlanSeguro" ColumnName="FilePlanSeguro" />
-          <ScalarProperty Name="FileNamePlanSeguro" ColumnName="FileNamePlanSeguro" />
-          <ScalarProperty Name="TipoCargaCodigos" ColumnName="TipoCargaCodigos" />
-          <ScalarProperty Name="TipoAsociacion" ColumnName="TipoAsociacion" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="USP_ObtenerBancosAsociacion" FunctionName="BD_HermesBancarizacionModel.Store.USP_ObtenerBancosAsociacion" />
     <FunctionImportMapping FunctionImportName="USP_ObtenerBancosIdAsociacion" FunctionName="BD_HermesBancarizacionModel.Store.USP_ObtenerBancosIdAsociacion">
       <ResultMapping>
@@ -2652,6 +2629,8 @@
     <EntitySetMapping Name="Reg_Online">
       <EntityTypeMapping TypeName="BD_HermesBancarizacionModel.Reg_Online">
         <MappingFragment StoreEntitySet="Reg_Online">
+          <ScalarProperty Name="Carrera" ColumnName="Carrera" />
+          <ScalarProperty Name="Facultad" ColumnName="Facultad" />
           <ScalarProperty Name="ad1Carrera" ColumnName="ad1Carrera" />
           <ScalarProperty Name="ad1Sexo" ColumnName="ad1Sexo" />
           <ScalarProperty Name="ad1DirMail" ColumnName="ad1DirMail" />
@@ -2702,6 +2681,7 @@
     <EntitySetMapping Name="Alumno">
       <EntityTypeMapping TypeName="BD_HermesBancarizacionModel.Alumno">
         <MappingFragment StoreEntitySet="Alumno">
+          <ScalarProperty Name="Facultad" ColumnName="Facultad" />
           <ScalarProperty Name="asociacionid" ColumnName="asociacionid" />
           <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
           <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
@@ -2735,5 +2715,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="USP_OBTENER_PRODUCTOS_IE" FunctionName="BD_HermesBancarizacionModel.Store.USP_OBTENER_PRODUCTOS_IE">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BD_HermesBancarizacionModel.USP_OBTENER_PRODUCTOS_IE_Result">
+          <ScalarProperty Name="IdAseguradora" ColumnName="IdAseguradora" />
+          <ScalarProperty Name="InstitucionEducativaID" ColumnName="InstitucionEducativaID" />
+          <ScalarProperty Name="NombreNatural" ColumnName="NombreNatural" />
+          <ScalarProperty Name="Producto" ColumnName="Producto" />
+          <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+          <ScalarProperty Name="IDAsociacion" ColumnName="IDAsociacion" />
+          <ScalarProperty Name="Aseguradora" ColumnName="Aseguradora" />
+          <ScalarProperty Name="Prima" ColumnName="Prima" />
+          <ScalarProperty Name="MonedaID" ColumnName="MonedaID" />
+          <ScalarProperty Name="Colegio" ColumnName="Colegio" />
+          <ScalarProperty Name="FechaVigenciaPolizaInicio" ColumnName="FechaVigenciaPolizaInicio" />
+          <ScalarProperty Name="FechaVigenciaPolizaFin" ColumnName="FechaVigenciaPolizaFin" />
+          <ScalarProperty Name="FechaVigenciaFin" ColumnName="FechaVigenciaFin" />
+          <ScalarProperty Name="FilePlanSeguro" ColumnName="FilePlanSeguro" />
+          <ScalarProperty Name="FileNamePlanSeguro" ColumnName="FileNamePlanSeguro" />
+          <ScalarProperty Name="TipoCargaCodigos" ColumnName="TipoCargaCodigos" />
+          <ScalarProperty Name="TipoAsociacion" ColumnName="TipoAsociacion" />
+          <ScalarProperty Name="TipoInstitucionEducativaID" ColumnName="TipoInstitucionEducativaID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

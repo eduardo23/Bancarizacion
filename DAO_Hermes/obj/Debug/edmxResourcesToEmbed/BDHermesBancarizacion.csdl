@@ -3780,25 +3780,6 @@
     <Property Type="DateTime" Name="FechaPago" Nullable="true" Precision="23" />
     <Property Type="String" Name="NombreBanco" Nullable="true" MaxLength="500" />
   </ComplexType>
-  <ComplexType Name="USP_OBTENER_PRODUCTOS_IE_Result">
-    <Property Type="Int32" Name="IdAseguradora" Nullable="false" />
-    <Property Type="Int32" Name="InstitucionEducativaID" Nullable="false" />
-    <Property Type="String" Name="NombreNatural" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Producto" Nullable="false" MaxLength="250" />
-    <Property Type="Int32" Name="IdProducto" Nullable="false" />
-    <Property Type="Int32" Name="IDAsociacion" Nullable="false" />
-    <Property Type="String" Name="Aseguradora" Nullable="true" MaxLength="255" />
-    <Property Type="Decimal" Name="Prima" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Int32" Name="MonedaID" Nullable="true" />
-    <Property Type="String" Name="Colegio" Nullable="true" />
-    <Property Type="DateTime" Name="FechaVigenciaPolizaInicio" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="FechaVigenciaPolizaFin" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="FechaVigenciaFin" Nullable="true" Precision="23" />
-    <Property Type="Binary" Name="FilePlanSeguro" Nullable="true" />
-    <Property Type="String" Name="FileNamePlanSeguro" Nullable="true" MaxLength="500" />
-    <Property Type="Int32" Name="TipoCargaCodigos" Nullable="true" />
-    <Property Type="Int32" Name="TipoAsociacion" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="USP_ObtenerBancosIdAsociacion_Result">
     <Property Type="Int32" Name="Item" Nullable="false" />
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="200" />
@@ -4411,6 +4392,8 @@
     <Property Name="ad1DirMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ad1Sexo" Type="Int32" />
     <Property Name="ad1Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Facultad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Alumno">
     <Key>
@@ -4438,6 +4421,7 @@
     <NavigationProperty Name="AfiliacionSeguroAlumno" Relationship="BD_HermesBancarizacionModel.FK__Afiliacio__Alumn__72910220" FromRole="Alumno" ToRole="AfiliacionSeguroAlumno" />
     <NavigationProperty Name="Grado" Relationship="BD_HermesBancarizacionModel.FK__Alumno__GradoID__531856C7" FromRole="Alumno" ToRole="Grado" />
     <NavigationProperty Name="TipoDocumento" Relationship="BD_HermesBancarizacionModel.FK_Alumno_TipoDocumento" FromRole="Alumno" ToRole="TipoDocumento" />
+    <Property Name="Facultad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__Afiliacio__Alumn__72910220">
     <End Type="BD_HermesBancarizacionModel.Alumno" Role="Alumno" Multiplicity="0..1" />
@@ -4485,4 +4469,24 @@
     <Property Name="PreguntaId" Type="Int32" />
     <Property Name="Rspta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <ComplexType Name="USP_OBTENER_PRODUCTOS_IE_Result">
+    <Property Type="Int32" Name="IdAseguradora" Nullable="false" />
+    <Property Type="Int32" Name="InstitucionEducativaID" Nullable="false" />
+    <Property Type="String" Name="NombreNatural" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Producto" Nullable="false" MaxLength="250" />
+    <Property Type="Int32" Name="IdProducto" Nullable="false" />
+    <Property Type="Int32" Name="IDAsociacion" Nullable="false" />
+    <Property Type="String" Name="Aseguradora" Nullable="true" MaxLength="255" />
+    <Property Type="Decimal" Name="Prima" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Int32" Name="MonedaID" Nullable="true" />
+    <Property Type="String" Name="Colegio" Nullable="true" />
+    <Property Type="DateTime" Name="FechaVigenciaPolizaInicio" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaVigenciaPolizaFin" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaVigenciaFin" Nullable="true" Precision="23" />
+    <Property Type="Binary" Name="FilePlanSeguro" Nullable="true" />
+    <Property Type="String" Name="FileNamePlanSeguro" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="TipoCargaCodigos" Nullable="true" />
+    <Property Type="Int32" Name="TipoAsociacion" Nullable="true" />
+    <Property Type="Int32" Name="TipoInstitucionEducativaID" Nullable="true" />
+  </ComplexType>
 </Schema>

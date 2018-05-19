@@ -25,16 +25,4 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://netsolutiondeveloper.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = DAO_Hermes\\DAO_Hermes.csproj
-		SccProjectName1 = DAO_Hermes
-		SccLocalPath1 = DAO_Hermes
-		SccProjectUniqueName2 = Demo\\Demo.csproj
-		SccProjectName2 = Demo
-		SccLocalPath2 = Demo
-	EndGlobalSection
 EndGlobal

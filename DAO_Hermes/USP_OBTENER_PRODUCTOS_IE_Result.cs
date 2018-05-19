@@ -30,5 +30,6 @@ namespace DAO_Hermes
         public string FileNamePlanSeguro { get; set; }
         public Nullable<int> TipoCargaCodigos { get; set; }
         public Nullable<int> TipoAsociacion { get; set; }
+        public Nullable<int> TipoInstitucionEducativaID { get; set; }
     }
 }

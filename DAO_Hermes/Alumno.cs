@@ -39,6 +39,7 @@ namespace DAO_Hermes
         public string UsuarioActualizacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
         public Nullable<int> asociacionid { get; set; }
+        public string Facultad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AfiliacionSeguroAlumno> AfiliacionSeguroAlumno { get; set; }

@@ -109,6 +109,8 @@ namespace DAO_Hermes.Repositorios
                     item.Bene_FechaNacimiento = regOnline.Bene_FechaNacimiento;
                     item.Bene_Grado = regOnline.Bene_Grado;                    
                     item.Bene_Seccion = regOnline.Bene_Seccion;
+                    item.Facultad = regOnline.Facultad;
+                    item.Carrera = regOnline.Carrera;
                     db.SaveChanges();
                 }
                 //buscado.beneSeccion = "c";           
@@ -151,6 +153,8 @@ namespace DAO_Hermes.Repositorios
                     item.Bene_FechaNacimiento = regOnline.Bene_FechaNacimiento;
                     item.Bene_Grado = regOnline.Bene_Grado;
                     item.Bene_Seccion = regOnline.Bene_Seccion;
+                    item.Facultad = regOnline.Facultad;
+                    item.Carrera = regOnline.Carrera;
                     db.SaveChanges();
                 }
                 //buscado.beneSeccion = "c";           

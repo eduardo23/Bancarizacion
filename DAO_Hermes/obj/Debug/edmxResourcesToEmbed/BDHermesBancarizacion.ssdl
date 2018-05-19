@@ -57,6 +57,7 @@
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
     <Property Name="FechaActualizacion" Type="datetime" />
     <Property Name="asociacionid" Type="int" />
+    <Property Name="Facultad" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Grado">
     <Key>
@@ -221,6 +222,8 @@
     <Property Name="ad1DirMail" Type="nvarchar(max)" />
     <Property Name="ad1Sexo" Type="int" />
     <Property Name="ad1Carrera" Type="varchar" MaxLength="200" />
+    <Property Name="Facultad" Type="varchar" MaxLength="50" />
+    <Property Name="Carrera" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
