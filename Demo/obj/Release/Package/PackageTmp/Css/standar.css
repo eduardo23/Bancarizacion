@@ -1,0 +1,337 @@
+﻿
+.CeldaTitulo {
+        text-align: center;
+        background-color: #3c454f;
+        color:white;
+        font-weight:bold;
+}
+      .tablaCentrada {
+          width:35%;
+          margin: 0 auto;
+          top: 50%;
+         }
+       .titulo {
+            font-size: x-large;
+            font-family: Helvetica;
+            }
+       .tituloWhite {
+            font-size: xx-large;
+            font-family: Helvetica;
+            color:white;
+            }
+      .combo {
+            padding:6px;
+            /*border-radius:10px;*/
+            background-color:#3c454f;
+            color:white;           
+            font-size:small;           
+                       }
+
+      .cajaTexto {
+            padding:4px;
+            text-align: left;
+            /*border-radius:5px;*/
+            font-size: small;
+                 }
+
+       .cajaTextoGrande{
+            padding:8px;
+            text-align: left;
+            /*border-radius:5px;*/
+            font-size:22px;
+                 }
+       .cajaEtiqueta {
+            padding:4px;
+            text-align: left;
+            border-radius:5px;
+            font-size: small;
+            background-color: #FFFFCC;
+                 }
+
+     .etiqueta {
+            text-align:right;
+            font-weight:bold;
+            padding:4px
+        }
+
+     .etiquetaBig {
+            text-align:right;
+            font-weight:bold;
+            padding:4px;
+            font-size:larger
+        }
+
+     .etiquetaTitulo {
+            text-align:center;
+        }
+     
+     .modalBackground 
+     {
+     position:fixed; 
+     background-color:#000; 
+     filter:alpha(opacity=50); 
+     opacity:0.5;  
+     }       
+  body   
+     {
+            background-color:White;
+            font-size: small;
+            font-family: Calibri;            
+            margin: 0px;
+            padding: 0px;
+            color:black;
+     }
+  h1
+  {
+      color:white;
+  }
+       
+  tdTool
+  {
+      width:500px
+  }
+
+ .button
+          {           
+            background-color: #3c454f; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            font-family:Arial, Helvetica, sans-serif;
+            /*border-radius: 12px;*/
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            -webkit-transition-duration: 0.4s; /* Safari */     transition-duration: 0.4s;
+}
+ 
+                                                 
+.Grid {background-color: #fff; margin: 5px 0 10px 0; border: solid 1px #BDBDBD; border-collapse:collapse; font-family:Calibri; color: #474747;}
+.Grid td {
+      padding: 2px;
+      border-left: none;
+      border-right: none;
+      /*border: inset 0pt;*/   
+      /*border: solid 1px #c1c1c1; */
+          }
+.Grid th  {
+      padding : 4px 2px;
+      color: #fff;
+      background: #3c454f;/*url(../ICONOS/grid-header.png) repeat-x top*/
+      border-left: solid 1px #525252;
+      font-size: 0.9em; }
+.Grid .alt {
+      background: #fcfcfc url(../ICONOS/grid-alt.png) repeat-x top; }
+.Grid .pgr {background: #363670 url(../ICONOS/grid-pgr.png) repeat-x top; }
+.Grid .pgr table { margin: 3px 0; }
+.Grid .pgr td { border-width: 0; padding: 0 6px; border-left: solid 1px #666; font-weight: bold; color: #fff; line-height: 12px; }  
+.Grid .pgr a { color: Gray; text-decoration: none; }
+.Grid .pgr a:hover { color: #000; text-decoration: none; }
+
+
+.Grid2 {background-color: #fff; margin: 5px 0 10px 0; border: solid 1px #BDBDBD; border-collapse:collapse; font-family:Calibri; color: #474747;}
+.Grid2 td {
+        padding: 2px;
+      border-left: none;
+      border-right: none;
+      /*border: solid 1px #c1c1c1; */
+}
+.Grid2 th  {
+      padding : 4px 2px;
+      color:#2C3E50;
+      background:#D6EAF8;   /*url(../ICONOS/grid-header.png) repeat-x top*/;
+    /*  border-left: solid 1px #525252;*/
+      border: 0pt ;
+      font-size: 0.9em; }
+.Grid2 .alt {
+      background: #fcfcfc url(../ICONOS/grid-alt.png) repeat-x top; }
+.Grid2 .pgr {background: #363670 url(../ICONOS/grid-pgr.png) repeat-x top; }
+.Grid2 .pgr table { margin: 3px 0; }
+.Grid2 .pgr td { border-width: 0; padding: 0 6px; border-left: solid 1px #666; font-weight: bold; color: #fff; line-height: 12px; }  
+.Grid2 .pgr a { color: Gray; text-decoration: none; }
+.Grid2 .pgr a:hover { color: #000; text-decoration: none; }
+
+ .Grid2 caption
+    {
+        text-align:center;
+        font-weight:bold;
+    }
+ 
+.rounded_corners
+    {
+        border: 1px solid #A1DCF2;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .rounded_corners td, .rounded_corners th
+    {
+        border: 1px solid #A1DCF2;
+        font-family: Arial;
+        font-size: 10pt;
+        text-align: center;
+    }
+    .rounded_corners table table td
+    {
+        border-style: none;
+    }
+  .watermarked
+{
+   background-color: #F7F6F3;
+   border: solid 1px #808080;
+   padding: 3px;
+   color:Gray;
+}
+
+.unwatermarked
+{
+   border: solid 1px #808080;
+   padding: 3px;
+   color:Gray;
+}
+ .oculto {
+    display:none;
+}
+
+div::-webkit-scrollbar {
+        width: 1em;
+        }
+ 
+div::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+ 
+ div::-webkit-scrollbar-thumb {
+        background-color: #3c454f;
+        outline: 1px solid slategrey;
+        }
+/* Círculos de colores numerados */
+span.red {
+    background: #FF8000;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 5px;
+    margin-left: 25px;
+    text-align: center;
+    width: 1.6em;
+  
+}
+
+span.grey {
+    background: #cccccc;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 15px;
+    text-align: center;
+    width: 1.6em;
+}
+
+span.green {
+    background: #5EA226;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 15px;
+    text-align: center;
+    width: 1.6em;
+}
+
+span.blue {
+    background: #5178D0;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 15px;
+    text-align: center;
+    width: 1.6em;
+}
+
+span.pink {
+    background: #EF0BD8;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 15px;
+    text-align: center;
+    width: 1.6em;
+}
+
+.my-content
+                        {
+                        width:100%;
+                        padding : 25px;                        
+                        }
+.numero
+               {
+                float:left;
+                padding: 5px 0px 5px 5px;            
+                display: inline-block;   
+                }
+
+.container
+{
+    width:98%;
+    border-style:solid;
+    border-width:medium;    
+
+}
+.div_title
+{ 
+    background-color:#1C2833;
+    color:white;
+    padding:4px;
+}
+.centrado
+{
+          width:35%;
+          margin: 0 auto;
+          top: 50%;    
+          padding:25px;
+}
+.msgcentrado
+{
+          width:90%;
+          margin: 0 auto;
+          top: 50%;    
+          padding:25px;
+          text-align:center;
+}
+.danger
+   {
+    font-size:18px;
+    background-color:#0B2161;
+    color:white;
+    border-style:hidden
+}
+
+.CobTitFileAcc {
+    font-weight:bold;
+    font-family:Arial;
+    font-size:10px;
+    background-color:#FF0000;
+}

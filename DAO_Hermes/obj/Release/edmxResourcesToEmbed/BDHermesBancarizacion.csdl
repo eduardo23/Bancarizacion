@@ -28,8 +28,8 @@
     <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
     <Property Name="idasociacion" Type="Int32" />
     <NavigationProperty Name="AfiliacionSeguro" Relationship="Self.FK__Afiliacio__Afili__6FE99F9F" FromRole="AfiliacionSeguroAlumno" ToRole="AfiliacionSeguro" />
-    <NavigationProperty Name="Alumno" Relationship="Self.FK__Afiliacio__Alumn__72910220" FromRole="AfiliacionSeguroAlumno" ToRole="Alumno" />
     <NavigationProperty Name="CodigoDetalle" Relationship="Self.FK_CodigoDetalle_AfiliacionSeguroAlumno" FromRole="AfiliacionSeguroAlumno" ToRole="CodigoDetalle" />
+    <NavigationProperty Name="Alumno" Relationship="BD_HermesBancarizacionModel.FK__Afiliacio__Alumn__72910220" FromRole="AfiliacionSeguroAlumno" ToRole="Alumno" />
   </EntityType>
   <EntityType Name="AfiliacionSeguroPadre">
     <Key>
@@ -44,33 +44,6 @@
     <NavigationProperty Name="Padre" Relationship="Self.FK__Afiliacio__Padre__7A672E12" FromRole="AfiliacionSeguroPadre" ToRole="Padre" />
     <NavigationProperty Name="CodigoDetalle" Relationship="Self.FK_CodigoDetalle_AfiliacionSeguroPadre" FromRole="AfiliacionSeguroPadre" ToRole="CodigoDetalle" />
   </EntityType>
-  <EntityType Name="Alumno">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ApellidoPaternno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="ApellidoMaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="TipoDocumentoID" Type="Int32" />
-    <Property Name="NumeroDocumento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
-    <Property Name="CodigoAlumno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Sexo" Type="Int32" />
-    <Property Name="GradoID" Type="Int32" />
-    <Property Name="Seccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="BeneficiarioID" Type="Int32" />
-    <Property Name="Estado" Type="Boolean" />
-    <Property Name="UsuarioCreacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioActualizacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
-    <Property Name="asociacionid" Type="Int32" />
-    <NavigationProperty Name="AfiliacionSeguroAlumno" Relationship="Self.FK__Afiliacio__Alumn__72910220" FromRole="Alumno" ToRole="AfiliacionSeguroAlumno" />
-    <NavigationProperty Name="Grado" Relationship="Self.FK__Alumno__GradoID__531856C7" FromRole="Alumno" ToRole="Grado" />
-    <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Alumno_TipoDocumento" FromRole="Alumno" ToRole="TipoDocumento" />
-  </EntityType>
   <EntityType Name="Grado">
     <Key>
       <PropertyRef Name="ID" />
@@ -84,7 +57,7 @@
     <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
     <Property Name="UsuarioActualizacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Alumno" Relationship="Self.FK__Alumno__GradoID__531856C7" FromRole="Grado" ToRole="Alumno" />
+    <NavigationProperty Name="Alumno" Relationship="BD_HermesBancarizacionModel.FK__Alumno__GradoID__531856C7" FromRole="Grado" ToRole="Alumno" />
   </EntityType>
   <EntityType Name="Padre">
     <Key>
@@ -488,9 +461,9 @@
     <Property Name="UsuarioActualizacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
     <Property Name="Estado" Type="Boolean" />
-    <NavigationProperty Name="Alumno" Relationship="Self.FK_Alumno_TipoDocumento" FromRole="TipoDocumento" ToRole="Alumno" />
     <NavigationProperty Name="Padre" Relationship="Self.FK__Padre__TipoDocum__7C4F7684" FromRole="TipoDocumento" ToRole="Padre" />
     <NavigationProperty Name="InstitucionEducativa" Relationship="Self.FK_InstitucionEducativa_TipoDocumento" FromRole="TipoDocumento" ToRole="InstitucionEducativa" />
+    <NavigationProperty Name="Alumno" Relationship="BD_HermesBancarizacionModel.FK_Alumno_TipoDocumento" FromRole="TipoDocumento" ToRole="Alumno" />
   </EntityType>
   <EntityType Name="TipoInstitucionEducativa">
     <Key>
@@ -876,18 +849,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Afiliacio__Alumn__72910220">
-    <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
-    <End Role="AfiliacionSeguroAlumno" Type="Self.AfiliacionSeguroAlumno" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Alumno">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="AfiliacionSeguroAlumno">
-        <PropertyRef Name="AlumnoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CodigoDetalle_AfiliacionSeguroAlumno">
     <End Role="AfiliacionSeguroAlumno" Type="Self.AfiliacionSeguroAlumno" Multiplicity="0..1" />
     <End Role="CodigoDetalle" Type="Self.CodigoDetalle" Multiplicity="*" />
@@ -921,30 +882,6 @@
       </Principal>
       <Dependent Role="CodigoDetalle">
         <PropertyRef Name="AfiliacionSeguroPadreID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Alumno__GradoID__531856C7">
-    <End Role="Grado" Type="Self.Grado" Multiplicity="0..1" />
-    <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Grado">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Alumno">
-        <PropertyRef Name="GradoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Alumno_TipoDocumento">
-    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="0..1" />
-    <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoDocumento">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Alumno">
-        <PropertyRef Name="TipoDocumentoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1540,7 +1477,6 @@
     <EntitySet Name="AfiliacionSeguro" EntityType="Self.AfiliacionSeguro" />
     <EntitySet Name="AfiliacionSeguroAlumno" EntityType="Self.AfiliacionSeguroAlumno" />
     <EntitySet Name="AfiliacionSeguroPadre" EntityType="Self.AfiliacionSeguroPadre" />
-    <EntitySet Name="Alumno" EntityType="Self.Alumno" />
     <EntitySet Name="Grado" EntityType="Self.Grado" />
     <EntitySet Name="Padre" EntityType="Self.Padre" />
     <EntitySet Name="TipoPadre" EntityType="Self.TipoPadre" />
@@ -1601,10 +1537,6 @@
       <End Role="AfiliacionSeguro" EntitySet="AfiliacionSeguro" />
       <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
     </AssociationSet>
-    <AssociationSet Name="FK__Afiliacio__Alumn__72910220" Association="Self.FK__Afiliacio__Alumn__72910220">
-      <End Role="Alumno" EntitySet="Alumno" />
-      <End Role="AfiliacionSeguroAlumno" EntitySet="AfiliacionSeguroAlumno" />
-    </AssociationSet>
     <AssociationSet Name="FK_CodigoDetalle_AfiliacionSeguroAlumno" Association="Self.FK_CodigoDetalle_AfiliacionSeguroAlumno">
       <End Role="AfiliacionSeguroAlumno" EntitySet="AfiliacionSeguroAlumno" />
       <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
@@ -1616,14 +1548,6 @@
     <AssociationSet Name="FK_CodigoDetalle_AfiliacionSeguroPadre" Association="Self.FK_CodigoDetalle_AfiliacionSeguroPadre">
       <End Role="AfiliacionSeguroPadre" EntitySet="AfiliacionSeguroPadre" />
       <End Role="CodigoDetalle" EntitySet="CodigoDetalle" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Alumno__GradoID__531856C7" Association="Self.FK__Alumno__GradoID__531856C7">
-      <End Role="Grado" EntitySet="Grado" />
-      <End Role="Alumno" EntitySet="Alumno" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Alumno_TipoDocumento" Association="Self.FK_Alumno_TipoDocumento">
-      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-      <End Role="Alumno" EntitySet="Alumno" />
     </AssociationSet>
     <AssociationSet Name="FK__Padre__TipoDocum__7C4F7684" Association="Self.FK__Padre__TipoDocum__7C4F7684">
       <End Role="TipoDocumento" EntitySet="TipoDocumento" />
@@ -2957,8 +2881,22 @@
     <FunctionImport Name="USP_LISTARASOCIACIONES_NOMBRE" ReturnType="Collection(BD_HermesBancarizacionModel.USP_LISTARASOCIACIONES_NOMBRE_Result)">
       <Parameter Name="NOMBRE" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="Reg_Online" EntityType="BD_HermesBancarizacionModel.Reg_Online" />
     <EntitySet Name="PersonaDatosAdic" EntityType="BD_HermesBancarizacionModel.PersonaDatosAdic" />
+    <EntitySet Name="Reg_Online" EntityType="BD_HermesBancarizacionModel.Reg_Online" />
+    <EntitySet Name="Alumno" EntityType="BD_HermesBancarizacionModel.Alumno" />
+    <AssociationSet Name="FK__Afiliacio__Alumn__72910220" Association="BD_HermesBancarizacionModel.FK__Afiliacio__Alumn__72910220">
+      <End Role="Alumno" EntitySet="Alumno" />
+      <End Role="AfiliacionSeguroAlumno" EntitySet="AfiliacionSeguroAlumno" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Alumno__GradoID__531856C7" Association="BD_HermesBancarizacionModel.FK__Alumno__GradoID__531856C7">
+      <End Role="Grado" EntitySet="Grado" />
+      <End Role="Alumno" EntitySet="Alumno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Alumno_TipoDocumento" Association="BD_HermesBancarizacionModel.FK_Alumno_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+      <End Role="Alumno" EntitySet="Alumno" />
+    </AssociationSet>
+    <EntitySet Name="PersonaPreg" EntityType="BD_HermesBancarizacionModel.PersonaPreg" />
   </EntityContainer>
   <ComplexType Name="LoguearUsuario_Result">
     <Property Type="String" Name="Id" Nullable="true" MaxLength="128" />
@@ -3842,25 +3780,6 @@
     <Property Type="DateTime" Name="FechaPago" Nullable="true" Precision="23" />
     <Property Type="String" Name="NombreBanco" Nullable="true" MaxLength="500" />
   </ComplexType>
-  <ComplexType Name="USP_OBTENER_PRODUCTOS_IE_Result">
-    <Property Type="Int32" Name="IdAseguradora" Nullable="false" />
-    <Property Type="Int32" Name="InstitucionEducativaID" Nullable="false" />
-    <Property Type="String" Name="NombreNatural" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="Producto" Nullable="false" MaxLength="250" />
-    <Property Type="Int32" Name="IdProducto" Nullable="false" />
-    <Property Type="Int32" Name="IDAsociacion" Nullable="false" />
-    <Property Type="String" Name="Aseguradora" Nullable="true" MaxLength="255" />
-    <Property Type="Decimal" Name="Prima" Nullable="false" Precision="10" Scale="2" />
-    <Property Type="Int32" Name="MonedaID" Nullable="true" />
-    <Property Type="String" Name="Colegio" Nullable="true" />
-    <Property Type="DateTime" Name="FechaVigenciaPolizaInicio" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="FechaVigenciaPolizaFin" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="FechaVigenciaFin" Nullable="true" Precision="23" />
-    <Property Type="Binary" Name="FilePlanSeguro" Nullable="true" />
-    <Property Type="String" Name="FileNamePlanSeguro" Nullable="true" MaxLength="500" />
-    <Property Type="Int32" Name="TipoCargaCodigos" Nullable="true" />
-    <Property Type="Int32" Name="TipoAsociacion" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="USP_ObtenerBancosIdAsociacion_Result">
     <Property Type="Int32" Name="Item" Nullable="false" />
     <Property Type="String" Name="Nombre" Nullable="true" MaxLength="200" />
@@ -4401,6 +4320,30 @@
     <Property Type="Int32" Name="CodGen" Nullable="false" />
     <Property Type="Int32" Name="TipoInstitucionEducativaID" Nullable="true" />
   </ComplexType>
+  <EntityType Name="PersonaDatosAdic">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonaTipoId" Type="Int32" Nullable="false" />
+    <Property Name="PersonaId" Type="Int32" Nullable="false" />
+    <Property Name="EstCivilId" Type="Int32" />
+    <Property Name="NacPais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DirPaisId" Type="Int32" />
+    <Property Name="DirDptCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="DirPrvCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="DirDisCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="DirEnt" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="TlfnoDom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TlfnoTrb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NroCel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DirMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sexo" Type="Int32" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioActualizacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+  </EntityType>
   <EntityType Name="Reg_Online">
     <Key>
       <PropertyRef Name="Id" />
@@ -4437,7 +4380,7 @@
     <Property Name="Bene_Seccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="TipoRegistro" Type="Int32" />
     <Property Name="ad1EstCivilId" Type="Int32" />
-    <Property Name="ad1NacPaisId" Type="Int32" />
+    <Property Name="ad1NacPais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ad1DirPaisId" Type="Int32" />
     <Property Name="ad1DirDptCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
     <Property Name="ad1DirPrvCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
@@ -4448,29 +4391,102 @@
     <Property Name="ad1NroCel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ad1DirMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ad1Sexo" Type="Int32" />
+    <Property Name="ad1Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Facultad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="PersonaDatosAdic">
+  <EntityType Name="Alumno">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApellidoPaternno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ApellidoMaterno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TipoDocumentoID" Type="Int32" />
+    <Property Name="NumeroDocumento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="CodigoAlumno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Carrera" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Sexo" Type="Int32" />
+    <Property Name="GradoID" Type="Int32" />
+    <Property Name="Seccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BeneficiarioID" Type="Int32" />
+    <Property Name="Estado" Type="Boolean" />
+    <Property Name="UsuarioCreacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="UsuarioActualizacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+    <Property Name="asociacionid" Type="Int32" />
+    <NavigationProperty Name="AfiliacionSeguroAlumno" Relationship="BD_HermesBancarizacionModel.FK__Afiliacio__Alumn__72910220" FromRole="Alumno" ToRole="AfiliacionSeguroAlumno" />
+    <NavigationProperty Name="Grado" Relationship="BD_HermesBancarizacionModel.FK__Alumno__GradoID__531856C7" FromRole="Alumno" ToRole="Grado" />
+    <NavigationProperty Name="TipoDocumento" Relationship="BD_HermesBancarizacionModel.FK_Alumno_TipoDocumento" FromRole="Alumno" ToRole="TipoDocumento" />
+    <Property Name="Facultad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__Afiliacio__Alumn__72910220">
+    <End Type="BD_HermesBancarizacionModel.Alumno" Role="Alumno" Multiplicity="0..1" />
+    <End Type="BD_HermesBancarizacionModel.AfiliacionSeguroAlumno" Role="AfiliacionSeguroAlumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alumno">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AfiliacionSeguroAlumno">
+        <PropertyRef Name="AlumnoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Alumno__GradoID__531856C7">
+    <End Type="BD_HermesBancarizacionModel.Grado" Role="Grado" Multiplicity="0..1" />
+    <End Type="BD_HermesBancarizacionModel.Alumno" Role="Alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grado">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Alumno">
+        <PropertyRef Name="GradoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Alumno_TipoDocumento">
+    <End Type="BD_HermesBancarizacionModel.TipoDocumento" Role="TipoDocumento" Multiplicity="0..1" />
+    <End Type="BD_HermesBancarizacionModel.Alumno" Role="Alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Alumno">
+        <PropertyRef Name="TipoDocumentoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PersonaPreg">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PersonaTipoId" Type="Int32" Nullable="false" />
     <Property Name="PersonaId" Type="Int32" Nullable="false" />
-    <Property Name="EstCivilId" Type="Int32" />
-    <Property Name="NacPaisId" Type="Int32" />
-    <Property Name="DirPaisId" Type="Int32" />
-    <Property Name="DirDptCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-    <Property Name="DirPrvCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-    <Property Name="DirDisCod" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-    <Property Name="DirEnt" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="TlfnoDom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="TlfnoTrb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="NroCel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="DirMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Sexo" Type="Int32" />
-    <Property Name="UsuarioCreacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-    <Property Name="UsuarioActualizacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+    <Property Name="PreguntaId" Type="Int32" />
+    <Property Name="Rspta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <ComplexType Name="USP_OBTENER_PRODUCTOS_IE_Result">
+    <Property Type="Int32" Name="IdAseguradora" Nullable="false" />
+    <Property Type="Int32" Name="InstitucionEducativaID" Nullable="false" />
+    <Property Type="String" Name="NombreNatural" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Producto" Nullable="false" MaxLength="250" />
+    <Property Type="Int32" Name="IdProducto" Nullable="false" />
+    <Property Type="Int32" Name="IDAsociacion" Nullable="false" />
+    <Property Type="String" Name="Aseguradora" Nullable="true" MaxLength="255" />
+    <Property Type="Decimal" Name="Prima" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Int32" Name="MonedaID" Nullable="true" />
+    <Property Type="String" Name="Colegio" Nullable="true" />
+    <Property Type="DateTime" Name="FechaVigenciaPolizaInicio" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaVigenciaPolizaFin" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaVigenciaFin" Nullable="true" Precision="23" />
+    <Property Type="Binary" Name="FilePlanSeguro" Nullable="true" />
+    <Property Type="String" Name="FileNamePlanSeguro" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="TipoCargaCodigos" Nullable="true" />
+    <Property Type="Int32" Name="TipoAsociacion" Nullable="true" />
+    <Property Type="Int32" Name="TipoInstitucionEducativaID" Nullable="true" />
+  </ComplexType>
 </Schema>

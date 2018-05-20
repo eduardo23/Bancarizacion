@@ -57,6 +57,7 @@
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
     <Property Name="FechaActualizacion" Type="datetime" />
     <Property Name="asociacionid" Type="int" />
+    <Property Name="Facultad" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Grado">
     <Key>
@@ -100,7 +101,7 @@
     <Property Name="PersonaTipoId" Type="int" Nullable="false" />
     <Property Name="PersonaId" Type="int" Nullable="false" />
     <Property Name="EstCivilId" Type="int" />
-    <Property Name="NacPaisId" Type="int" />
+    <Property Name="NacPais" Type="varchar" MaxLength="50" />
     <Property Name="DirPaisId" Type="int" />
     <Property Name="DirDptCod" Type="char" MaxLength="2" />
     <Property Name="DirPrvCod" Type="char" MaxLength="2" />
@@ -115,6 +116,16 @@
     <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="255" />
     <Property Name="FechaActualizacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PersonaPreg">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonaTipoId" Type="int" Nullable="false" />
+    <Property Name="PersonaId" Type="int" Nullable="false" />
+    <Property Name="PreguntaId" Type="int" />
+    <Property Name="Rspta" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TipoPadre">
     <Key>
@@ -199,7 +210,7 @@
     <Property Name="Bene_Seccion" Type="varchar" MaxLength="50" />
     <Property Name="TipoRegistro" Type="int" />
     <Property Name="ad1EstCivilId" Type="int" />
-    <Property Name="ad1NacPaisId" Type="int" />
+    <Property Name="ad1NacPais" Type="varchar" MaxLength="50" />
     <Property Name="ad1DirPaisId" Type="int" />
     <Property Name="ad1DirDptCod" Type="char" MaxLength="2" />
     <Property Name="ad1DirPrvCod" Type="char" MaxLength="2" />
@@ -210,6 +221,9 @@
     <Property Name="ad1NroCel" Type="varchar" MaxLength="50" />
     <Property Name="ad1DirMail" Type="nvarchar(max)" />
     <Property Name="ad1Sexo" Type="int" />
+    <Property Name="ad1Carrera" Type="varchar" MaxLength="200" />
+    <Property Name="Facultad" Type="varchar" MaxLength="50" />
+    <Property Name="Carrera" Type="varchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -2762,6 +2776,7 @@ advertencia 6002: La tabla o vista 'BDHermesBancarizacionTest.Maestro.Ubigeo' no
     <EntitySet Name="Grado" EntityType="Self.Grado" Schema="Afiliacion" store:Type="Tables" />
     <EntitySet Name="Padre" EntityType="Self.Padre" Schema="Afiliacion" store:Type="Tables" />
     <EntitySet Name="PersonaDatosAdic" EntityType="Self.PersonaDatosAdic" Schema="Afiliacion" store:Type="Tables" />
+    <EntitySet Name="PersonaPreg" EntityType="Self.PersonaPreg" Schema="Afiliacion" store:Type="Tables" />
     <EntitySet Name="TipoPadre" EntityType="Self.TipoPadre" Schema="Afiliacion" store:Type="Tables" />
     <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />

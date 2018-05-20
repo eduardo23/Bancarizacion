@@ -16,13 +16,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/10/2017 23:38:16</publishTime>
     </File>
     <File Include="Afiliados.aspx">
-      <publishTime>01/02/2018 10:31:03</publishTime>
+      <publishTime>05/19/2018 03:23:47</publishTime>
     </File>
     <File Include="ApplicationInsights.config">
       <publishTime>07/10/2017 23:37:16</publishTime>
     </File>
     <File Include="Asociacion.aspx">
-      <publishTime>12/27/2017 23:43:21</publishTime>
+      <publishTime>04/03/2018 23:10:15</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>05/11/2017 14:28:20</publishTime>
@@ -301,13 +301,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/01/2017 01:33:14</publishTime>
     </File>
     <File Include="bin/DAO_Hermes.dll">
-      <publishTime>01/11/2018 13:43:51</publishTime>
+      <publishTime>05/19/2018 13:18:10</publishTime>
     </File>
     <File Include="bin/de/Microsoft.SqlServer.Types.resources.dll">
       <publishTime>02/21/2014 05:26:06</publishTime>
     </File>
     <File Include="bin/Demo.dll">
-      <publishTime>01/11/2018 13:55:45</publishTime>
+      <publishTime>05/19/2018 13:18:20</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -316,7 +316,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WebForms.resources.dll">
-      <publishTime>12/02/2017 09:47:41</publishTime>
+      <publishTime>01/10/2018 12:05:58</publishTime>
     </File>
     <File Include="bin/es/Microsoft.ReportViewer.WinForms.resources.dll">
       <publishTime>05/29/2015 21:25:26</publishTime>
@@ -326,6 +326,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     </File>
     <File Include="bin/fr/Microsoft.SqlServer.Types.resources.dll">
       <publishTime>02/21/2014 05:27:18</publishTime>
+    </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>01/03/2011 14:16:38</publishTime>
     </File>
     <File Include="bin/Ionic.Zip.dll">
       <publishTime>08/21/2017 18:07:48</publishTime>
@@ -371,6 +374,9 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     </File>
     <File Include="bin/MSCaptcha.dll">
       <publishTime>10/03/2007 07:33:28</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/18/2017 13:57:10</publishTime>
     </File>
     <File Include="bin/pt/Microsoft.SqlServer.Types.resources.dll">
       <publishTime>02/21/2014 05:25:24</publishTime>
@@ -490,10 +496,13 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/10/2017 23:38:16</publishTime>
     </File>
     <File Include="CargarCodigos.aspx">
-      <publishTime>12/30/2017 16:53:50</publishTime>
+      <publishTime>03/17/2018 19:08:26</publishTime>
     </File>
     <File Include="changelog.md">
       <publishTime>07/10/2017 23:38:16</publishTime>
+    </File>
+    <File Include="Cobranza.aspx">
+      <publishTime>03/15/2018 22:43:26</publishTime>
     </File>
     <File Include="Cobranza/CobranzaProducto.aspx">
       <publishTime>11/08/2017 14:12:57</publishTime>
@@ -508,13 +517,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/10/2017 23:38:16</publishTime>
     </File>
     <File Include="ConsultaPagos.aspx">
-      <publishTime>12/08/2017 13:04:24</publishTime>
+      <publishTime>05/17/2018 00:28:27</publishTime>
     </File>
     <File Include="ConsultarAfiliacion.aspx">
-      <publishTime>12/20/2017 15:28:34</publishTime>
+      <publishTime>01/17/2018 17:39:19</publishTime>
     </File>
     <File Include="ConsultarCampañas.aspx">
       <publishTime>12/28/2017 12:47:35</publishTime>
+    </File>
+    <File Include="ConsultarCheque.aspx">
+      <publishTime>03/19/2018 19:43:25</publishTime>
     </File>
     <File Include="Css/images/ui-icons_444444_256x240.png">
       <publishTime>07/11/2017 10:30:00</publishTime>
@@ -577,7 +589,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/11/2017 10:30:00</publishTime>
     </File>
     <File Include="Css/standar.css">
-      <publishTime>01/02/2018 10:07:25</publishTime>
+      <publishTime>04/13/2018 14:50:05</publishTime>
     </File>
     <File Include="dist/css/AdminLTE.css">
       <publishTime>07/10/2017 23:38:24</publishTime>
@@ -798,8 +810,11 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="dll/Recaptcha.dll">
       <publishTime>08/25/2009 14:44:30</publishTime>
     </File>
+    <File Include="EmailMasivo.aspx">
+      <publishTime>03/17/2018 21:42:41</publishTime>
+    </File>
     <File Include="EnvioEmailMasivo.aspx">
-      <publishTime>11/03/2017 23:35:54</publishTime>
+      <publishTime>03/17/2018 21:42:06</publishTime>
     </File>
     <File Include="Files/Asociacion/PLAN-DE-SEGUROS-ASOCIACION.PDF">
       <publishTime>12/06/2017 13:58:54</publishTime>
@@ -817,13 +832,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>12/19/2017 12:36:20</publishTime>
     </File>
     <File Include="GenerarCargarTXT.aspx">
-      <publishTime>12/02/2017 10:58:52</publishTime>
+      <publishTime>02/02/2018 15:03:25</publishTime>
     </File>
     <File Include="GenerarCodigos.aspx">
-      <publishTime>01/02/2018 10:31:03</publishTime>
+      <publishTime>04/21/2018 12:03:25</publishTime>
+    </File>
+    <File Include="GenerarTramaOnco.aspx">
+      <publishTime>05/05/2018 08:12:35</publishTime>
     </File>
     <File Include="GestionarCampaña.aspx">
-      <publishTime>12/26/2017 15:59:57</publishTime>
+      <publishTime>04/02/2018 23:04:07</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>07/10/2017 23:36:08</publishTime>
@@ -832,7 +850,7 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/10/2017 23:38:16</publishTime>
     </File>
     <File Include="Home.Master">
-      <publishTime>01/02/2018 08:55:23</publishTime>
+      <publishTime>05/01/2018 20:02:33</publishTime>
     </File>
     <File Include="Images/1.png">
       <publishTime>07/11/2017 10:17:36</publishTime>
@@ -985,19 +1003,19 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>12/05/2017 08:29:07</publishTime>
     </File>
     <File Include="ListaInstituciones.aspx">
-      <publishTime>12/20/2017 12:42:51</publishTime>
+      <publishTime>02/23/2018 17:12:55</publishTime>
     </File>
     <File Include="ListaTiposSeguro.aspx">
       <publishTime>12/19/2017 08:51:43</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>12/02/2017 10:30:57</publishTime>
+      <publishTime>05/16/2018 21:14:27</publishTime>
     </File>
     <File Include="package.json">
       <publishTime>07/10/2017 23:38:16</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>12/13/2017 11:18:10</publishTime>
+      <publishTime>04/13/2018 16:42:27</publishTime>
     </File>
     <File Include="pages/calendar.html">
       <publishTime>07/10/2017 23:37:56</publishTime>
@@ -3799,10 +3817,16 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>07/10/2017 23:38:16</publishTime>
     </File>
     <File Include="RegistrarUsuario.aspx">
-      <publishTime>12/14/2017 19:47:30</publishTime>
+      <publishTime>03/17/2018 16:03:27</publishTime>
+    </File>
+    <File Include="ReportCobranza.xsc">
+      <publishTime>02/21/2018 00:36:38</publishTime>
+    </File>
+    <File Include="ReportCobranza.xss">
+      <publishTime>02/21/2018 00:36:38</publishTime>
     </File>
     <File Include="Reportes/BoletaPagosAfiliados.aspx">
-      <publishTime>12/13/2017 17:49:35</publishTime>
+      <publishTime>02/26/2018 20:26:11</publishTime>
     </File>
     <File Include="RestablecerContraseña.aspx">
       <publishTime>12/14/2017 19:47:30</publishTime>
@@ -3975,6 +3999,18 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
     <File Include="Scripts/jquery.numeric.js">
       <publishTime>07/21/2017 14:58:24</publishTime>
     </File>
+    <File Include="Scripts/moment-with-locales.js">
+      <publishTime>02/19/2018 17:28:15</publishTime>
+    </File>
+    <File Include="Scripts/moment-with-locales.min.js">
+      <publishTime>02/19/2018 17:28:15</publishTime>
+    </File>
+    <File Include="Scripts/moment.js">
+      <publishTime>02/19/2018 17:28:15</publishTime>
+    </File>
+    <File Include="Scripts/moment.min.js">
+      <publishTime>02/19/2018 17:28:10</publishTime>
+    </File>
     <File Include="Scripts/util.js">
       <publishTime>07/21/2017 14:58:24</publishTime>
     </File>
@@ -4000,10 +4036,10 @@ editando este archivo MSBuild. Para conocer más acerca de esto, visite http://g
       <publishTime>11/27/2017 11:19:27</publishTime>
     </File>
     <File Include="Usuarios.aspx">
-      <publishTime>12/21/2017 11:58:08</publishTime>
+      <publishTime>05/19/2018 12:22:14</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/11/2018 13:44:10</publishTime>
+      <publishTime>05/19/2018 13:18:30</publishTime>
     </File>
     <File Include="WebForm1.aspx">
       <publishTime>12/13/2017 14:57:00</publishTime>

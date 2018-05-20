@@ -19,3 +19,15 @@ C:\Users\Hermes\Desktop\HERMES\HermesBancarizacion\Hermes\DAO_Hermes\obj\Release
 C:\Users\Hermes\Desktop\HERMES\HermesBancarizacion\Hermes\DAO_Hermes\bin\Release\Newtonsoft.Json.dll
 C:\Users\Hermes\Desktop\HERMES\HermesBancarizacion\Hermes\DAO_Hermes\bin\Release\Newtonsoft.Json.xml
 C:\Users\Hermes\Desktop\HERMES\HermesBancarizacion\Hermes\DAO_Hermes\obj\Release\DAO_Hermes.csprojResolveAssemblyReference.cache
+C:\Bancarizacion\DAO_Hermes\bin\Release\DAO_Hermes.dll.config
+C:\Bancarizacion\DAO_Hermes\bin\Release\DAO_Hermes.dll
+C:\Bancarizacion\DAO_Hermes\bin\Release\DAO_Hermes.pdb
+C:\Bancarizacion\DAO_Hermes\bin\Release\EntityFramework.dll
+C:\Bancarizacion\DAO_Hermes\bin\Release\EntityFramework.SqlServer.dll
+C:\Bancarizacion\DAO_Hermes\bin\Release\Newtonsoft.Json.dll
+C:\Bancarizacion\DAO_Hermes\bin\Release\EntityFramework.xml
+C:\Bancarizacion\DAO_Hermes\bin\Release\EntityFramework.SqlServer.xml
+C:\Bancarizacion\DAO_Hermes\bin\Release\Newtonsoft.Json.xml
+C:\Bancarizacion\DAO_Hermes\obj\Release\DAO_Hermes.csprojResolveAssemblyReference.cache
+C:\Bancarizacion\DAO_Hermes\obj\Release\DAO_Hermes.dll
+C:\Bancarizacion\DAO_Hermes\obj\Release\DAO_Hermes.pdb
