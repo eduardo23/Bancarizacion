@@ -225,8 +225,10 @@
     <Compile Include="Repositorios\ContactoDAO.cs" />
     <Compile Include="Repositorios\CuentaDAO.cs" />
     <Compile Include="Repositorios\FuncionesAuxDAO.cs" />
+    <Compile Include="Repositorios\GestionCorreoDAO.cs" />
     <Compile Include="Repositorios\Globales.cs" />
     <Compile Include="Repositorios\GradoDAO.cs" />
+    <Compile Include="Repositorios\GrupoCorreoDAO.cs" />
     <Compile Include="Repositorios\HistorialDAO.cs" />
     <Compile Include="Repositorios\InstitucionEducativaDAO.cs" />
     <Compile Include="Repositorios\MonedaDAO.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Repositorios\ChequeDAO.cs" />
     <Compile Include="Repositorios\PadreDAO.cs" />
     <Compile Include="Repositorios\Pagination.cs" />
+    <Compile Include="Repositorios\ParametrosMaestrosDAO.cs" />
     <Compile Include="Repositorios\TipoDocumento_DAO.cs" />
     <Compile Include="Repositorios\TipoInstitucionEducativaDAO.cs" />
     <Compile Include="Repositorios\TipoProductoDAO.cs" />
@@ -559,8 +562,11 @@
     <Compile Include="ViewModel\Campañas.cs" />
     <Compile Include="ViewModel\Cia_Seguro.cs" />
     <Compile Include="ViewModel\Cobranzas.cs" />
+    <Compile Include="ViewModel\GestionCorreo.cs" />
+    <Compile Include="ViewModel\GrupoCorreo.cs" />
     <Compile Include="ViewModel\Institucion_Educativa.cs" />
     <Compile Include="ViewModel\LoguearUsuario.cs" />
+    <Compile Include="ViewModel\ParametrosMaestros.cs" />
     <Compile Include="ViewModel\TipoProducto.cs" />
     <Compile Include="ViewModel\Tipo_Moneda.cs" />
   </ItemGroup>

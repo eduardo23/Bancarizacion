@@ -29,7 +29,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +98,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MSCaptcha">
       <HintPath>C:\Users\Henry\Desktop\MSCaptcha.dll</HintPath>
@@ -151,6 +155,7 @@
     <Content Include="bootstrap\js\jquery.minp.js" />
     <Content Include="bootstrap\js\npm.js" />
     <Content Include="CargarCodigos.aspx" />
+    <Content Include="CargarCorreosViaExcel.aspx" />
     <Content Include="ConsultaPagos.aspx" />
     <Content Include="ConsultarAfiliacion.aspx" />
     <Content Include="ConsultarCampañas.aspx" />
@@ -265,6 +270,8 @@
     <Content Include="Css\img\sprite.png" />
     <Content Include="Css\img\x.png" />
     <Content Include="Css\jquery-ui1.css" />
+    <Content Include="Css\open-iconic\font\css\open-iconic-bootstrap.css" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.svg" />
     <Content Include="Css\standar.css" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
@@ -348,6 +355,7 @@
     <Content Include="GenerarCodigos.aspx" />
     <Content Include="GenerarTramaOnco.aspx" />
     <Content Include="GestionarCampaña.aspx" />
+    <Content Include="GestionarCorreos.aspx" />
     <Content Include="Home.Master" />
     <Content Include="Images\1.png" />
     <Content Include="Images\2.png" />
@@ -402,6 +410,7 @@
     <Content Include="ListaTiposSeguro.aspx" />
     <Content Include="ListaInstituciones.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MantGrupoCorreo.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -520,6 +529,7 @@
     <Content Include="Cobranza.aspx" />
     <Content Include="RestablecerContraseña.aspx" />
     <Content Include="Scripts\DeepASPImpromptuCalling.js" />
+    <Content Include="Scripts\FileStyle\bootstrap-filestyle.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="bootstrap\css\bootstrap-theme.css.map" />
@@ -539,6 +549,10 @@
     <Content Include="BoletaPagos.xss">
       <DependentUpon>BoletaPagos.xsd</DependentUpon>
     </Content>
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.eot" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.otf" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.ttf" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.woff" />
     <None Include="Properties\PublishProfiles\Eduardo.pubxml" />
     <None Include="Properties\PublishProfiles\Hermes.pubxml" />
     <Content Include="ReportCobranza.xsc">
@@ -562,6 +576,7 @@
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min_1_10.js" />
     <Content Include="Scripts\jquery.alerts-1.1\package.json" />
+    <Content Include="UploadFile.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1501,6 +1516,13 @@
     <Compile Include="CargarCodigos.aspx.designer.cs">
       <DependentUpon>CargarCodigos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CargarCorreosViaExcel.aspx.cs">
+      <DependentUpon>CargarCorreosViaExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CargarCorreosViaExcel.aspx.designer.cs">
+      <DependentUpon>CargarCorreosViaExcel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ConsultaPagos.aspx.cs">
       <DependentUpon>ConsultaPagos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1573,6 +1595,13 @@
     <Compile Include="GestionarCampaña.aspx.designer.cs">
       <DependentUpon>GestionarCampaña.aspx</DependentUpon>
     </Compile>
+    <Compile Include="GestionarCorreos.aspx.cs">
+      <DependentUpon>GestionarCorreos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionarCorreos.aspx.designer.cs">
+      <DependentUpon>GestionarCorreos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1629,6 +1658,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="MantGrupoCorreo.aspx.cs">
+      <DependentUpon>MantGrupoCorreo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MantGrupoCorreo.aspx.designer.cs">
+      <DependentUpon>MantGrupoCorreo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -1668,6 +1704,9 @@
     </Compile>
     <Compile Include="RestablecerContraseña.aspx.designer.cs">
       <DependentUpon>RestablecerContraseña.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadFile.ashx.cs">
+      <DependentUpon>UploadFile.ashx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
