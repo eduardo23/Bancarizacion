@@ -30,6 +30,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -271,6 +272,8 @@
     <Content Include="Css\img\sprite.png" />
     <Content Include="Css\img\x.png" />
     <Content Include="Css\jquery-ui1.css" />
+    <Content Include="Css\open-iconic\font\css\open-iconic-bootstrap.css" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.svg" />
     <Content Include="Css\standar.css" />
     <Content Include="Demo.csproj.vspscc" />
     <Content Include="dist\css\AdminLTE.css" />
@@ -548,6 +551,10 @@
     <Content Include="BoletaPagos.xss">
       <DependentUpon>BoletaPagos.xsd</DependentUpon>
     </Content>
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.eot" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.otf" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.ttf" />
+    <Content Include="Css\open-iconic\font\fonts\open-iconic.woff" />
     <None Include="Properties\PublishProfiles\Eduardo.pubxml" />
     <None Include="Properties\PublishProfiles\Hermes.pubxml" />
     <Content Include="ReportCobranza.xsc">
