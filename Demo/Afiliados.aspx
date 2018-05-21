@@ -5,7 +5,7 @@
 
 <link href="Css/standar.css" rel="stylesheet" />
 <script src="Scripts/moment.js"></script>
-
+    
 <%--<script>   
     $('#txtNumeroDocumento').propddlOncTitEdtGradotype', 'number'); 
 </script>--%>
