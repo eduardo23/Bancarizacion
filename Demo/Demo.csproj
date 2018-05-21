@@ -133,6 +133,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdministrarPlantillas.aspx" />
     <Content Include="Afiliados.aspx" />
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\DAO_Hermes.dll" />
@@ -350,6 +351,7 @@
     <Content Include="dll\MSCaptcha.dll" />
     <Content Include="dll\Recaptcha.dll" />
     <Content Include="EmailMasivo.aspx" />
+    <Content Include="EnvioCorreo.aspx" />
     <Content Include="EnvioEmailMasivo.aspx" />
     <Content Include="Files\Plan\SEGURO-DE-ACCIDENTES-ESTUDIANTILES.pdf" />
     <Content Include="Files\Terminos\condiciones.txt" />
@@ -1499,6 +1501,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministrarPlantillas.aspx.cs">
+      <DependentUpon>AdministrarPlantillas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarPlantillas.aspx.designer.cs">
+      <DependentUpon>AdministrarPlantillas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Afiliados.aspx.cs">
       <DependentUpon>Afiliados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1562,6 +1571,13 @@
       <DependentUpon>EmailMasivo.aspx</DependentUpon>
     </Compile>
     <Compile Include="EnviaEmailSeguro.cs" />
+    <Compile Include="EnvioCorreo.aspx.cs">
+      <DependentUpon>EnvioCorreo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnvioCorreo.aspx.designer.cs">
+      <DependentUpon>EnvioCorreo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EnvioEmailMasivo.aspx.cs">
       <DependentUpon>EnvioEmailMasivo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

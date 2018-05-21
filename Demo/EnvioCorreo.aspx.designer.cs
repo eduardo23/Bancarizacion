@@ -10,6 +10,6 @@
 namespace Demo {
     
     
-    public partial class MantGrupoCorre {
+    public partial class EnvioCorreo {
     }
 }

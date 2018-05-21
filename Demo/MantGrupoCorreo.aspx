@@ -419,7 +419,7 @@
                 codigo: $("#txt_codigo").val()
             };
             var estado = $("#flag_accion").val();
-            
+
             if (estado == "UPD") {
                 url = "MantGrupoCorreo.aspx/ActualiarGrupoCorreo";
 
