@@ -1,3 +1,5 @@
 packages/*
 Demo/bin/*
 DAO_Hermes/bin/*
+DAO_Hermes/obj/*
+Demo/obj/*
