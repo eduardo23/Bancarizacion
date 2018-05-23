@@ -20,34 +20,31 @@
         .containerpanel {
             width: 100%;
             height: auto;
-            padding: 0px 104px;
+            padding: 0px 85px;
         }
 
         .panel1 {
-            width: 40%;
+            width: 100%;
             height: 179px;
             border: 1px solid #D5CFDF;
             border-radius: 6px;
         }
 
         .panel2 {
-            width: 40%;
+            width: 100%;
             height: 179px;
             border: 1px solid #D5CFDF;
             border-radius: 6px;
-            float: right;
-            margin-top: -180px;
-            margin-right: -18px;
         }
 
         .panelButton {
-            width: 16%;
+            width: 100%;
             height: 178px;
             border: 1px solid #D5CFDF;
             border-radius: 6px;
             float: right;
-            margin-top: -179px;
-            margin-right: 417px;
+            /* margin-top: -179px; */
+            /* margin-right: 417px; */
             padding: 5px 5px;
         }
 
@@ -115,31 +112,31 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-1 control-label">Origen:</label>
                         <div class="col-sm-5">
-                            <select id="cbo_origen" class="form-control">
-                                <option value="0">--Seleccione--</option>
+                            <select id="cbo_origen"  onchange="selectChange()" class="form-control">
+                                <%--<option value="0">--Seleccione--</option>
                                 <option value="1">1</option>
-                                <option value="2">2</option>
+                                <option value="2">2</option>--%>
                             </select>
                         </div>
                         <label for="inputEmail3" class="col-sm-1 control-label">Plantilla:</label>
                         <div class="col-sm-5">
                             <select id="cbo_plantilla" class="form-control">
-                                <option value="0">--Seleccione--</option>
+                                <%--<option value="0">--Seleccione--</option>
                                 <option value="1">1</option>
-                                <option value="2">2</option>                                
+                                <option value="2">2</option>--%>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-sm-12 col-lg-12">
-                            <div class="containerpanel">
+                        <div class="containerpanel">
+                            <div class="col-sm-12 col-lg-5">
                                 <div class="panel1">
                                     <div class="tilepanel">
-                                        <label for="exampleInputEmail1">Datos Origen</label>
+                                        <label for="exampleInputEmail1">Grupo Correo Origen</label>
                                     </div>
                                     <div>
-                                        <select multiple="multiple" name="origen[]" id="origen" class="form-control" style="height: 152px;">
-                                            <option value="1">Option 1</option>
+                                        <select multiple="multiple" name="origen[]" id="cbogrupocorreoorigen" class="form-control" style="height: 152px;">
+                                           <%-- <option value="1">Option 1</option>
                                             <option value="2">Option 2</option>
                                             <option value="3">Option 3</option>
                                             <option value="4">Option 4</option>
@@ -150,11 +147,12 @@
                                             <option value="9">Option 9</option>
                                             <option value="10">Option 10</option>
                                             <option value="11">Option 11</option>
-                                            <option value="12">Option 12</option>
+                                            <option value="12">Option 12</option>--%>
                                         </select>
                                     </div>
-
                                 </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-2">
                                 <div class="panelButton">
                                     <button type="button" class="btnHermesEnvioCorreo" id="quitartodos">
                                         |<<
@@ -172,12 +170,14 @@
                                         >>|
                                     </button>
                                 </div>
+                            </div>
+                            <div class="col-sm-12 col-lg-5">
                                 <div class="panel2">
                                     <div class="tilepanel">
-                                        <label for="exampleInputEmail1">Datos Destino</label>
+                                        <label for="exampleInputEmail1">Grupo Correo Destino</label>
                                     </div>
                                     <div>
-                                        <select multiple="multiple" name="destino[]" id="destino" class="form-control" style="height: 152px;">
+                                        <select multiple="multiple" name="cbogrupocorreodestino[]" id="cbogrupocorreodestino" class="form-control" style="height: 152px;">
                                         </select>
                                     </div>
 
@@ -234,8 +234,84 @@
             }
         }
 
-        function EnviarCorreo() {            
-            var selO = document.getElementsByName('destino[]')[0];
+        function loadOrigen() {
+            $.ajax({
+                type: "POST",
+                url: "MantGrupoCorreo.aspx/getListParametrosMaestro",
+                data: '{skey:"ORIGEN_GRUPOCORREO"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+
+                    var models = JSON.parse(response.d.DataJson);// (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                    $('#cbo_origen').empty();
+                    $('#cbo_origen').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < models.length; i++) {
+                        var valor = models[i].valor;
+                        var text = models[i].descripcion;
+                        $("#cbo_origen").append($("<option></option>").val(valor).html(text));
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
+        }
+        function selectChange() {
+            var origen = $("#cbo_origen").val();
+            loadGrupoCorreoXOrigen(origen);
+        }
+        function loadGrupoCorreoXOrigen(origen) {
+            $.ajax({
+                type: "POST",
+                url: "MantGrupoCorreo.aspx/getListGrupoCorreoXOrigen",
+                data: '{origen:"' + origen + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var models = JSON.parse(response.d.DataJson);//(typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                    $('#cbogrupocorreoorigen').empty();                 
+                    for (var i = 0; i < models.length; i++) {
+                        var valor = models[i].id;
+                        var text = models[i].descripcion;
+                        $("#cbogrupocorreoorigen").append($("<option></option>").val(valor).html(text));
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
+        }
+
+        function loadPlantilla() {
+            $.ajax({
+                type: "POST",
+                url: "AdministrarPlantillas.aspx/getPlanilla",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var models = JSON.parse(response.d.DataJson);
+                    $('#cbo_plantilla').empty();
+                    $('#cbo_plantilla').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < models.length; i++) {
+                        var valor = models[i].id;
+                        var text = models[i].descripcion;
+                        $("#cbo_plantilla").append($("<option></option>").val(valor).html(text));
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
+        }
+
+
+        function EnviarCorreo() {
+            var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
             var list = [];
             for (i = 0; i < selO.length; i++) {
                 var objeto = {
@@ -246,7 +322,7 @@
             var cbo_origen = $("#cbo_origen").val();
             var cbo_plantilla = $("#cbo_plantilla").val();
             var txt_asunto = $("#txt_asunto").val();
-            
+
             if (txt_asunto == "") {
                 Alert.warn("Por favor Ingrese Asunto");
                 return false;
@@ -263,31 +339,33 @@
                 Alert.warn("Por favor agregue datos a la seccion destino.");
                 return false;
             }
-            
+
         }
 
         $(document).ready(function () {
+            loadOrigen();
+            loadPlantilla();
             $('#pasar').click(function () {
-                copiarOpcion($('#origen option:selected').clone(), "#destino");
-                $('#origen option:selected').remove();
+                copiarOpcion($('#cbogrupocorreoorigen option:selected').clone(), "#cbogrupocorreodestino");
+                $('#cbogrupocorreoorigen option:selected').remove();
             });
             $('#pasartodos').click(function () {
-                $('#origen option').each(function () {
-                    copiarOpcion($(this).clone(), "#destino");
+                $('#cbogrupocorreoorigen option').each(function () {
+                    copiarOpcion($(this).clone(), "#cbogrupocorreodestino");
                 });
-                $('#origen option').each(function () {
+                $('#cbogrupocorreoorigen option').each(function () {
                     $(this).remove();
                 });
             });
             $('#quitar').click(function () {
-                copiarOpcion($('#destino option:selected').clone(), "#origen");
-                $('#destino option:selected').remove();
+                copiarOpcion($('#cbogrupocorreodestino option:selected').clone(), "#cbogrupocorreoorigen");
+                $('#cbogrupocorreodestino option:selected').remove();
             });
             $('#quitartodos').click(function () {
-                $('#destino option').each(function () {
-                    copiarOpcion($(this).clone(), "#origen");
+                $('#cbogrupocorreodestino option').each(function () {
+                    copiarOpcion($(this).clone(), "#cbogrupocorreoorigen");
                 });
-                $('#destino option').each(function () {
+                $('#cbogrupocorreodestino option').each(function () {
                     $(this).remove();
                 });
             });

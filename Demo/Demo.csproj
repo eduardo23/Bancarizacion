@@ -29,7 +29,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
     <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -581,6 +581,7 @@
     <Content Include="Scripts\jquery-ui.min_1_10.js" />
     <Content Include="Scripts\jquery.alerts-1.1\package.json" />
     <Content Include="UploadFile.ashx" />
+    <Content Include="UploadPlantilla.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1725,6 +1726,9 @@
     </Compile>
     <Compile Include="UploadFile.ashx.cs">
       <DependentUpon>UploadFile.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadPlantilla.ashx.cs">
+      <DependentUpon>UploadPlantilla.ashx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>

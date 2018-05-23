@@ -52,6 +52,7 @@ namespace Demo
                 string files = savepath + @"\" + filename;
                 postedFile.SaveAs(files);
 
+               
                 Excel.Application xlApp;
                 Excel.Workbook xlWorkBook;
                 Excel.Worksheet xlWorkSheet;
@@ -119,10 +120,11 @@ namespace Demo
                 Marshal.ReleaseComObject(xlApp);
 
 
-                //context.Response.Write(tempPath + "/" + filename);
-
-                //context.Response.StatusCode = 200;
-
+      
+                if ((System.IO.File.Exists(files)))
+                {
+                    System.IO.File.Delete(files);
+                }
 
                 var wapper = new
                 {

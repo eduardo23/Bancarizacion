@@ -83,9 +83,9 @@
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
                             <div class="pull-left">
-                                <label for="RazonSocial" class="col-lg-4 control-label">Estado</label>
+                                <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
                                 <div class="col-lg-8">
-                                    <select name="cbo_grupo_consultar" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
+                                    <select name="cbo_grupo_consultar" onchange="selectChange()"  id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
                                     </select>
                                 </div>
                             </div>
@@ -263,7 +263,15 @@
         var RegistroXpagina = 10;
         var firstPageClick = true;
 
+        $('#select_id').change(function () {
+            alert($(this).val());
+        })
+        function selectChange() {
+            $("#flag").val("true");
+            listarCheques(1); 
+        }
         function listarCheques(pagina) {
+            var id_cbo_grupo_consultar = $("#cbo_grupo_consultar").val();
             var currentPage = 0;
             if (firstPageClick) {
                 currentPage = $pagination.twbsPagination('getCurrentPage');
@@ -273,7 +281,7 @@
             $.ajax({
                 type: "POST",
                 url: "GestionarCorreos.aspx/getListGestionCorreo",
-                data: "{'paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "'}",
+                data: "{'paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "','id_cbo_grupo_consultar':'" + id_cbo_grupo_consultar + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

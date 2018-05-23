@@ -27,6 +27,49 @@ namespace DAO_Hermes.Repositorios
             clientResponse.Status = "OK";
         }
 
+
+        public ClientResponse getGrupoCorreoXOrigen(int origen)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_sel_grupo_x_origen", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@origen", origen);
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
+
+                            while (reader.Read())
+                            {
+                                entidad = new GrupoCorreo();
+                                entidad.id = Convert.ToInt32(reader["id"] == DBNull.Value ? "" : reader["id"]);
+                                entidad.descripcion = Convert.ToString(reader["descripcion"] == DBNull.Value ? "" : reader["descripcion"]);
+                                list_grupocorreo.Add(entidad);
+                            }
+                        }
+                        clientResponse.DataJson = JsonConvert.SerializeObject(list_grupocorreo).ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }
+
+            return clientResponse;
+        }
         public ClientResponse getGrupoCorreoCombo()
         {
             try

@@ -340,7 +340,6 @@
             loadEstado();
             loadOrigen();
             $("#flag").val("true");
-            //e.preventDefault();
             listarCheques(1);
         });
 
