@@ -12,7 +12,7 @@ namespace DAO_Hermes.Repositorios
 {
     public class GestionCorreoDAO : IDisposable
     {
-        private static List<GestionCorreo> listgestioncorreo;        
+        private static List<GestionCorreo> listgestioncorreo;
         private static GestionCorreo entidad;
         private static SqlDataReader reader;
         private static SqlConnection conexion;
@@ -22,13 +22,13 @@ namespace DAO_Hermes.Repositorios
         public GestionCorreoDAO()
         {
             listgestioncorreo = new List<GestionCorreo>();
-          
+
             entidad = null;
             reader = null;
             clientResponse = new ClientResponse();
             clientResponse.Status = "OK";
         }
-        public ClientResponse getLstGestionCorreo(int paginaActual, int RegistroXPagina)
+        public ClientResponse getLstGestionCorreo(int paginaActual, int RegistroXPagina, int id_cbo_grupo_consultar)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace DAO_Hermes.Repositorios
                 {
                     using (comando = new SqlCommand("usp_sel_gestioncorreo", conexion))
                     {
-                        //cmd.Parameters.AddWithValue("@skey", skey);
+                        comando.Parameters.AddWithValue("@id_grupo_correo", id_cbo_grupo_consultar);
                         comando.Parameters.AddWithValue("@vi_Pagina", paginaActual);
                         comando.Parameters.AddWithValue("@vi_RegistrosporPagina", RegistroXPagina);
                         comando.Parameters.Add("@vi_RecordCount", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -92,6 +92,59 @@ namespace DAO_Hermes.Repositorios
             return clientResponse;
 
         }
+
+        public ClientResponse InsertGestionCorreoAutomatico(List<GestionCorreo> list)
+        {
+            try
+            {
+                List<GestionCorreo> GrupoCorreosNuevos = list.Where(i => i.grupocorreo.id == 0).ToList();
+                List<GestionCorreo> GrupoCorreosExistentes = list.Where(i => i.grupocorreo.id > 0).ToList();
+                List<GestionCorreo> DistinctList = GrupoCorreosNuevos.GroupBy(a => a.grupocorreo.descripcion).Select(g => g.First()).ToList();
+                List<GestionCorreo> ListInsert = new List<GestionCorreo>();                
+                foreach (GestionCorreo item in DistinctList)
+                {
+                    int id_grupo = 0;
+                    for (int e = 0; e < GrupoCorreosNuevos.Count(); e++)
+                    {
+                        if (item.grupocorreo.descripcion.Equals(GrupoCorreosNuevos[e].grupocorreo.descripcion))
+                        {
+                            if (id_grupo == 0) {
+                                ClientResponse response = null;
+                                using (GrupoCorreoDAO grupocorreo = new GrupoCorreoDAO()) {
+                                    response = grupocorreo.InsertGrupoCorreo(item.grupocorreo);
+                                }
+                                id_grupo = response.Id;
+                                GrupoCorreosNuevos[e].grupocorreo.id = id_grupo;
+                            } else {
+                                GrupoCorreosNuevos[e].grupocorreo.id = id_grupo;
+                            }
+                        }
+                    }
+                }
+                ListInsert = GrupoCorreosNuevos.Concat(GrupoCorreosExistentes).ToList();
+
+                foreach (GestionCorreo item in ListInsert)
+                {
+                    ClientResponse response = InsertGestionCorreo(item);                  
+                }
+                clientResponse.Mensaje = "Se registro correo satisfactoriamente";
+                clientResponse.Status = "OK";
+
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;
+        }
+
         public ClientResponse InsertGestionCorreo(GestionCorreo objeto)
         {
             try
@@ -148,7 +201,7 @@ namespace DAO_Hermes.Repositorios
                         comando.Parameters.AddWithValue("@email", objeto.Email);
                         comando.Parameters.AddWithValue("@id_estado", objeto.id_estado);
                         comando.Parameters.AddWithValue("@UsuarioActualizacion", objeto.UsuarioModificacion);
-                    
+
 
                         comando.CommandType = CommandType.StoredProcedure;
                         conexion.Open();

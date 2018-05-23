@@ -16,8 +16,8 @@ namespace Demo
     public class UploadFile : IHttpHandler
     {
 
-        private  List<GestionCorreo> listgestioncorreo;
-        private  GestionCorreo entidad;
+        private List<GestionCorreo> listgestioncorreo;
+        private GestionCorreo entidad;
         public void ProcessRequest(HttpContext context)
         {
 
@@ -32,7 +32,7 @@ namespace Demo
                 HttpPostedFile postedFile = context.Request.Files["Filedata"];
 
                 listgestioncorreo = new List<GestionCorreo>();
-                
+
 
                 string savepath = "";
 
@@ -52,7 +52,7 @@ namespace Demo
                 string files = savepath + @"\" + filename;
                 postedFile.SaveAs(files);
 
-               
+
                 Excel.Application xlApp;
                 Excel.Workbook xlWorkBook;
                 Excel.Worksheet xlWorkSheet;
@@ -72,6 +72,12 @@ namespace Demo
                 rw = range.Rows.Count;
                 cl = range.Columns.Count;
 
+                ClientResponse response;
+                using (GrupoCorreoDAO dbGrupoCorreo = new GrupoCorreoDAO())
+                {
+                    response = dbGrupoCorreo.getGrupoCorreoCombo();
+                }
+                List<GrupoCorreo> list = JsonConvert.DeserializeObject<List<GrupoCorreo>>(response.DataJson);
 
                 for (rCnt = 1; rCnt <= rw; rCnt++)
                 {
@@ -80,18 +86,26 @@ namespace Demo
                         entidad = new GestionCorreo();
                         for (cCnt = 1; cCnt <= cl; cCnt++)
                         {
-                            if (cCnt ==1)
+                            if (cCnt == 1)
                             {
-                                GrupoCorreo grupocorreo = new GrupoCorreo();                                
+                                GrupoCorreo grupocorreo = new GrupoCorreo();
                                 grupocorreo.descripcion = str = (string)(range.Cells[rCnt, cCnt] as Excel.Range).Value2;
                                 entidad.grupocorreo = grupocorreo;
+                                //Validamos si el grupo de correo esta registrado en la base de datos   
+                                grupocorreo.origen = 2;//Carga de Correo externo
+                                grupocorreo.estado = 1;
+                                GrupoCorreo objeto = list.Where(i => i.descripcion.ToUpper() == grupocorreo.descripcion.ToUpper()).FirstOrDefault();
+                                if (objeto != null)
+                                {
+                                    grupocorreo.id = objeto.id;
+                                }
                             }
                             if (cCnt == 2)
-                            {                                
-                                entidad.Nombre1 = str = (string)(range.Cells[rCnt, cCnt] as Excel.Range).Value2; 
+                            {
+                                entidad.Nombre1 = str = (string)(range.Cells[rCnt, cCnt] as Excel.Range).Value2;
                             }
                             if (cCnt == 3)
-                            {                              
+                            {
                                 entidad.Nombre2 = str = (string)(range.Cells[rCnt, cCnt] as Excel.Range).Value2;
                             }
                             if (cCnt == 4)
@@ -105,11 +119,11 @@ namespace Demo
                             if (cCnt == 6)
                             {
                                 entidad.Email = str = (string)(range.Cells[rCnt, cCnt] as Excel.Range).Value2;
-                            }                            
+                            }
                         }
                         entidad.id_estado = 1;
                         listgestioncorreo.Add(entidad);
-                    }                    
+                    }
                 }
 
                 xlWorkBook.Close(true, null, null);
@@ -120,16 +134,25 @@ namespace Demo
                 Marshal.ReleaseComObject(xlApp);
 
 
-      
+
                 if ((System.IO.File.Exists(files)))
                 {
                     System.IO.File.Delete(files);
                 }
 
+                if (listgestioncorreo.Count() > 0) {
+                    ClientResponse response1;
+                    using (GestionCorreoDAO dbGestionCorreo = new GestionCorreoDAO())
+                    {
+                        response1 = dbGestionCorreo.InsertGestionCorreoAutomatico(listgestioncorreo);
+                    }
+                }
+                     
+
                 var wapper = new
                 {
-                    Result = "Ok" ,
-                    Mensaje = "Se cargaron correctaente la trama." 
+                    Result = "Ok",
+                    Mensaje = "Se cargaron correctaente la trama."
                 };
                 context.Response.Write(JsonConvert.SerializeObject(wapper));
 

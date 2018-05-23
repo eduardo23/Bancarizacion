@@ -180,9 +180,12 @@ namespace DAO_Hermes.Repositorios
                         comando.Parameters.AddWithValue("@descripcion", objeto.descripcion);
                         comando.Parameters.AddWithValue("@estado", objeto.estado);
                         comando.Parameters.AddWithValue("@origen", objeto.origen);
+                        comando.Parameters.Add("@id", SqlDbType.Int).Direction = ParameterDirection.Output;
                         comando.CommandType = CommandType.StoredProcedure;
                         conexion.Open();
                         comando.ExecuteNonQuery();
+                        int id = Convert.ToInt32(comando.Parameters["@id"].Value);
+                        clientResponse.Id = id;
                         clientResponse.Mensaje = "Se registro de grupo de correo satisfactoriamente";
                         clientResponse.Status = "OK";
 

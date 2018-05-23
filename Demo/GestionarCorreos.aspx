@@ -272,6 +272,9 @@
         }
         function listarCheques(pagina) {
             var id_cbo_grupo_consultar = $("#cbo_grupo_consultar").val();
+            if (id_cbo_grupo_consultar == null) {
+                id_cbo_grupo_consultar = 0;
+            }
             var currentPage = 0;
             if (firstPageClick) {
                 currentPage = $pagination.twbsPagination('getCurrentPage');
@@ -305,7 +308,6 @@
                                 id_grupo_correo: result[index].grupocorreo["id"]
                             };
                             var Vals = JSON.stringify(vals);
-                            debugger;
                             //modalEliminar = "modalEliminar(" + parseInt(result[index]["ID"]) + ")";
                             modalEliminar = "modalEliminar(" + Vals + ")";
                             modalActualizar = "modalActualizar(" + Vals + ")";
@@ -324,7 +326,6 @@
                             HTML += "</td>";
                             HTML += "</tr>";
                         }
-                        debugger;
                         document.getElementById("tbodygrupocorreo").innerHTML = HTML;
                         /*if ($pagination.data("twbs-pagination"))
                             $pagination.twbsPagination('destroy');*/
@@ -469,8 +470,7 @@
                 Alert.danger(mensaje);
                 return false;
             }
-
-            debugger;
+            
             var data = {
                 id: txt_codigo,
                 Nombre1: txt_nombre1,
@@ -602,9 +602,10 @@
         }
 
         $(document).ready(function (e) {
+            loadGrupoConsultar();
             loadEstado();
             loadGrupo();
-            loadGrupoConsultar();
+           
             $("#flag").val("true");
             listarCheques(1);
         });
