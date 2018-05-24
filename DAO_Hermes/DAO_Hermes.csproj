@@ -237,6 +237,7 @@
     <Compile Include="Repositorios\PadreDAO.cs" />
     <Compile Include="Repositorios\Pagination.cs" />
     <Compile Include="Repositorios\ParametrosMaestrosDAO.cs" />
+    <Compile Include="Repositorios\PlantillaDAO.cs" />
     <Compile Include="Repositorios\TipoDocumento_DAO.cs" />
     <Compile Include="Repositorios\TipoInstitucionEducativaDAO.cs" />
     <Compile Include="Repositorios\TipoProductoDAO.cs" />
@@ -567,6 +568,8 @@
     <Compile Include="ViewModel\Institucion_Educativa.cs" />
     <Compile Include="ViewModel\LoguearUsuario.cs" />
     <Compile Include="ViewModel\ParametrosMaestros.cs" />
+    <Compile Include="ViewModel\Plantilla.cs" />
+    <Compile Include="ViewModel\Plantilla_Detalle.cs" />
     <Compile Include="ViewModel\TipoProducto.cs" />
     <Compile Include="ViewModel\Tipo_Moneda.cs" />
   </ItemGroup>

@@ -91,6 +91,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
                             <table class="table-style-one" style="width: 100%">
@@ -295,8 +297,7 @@
                             HTML += "<a href='#' onclick='" + modalEliminar + "' title='Editar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
                             HTML += "</td>";
                             HTML += "</tr>";
-                        }
-                        debugger;
+                        }                        
                         document.getElementById("tbodygrupocorreo").innerHTML = HTML;
                         /*if ($pagination.data("twbs-pagination"))
                             $pagination.twbsPagination('destroy');*/
@@ -338,7 +339,6 @@
             loadEstado();
             loadOrigen();
             $("#flag").val("true");
-            //e.preventDefault();
             listarCheques(1);
         });
 
@@ -416,10 +416,10 @@
                 descripcion: $("#txt_grupo").val(),
                 estado: $("#cbo_estado").val(),
                 origen: $("#cbo_origen").val(),
-                codigo: $("#txt_codigo").val()
+                id: $("#txt_codigo").val()
             };
             var estado = $("#flag_accion").val();
-            
+
             if (estado == "UPD") {
                 url = "MantGrupoCorreo.aspx/ActualiarGrupoCorreo";
 

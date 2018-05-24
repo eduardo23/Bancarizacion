@@ -8,6 +8,7 @@ namespace DAO_Hermes.Repositorios
 {
    public class ClientResponse
     {
+        public int Id { get; set; }
         public object Data { get; set; }
         public string DataJson { get; set; }
         public object Errores { get; set; }

@@ -29,7 +29,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -98,6 +99,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MSCaptcha">
       <HintPath>C:\Users\Henry\Desktop\MSCaptcha.dll</HintPath>
@@ -127,6 +133,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdministrarPlantillas.aspx" />
     <Content Include="Afiliados.aspx" />
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\DAO_Hermes.dll" />
@@ -151,6 +158,7 @@
     <Content Include="bootstrap\js\jquery.minp.js" />
     <Content Include="bootstrap\js\npm.js" />
     <Content Include="CargarCodigos.aspx" />
+    <Content Include="CargarCorreosViaExcel.aspx" />
     <Content Include="ConsultaPagos.aspx" />
     <Content Include="ConsultarAfiliacion.aspx" />
     <Content Include="ConsultarCampañas.aspx" />
@@ -268,6 +276,7 @@
     <Content Include="Css\open-iconic\font\css\open-iconic-bootstrap.css" />
     <Content Include="Css\open-iconic\font\fonts\open-iconic.svg" />
     <Content Include="Css\standar.css" />
+    <Content Include="Demo.csproj.vspscc" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -342,6 +351,7 @@
     <Content Include="dll\MSCaptcha.dll" />
     <Content Include="dll\Recaptcha.dll" />
     <Content Include="EmailMasivo.aspx" />
+    <Content Include="EnvioCorreo.aspx" />
     <Content Include="EnvioEmailMasivo.aspx" />
     <Content Include="Files\Plan\SEGURO-DE-ACCIDENTES-ESTUDIANTILES.pdf" />
     <Content Include="Files\Terminos\condiciones.txt" />
@@ -570,6 +580,8 @@
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min_1_10.js" />
     <Content Include="Scripts\jquery.alerts-1.1\package.json" />
+    <Content Include="UploadFile.ashx" />
+    <Content Include="UploadPlantilla.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1490,6 +1502,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministrarPlantillas.aspx.cs">
+      <DependentUpon>AdministrarPlantillas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdministrarPlantillas.aspx.designer.cs">
+      <DependentUpon>AdministrarPlantillas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Afiliados.aspx.cs">
       <DependentUpon>Afiliados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1508,6 +1527,13 @@
     </Compile>
     <Compile Include="CargarCodigos.aspx.designer.cs">
       <DependentUpon>CargarCodigos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CargarCorreosViaExcel.aspx.cs">
+      <DependentUpon>CargarCorreosViaExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CargarCorreosViaExcel.aspx.designer.cs">
+      <DependentUpon>CargarCorreosViaExcel.aspx</DependentUpon>
     </Compile>
     <Compile Include="ConsultaPagos.aspx.cs">
       <DependentUpon>ConsultaPagos.aspx</DependentUpon>
@@ -1546,6 +1572,13 @@
       <DependentUpon>EmailMasivo.aspx</DependentUpon>
     </Compile>
     <Compile Include="EnviaEmailSeguro.cs" />
+    <Compile Include="EnvioCorreo.aspx.cs">
+      <DependentUpon>EnvioCorreo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EnvioCorreo.aspx.designer.cs">
+      <DependentUpon>EnvioCorreo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EnvioEmailMasivo.aspx.cs">
       <DependentUpon>EnvioEmailMasivo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1690,6 +1723,12 @@
     </Compile>
     <Compile Include="RestablecerContraseña.aspx.designer.cs">
       <DependentUpon>RestablecerContraseña.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadFile.ashx.cs">
+      <DependentUpon>UploadFile.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadPlantilla.ashx.cs">
+      <DependentUpon>UploadPlantilla.ashx</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>

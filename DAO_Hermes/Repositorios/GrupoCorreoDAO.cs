@@ -27,6 +27,49 @@ namespace DAO_Hermes.Repositorios
             clientResponse.Status = "OK";
         }
 
+
+        public ClientResponse getGrupoCorreoXOrigen(int origen)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_sel_grupo_x_origen", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@origen", origen);
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
+
+                            while (reader.Read())
+                            {
+                                entidad = new GrupoCorreo();
+                                entidad.id = Convert.ToInt32(reader["id"] == DBNull.Value ? "" : reader["id"]);
+                                entidad.descripcion = Convert.ToString(reader["descripcion"] == DBNull.Value ? "" : reader["descripcion"]);
+                                list_grupocorreo.Add(entidad);
+                            }
+                        }
+                        clientResponse.DataJson = JsonConvert.SerializeObject(list_grupocorreo).ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }
+
+            return clientResponse;
+        }
         public ClientResponse getGrupoCorreoCombo()
         {
             try
@@ -137,9 +180,12 @@ namespace DAO_Hermes.Repositorios
                         comando.Parameters.AddWithValue("@descripcion", objeto.descripcion);
                         comando.Parameters.AddWithValue("@estado", objeto.estado);
                         comando.Parameters.AddWithValue("@origen", objeto.origen);
+                        comando.Parameters.Add("@id", SqlDbType.Int).Direction = ParameterDirection.Output;
                         comando.CommandType = CommandType.StoredProcedure;
                         conexion.Open();
                         comando.ExecuteNonQuery();
+                        int id = Convert.ToInt32(comando.Parameters["@id"].Value);
+                        clientResponse.Id = id;
                         clientResponse.Mensaje = "Se registro de grupo de correo satisfactoriamente";
                         clientResponse.Status = "OK";
 

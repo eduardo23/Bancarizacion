@@ -83,6 +83,11 @@
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
                             <div class="pull-left">
+                                <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
+                                <div class="col-lg-8">
+                                    <select name="cbo_grupo_consultar" onchange="selectChange()"  id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
+                                    </select>
+                                </div>
                             </div>
                             <div class="pull-right">
                                 <button type="button" class="btnHermes" data-toggle="modal" onclick="modalRegistrar();">
@@ -150,7 +155,7 @@
                         <div class="form-group" style="display: none;" id="divcodigo">
                             <label for="RazonSocial" class="col-lg-4 control-label">Código</label>
                             <div class="col-lg-8">
-                                <input name="txt_codigo" type="text" value="0" id="txt_codigo" readonly="readonly"  class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Código">
+                                <input name="txt_codigo" type="text" value="0" id="txt_codigo" readonly="readonly" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Código">
                             </div>
                         </div>
                         <div class="form-group">
@@ -213,7 +218,7 @@
             <!-- /.modal-dialog -->
         </div>
     </div>
-        <div id="myDialog" class="modal fade" role="dialog">
+    <div id="myDialog" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #D6EAF8">
@@ -258,7 +263,18 @@
         var RegistroXpagina = 10;
         var firstPageClick = true;
 
+        $('#select_id').change(function () {
+            alert($(this).val());
+        })
+        function selectChange() {
+            $("#flag").val("true");
+            listarCheques(1); 
+        }
         function listarCheques(pagina) {
+            var id_cbo_grupo_consultar = $("#cbo_grupo_consultar").val();
+            if (id_cbo_grupo_consultar == null) {
+                id_cbo_grupo_consultar = 0;
+            }
             var currentPage = 0;
             if (firstPageClick) {
                 currentPage = $pagination.twbsPagination('getCurrentPage');
@@ -268,7 +284,7 @@
             $.ajax({
                 type: "POST",
                 url: "GestionarCorreos.aspx/getListGestionCorreo",
-                data: "{'paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "'}",
+                data: "{'paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "','id_cbo_grupo_consultar':'" + id_cbo_grupo_consultar + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -287,12 +303,11 @@
                                 Nombre2: result[index]["Nombre2"],
                                 ApePaterno: result[index]["ApePaterno"],
                                 ApeMaterno: result[index]["ApeMaterno"],
-                                Email: result[index]["Email"],                                
+                                Email: result[index]["Email"],
                                 id_estado: result[index]["id_estado"],
                                 id_grupo_correo: result[index].grupocorreo["id"]
                             };
                             var Vals = JSON.stringify(vals);
-                            debugger;
                             //modalEliminar = "modalEliminar(" + parseInt(result[index]["ID"]) + ")";
                             modalEliminar = "modalEliminar(" + Vals + ")";
                             modalActualizar = "modalActualizar(" + Vals + ")";
@@ -311,7 +326,6 @@
                             HTML += "</td>";
                             HTML += "</tr>";
                         }
-                        debugger;
                         document.getElementById("tbodygrupocorreo").innerHTML = HTML;
                         /*if ($pagination.data("twbs-pagination"))
                             $pagination.twbsPagination('destroy');*/
@@ -398,9 +412,9 @@
             $("#txt_materno").val(data.ApeMaterno);
             $("#txt_email").val(data.Email);
             $("#cbo_grupo_crear").val(data.id_grupo_correo);
-            $("#cbo_estado").val(data.id_estado);           
+            $("#cbo_estado").val(data.id_estado);
             $("#flag_accion").val("UPD");
-            $('#myModal').modal('show');            
+            $('#myModal').modal('show');
         }
 
         function Grabar() {
@@ -457,23 +471,22 @@
                 return false;
             }
             
-            debugger;
             var data = {
-                id:txt_codigo,
+                id: txt_codigo,
                 Nombre1: txt_nombre1,
                 Nombre2: txt_nombre2,
                 ApePaterno: txt_paterno,
                 ApeMaterno: txt_materno,
                 Email: txt_email,
                 id_estado: cbo_estado,
-                grupocorreo : {
+                grupocorreo: {
                     id: cbo_grupo_crear
                 }
             };
-            
-            
-            
-            
+
+
+
+
             var estado = $("#flag_accion").val();
             if (estado == "UPD") {
                 url = "GestionarCorreos.aspx/ActualiarGestionCorreo";
@@ -515,6 +528,30 @@
                 }
             });
             //listarCheques(1);
+        }
+        
+        function loadGrupoConsultar() {
+            $.ajax({
+                type: "POST",
+                url: "GestionarCorreos.aspx/getGrupoCorreoCombo",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var models = JSON.parse(response.d.DataJson);
+                    $('#cbo_grupo_consultar').empty();
+                    $('#cbo_grupo_consultar').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < models.length; i++) {
+                        var valor = models[i].id;
+                        var text = models[i].descripcion;
+                        $("#cbo_grupo_consultar").append($("<option></option>").val(valor).html(text));
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
         }
         function loadGrupo() {
             $.ajax({
@@ -565,9 +602,11 @@
         }
 
         $(document).ready(function (e) {
+            loadGrupoConsultar();
             loadEstado();
             loadGrupo();
-            $("#flag").val("true");            
+           
+            $("#flag").val("true");
             listarCheques(1);
         });
     </script>

@@ -18,7 +18,7 @@
             -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
         }
-        
+
         .alert-top {
             top: 50px;
             width: 100%;
@@ -39,32 +39,40 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
-                        <div class="col-sm-12 col-lg-12">
-                            <label>Seleccione Archivo</label>
-							<input type="file" id="input08" onchange="checkfile(this);">
+                        <div class="col-lg-12">
+                            <div id="alert-info" class="alert alert-info alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-warn" class="alert alert-warning alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-danger" class="alert alert-danger alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                            <div class="col-lg-12">
-                                <div id="alert-info" class="alert alert-info alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
-                                <div id="alert-warn" class="alert alert-warning alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
-                                <div id="alert-danger" class="alert alert-danger alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
+                        <div class="col-sm-12 col-lg-12">
+                            <label>Seleccione Archivo</label>
+                            <input type="file" id="input08" onchange="checkfile(this);">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="progress" id="idprogress" style="display: none;">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
                             </div>
                         </div>
-                     <div class="form-group row">
+                    </div>
+
+                    <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
-                           <button type="button" class="btnHermes" data-toggle="modal" onclick="cargarArchivo();">
-                                    Cargar
-                                </button>
+                            <button type="button" class="btnHermes" data-toggle="modal" onclick="cargarArchivo();">
+                                Cargar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -75,7 +83,7 @@
         Alert = {
             show: function ($div, msg) {
                 $div.find('.alert-msg').text(msg);
-                if ($div.css('display') === 'none') {                    
+                if ($div.css('display') === 'none') {
                     $div.fadeIn(1000).delay(2000).fadeOut(3000);
                 }
             },
@@ -89,7 +97,7 @@
                 this.show($('#alert-danger'), msg);
             }
         }
-        function checkfile(sender) {            
+        function checkfile(sender) {
             var validExts = new Array(".xlsx", ".xls");
             var fileExt = sender.value;
             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
@@ -123,21 +131,48 @@
             if (files.length > 0) {
                 data.append("Filedata", files[0]);
             }
-
+            $("#idprogress").css('display', 'block');
             $.ajax({
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    //Upload Progress
+                    xhr.upload.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = (evt.loaded / evt.total) * 100;
+                            $('div.progress > div.progress-bar').css({ "width": percentComplete + "%" });
+                            //$('div.progress > div.progress-bar').html(percentComplete + '%');
+                        }
+                    }, false);
+                    //Download progress
+                    xhr.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = (evt.loaded / evt.total) * 100;
+                            $("div.progress > div.progress-bar").css({ "width": percentComplete + "%" });
+                            //$('div.progress > div.progress-bar').html(percentComplete + '%');
+                        }
+                    },
+                   false);
+                    return xhr;
+                },
                 type: 'post',
                 url: "UploadFile.ashx",
-                contentType: false,             
+                contentType: false,
                 processData: false,
                 data: data,
                 success: function (response) {
-                    alert('succes!!');
+                    var objeto = JSON.parse(response);
+                    if (objeto.Result == "Ok") {
+                        Alert.info(objeto.Mensaje);
+                        $("div.progress > div.progress-bar").css({ "width": 0 + "%" });
+                    } else {
+                        Alert.danger(objeto.Mensaje);
+                    }
+                    $("#idprogress").css('display', 'none');
                 },
                 error: function (error) {
-                    alert("errror");
+                    Alert.danger("Error Consulte con el Administrador de Sistema.");
                 }
             });
-            console.log(data);
         }
     </script>
 </asp:Content>

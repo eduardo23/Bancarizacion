@@ -52,14 +52,14 @@ namespace Demo
             return response;
         }
         [WebMethod]
-        public static ClientResponse getListGestionCorreo(int paginaActual, int RegistroXpagina)
+        public static ClientResponse getListGestionCorreo(int paginaActual, int RegistroXpagina, int id_cbo_grupo_consultar)
         {
             ClientResponse response;
             try
             {
                 using (GestionCorreoDAO dbGestionCorreo = new GestionCorreoDAO())
                 {
-                    response = dbGestionCorreo.getLstGestionCorreo(paginaActual, RegistroXpagina);
+                    response = dbGestionCorreo.getLstGestionCorreo(paginaActual, RegistroXpagina, id_cbo_grupo_consultar);
                 }
             }
             catch (Exception exception)
