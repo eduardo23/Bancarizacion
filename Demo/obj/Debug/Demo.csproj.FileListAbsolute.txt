@@ -141,4 +141,3 @@ C:\Bancarizacion\Demo\obj\Debug\RdlCompile.cache
 C:\Bancarizacion\Demo\obj\Debug\RdlCompile.compiled
 C:\Bancarizacion\Demo\obj\Debug\Demo.dll
 C:\Bancarizacion\Demo\obj\Debug\Demo.pdb
-C:\Bancarizacion\Demo\bin\es\Microsoft.ReportViewer.WebForms.resources.dll

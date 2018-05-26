@@ -369,8 +369,8 @@
                         HTML += "<td>" + result[index]["NroCheque"] + "</td>";
                         HTML += "<td>" + moment(result[index]["Fecha"]).format('DD/MM/YYYY') + "</td>";
                         HTML += "<td>";
-                        HTML += "<a href='#' onclick='" + modalActualizar + "' title='Elimnar registro' ><span class='fa fa-trash'></span> Editar</a> ";
-                        HTML += "<a href='#' onclick='" + modalEliminar + "' title='Editar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
+                        HTML += "<a href='#' onclick='" + modalActualizar + "' title='Editar registro' ><span class='fa fa-trash'></span> Editar</a> ";
+                        HTML += "<a href='#' onclick='" + modalEliminar + "' title='Eliminar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
                         HTML += "</td>";
                         HTML += "</tr>";
                     }

@@ -207,7 +207,9 @@ namespace DAO_Hermes.Repositorios
                             //Generar Codigo
                             //Codigo detalle
 
-                            codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+                            //codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+                            codInsED = asociacionID.ToString().PadLeft(5, '0');
+
                             codRel = correlativo.ToString().PadLeft(5, '0');
                             SegProd = codigo.CIASeguroID.ToString().PadLeft(2, '0') + codigo.ProductoID.ToString().PadLeft(2, '0');
                             CodGenerado = codInsED + codRel + SegProd;
@@ -316,7 +318,11 @@ namespace DAO_Hermes.Repositorios
                             //Generar Codigo
                             //Codigo detalle
 
-                            codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+                            //codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+                            codInsED = asociacionId.ToString().PadLeft(5, '0');
+                            
+
+
                             codRel = correlativo.ToString().PadLeft(5, '0');
                             SegProd = codigo.CIASeguroID.ToString().PadLeft(2, '0') + codigo.ProductoID.ToString().PadLeft(2, '0');
                             CodGenerado = codInsED + codRel + SegProd;
@@ -366,7 +372,7 @@ namespace DAO_Hermes.Repositorios
         }
 
         public int? AgregarAfiliadoCargaAccidentesPositiva(Codigo codigo, List<Alumno> alumnos, string usuario, int InstitucionEducativaId,
-                                                                                              int Idproducto, string Descripcion, int? CantidadActual, int? correlativo, bool tienecodigo, int codigoid)
+                                                                                              int Idproducto, string Descripcion, int? CantidadActual, int? correlativo, bool tienecodigo, int codigoid, int asociacionId)
         {
             using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
             {
@@ -426,7 +432,9 @@ namespace DAO_Hermes.Repositorios
                             //Generar Codigo
                             //Codigo detalle
 
-                            codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+                            //codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+                            codInsED = asociacionId.ToString().PadLeft(5, '0');
+
                             codRel = correlativo.ToString().PadLeft(5, '0');
                             SegProd = codigo.CIASeguroID.ToString().PadLeft(2, '0') + codigo.ProductoID.ToString().PadLeft(2, '0');
                             CodGenerado = codInsED + codRel + SegProd;
@@ -762,7 +770,10 @@ namespace DAO_Hermes.Repositorios
                             //Guardar seguro alumno
                             //Generar Codigo
                             //Codigo detalle
-                            codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+
+                            //codInsED = codigo.InstitucionEducativaID.ToString().PadLeft(5, '0');
+                            codInsED = asociacionId.ToString().PadLeft(5, '0');
+
                             codRel = correlativo.ToString().PadLeft(5, '0');
                             SegProd = codigo.CIASeguroID.ToString().PadLeft(2, '0') + codigo.ProductoID.ToString().PadLeft(2, '0');
                             CodGenerado = codInsED + codRel + SegProd;
