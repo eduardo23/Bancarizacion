@@ -326,10 +326,11 @@ namespace Demo
                 {
                     if (ValidarInfoAlumnos(GrvPositivaAccidentes) == true)
                     {
-                        txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen alumnos con seguro vigente ";
-                        string jss2 = "openModal();";
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
-                        return;
+                        //comentario temporal ES 24/05/2018
+                        //txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen alumnos con seguro vigente ";
+                        //string jss2 = "openModal();";
+                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
+                        //return;
                     }
                     //Establecer la cantidad de codigos a Generar
                     using (CodigoDAO db = new CodigoDAO())
@@ -396,7 +397,7 @@ namespace Demo
 
                         int? codGenerado = dbAlumno.AgregarAfiliadoCargaAccidentesPositiva(codigo, alumnos, Session["Usuario"].ToString(),
                                                                                                                Convert.ToInt32(hdnInstitucionEducativa.Value),
-                                                                                                              Convert.ToInt32(hdnProductoID.Value), "", codigo.Cantidad, Convert.ToInt32(Request["CANT"]) + 1, tienecodigo, Convert.ToInt32(hdnCodigoGen.Value == "" ? "0" : hdnCodigoGen.Value));
+                                                                                                              Convert.ToInt32(hdnProductoID.Value), "", codigo.Cantidad, Convert.ToInt32(Request["CANT"]) + 1, tienecodigo, Convert.ToInt32(hdnCodigoGen.Value == "" ? "0" : hdnCodigoGen.Value), Convert.ToInt32(hdnAsociacionID.Value == "" ? "0" : hdnAsociacionID.Value));
 
                         Alumno_DAO dbAlumnoExp = new Alumno_DAO();
 
@@ -486,10 +487,10 @@ namespace Demo
                 {
                     if (ValidarInfoAlumnos(grvPacificoAccidentes) == true)
                     {
-                        txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen alumnos con seguro vigente ";
-                        string jss2 = "openModal();";
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
-                        return;
+                        //txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen alumnos con seguro vigente ";
+                        //string jss2 = "openModal();";
+                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
+                        //return;
                     }
 
                     //Establecer la cantidad de codigos a Generar
@@ -641,11 +642,11 @@ namespace Demo
 
                     if (ValidarInfoAlumnos(GrvRimacAccidentes) == true)
                     {
-                        txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen alumnos con seguro vigente ";
-                        string jss2 = "openModal();";
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
+                        //txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen alumnos con seguro vigente ";
+                        //string jss2 = "openModal();";
+                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
 
-                        return;
+                        //return;
                     }
 
                     using (CodigoDAO db = new CodigoDAO())
@@ -803,10 +804,10 @@ namespace Demo
 
                     if (ValidarInfoAlumnos(grvDatosIE_RENTA) == true)
                     {
-                        txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen padres con seguro vigente ";
-                        string jss2 = "openModal();";
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
-                        return;
+                        //txtmensaje.Text = "El archivo de trama proporcionado contiene errores: Existen padres con seguro vigente ";
+                        //string jss2 = "openModal();";
+                        //ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss2, true);
+                        //return;
                     }
 
                     //Establecer la cantidad de codigos a Generar
