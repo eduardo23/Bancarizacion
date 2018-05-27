@@ -1,15 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ConsultarCheque.aspx.cs" Inherits="Demo.ConsultarCheque" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Css/standar.css" rel="stylesheet" />
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
 
-    <script src="https://esimakin.github.io/twbs-pagination/js/jquery.twbsPagination.js"></script>--%>
 <script src="Scripts/moment.js"></script>
   
 <div class="content">
@@ -33,8 +30,6 @@
                         <label class="control-label">Campaña:</label>
                     </div>
                     <div class="col-md-7">
-<%--                        <asp:DropDownList ID="ddlFCampana" runat="server" CssClass="form-control">
-                        </asp:DropDownList>--%>
                             <select id="ddlFCampana" title="Campaña" class="form-control" data-placement="left">
                             <option value="0">--SELECCIONE--</option>
                             </select>
@@ -46,8 +41,6 @@
                     </div>
                     <div class="col-md-7">
 
-<%--                        <asp:DropDownList ID="ddlFTipoSeguro" runat="server" CssClass="form-control">
-                        </asp:DropDownList>--%>
                             <select id="ddlFTipoSeguro" title="Tipo Seguro" class="form-control" data-placement="left">
                             <option value="0">--SELECCIONE--</option>
                             </select>
@@ -60,8 +53,6 @@
                     </div>
                     <div class="col-md-7">
 
-<%--                        <asp:DropDownList ID="ddlFInstitucion" runat="server" CssClass="form-control">
-                        </asp:DropDownList>--%>
                             <select id="ddlFInstitucion" title="Institucion Educativa" class="form-control" data-placement="left">
                             <option value="0">--SELECCIONE--</option>
                             </select>
@@ -98,12 +89,9 @@
                 <a  Class="btn btn-primary btn-sm" id="btnBuscar" Style="background-color: orangered" href="javascript:void(0)"  >
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span> Buscar
                 </a>                      
-<%--                <button id="btnBuscar" Class="btn btn-primary btn-sm" Style="background-color: orangered" onclick='return false;'>
-                    <span aria-hidden="true" class="glyphicon glyphicon-search"></span> Buscar
-                </button>--%>
-<%--                <input type="button" id="btnBuscar" value="asdasd"/>--%>
+
                 <button id="btnNuevo" Class="btn btn-primary btn-sm" Style="background-color: orangered" onclick='javascript:LoadMntChq("NVO","");return false;'>
-                    <%--data-toggle="modal" data-target="#myModalCheque"--%>
+          
                     <span aria-hidden="true" class="glyphicon glyphicon-file"></span> Nuevo
                 </button>
                        
@@ -233,8 +221,7 @@
                             <label class="control-label"> Fecha:</label>
                         </div>
                         <div class="col-md-7">
-                            <%--<input type="text" class="form-control" id="txtFecha" title="Fecha" onfocus="(this.type='date')"  placeholder="Ingrese Fecha" data-date-format="dd/mm/yyyy" />--%>
-                            <input type="text" class="form-control" id="txtFecha" title="Fecha" placeholder="Ingrese Fecha" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')"/>
+                             <input type="text" class="form-control" id="txtFecha" title="Fecha" placeholder="Ingrese Fecha" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')"/>
                         </div>                    
                     </div>
                     <div class="form-group">
@@ -268,6 +255,23 @@
         </div>                
     </div>
 </div>
+</div>
+    
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Mensaje de Confirmacion
+            </div>
+            <div class="modal-body">
+                Esta seguro que desea eliminar el registro?                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -342,6 +346,9 @@
                 document.getElementById("tbodycheque").innerHTML = "";
                 if (result.length > 0) {
                     for (index in result) {
+
+                        //var ID = parseInt(result[index]["ID"]);
+                        //var vals = result.find(book => book.ID === ID);
                         vals = {
                             ID: parseInt(result[index]["ID"]),
                             CampaniaID: result[index]["CampaniaID"],
@@ -497,7 +504,7 @@
         });
     }
     function loadInstitucion() {
-        debugger;
+
         $.ajax({
             type: "POST",
             url: "Services/WS_ServiceHermes.asmx/getLstInstByCampana",
@@ -505,7 +512,7 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                debugger;
+
                 var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
                 $('#ddlInstitucion').empty();
                 $('#ddlInstitucion').append("<option value='0'>--SELECCIONE--</option>");
@@ -616,19 +623,16 @@
             }
         });
     }
-
-
-
-
     function modalEliminar(Id) {
-        btnEliminar(Id);
+        $("#confirm-submit").modal("show");
+        $('#btn-submit-confirmacion').attr('onclick', 'btnEliminar(' + Id + ')');
     }
     function modalActualizar(oObj) {
         LoadMntChq('UPD', oObj);
     }
     function btnGuardar() {
-        debugger;
-        var oparm = {
+
+        /*var oparm = {
             'ID': $('#txtID').val(),
             'CampaniaID': $('#ddlCampana').val(),
             'InstitucionEducativaID': $('#ddlInstitucion').val(),
@@ -638,20 +642,53 @@
             'MonedaID': $('#ddlMoneda').val(),
             'Fecha': $('#txtFecha').val(),
             'NroCheque': $('#txtNroCheque').val(),
-            'Monto': $('#txtMonto').val(),
-            'UsuarioCreacion': 'eduardo23@gmail.com'
-        };
-        var pParm = JSON.stringify(oparm);
+            'Monto': $('#txtMonto').val()
+        };*/
+
+        var obj = new Array();
+        obj[0] = $('#txtID').val();
+        obj[1] = $('#ddlCampana').val();
+        obj[2] = $('#ddlInstitucion').val();
+        obj[3] = $('#ddlCia').val();
+        obj[4] = $('#ddlProducto').val();
+        obj[5] = $('#ddlBanco').val();
+        obj[6] = $('#ddlMoneda').val();
+        obj[7] = $('#txtFecha').val();
+        obj[8] = $('#txtNroCheque').val();
+        obj[9] = $('#txtMonto').val();
+        /*  datos.ID = $('#txtID').val();
+          datos.CampaniaID = $('#ddlCampana').val();
+          datos.InstitucionEducativaID = $('#ddlInstitucion').val();
+          datos.CIASeguroID = $('#ddlCia').val();
+          datos.ProductoID = $('#ddlProducto').val();
+          datos.BancoID = $('#ddlBanco').val();
+          datos.MonedaID = $('#ddlMoneda').val();
+          datos.Fecha = $('#txtFecha').val();
+          datos.NroCheque = $('#txtNroCheque').val();
+          datos.Monto= $('#txtMonto').val();*/
+
+        // var pParm = JSON.stringify(datos);
         $.ajax({
             type: "POST",
             url: "ConsultarCheque.aspx/GrabarCheque",
-            data: "{'pCheque':" + pParm + "}",
+            data: JSON.stringify({ arr: obj }),
+            // data: "{'pCheque':" + pParm + "}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-                $("#myDialog").modal("toggle");
-                $("#getCode").html(models);
+                debugger;
+                var result = response.d.Status;
+                var mensaje = response.d.Mensaje;
+                if (result == "OK") {
+                    $("#myDialog").modal("toggle");
+                    $("#getCode").html(mensaje);
+                } else {
+                    $("#getCode").html(mensaje);
+                }
+
+                /* var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                 $("#myDialog").modal("toggle");
+                 $("#getCode").html(models);*/
             },
             error: function (response) {
                 if (response.length != 0)
@@ -669,7 +706,7 @@
             success: function (response) {
                 $("#myDialog").modal("toggle");
                 $("#getCode").html(response.d);
-                $("#flag").val("true");               
+                $("#flag").val("true");
                 listarCheques(1);
             },
             error: function (response) {
@@ -677,6 +714,7 @@
                     alert(response);
             }
         });
+        $("#confirm-submit").modal("hide");
     }
 
     $(document).ready(function () {
@@ -713,11 +751,104 @@
             $('#txtMonto').val('0.00');
         }
         if (estado == 'UPD') {
+            $.ajax({
+                type: "POST",
+                url: "ConsultarCheque.aspx/getChequeXId",
+                data: "{'id':'" + datos.ID + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var vals = new Object();
+                    var result = JSON.parse(response.d.DataJson);
+                    console.log(result);
+                    $('#ddlCampana').empty();
+                    $('#ddlCampana').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < result.listCampañas.length; i++) {
+                        var valor = result.listCampañas[i].ID;
+                        var text = result.listCampañas[i].Nombre;
+                        $("#ddlCampana").append($("<option></option>").val(valor).html(text));
+                    }
+
+
+                    $('#ddlInstitucion').empty();
+                    $('#ddlInstitucion').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < result.listInstitucionEducativa.length; i++) {
+                        var valor = result.listInstitucionEducativa[i].ID;
+                        var text = result.listInstitucionEducativa[i].Nombre;
+                        $("#ddlInstitucion").append($("<option></option>").val(valor).html(text));
+                    }
+
+                    $('#ddlCia').empty();
+                    $('#ddlCia').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < result.listCIASeguro.length; i++) {
+                        var valor = result.listCIASeguro[i].ID;
+                        var text = result.listCIASeguro[i].Nombre;
+                        $("#ddlCia").append($("<option></option>").val(valor).html(text));
+                    }
+
+                    $('#ddlProducto').empty();
+                    $('#ddlProducto').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < result.listProducto.length; i++) {
+                        var valor = result.listProducto[i].ID;
+                        var text = result.listProducto[i].Nombre;
+                        $("#ddlProducto").append($("<option></option>").val(valor).html(text));
+                    }
+
+                    $('#ddlBanco').empty();
+                    $('#ddlBanco').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < result.listBanco.length; i++) {
+                        var valor = result.listBanco[i].ID;
+                        var text = result.listBanco[i].Nombre;
+                        $("#ddlBanco").append($("<option></option>").val(valor).html(text));
+                    }
+
+                    $('#ddlMoneda').empty();
+                    $('#ddlMoneda').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < result.listMoneda.length; i++) {
+                        var valor = result.listMoneda[i].ID;
+                        var text = result.listMoneda[i].Nombre;
+                        $("#ddlMoneda").append($("<option></option>").val(valor).html(text));
+                    }
+
+                    $('#txtID').val(result.ID);
+                    $('#ddlCampana').val(result.CampaniaID);
+
+                    // setTimeout("loadInstitucion();", 250);
+                    $('#ddlInstitucion').val(result.InstitucionEducativaID);
+                   // setTimeout("$('#ddlInstitucion').val(" + datos.InstitucionEducativaID + ");", 500);
+
+                    $('#ddlCia').val(result.CIASeguroID);
+                    //setTimeout("loadCia();", 750);
+                    //setTimeout("$('#ddlCia').val(" + datos.CIASeguroID + ");", 1000);
+
+                    $('#ddlProducto').val(result.ProductoID);
+                    //setTimeout("loadProductos();", 1250);
+                    //setTimeout("$('#ddlProducto').val(" + datos.ProductoID + ");", 1500);
+
+                    $('#ddlBanco').val(result.BancoID);
+
+                    $('#ddlMoneda').val(result.MonedaID);
+                    //setTimeout("loadMoneda();", 1750);
+                    //setTimeout("$('#ddlMoneda').val(" + datos.MonedaID + ");", 2000);
+                    debugger;
+                    $('#txtFecha').val(result.Fecha);
+                    $('#txtNroCheque').val(result.NroCheque);
+                    $('#txtMonto').val(result.Monto);
+
+
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
+
+            /*
             $('#txtID').val(datos.ID);
             $('#ddlCampana').val(datos.CampaniaID);
 
             setTimeout("loadInstitucion();", 250);
-            setTimeout("$('#ddlInstitucion').val("+ datos.InstitucionEducativaID +");", 500);
+            setTimeout("$('#ddlInstitucion').val(" + datos.InstitucionEducativaID + ");", 500);
 
             setTimeout("loadCia();", 750);
             setTimeout("$('#ddlCia').val(" + datos.CIASeguroID + ");", 1000);
@@ -729,12 +860,13 @@
 
             setTimeout("loadMoneda();", 1750);
             setTimeout("$('#ddlMoneda').val(" + datos.MonedaID + ");", 2000);
-
+            debugger;
             $('#txtFecha').val(datos.Fecha);
             $('#txtNroCheque').val(datos.NroCheque);
-            $('#txtMonto').val(datos.Monto);
+            $('#txtMonto').val(datos.Monto);*/
+            //var Vals = JSON.stringify(datos);
+            //$('#btnGuardar').attr('onclick', 'btnGuardar(' + Vals + ')');
         }
-
         setTimeout("$('#myModalCheque').modal('show');", 1000);
 
         //var miaplicacion = { queue: [] };

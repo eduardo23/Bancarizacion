@@ -274,6 +274,46 @@ namespace Demo
             smtp.Send(correo);
         }
 
+        public static void EnvioMailSegundo(
+                        string asunto, 
+                        List<GestionCorreo> liscorreos, 
+                        List<string> listrutas, 
+                        string De, 
+                        string Clave, 
+                        string SMTPServer, 
+                        int Puerto)
+        {
+            MailMessage correo = new MailMessage();
+            SmtpClient smtp = new SmtpClient();
+
+            correo.From = new MailAddress(De, "Hermes Seguros", System.Text.Encoding.UTF8);
+            correo.To.Add("ccarhuas.mike@gmail.com");
+            correo.SubjectEncoding = System.Text.Encoding.UTF8;
+            correo.Subject = asunto;
+            //correo.Body = Mensaje;
+            correo.BodyEncoding = System.Text.Encoding.UTF8;
+           // correo.IsBodyHtml = EsHTML;
+            correo.Priority = MailPriority.High;
+            foreach (var item in listrutas)
+            {
+                correo.Attachments.Add(new Attachment(item));
+            }
+            smtp.Credentials = new System.Net.NetworkCredential(De, Clave);
+            smtp.Port = Puerto;
+            smtp.Host = SMTPServer;
+            smtp.EnableSsl = true;
+
+
+            ServicePointManager.ServerCertificateValidationCallback =
+               delegate (object s
+                   , X509Certificate certificate
+                   , X509Chain chai
+                   , SslPolicyErrors sslPolicyErrors)
+               { return true; };
+            smtp.Send(correo);
+        }
+
+
         public static void EnvioMails(string Para, string De, string Asunto, string Mensaje, bool EsHTML, string Clave, string SMTPServer, Int32 Puerto, List<string> adjuntos)
         {
             MailMessage correo = new MailMessage();

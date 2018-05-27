@@ -253,6 +253,8 @@
     <Content Include="bin\Css\dist\js\pages\dashboard.js" />
     <Content Include="bin\Css\dist\js\pages\dashboard2.js" />
     <Content Include="ConsultarCheque.aspx" />
+    <Content Include="Css\datepicker\bootstrap-datepicker.css" />
+    <Content Include="Css\datepicker\bootstrap-datepicker.min.css" />
     <Content Include="Css\images\ui-icons_444444_256x240.png" />
     <Content Include="Css\images\ui-icons_555555_256x240.png" />
     <Content Include="Css\images\ui-icons_777620_256x240.png" />
@@ -533,7 +535,10 @@
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Cobranza.aspx" />
     <Content Include="RestablecerContraseña.aspx" />
+    <Content Include="Scripts\datepicker\bootstrap-datepicker.es.min.js" />
+    <Content Include="Scripts\datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\DeepASPImpromptuCalling.js" />
+    <Content Include="Scripts\FileStyle\bootstrap-filestyle.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
     <Content Include="bootstrap\css\bootstrap-theme.css.map" />
@@ -557,6 +562,7 @@
     <Content Include="Css\open-iconic\font\fonts\open-iconic.otf" />
     <Content Include="Css\open-iconic\font\fonts\open-iconic.ttf" />
     <Content Include="Css\open-iconic\font\fonts\open-iconic.woff" />
+    <Content Include="Css\datepicker\bootstrap-datepicker.css.map" />
     <None Include="Properties\PublishProfiles\Eduardo.pubxml" />
     <None Include="Properties\PublishProfiles\Hermes.pubxml" />
     <Content Include="ReportCobranza.xsc">
@@ -582,6 +588,7 @@
     <Content Include="Scripts\jquery.alerts-1.1\package.json" />
     <Content Include="UploadFile.ashx" />
     <Content Include="UploadPlantilla.ashx" />
+    <Content Include="UploadEnvioCorreo.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1723,6 +1730,9 @@
     </Compile>
     <Compile Include="RestablecerContraseña.aspx.designer.cs">
       <DependentUpon>RestablecerContraseña.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadEnvioCorreo.ashx.cs">
+      <DependentUpon>UploadEnvioCorreo.ashx</DependentUpon>
     </Compile>
     <Compile Include="UploadFile.ashx.cs">
       <DependentUpon>UploadFile.ashx</DependentUpon>
