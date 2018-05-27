@@ -11,7 +11,8 @@ namespace DAO_Hermes
 {
     using System;
     using System.Collections.Generic;
-    
+    using ViewModel;
+
     public partial class Cheque
     {
         public int ID { get; set; }
@@ -30,12 +31,30 @@ namespace DAO_Hermes
         public string UsuarioActualizacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
         public bool Activo { get; set; }
-    
+
         public virtual Banco Banco { get; set; }
         public virtual CIASeguro CIASeguro { get; set; }
         public virtual InstitucionEducativa InstitucionEducativa { get; set; }
         public virtual Moneda Moneda { get; set; }
         public virtual Producto Producto { get; set; }
         public virtual Campania Campania { get; set; }
+
+        public List<Bancos> listBanco;
+        public List<Cia_Seguro> listCIASeguro;
+        public List<Institucion_Educativa> listInstitucionEducativa;
+        public List<Moneda> listMoneda;
+        public List<Producto> listProducto;
+        public List<Campañas> listCampañas;
+
+        public Cheque()
+        {
+            listBanco = new List<Bancos>();
+            listCIASeguro = new List<Cia_Seguro>();
+            listInstitucionEducativa = new List<Institucion_Educativa>();
+            listMoneda = new List<Moneda>();
+            listProducto = new List<Producto>();
+            listCampañas = new List<Campañas>();
+
+        }
     }
 }

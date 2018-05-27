@@ -4,6 +4,8 @@ using System.Linq;
 using System.Data.SqlClient;
 using System.Data;
 using Newtonsoft.Json;
+using DAO_Hermes.ViewModel;
+
 namespace DAO_Hermes.Repositorios
 {
     public class ChequeDAO : IDisposable
@@ -14,6 +16,7 @@ namespace DAO_Hermes.Repositorios
         private static SqlConnection conexion;
         private static SqlCommand comando;
         private static ClientResponse clientResponse;
+        public static int codigo;
         public ChequeDAO()
         {
             lstCheque = new List<Cheque>();
@@ -23,10 +26,49 @@ namespace DAO_Hermes.Repositorios
             clientResponse.Status = "OK";
         }
         BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities();
-        public int Agregar(Cheque cheque)
-        {
-            db.Cheque.Add(cheque);
-            return db.SaveChanges();
+        public ClientResponse Agregar(Cheque cheque)
+        {     
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_ins_cheque", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@CampaniaID", cheque.CampaniaID);
+                        comando.Parameters.AddWithValue("@InstitucionEducativaID", cheque.InstitucionEducativaID);
+                        comando.Parameters.AddWithValue("@CIASeguroID", cheque.CIASeguroID);
+                        comando.Parameters.AddWithValue("@ProductoID", cheque.ProductoID);
+                        comando.Parameters.AddWithValue("@BancoID", cheque.BancoID);
+                        comando.Parameters.AddWithValue("@MonedaID", cheque.MonedaID);
+                        comando.Parameters.AddWithValue("@fecha", cheque.Fecha);
+                        comando.Parameters.AddWithValue("@NroCheque", cheque.NroCheque);
+                        comando.Parameters.AddWithValue("@Monto", cheque.Monto);
+                        comando.Parameters.AddWithValue("@UsuarioCreacion", cheque.UsuarioCreacion);
+                        comando.Parameters.AddWithValue("@FechaCreacion", cheque.Fecha);
+                        comando.Parameters.AddWithValue("@Activo", cheque.Activo);
+                        comando.Parameters.Add("@id", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        comando.ExecuteNonQuery();                     
+                        clientResponse.Id = Convert.ToInt32(comando.Parameters["@id"].Value); 
+                        clientResponse.Mensaje = "El cheque se ha Emitido Satisfactoriamente.";
+                        clientResponse.Status = "OK";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+        
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;           
         }
 
         public int Eliminar(int Id)
@@ -48,6 +90,82 @@ namespace DAO_Hermes.Repositorios
                 return res;
             }
         }
+
+        public ClientResponse getObtenerChequeXId(int ID)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_sel_cheque_x_id", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@id", ID);                       
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                entidad = new Cheque();
+
+                                entidad.ID = (reader["ID"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["ID"].ToString());
+                                entidad.CampaniaID = (reader["CampaniaID"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["CampaniaID"]);
+                                                           
+                                using (CampañasDAO oCampDao = new CampañasDAO())
+                                {
+                                    entidad.listCampañas = oCampDao.ListarCampañas();
+                                }
+                                entidad.InstitucionEducativaID = (reader["InstitucionEducativaID"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["InstitucionEducativaID"]);
+                                using (InstitucionEducativaDAO db = new InstitucionEducativaDAO())
+                                {
+                                    entidad.listInstitucionEducativa = db.getLstByCampania(entidad.CampaniaID);
+                                }
+                                using (CiaSeguro_DAO db = new CiaSeguro_DAO())
+                                {
+                                    entidad.listCIASeguro = db.getLstbyInst(entidad.InstitucionEducativaID);
+                                }
+                                entidad.CIASeguroID = (reader["CIASeguroID"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["CIASeguroID"]);
+                                
+                                using (TipoSeguro_DAO db = new TipoSeguro_DAO())
+                                {
+                                    entidad.listProducto = db.getLstbyInstAseg(entidad.InstitucionEducativaID, entidad.CIASeguroID);
+                                }
+                                entidad.ProductoID = (reader["ProductoID"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["ProductoID"]);
+                                entidad.BancoID = (reader["BancoID"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["BancoID"]);
+                                entidad.MonedaID = (reader["MonedaID"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["MonedaID"]);
+                                using (BancoDAO db = new BancoDAO())
+                                {
+                                    entidad.listBanco = db.ListarBanco();
+                                }                                
+                                using (MonedaDAO db = new MonedaDAO())
+                                {
+                                    entidad.listMoneda = db.getLstbyInstAsegProd(entidad.InstitucionEducativaID, entidad.CIASeguroID, entidad.ProductoID);
+                                }     
+                                entidad.Fecha = Convert.ToDateTime(reader["Fecha"]);
+                                entidad.NroCheque = (reader["NroCheque"] == DBNull.Value) ? "" : reader["NroCheque"].ToString();
+                                entidad.Monto = (reader["Monto"] == DBNull.Value) ? 0 : Convert.ToDecimal(reader["Monto"]);
+                                entidad.Concepto = (reader["Concepto"] == DBNull.Value) ? "" : reader["Concepto"].ToString();                               
+                            }
+                        }                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }           
+            clientResponse.DataJson = JsonConvert.SerializeObject(entidad).ToString();          
+            return clientResponse;
+        }
+
 
         public ClientResponse listarReporte(int CampaniaID, int ProductoID, int InstitucionEducativaID, int paginaActual, int RegistroXPagina)
         {
@@ -143,29 +261,69 @@ namespace DAO_Hermes.Repositorios
             return clientResponse;
         }
 
-        public int Grabar(Cheque cheque)
+        public ClientResponse Grabar(Cheque cheque)
         {
-            using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
+            try
             {
-                bool existe = (db.Cheque.Where(p => p.ID == cheque.ID).Count() > 0);
-                if (existe == true)
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
                 {
-                    Cheque oCheque = db.Cheque.Where(p => p.ID == cheque.ID).FirstOrDefault();
-                    oCheque.ID = cheque.ID;
-                    oCheque.CampaniaID = cheque.CampaniaID;
-                    oCheque.InstitucionEducativaID = cheque.InstitucionEducativaID;
-                    oCheque.CIASeguroID = cheque.CIASeguroID;
-                    oCheque.ProductoID = cheque.ProductoID;
-                    oCheque.BancoID = cheque.BancoID;
-                    oCheque.MonedaID = cheque.MonedaID;
-                    oCheque.Fecha = cheque.Fecha;
-                    oCheque.NroCheque = cheque.NroCheque;
-                    oCheque.Monto = cheque.Monto;
-                    oCheque.UsuarioActualizacion = cheque.UsuarioActualizacion;
-                    oCheque.FechaActualizacion = cheque.FechaActualizacion;
+                    using (comando = new SqlCommand("usp_upd_cheque", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@CampaniaID", cheque.CampaniaID);
+                        comando.Parameters.AddWithValue("@InstitucionEducativaID", cheque.InstitucionEducativaID);
+                        comando.Parameters.AddWithValue("@CIASeguroID", cheque.CIASeguroID);
+                        comando.Parameters.AddWithValue("@ProductoID", cheque.ProductoID);
+                        comando.Parameters.AddWithValue("@BancoID", cheque.BancoID);
+                        comando.Parameters.AddWithValue("@MonedaID", cheque.MonedaID);
+                        comando.Parameters.AddWithValue("@fecha", cheque.Fecha);
+                        comando.Parameters.AddWithValue("@NroCheque", cheque.NroCheque);
+                        comando.Parameters.AddWithValue("@Monto", cheque.Monto);
+                        comando.Parameters.AddWithValue("@UsuarioActualizacion", cheque.UsuarioActualizacion);
+                        comando.Parameters.AddWithValue("@FechaActualizacion", cheque.FechaActualizacion);
+                        comando.Parameters.AddWithValue("@Activo", cheque.Activo);
+                        comando.Parameters.AddWithValue("@id", cheque.ID);                        
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        clientResponse.Mensaje = "El cheque se ha Actualizado Satisfactoriamente.";
+                        clientResponse.Status = "OK";
+                    }
                 }
-                return db.SaveChanges();
             }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;
+            //using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
+            //{
+            //    bool existe = (db.Cheque.Where(p => p.ID == cheque.ID).Count() > 0);
+            //    if (existe == true)
+            //    {
+            //        Cheque oCheque = db.Cheque.Where(p => p.ID == cheque.ID).FirstOrDefault();
+            //        oCheque.ID = cheque.ID;
+            //        oCheque.CampaniaID = cheque.CampaniaID;
+            //        oCheque.InstitucionEducativaID = cheque.InstitucionEducativaID;
+            //        oCheque.CIASeguroID = cheque.CIASeguroID;
+            //        oCheque.ProductoID = cheque.ProductoID;
+            //        oCheque.BancoID = cheque.BancoID;
+            //        oCheque.MonedaID = cheque.MonedaID;
+            //        oCheque.Fecha = cheque.Fecha;
+            //        oCheque.NroCheque = cheque.NroCheque;
+            //        oCheque.Monto = cheque.Monto;
+            //        oCheque.UsuarioActualizacion = cheque.UsuarioActualizacion;
+            //        oCheque.FechaActualizacion = cheque.FechaActualizacion;
+            //    }
+            //    return db.SaveChanges();
+            //}
         }
 
         public DataSet getLstCobranza(int CampaniaID, int CIASeguroID, int InstitucionEducativaID, int ProductID)

@@ -8,14 +8,13 @@ namespace DAO_Hermes.ViewModel
 {
     public class Plantilla
     {
-        public int _id { get; set; }
-        public string _descripcion { get; set; }
-        public string _NombreArchivoHtml { get; set; }
-        public string _ruta_plantilla_html { get; set; }
-        public int _id_estado { get; set; }
-       
-        public string _fec_reg { get; set; }
-        public int _fl_nuevo { get; set; } //fl_nuevo : 0 Nuevo fl_nuevo: 1 registro existente en la bd
+        public int _id;
+        public string _descripcion;
+        public string _NombreArchivoHtml;
+        public string _ruta_plantilla_html;
+        public int _id_estado;
+        public string _fec_reg;
+        public int _fl_nuevo; //fl_nuevo : 0 Nuevo fl_nuevo: 1 registro existente en la bd
         public int fl_nuevo
         {
             get { return _fl_nuevo; }

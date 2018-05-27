@@ -12,67 +12,115 @@ namespace Demo
 {
     public partial class ConsultarCheque : System.Web.UI.Page
     {
+        public static ClientResponse response;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack) {
+            if (!Page.IsPostBack)
+            {
 
             }
         }
 
         [WebMethod]
-        public static  List<Campañas> GetFLstCampana() {
+        public static List<Campañas> GetFLstCampana()
+        {
             CampañasDAO objCampaña = new CampañasDAO();
             List<Campañas> oCampañas = objCampaña.ListarCampañas();
             return oCampañas;
         }
 
         [WebMethod]
-        public static List<TipoProducto> GetFLstProducto() {
+        public static List<TipoProducto> GetFLstProducto()
+        {
             TipoProductoDAO ObjTipoProducto = new TipoProductoDAO();
             List<TipoProducto> oTipoProducto = ObjTipoProducto.ListarTipoProductos();
             return oTipoProducto;
         }
 
         [WebMethod]
-        public static List<InstitucionEducativa> GetFLstInstitucion() {
-            InstitucionEducativaDAO objInstitucion= new InstitucionEducativaDAO();
-            List<InstitucionEducativa> oLstInst= objInstitucion.getLst();
+        public static List<InstitucionEducativa> GetFLstInstitucion()
+        {
+            InstitucionEducativaDAO objInstitucion = new InstitucionEducativaDAO();
+            List<InstitucionEducativa> oLstInst = objInstitucion.getLst();
             return oLstInst;
         }
- 
+
         protected void btnExportar_Click(object sender, EventArgs e)
         {
 
         }
 
         [WebMethod]
-        public static string GrabarCheque(Cheque pCheque) {
-            string sRet = "";
+        public static ClientResponse GrabarCheque(List<string> arr)
+        {           
+            int txtID = 0;
+            int ddlCampana = 0;
+            int ddlInstitucion = 0;
+            int ddlCia = 0;
+            int ddlProducto = 0;
+            int ddlBanco = 0;
+            int ddlMoneda = 0;
+            decimal txtMonto = 0;
+            string txtFecha = string.Empty;
+            string txtNroCheque = string.Empty;
             try
             {
-                pCheque.FechaCreacion = DateTime.Now.Date;
-                pCheque.Activo = true;
+                int.TryParse(arr[0], out txtID);
+                int.TryParse(arr[1], out ddlCampana);
+                int.TryParse(arr[2], out ddlInstitucion);
+                int.TryParse(arr[3], out ddlCia);
+                int.TryParse(arr[4], out ddlProducto);
+                int.TryParse(arr[5], out ddlBanco);
+                int.TryParse(arr[6], out ddlMoneda);
+                decimal.TryParse(arr[9], out txtMonto);
+                txtFecha = arr[7];
+                txtNroCheque = arr[8];
 
+                DateTime FechaDate = DateTime.Parse(txtFecha);
+                Cheque pCheque = new Cheque()
+                {
+                    ID = txtID,
+                    CampaniaID = ddlCampana,
+                    InstitucionEducativaID = ddlInstitucion,
+                    CIASeguroID = ddlCia,
+                    ProductoID = ddlProducto,
+                    BancoID = ddlBanco,
+                    MonedaID = ddlMoneda,
+                    Fecha = FechaDate,
+                    NroCheque = txtNroCheque,
+                    Monto = txtMonto
+
+
+                };
+         
                 using (ChequeDAO dbChq = new ChequeDAO())
                 {
                     if (pCheque.ID == 0)
                     {
-                        dbChq.Agregar(pCheque);
-                        sRet = "'El cheque se ha Emitido Satisfactoriamente.'";
+                        pCheque.FechaCreacion = DateTime.Now.Date;
+                        pCheque.Activo = true;
+                        pCheque.UsuarioCreacion = "demo@gamil.com";
+                        response = dbChq.Agregar(pCheque);
+
                     }
                     else
                     {
-                        dbChq.Grabar(pCheque);
-                        sRet = "'El cheque se ha Actualizado Satisfactoriamente.'";
+                        pCheque.FechaActualizacion = DateTime.Now.Date;
+                        pCheque.Activo = true;
+                        pCheque.UsuarioActualizacion = "demo@gamil.com";
+                        response = dbChq.Grabar(pCheque);
+                        //dbChq.Grabar(pCheque);
+                        //sRet = "'El cheque se ha Actualizado Satisfactoriamente.'";
                     }
 
                 }
+           
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                sRet = "Ocurrio un error al intentar grabar el Cheque";
-            }            
-            return sRet;
+                throw exception;
+            }
+            return response;
         }
 
         [WebMethod]
@@ -96,14 +144,32 @@ namespace Demo
         }
 
         [WebMethod]
-        public static ClientResponse listar_reporte(int CampaniaID, int ProductoID, int InstitucionEducativaID, int paginaActual,int RegistroXpagina)
+        public static ClientResponse getChequeXId(int id)
         {
             ClientResponse response;
             try
             {
                 using (ChequeDAO dbChq = new ChequeDAO())
                 {
-                    response = dbChq.listarReporte(CampaniaID, ProductoID, InstitucionEducativaID,  paginaActual, RegistroXpagina);
+                    response = dbChq.getObtenerChequeXId(id);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return response;
+        }
+
+        [WebMethod]
+        public static ClientResponse listar_reporte(int CampaniaID, int ProductoID, int InstitucionEducativaID, int paginaActual, int RegistroXpagina)
+        {
+            ClientResponse response;
+            try
+            {
+                using (ChequeDAO dbChq = new ChequeDAO())
+                {
+                    response = dbChq.listarReporte(CampaniaID, ProductoID, InstitucionEducativaID, paginaActual, RegistroXpagina);
                 }
             }
             catch (Exception exception)

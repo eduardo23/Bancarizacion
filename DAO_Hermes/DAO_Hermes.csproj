@@ -224,6 +224,7 @@
     <Compile Include="Repositorios\ConfiguracionArchivo_DAO.cs" />
     <Compile Include="Repositorios\ContactoDAO.cs" />
     <Compile Include="Repositorios\CuentaDAO.cs" />
+    <Compile Include="Repositorios\EnvioCorreoPlantillaDAO.cs" />
     <Compile Include="Repositorios\FuncionesAuxDAO.cs" />
     <Compile Include="Repositorios\GestionCorreoDAO.cs" />
     <Compile Include="Repositorios\Globales.cs" />
@@ -563,6 +564,8 @@
     <Compile Include="ViewModel\Campañas.cs" />
     <Compile Include="ViewModel\Cia_Seguro.cs" />
     <Compile Include="ViewModel\Cobranzas.cs" />
+    <Compile Include="ViewModel\EnvioCorreoPlantilla.cs" />
+    <Compile Include="ViewModel\EnvioCorreoPlantillaAdjunto.cs" />
     <Compile Include="ViewModel\GestionCorreo.cs" />
     <Compile Include="ViewModel\GrupoCorreo.cs" />
     <Compile Include="ViewModel\Institucion_Educativa.cs" />

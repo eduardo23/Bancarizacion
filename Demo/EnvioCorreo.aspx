@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="EnvioCorreo.aspx.cs" Inherits="Demo.EnvioCorreo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="Css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="Scripts/FileStyle/bootstrap-filestyle.js"></script>
     <style>
         .btnHermes {
             background-color: orangered;
@@ -112,19 +114,19 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-1 control-label">Origen:</label>
                         <div class="col-sm-5">
-                            <select id="cbo_origen"  onchange="selectChange()" class="form-control">
-                                <%--<option value="0">--Seleccione--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>--%>
+                            <select id="cbo_origen" onchange="selectChange()" class="form-control">
                             </select>
                         </div>
                         <label for="inputEmail3" class="col-sm-1 control-label">Plantilla:</label>
                         <div class="col-sm-5">
                             <select id="cbo_plantilla" class="form-control">
-                                <%--<option value="0">--Seleccione--</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>--%>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-1 control-label">Seleccione Archivo:</label>
+                        <div class="col-sm-11">
+                            <input type="file" id="input08" onchange="checkfile(this);" multiple>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -136,18 +138,6 @@
                                     </div>
                                     <div>
                                         <select multiple="multiple" name="origen[]" id="cbogrupocorreoorigen" class="form-control" style="height: 152px;">
-                                           <%-- <option value="1">Option 1</option>
-                                            <option value="2">Option 2</option>
-                                            <option value="3">Option 3</option>
-                                            <option value="4">Option 4</option>
-                                            <option value="5">Option 5</option>
-                                            <option value="6">Option 6</option>
-                                            <option value="7">Option 7</option>
-                                            <option value="8">Option 8</option>
-                                            <option value="9">Option 9</option>
-                                            <option value="10">Option 10</option>
-                                            <option value="11">Option 11</option>
-                                            <option value="12">Option 12</option>--%>
                                         </select>
                                     </div>
                                 </div>
@@ -209,6 +199,25 @@
         </div>
     </div>
     <script>
+        $('#input08').filestyle({
+            'placeholder': 'adjunte archivo',
+            text: ' Examinar',
+            btnClass: 'btn-success'
+        });
+
+        function checkfile(sender) {
+            var validExts = new Array(".xlsx", ".xls", ".jpg", "JPEG", "png", ".doc", ".pdf", ".docx");
+            var fileExt = sender.value;
+            fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+            if (validExts.indexOf(fileExt) < 0) {
+                sender.value = "";
+                Alert.warn("El archivo seleccionado es inválido , los archivos válidos son de tipo " +
+                         validExts.toString() + "");
+                return false;
+            }
+            else return true;
+        }
+
         Alert = {
             show: function ($div, msg) {
                 $div.find('.alert-msg').text(msg);
@@ -271,7 +280,7 @@
                 dataType: "json",
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);//(typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-                    $('#cbogrupocorreoorigen').empty();                 
+                    $('#cbogrupocorreoorigen').empty();
                     for (var i = 0; i < models.length; i++) {
                         var valor = models[i].id;
                         var text = models[i].descripcion;
@@ -314,10 +323,10 @@
             var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
             var list = [];
             for (i = 0; i < selO.length; i++) {
-                var objeto = {
-                    id: selO.options[i].value
-                };
-                list.push(objeto);
+                //var objeto = {
+                    id= selO.options[i].value
+               // };
+                    list.push(id);
             }
             var cbo_origen = $("#cbo_origen").val();
             var cbo_plantilla = $("#cbo_plantilla").val();
@@ -335,11 +344,48 @@
                 Alert.warn("Por favor seleccione Plantilla");
                 return false;
             }
-            if (list.length > 0) {
-                Alert.warn("Por favor agregue datos a la seccion destino.");
+            if (list.length == 0) {
+                Alert.warn("Por favor agregue datos a la seccion Grupo Correo Destino.");
                 return false;
             }
+            var data = new FormData();
+            
+            //var files = $("#input08").get(0).files;
+            //var inputfile = document.getElementById('input08').files;
+            //for (var x = 0; x < inputfile.length; x++) {
+            //    fd.append("Files[]", inputfile[x]);
+            //}
 
+            for (var i = 0, len = document.getElementById('input08').files.length; i < len; i++) {
+                data.append("Files" + i, document.getElementById('input08').files[i]);
+            }
+
+
+           // data.append("Files", files[0]);
+            data.append("cbo_origen", cbo_origen);
+            data.append("cbo_plantilla", cbo_plantilla);
+            data.append("txt_asunto", txt_asunto);
+            data.append("list", list);
+            $.ajax({
+                type: 'post',
+                url: "UploadEnvioCorreo.ashx",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (response) {
+                    var objeto = JSON.parse(response);
+                    if (objeto.Result == "Ok") {
+                        //Alert.info(objeto.Mensaje);
+                        //listarPlanilla();
+                        //listImagen = [];
+                    } else {
+                        Alert.danger(objeto.Mensaje);
+                    }
+                },
+                error: function (error) {
+                    Alert.danger("Error Consulte con el Administrador de Sistema.");
+                }
+            });
         }
 
         $(document).ready(function () {
