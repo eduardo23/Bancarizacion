@@ -8,6 +8,7 @@
 
 
 <script src="Scripts/moment.js"></script>
+<script src="Scripts/accounting.js"></script>
   
 <div class="content">
      
@@ -65,8 +66,8 @@
                         <label class="control-label">Fecha Inicio:</label>
                     </div>
                     <div class="col-md-7">
-
-                        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')" placeholder="Fecha Inicio"></asp:TextBox>
+                        <input type="date" id="txtFechaInicial" Class="form-control" data-date-format="dd/mm/yyyy" placeholder="Fecha Inicio" />
+                        <%--<asp:TextBox ID="txtFechaInicial" CssClass="form-control" runat="server" placeholder="Fecha Inicio"></asp:TextBox>--%>
 
                     </div>
                 </div>
@@ -75,8 +76,8 @@
                         <label class="control-label">Fecha Fin:</label>
                     </div>
                     <div class="col-md-7">
-
-                        <asp:TextBox ID="TextBox2" CssClass="form-control" runat="server" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')" placeholder="Fecha Fin"></asp:TextBox>
+                        <input type="date" id="txtFechaFinal" Class="form-control" data-date-format="dd/mm/yyyy" placeholder="Fecha Fin" />
+                        <%--<asp:TextBox ID="txtFechaFinal" CssClass="form-control" runat="server" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')" placeholder="Fecha Fin"></asp:TextBox>--%>
 
                     </div>
                 </div>
@@ -221,7 +222,7 @@
                             <label class="control-label"> Fecha:</label>
                         </div>
                         <div class="col-md-7">
-                             <input type="text" class="form-control" id="txtFecha" title="Fecha" placeholder="Ingrese Fecha" data-date-format="dd/mm/yyyy" onfocus="(this.type='date')"/>
+                             <input type="date" class="form-control" id="txtFecha" title="Fecha" data-toggle="tooltip" data-placement="left" placeholder="Ingrese Fecha" required />
                         </div>                    
                     </div>
                     <div class="form-group">
@@ -229,7 +230,7 @@
                             <label class="control-label"> Nro. Cheque:</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="txtNroCheque" Title="Nro de Cheque" placeholder="Ingrese Nro de Cheque"/>
+                            <input type="text" class="form-control" id="txtNroCheque" Title="Nro de Cheque" data-toggle="tooltip" data-placement="left" placeholder="Ingrese Nro de Cheque" required/>
                         </div>                    
                     </div>
                     <div class="form-group">
@@ -237,7 +238,7 @@
                             <label class="control-label"> Monto:</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="txtMonto" Title="Monto" data-val-required="El Monto es Obligatorio" placeholder="Ingrese Monto"/>
+                            <input type="number" step="0.01" class="form-control" id="txtMonto" Title="Monto" data-toggle="tooltip" data-placement="left" data-val-required="El Monto es Obligatorio" placeholder="0.00" required/>
                         </div>                    
                     </div>
                     </div>
@@ -331,7 +332,7 @@
         $.ajax({
             type: "POST",
             url: "ConsultarCheque.aspx/listar_reporte",
-            data: "{'CampaniaID':'" + $('#ddlFCampana').val() + "','ProductoID':'" + $('#ddlFTipoSeguro').val() + "','InstitucionEducativaID':'" + $('#ddlFInstitucion').val() + "','paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "'}",
+            data: "{'CampaniaID':'" + $('#ddlFCampana').val() + "','ProductoID':'" + $('#ddlFTipoSeguro').val() + "','InstitucionEducativaID':'" + $('#ddlFInstitucion').val() + "','FechaInicial':'" + $('#txtFechaInicial').val() + "','FechaFinal':'" + $('#txtFechaFinal').val() + "','paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "'}",
             //data: { 'paginaActual': currentPage, 'RegistroXpagina': RegistroXpagina },
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -372,7 +373,7 @@
                         HTML += "<td>" + result[index].Banco["Nombre"] + "</td>";
                         HTML += "<td>" + result[index]["Concepto"] + "</td>";
                         HTML += "<td>" + result[index].Moneda["Nombre"] + "</td>";
-                        HTML += "<td>" + result[index]["Monto"] + "</td>";
+                        HTML += "<td>" + accounting.formatNumber(result[index]["Monto"],2) + "</td>";
                         HTML += "<td>" + result[index]["NroCheque"] + "</td>";
                         HTML += "<td>" + moment(result[index]["Fecha"]).format('DD/MM/YYYY') + "</td>";
                         HTML += "<td>";
@@ -748,7 +749,7 @@
             $('#ddlMoneda').val(0);
             $('#txtFecha').val('');
             $('#txtNroCheque').val('');
-            $('#txtMonto').val('0.00');
+            $('#txtMonto').val('0');
         }
         if (estado == 'UPD') {
             $.ajax({
@@ -831,9 +832,10 @@
                     //setTimeout("loadMoneda();", 1750);
                     //setTimeout("$('#ddlMoneda').val(" + datos.MonedaID + ");", 2000);
                     debugger;
-                    $('#txtFecha').val(result.Fecha);
+                    $('#txtFecha').val(moment(result.Fecha).format('YYYY-MM-DD'));
+                    //$('#txtFecha').val(result.Fecha);
                     $('#txtNroCheque').val(result.NroCheque);
-                    $('#txtMonto').val(result.Monto);
+                    $('#txtMonto').val(parseFloat(result.Monto).toFixed(2));
 
 
                 },

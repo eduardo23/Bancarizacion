@@ -99,7 +99,7 @@ namespace Demo
                     {
                         pCheque.FechaCreacion = DateTime.Now.Date;
                         pCheque.Activo = true;
-                        pCheque.UsuarioCreacion = "demo@gamil.com";
+                        pCheque.UsuarioCreacion = "eduardo23@gmail.com";
                         response = dbChq.Agregar(pCheque);
 
                     }
@@ -107,7 +107,7 @@ namespace Demo
                     {
                         pCheque.FechaActualizacion = DateTime.Now.Date;
                         pCheque.Activo = true;
-                        pCheque.UsuarioActualizacion = "demo@gamil.com";
+                        pCheque.UsuarioActualizacion = "eduardo23@gmail.com";
                         response = dbChq.Grabar(pCheque);
                         //dbChq.Grabar(pCheque);
                         //sRet = "'El cheque se ha Actualizado Satisfactoriamente.'";
@@ -162,14 +162,26 @@ namespace Demo
         }
 
         [WebMethod]
-        public static ClientResponse listar_reporte(int CampaniaID, int ProductoID, int InstitucionEducativaID, int paginaActual, int RegistroXpagina)
+        public static ClientResponse listar_reporte(int CampaniaID, int ProductoID, int InstitucionEducativaID, String FechaInicial, String FechaFinal, int paginaActual, int RegistroXpagina)
         {
             ClientResponse response;
             try
             {
                 using (ChequeDAO dbChq = new ChequeDAO())
                 {
-                    response = dbChq.listarReporte(CampaniaID, ProductoID, InstitucionEducativaID, paginaActual, RegistroXpagina);
+                    DateTime? dFechaInicial=null;
+                    if (FechaInicial!= "")
+                    {
+                        dFechaInicial = Convert.ToDateTime(FechaInicial);
+                    }
+
+                    DateTime? dFechaFinal=null;
+                    if (FechaFinal != "")
+                    {
+                        dFechaFinal = Convert.ToDateTime(FechaFinal);
+                    }
+
+                    response = dbChq.listarReporte(CampaniaID, ProductoID, InstitucionEducativaID, dFechaInicial, dFechaFinal, paginaActual, RegistroXpagina);
                 }
             }
             catch (Exception exception)

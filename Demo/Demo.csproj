@@ -535,6 +535,7 @@
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Cobranza.aspx" />
     <Content Include="RestablecerContraseña.aspx" />
+    <Content Include="Scripts\accounting.js" />
     <Content Include="Scripts\datepicker\bootstrap-datepicker.es.min.js" />
     <Content Include="Scripts\datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\DeepASPImpromptuCalling.js" />

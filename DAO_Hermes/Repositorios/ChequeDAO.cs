@@ -167,7 +167,7 @@ namespace DAO_Hermes.Repositorios
         }
 
 
-        public ClientResponse listarReporte(int CampaniaID, int ProductoID, int InstitucionEducativaID, int paginaActual, int RegistroXPagina)
+        public ClientResponse listarReporte(int CampaniaID, int ProductoID, int InstitucionEducativaID, DateTime? FechaInicial, DateTime? FechaFinal, int paginaActual, int RegistroXPagina)
         {
             int recordCount = 0;          
             try
@@ -180,6 +180,8 @@ namespace DAO_Hermes.Repositorios
                         comando.Parameters.AddWithValue("@CampaniaID", CampaniaID);
                         comando.Parameters.AddWithValue("@ProductoID", ProductoID);
                         comando.Parameters.AddWithValue("@InstitucionEducativaID", InstitucionEducativaID);
+                        comando.Parameters.AddWithValue("@StartDate",FechaInicial);
+                        comando.Parameters.AddWithValue("@EndDate", FechaFinal);
                         comando.Parameters.AddWithValue("@vi_Pagina", paginaActual);
                         comando.Parameters.AddWithValue("@vi_RegistrosporPagina", RegistroXPagina);
                         comando.Parameters.Add("@vi_RecordCount", SqlDbType.Int).Direction = ParameterDirection.Output;
