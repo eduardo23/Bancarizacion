@@ -22,36 +22,30 @@ namespace Demo
         {
 
             context.Response.ContentType = "text/plain";
-
             context.Response.Expires = -1;
-
             try
-
             {
-
+                ClientResponse responseruta;
+                using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
+                {
+                    responseruta = dbParametrosMaestro.getObjParametroMaestro("RUTA_CARGAEXCELCORREOS");
+                }
+                ParametrosMaestros rutaexcel = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responseruta.DataJson);
                 HttpPostedFile postedFile = context.Request.Files["Filedata"];
-
                 listgestioncorreo = new List<GestionCorreo>();
 
-
                 string savepath = "";
-
                 string tempPath = "";
 
-                tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"];
-
+                tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"] + rutaexcel.valor;
                 savepath = context.Server.MapPath(tempPath);
-
                 string filename = postedFile.FileName;
 
                 if (!Directory.Exists(savepath))
-
                     Directory.CreateDirectory(savepath);
-
 
                 string files = savepath + @"\" + filename;
                 postedFile.SaveAs(files);
-
 
                 Excel.Application xlApp;
                 Excel.Workbook xlWorkBook;
@@ -70,7 +64,7 @@ namespace Demo
 
                 range = xlWorkSheet.UsedRange;
                 rw = range.Rows.Count;
-                cl = range.Columns.Count;
+                cl = 6;// range.Columns.Count; Leemos solo 6 columnas de cada fila
 
                 ClientResponse response;
                 using (GrupoCorreoDAO dbGrupoCorreo = new GrupoCorreoDAO())
@@ -140,14 +134,15 @@ namespace Demo
                     System.IO.File.Delete(files);
                 }
 
-                if (listgestioncorreo.Count() > 0) {
+                if (listgestioncorreo.Count() > 0)
+                {
                     ClientResponse response1;
                     using (GestionCorreoDAO dbGestionCorreo = new GestionCorreoDAO())
                     {
                         response1 = dbGestionCorreo.InsertGestionCorreoAutomatico(listgestioncorreo);
                     }
                 }
-                     
+
 
                 var wapper = new
                 {

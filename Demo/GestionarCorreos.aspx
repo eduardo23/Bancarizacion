@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="GestionarCorreos.aspx.cs" Inherits="Demo.GestionarCorreos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="Css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="Scripts/FileStyle/bootstrap-filestyle.js"></script>
     <style>
         .btnHermes {
             background-color: orangered;
@@ -85,11 +87,14 @@
                             <div class="pull-left">
                                 <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
                                 <div class="col-lg-8">
-                                    <select name="cbo_grupo_consultar" onchange="selectChange()"  id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
+                                    <select name="cbo_grupo_consultar" onchange="selectChange()" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
                                     </select>
                                 </div>
                             </div>
                             <div class="pull-right">
+                                <button type="button" class="btnHermes" data-toggle="modal" onclick="modalCargaMasivodeCorrreo();">
+                                    Carga Masivo de Corrreo
+                                </button>
                                 <button type="button" class="btnHermes" data-toggle="modal" onclick="modalRegistrar();">
                                     Nuevo
                                 </button>
@@ -126,6 +131,74 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModalCargacorreoAutomatico" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #D6EAF8">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Carga Correo Automatico</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <div id="alert-info-carga" class="alert alert-info alert-top" role="alert">
+                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <span class="alert-msg"></span>
+                                </div>
+                                <div id="alert-warn-carga" class="alert alert-warning alert-top" role="alert">
+                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <span class="alert-msg"></span>
+                                </div>
+                                <div id="alert-danger-carga" class="alert alert-danger alert-top" role="alert">
+                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <span class="alert-msg"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <label>Seleccione Archivo</label>
+                                <input type="file" id="input08" onchange="checkfile(this);">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-lg-12">
+                                <div class="progress" id="idprogress" style="display: none;">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btnHermes" onclick="cargarArchivo();">Grabar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Mensaje de Confirmacion
+                </div>
+                <div class="modal-body">
+                    Esta seguro que desea eliminar el registro?                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
@@ -218,6 +291,7 @@
             <!-- /.modal-dialog -->
         </div>
     </div>
+
     <div id="myDialog" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -233,14 +307,37 @@
             </div>
         </div>
     </div>
+
     <input type="hidden" name="name" id="flag" value="true" />
     <input type="hidden" name="name" id="flag_accion" value="" />
     <script type="text/javascript">
+        $('#input08').filestyle({
+            'placeholder': 'adjunte archivo',
+            text: ' Examinar',
+            btnClass: 'btn-success'
+        });
+        AlertCarga = {
+            show: function ($div, msg) {
+                $div.find('.alert-msg').text(msg);
+                if ($div.css('display') === 'none') {
+                    $div.fadeIn(1000).delay(2000).fadeOut(3000);
+                }
+            },
+            info: function (msg) {
+                this.show($('#alert-info-carga'), msg);
+            },
+            warn: function (msg) {
+                this.show($('#alert-warn-carga'), msg);
+            },
+            danger: function (msg) {
+                this.show($('#alert-danger-carga'), msg);
+            }
+        }
+
         Alert = {
             show: function ($div, msg) {
                 $div.find('.alert-msg').text(msg);
                 if ($div.css('display') === 'none') {
-                    // fadein, fadeout.                    
                     $div.fadeIn(1000).delay(2000).fadeOut(2000);
                 }
             },
@@ -255,7 +352,6 @@
             }
         }
 
-
         var $pagination = $('#pagination');
         var defaultOpts = {
             totalPages: 10
@@ -265,11 +361,26 @@
 
         $('#select_id').change(function () {
             alert($(this).val());
-        })
+        });
+
         function selectChange() {
             $("#flag").val("true");
-            listarCheques(1); 
+            listarCheques(1);
         }
+
+        function checkfile(sender) {
+            var validExts = new Array(".xlsx", ".xls");
+            var fileExt = sender.value;
+            fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+            if (validExts.indexOf(fileExt) < 0) {
+                sender.value = "";
+                AlertCarga.warn("El archivo seleccionado es inválido , los archivos válidos son de tipo " +
+                    validExts.toString() + "");
+                return false;
+            }
+            else return true;
+        }
+
         function listarCheques(pagina) {
             var id_cbo_grupo_consultar = $("#cbo_grupo_consultar").val();
             if (id_cbo_grupo_consultar == null) {
@@ -308,7 +419,6 @@
                                 id_grupo_correo: result[index].grupocorreo["id"]
                             };
                             var Vals = JSON.stringify(vals);
-                            //modalEliminar = "modalEliminar(" + parseInt(result[index]["ID"]) + ")";
                             modalEliminar = "modalEliminar(" + Vals + ")";
                             modalActualizar = "modalActualizar(" + Vals + ")";
                             HTML += "<tr>";
@@ -327,8 +437,6 @@
                             HTML += "</tr>";
                         }
                         document.getElementById("tbodygrupocorreo").innerHTML = HTML;
-                        /*if ($pagination.data("twbs-pagination"))
-                            $pagination.twbsPagination('destroy');*/
                         $pagination.twbsPagination('destroy');
                         $pagination.twbsPagination($.extend({}, defaultOpts, {
                             startPage: currentPage,
@@ -363,6 +471,7 @@
                 }
             });
         }
+
         function modalRegistrar() {
             $("#gridSystemModalLabel").text("Nuevo Correo");
             $("#txt_codigo").val("0");
@@ -377,9 +486,15 @@
             $("#flag_accion").val("INS");
             $('#myModal').modal('show');
         }
+
         function modalEliminar(data) {
+            $("#confirm-submit").modal("show");
+            $('#btn-submit-confirmacion').attr('onclick', 'btnEliminar(' + data.id + ')');
+        }
+
+        function btnEliminar(id) {
             var data = {
-                id: data.id,
+                id: id,
                 id_estado: 0
             };
             $.ajax({
@@ -399,7 +514,7 @@
                         alert(response);
                 }
             });
-
+            $("#confirm-submit").modal("hide");
         }
 
         function modalActualizar(data) {
@@ -418,7 +533,6 @@
         }
 
         function Grabar() {
-
             var txt_codigo = $("#txt_codigo").val();
             var txt_nombre1 = $("#txt_nombre1").val();
             var txt_nombre2 = $("#txt_nombre2").val();
@@ -429,25 +543,21 @@
             var cbo_estado = $("#cbo_estado").val();
 
             var mensaje = "";
-
             if (cbo_grupo_crear == "0") {
                 mensaje = mensaje + "- Seleccione  grupo \n";
                 Alert.danger(mensaje);
                 return false;
             }
-
             if (txt_nombre1 == "") {
                 mensaje = mensaje + "- Ingrese Nombre 1 \n";
                 Alert.danger(mensaje);
                 return false;
             }
-
             if (txt_nombre2 == "") {
                 mensaje = mensaje + "- Ingrese Nombre 1 \n";
                 Alert.danger(mensaje);
                 return false;
             }
-
             if (txt_paterno == "") {
                 mensaje = mensaje + "- Ingrese Apellido Paterno \n";
                 Alert.danger(mensaje);
@@ -458,19 +568,16 @@
                 Alert.danger(mensaje);
                 return false;
             }
-
             if (txt_email == "") {
                 mensaje = mensaje + "- Ingrese email \n";
                 Alert.danger(mensaje);
                 return false;
             }
-
             if (cbo_estado == "0") {
                 mensaje = mensaje + "- Seleccione estado \n";
                 Alert.danger(mensaje);
                 return false;
             }
-            
             var data = {
                 id: txt_codigo,
                 Nombre1: txt_nombre1,
@@ -483,18 +590,12 @@
                     id: cbo_grupo_crear
                 }
             };
-
-
-
-
             var estado = $("#flag_accion").val();
             if (estado == "UPD") {
                 url = "GestionarCorreos.aspx/ActualiarGestionCorreo";
-
             } else if (estado == "INS") {
                 url = "GestionarCorreos.aspx/InsertGestionCorreo";
             }
-
             $.ajax({
                 type: "POST",
                 url: url,
@@ -527,9 +628,8 @@
                         Alert.info(mensaje);
                 }
             });
-            //listarCheques(1);
         }
-        
+
         function loadGrupoConsultar() {
             $.ajax({
                 type: "POST",
@@ -553,6 +653,7 @@
                 }
             });
         }
+
         function loadGrupo() {
             $.ajax({
                 type: "POST",
@@ -601,11 +702,64 @@
             });
         }
 
+        function modalCargaMasivodeCorrreo() {
+            $("#myModalCargacorreoAutomatico").modal("show");
+        }
+
+        function cargarArchivo() {
+            var data = new FormData();
+
+            var files = $("#input08").get(0).files;
+            if (files.length > 0) {
+                data.append("Filedata", files[0]);
+            }
+            $("#idprogress").css('display', 'block');
+            $.ajax({
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    //Upload Progress
+                    xhr.upload.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = (evt.loaded / evt.total) * 100;
+                            $('div.progress > div.progress-bar').css({ "width": percentComplete + "%" });
+                        }
+                    }, false);
+                    //Download progress
+                    xhr.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = (evt.loaded / evt.total) * 100;
+                            $("div.progress > div.progress-bar").css({ "width": percentComplete + "%" });
+                        }
+                    },
+                        false);
+                    return xhr;
+                },
+                type: 'post',
+                url: "UploadFile.ashx",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (response) {
+                    var objeto = JSON.parse(response);
+                    if (objeto.Result == "Ok") {
+                        AlertCarga.info(objeto.Mensaje);
+                        $("div.progress > div.progress-bar").css({ "width": 0 + "%" });
+                    } else {
+                        AlertCarga.danger(objeto.Mensaje);
+                    }
+                    $("#idprogress").css('display', 'none');
+                },
+                error: function (error) {
+                    AlertCarga.danger("Error Consulte con el Administrador de Sistema.");
+                }
+            });
+        }
+
         $(document).ready(function (e) {
             loadGrupoConsultar();
             loadEstado();
             loadGrupo();
-           
+
             $("#flag").val("true");
             listarCheques(1);
         });

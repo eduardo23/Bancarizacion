@@ -71,6 +71,46 @@ namespace DAO_Hermes.Repositorios
 
             return clientResponse;
         }
+        public ClientResponse getObjParametroMaestro(string skey)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_sel_parametros_maestros", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@skey", skey);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
+
+                            if (reader.Read())
+                            {
+                                entidad = new ParametrosMaestros();
+                                entidad.valor = Convert.ToString(reader["valor"] == DBNull.Value ? "" : reader["valor"]);
+                            }
+                        }
+                        clientResponse.DataJson = JsonConvert.SerializeObject(entidad).ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }
+
+            return clientResponse;
+        }
         #region IDisposable Support
         private bool disposedValue = false; // Para detectar llamadas redundantes
 
