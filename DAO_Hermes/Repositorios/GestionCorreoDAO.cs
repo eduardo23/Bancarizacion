@@ -109,13 +109,14 @@ namespace DAO_Hermes.Repositorios
                                 entidad.ApePaterno = Convert.ToString(reader["apePaterno"] == DBNull.Value ? "" : reader["apePaterno"]);
                                 entidad.ApeMaterno = Convert.ToString(reader["apeMaterno"] == DBNull.Value ? "" : reader["apeMaterno"]);
                                 entidad.Email = Convert.ToString(reader["email"] == DBNull.Value ? "" : reader["email"]);
-                                entidad.fechabaja = Convert.ToString(reader["fechabaja"] == DBNull.Value ? "" : reader["fechabaja"]);
+                                
                                 entidad.id_estado = Convert.ToInt32(reader["id_estado"] == DBNull.Value ? 0 : reader["id_estado"]);
                                 entidad.descestado = Convert.ToString(reader["desestado"] == DBNull.Value ? "" : reader["desestado"]);
                                 GrupoCorreo grupocorreo = new GrupoCorreo();
                                 grupocorreo.id = Convert.ToInt32(reader["id_grupo_correo"] == DBNull.Value ? 0 : reader["id_grupo_correo"]);
                                 grupocorreo.descripcion = Convert.ToString(reader["descgrupo_correo"] == DBNull.Value ? "" : reader["descgrupo_correo"]);
                                 entidad.grupocorreo = grupocorreo;
+                                entidad.fechabaja = Convert.ToString(reader["fechabaja"] == DBNull.Value ? "" : reader["fechabaja"]);
                                 listgestioncorreo.Add(entidad);
                             }
                         }

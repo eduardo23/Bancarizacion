@@ -83,6 +83,22 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
+                            <div class="col-lg-12">
+                                <div id="alert-info-principal" class="alert alert-info alert-top" role="alert">
+                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <span class="alert-msg"></span>
+                                </div>
+                                <div id="alert-warn-principal" class="alert alert-warning alert-top" role="alert">
+                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <span class="alert-msg"></span>
+                                </div>
+                                <div id="alert-danger-principal" class="alert alert-danger alert-top" role="alert">
+                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <span class="alert-msg"></span>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
                             <div class="pull-left">
                                 <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
@@ -319,6 +335,24 @@
             text: ' Examinar',
             btnClass: 'btn-success'
         });
+        AlertPrincial = {
+            show: function ($div, msg) {
+                $div.find('.alert-msg').text(msg);
+                if ($div.css('display') === 'none') {
+                    $div.fadeIn(1000).delay(2000).fadeOut(3000);
+                }
+            },
+            info: function (msg) {
+                this.show($('#alert-info-principal'), msg);
+            },
+            warn: function (msg) {
+                this.show($('#alert-warn-principal'), msg);
+            },
+            danger: function (msg) {
+                this.show($('#alert-danger-principal'), msg);
+            }
+        }
+
         AlertCarga = {
             show: function ($div, msg) {
                 $div.find('.alert-msg').text(msg);
@@ -506,7 +540,7 @@
                     var result = response.d.Status;
                     var mensaje = response.d.Mensaje;
                     if (result == "OK") {
-                        alert(mensaje);
+                        AlertPrincial.info(mensaje);
                         $("#flag").val("true");
                         listarCheques(1);
                     } else {
@@ -515,7 +549,7 @@
                 },
                 error: function (response) {
                     if (response.length != 0)
-                        alert(response);
+                        AlertPrincial.danger(response);
                 }
             });
         }

@@ -425,9 +425,7 @@
                 success: function (response) {
                     var objeto = JSON.parse(response);
                     if (objeto.Result == "Ok") {
-                        //Alert.info(objeto.Mensaje);
-                        //listarPlanilla();
-                        //listImagen = [];
+                        Alert.info(objeto.Mensaje);
                     } else {
                         Alert.danger(objeto.Mensaje);
                     }
