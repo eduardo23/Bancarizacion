@@ -19,6 +19,8 @@ namespace DAO_Hermes.ViewModel
         private string _descestado = "";
         private string _usuariocreacion = "";
         private string _usuariomodificacion = "";
+        private string _tokens = "";
+        private string _fechabaja = "";
         public GrupoCorreo grupocorreo { get; set; }
         public int id
         {
@@ -26,6 +28,24 @@ namespace DAO_Hermes.ViewModel
             set
             {
                 _id = value;
+            }
+        }
+
+        public string fechabaja
+        {
+            get { return _fechabaja; }
+            set
+            {
+                _fechabaja = value;
+            }
+        }
+
+        public string Tokens
+        {
+            get { return _tokens; }
+            set
+            {
+                _tokens = value;
             }
         }
         public string Nombre1

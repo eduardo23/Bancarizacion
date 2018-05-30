@@ -33,7 +33,7 @@ namespace Demo
             }
             return response;
         }
-      
+
         [WebMethod]
         public static ClientResponse getListParametrosMaestro(string skey)
         {
@@ -60,6 +60,25 @@ namespace Demo
                 using (GestionCorreoDAO dbGestionCorreo = new GestionCorreoDAO())
                 {
                     response = dbGestionCorreo.getLstGestionCorreo(paginaActual, RegistroXpagina, id_cbo_grupo_consultar);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return response;
+        }
+
+
+        [WebMethod]
+        public static ClientResponse ImportarCorreos()
+        {
+            ClientResponse response;
+            try
+            {
+                using (GestionCorreoDAO dbGestionCorreo = new GestionCorreoDAO())
+                {
+                    response = dbGestionCorreo.ImportarCorreos();
                 }
             }
             catch (Exception exception)

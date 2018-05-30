@@ -253,6 +253,14 @@
     <Content Include="bin\Css\dist\js\pages\dashboard.js" />
     <Content Include="bin\Css\dist\js\pages\dashboard2.js" />
     <Content Include="ConsultarCheque.aspx" />
+    <Content Include="Css\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Css\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Css\bootstrap\css\bootstrap.css" />
+    <Content Include="Css\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Css\bootstrap\js\bootstrap.js" />
+    <Content Include="Css\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Css\bootstrap\js\npm.js" />
     <Content Include="Css\datepicker\bootstrap-datepicker.css" />
     <Content Include="Css\datepicker\bootstrap-datepicker.min.css" />
     <Content Include="Css\images\ui-icons_444444_256x240.png" />
@@ -279,6 +287,7 @@
     <Content Include="Css\open-iconic\font\fonts\open-iconic.svg" />
     <Content Include="Css\standar.css" />
     <Content Include="Demo.csproj.vspscc" />
+    <Content Include="Desafiliacion.aspx" />
     <Content Include="dist\css\AdminLTE.css" />
     <Content Include="dist\css\AdminLTE.min.css" />
     <Content Include="dist\css\alt\AdminLTE-bootstrap-social.css" />
@@ -564,6 +573,14 @@
     <Content Include="Css\open-iconic\font\fonts\open-iconic.ttf" />
     <Content Include="Css\open-iconic\font\fonts\open-iconic.woff" />
     <Content Include="Css\datepicker\bootstrap-datepicker.css.map" />
+    <Content Include="Css\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Css\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Css\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Css\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Css\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\Eduardo.pubxml" />
     <None Include="Properties\PublishProfiles\Hermes.pubxml" />
     <Content Include="ReportCobranza.xsc">
@@ -1572,6 +1589,13 @@
       <DependentUpon>ConsultarCheque.aspx</DependentUpon>
     </Compile>
     <Compile Include="cUtil.cs" />
+    <Compile Include="Desafiliacion.aspx.cs">
+      <DependentUpon>Desafiliacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Desafiliacion.aspx.designer.cs">
+      <DependentUpon>Desafiliacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="EmailMasivo.aspx.cs">
       <DependentUpon>EmailMasivo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -92,6 +92,9 @@
                                 </div>
                             </div>
                             <div class="pull-right">
+                                <button type="button" class="btnHermes" data-toggle="modal" onclick="ImportarCorreos();">
+                                    Importar Correo desde el sistema de Bancarizacion
+                                </button>
                                 <button type="button" class="btnHermes" data-toggle="modal" onclick="modalCargaMasivodeCorrreo();">
                                     Carga Masivo de Corrreo
                                 </button>
@@ -429,7 +432,7 @@
                             HTML += "<td>" + result[index]["ApeMaterno"] + "</td>";
                             HTML += "<td>" + result[index]["Email"] + "</td>";
                             HTML += "<td>" + result[index]["descestado"] + "</td>";
-                            HTML += "<td>" + result[index]["descorigen"] + "</td>";
+                            HTML += "<td>" + result[index]["fechabaja"] + "</td>";
                             HTML += "<td>";
                             HTML += "<a href='#' onclick='" + modalActualizar + "' title='Elimnar registro' ><span class='fa fa-trash'></span> Editar</a> ";
                             HTML += "<a href='#' onclick='" + modalEliminar + "' title='Editar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
@@ -492,6 +495,30 @@
             $('#btn-submit-confirmacion').attr('onclick', 'btnEliminar(' + data.id + ')');
         }
 
+        function ImportarCorreos() {
+            $.ajax({
+                type: "POST",
+                url: "GestionarCorreos.aspx/ImportarCorreos",
+                contentType: "application/json",
+                data: '{}',
+                dataType: "json",
+                success: function (response) {
+                    var result = response.d.Status;
+                    var mensaje = response.d.Mensaje;
+                    if (result == "OK") {
+                        alert(mensaje);
+                        $("#flag").val("true");
+                        listarCheques(1);
+                    } else {
+                    }
+                   
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
+        }
         function btnEliminar(id) {
             var data = {
                 id: id,

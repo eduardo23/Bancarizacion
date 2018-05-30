@@ -41,6 +41,9 @@ namespace Demo
                     responseruta = dbParametrosMaestro.getObjParametroMaestro("RUTA_ADJUNTO_ENVIO_CORREOS");
                 }
                 ParametrosMaestros rutaadjunto = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responseruta.DataJson);
+           
+                
+                
                 for (int i = 0; i < uploadFiles.Count; i++)
                 {
 
@@ -63,8 +66,17 @@ namespace Demo
                 string smtp = cUtil.ObtenerValorParametro("CORREO", "SMTP");
                 int puerto = Convert.ToInt32(cUtil.ObtenerValorParametro("CORREO", "PUERTO"));
 
-                ClientResponse responseplantilla;
 
+                ClientResponse responsedesafiliacion;
+                using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
+                {
+                    responsedesafiliacion = dbParametrosMaestro.getObjParametroMaestro("DESAFILACIONPROMOCIONES");
+                }
+                ParametrosMaestros desafiliacion = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responsedesafiliacion.DataJson);
+
+
+
+                ClientResponse responseplantilla;
                 using (PlantillaDAO dbPlanilla = new PlantillaDAO())
                 {
                     responseplantilla = dbPlanilla.getPlantillaXId(cbo_plantilla);
@@ -86,10 +98,11 @@ namespace Demo
                 foreach (GestionCorreo item in liscorreos)
                 {
                     bodyaux = body.Replace("{NombreUsuario}", item.Nombre1 + " " + item.Nombre2);
+                    bodyaux = bodyaux.Replace("{linkdardebaja}", desafiliacion.valor+"?tokens=" +item.Tokens);
                     cUtil.EnvioMailSegundo(txt_asunto, item.Email, bodyaux, listrutas, usuario, clave, smtp, puerto);
                 }
 
-                Directory.Delete(savepath, true);
+               // Directory.Delete(savepath, true);
 
                 //plantilla.list_plantilla_detalle = list_plantilla_detalle;
                 //ClientResponse response;

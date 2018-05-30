@@ -56,6 +56,8 @@ namespace DAO_Hermes.Repositorios
                                 entidad.ApePaterno = Convert.ToString(reader["apePaterno"] == DBNull.Value ? "" : reader["apePaterno"]);
                                 entidad.ApeMaterno = Convert.ToString(reader["apeMaterno"] == DBNull.Value ? "" : reader["apeMaterno"]);
                                 entidad.Email = Convert.ToString(reader["email"] == DBNull.Value ? "" : reader["email"]);
+                                entidad.Tokens = Convert.ToString(reader["tokens"] == DBNull.Value ? "" : reader["tokens"]);
+                                
                                 entidad.grupocorreo = grupocorreo;
                                 listgestioncorreo.Add(entidad);
                             }
@@ -107,6 +109,7 @@ namespace DAO_Hermes.Repositorios
                                 entidad.ApePaterno = Convert.ToString(reader["apePaterno"] == DBNull.Value ? "" : reader["apePaterno"]);
                                 entidad.ApeMaterno = Convert.ToString(reader["apeMaterno"] == DBNull.Value ? "" : reader["apeMaterno"]);
                                 entidad.Email = Convert.ToString(reader["email"] == DBNull.Value ? "" : reader["email"]);
+                                entidad.fechabaja = Convert.ToString(reader["fechabaja"] == DBNull.Value ? "" : reader["fechabaja"]);
                                 entidad.id_estado = Convert.ToInt32(reader["id_estado"] == DBNull.Value ? 0 : reader["id_estado"]);
                                 entidad.descestado = Convert.ToString(reader["desestado"] == DBNull.Value ? "" : reader["desestado"]);
                                 GrupoCorreo grupocorreo = new GrupoCorreo();
@@ -236,6 +239,68 @@ namespace DAO_Hermes.Repositorios
             return clientResponse;
         }
 
+        public ClientResponse DarDebajaEnviocorreos(GestionCorreo objeto)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("sp_upd_darjar_envio_correo", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@tokens", objeto.Tokens);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        clientResponse.Mensaje = "Se desafilio el envio de correos  satisfactoriamente";
+                        clientResponse.Status = "OK";
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;
+        }
+
+        public ClientResponse ImportarCorreos()
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("sp_upd_importar_correos", conexion))
+                    {  
+
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        clientResponse.Mensaje = "Se importo correctamente los correos";
+                        clientResponse.Status = "OK";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;
+        }
         public ClientResponse ActualiarGestionCorreo(GestionCorreo objeto)
         {
             try

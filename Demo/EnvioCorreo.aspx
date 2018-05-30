@@ -287,7 +287,7 @@
                 },
                 error: function (response) {
                     if (response.length != 0)
-                        Alert.danger(mensaje);
+                        Alert.danger(response);
                 }
             });
         }
