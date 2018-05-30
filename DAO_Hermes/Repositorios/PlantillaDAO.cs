@@ -60,6 +60,52 @@ namespace DAO_Hermes.Repositorios
             }
             return clientResponse;
         }
+
+        public ClientResponse getPlantillaXId(int Id_Plantilla)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_sel_plantilla_x_id", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@id_plantilla", Id_Plantilla);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
+
+                            if (reader.Read())
+                            {
+                                entidad = new Plantilla();
+                                entidad.id = Convert.ToInt32(reader["id"] == DBNull.Value ? "" : reader["id"]);
+                                entidad.descripcion = Convert.ToString(reader["descripcion"] == DBNull.Value ? "" : reader["descripcion"]);
+                                entidad.NombreArchivoHtml = Convert.ToString(reader["NombreArchivoHtml"] == DBNull.Value ? "" : reader["NombreArchivoHtml"]);
+                                entidad.ruta_plantilla_html = Convert.ToString(reader["ruta_plantilla_html"] == DBNull.Value ? "" : reader["ruta_plantilla_html"]);
+                             
+                            }
+                        }
+                        clientResponse.DataJson = JsonConvert.SerializeObject(entidad).ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }
+
+            return clientResponse;
+        }
+
         public ClientResponse getPlantilla()
         {
             try
@@ -130,6 +176,7 @@ namespace DAO_Hermes.Repositorios
                                 plantilla_detalle.id = Convert.ToInt32(readers["id"] == DBNull.Value ? 0 : readers["id"]);                               
                                 plantilla_detalle.NombreArchivoImagen = Convert.ToString(readers["NombreArchivoImagen"] == DBNull.Value ? "" : readers["NombreArchivoImagen"]);
                                 plantilla_detalle.ruta_imagen = Convert.ToString(readers["ruta_imagen"] == DBNull.Value ? "" : readers["ruta_imagen"]);
+                                plantilla_detalle.ruta_site_imagen = Convert.ToString(readers["ruta_site_imagen"] == DBNull.Value ? "" : readers["ruta_site_imagen"]);
                                 plantilla_detalle.id_estado = Convert.ToInt32(readers["id_estado"] == DBNull.Value ? 0 : readers["id_estado"]);
                                 plantilla_detalle.fl_nuevo = 1;
                                 list.Add(plantilla_detalle);
@@ -162,7 +209,8 @@ namespace DAO_Hermes.Repositorios
                 {
                     XElement address = new XElement("Detalle",
                     new XElement("NombreArchivoImagen", detalle.NombreArchivoImagen),
-                    new XElement("ruta_imagen", detalle.ruta_imagen)
+                    new XElement("ruta_imagen", detalle.ruta_imagen),
+                    new XElement("ruta_site_imagen", detalle.ruta_site_imagen)
                     );
                     root.Add(address);
                 }

@@ -18,29 +18,47 @@ namespace Demo
         private List<Plantilla_Detalle> list_plantilla_detalle = new List<Plantilla_Detalle>();
         private Plantilla_Detalle plantilla_detalle;
         private Plantilla plantilla = new Plantilla();
-        
+
         public void ProcessRequest(HttpContext context)
         {
 
             context.Response.ContentType = "text/plain";
-
             context.Response.Expires = -1;
-
+            string ruta_hota_name = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
             try
 
             {
-                string tempPath = "";               
+                string hora = DateTime.Now.ToString("yyyyMMddhhmmss");
+                string tempPath = "";
                 string txt_descripcion = context.Request["txt_descripcion"];
                 string FiledataHTMLName = context.Request["FiledataHTMLName"];
                 HttpFileCollection uploadFiles = context.Request.Files;
                 plantilla.descripcion = txt_descripcion;
+
+                string FolderPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"];
+
+                ClientResponse responserutahtml;
+                using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
+                {
+                    responserutahtml = dbParametrosMaestro.getObjParametroMaestro("RUTA_CARGAHTMLPLANTILLACORREOS");
+                }
+                ParametrosMaestros rutahtml = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responserutahtml.DataJson);
+
+
+                ClientResponse responserutaimage;
+                using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
+                {
+                    responserutaimage = dbParametrosMaestro.getObjParametroMaestro("RUTA_CARGAIMAGENPLANTILLACORREOS");
+                }
+                ParametrosMaestros rutaimage = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responserutaimage.DataJson);
+
+
                 for (int i = 0; i < uploadFiles.Count; i++)
                 {
-                    
                     HttpPostedFile postedFile = uploadFiles[i];
                     if (postedFile.FileName.Equals(FiledataHTMLName))
                     {
-                        tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"]+"/PlantillaHtml";
+                        tempPath = FolderPath + rutahtml.valor + hora;
                         string savepath = "";
                         savepath = context.Server.MapPath(tempPath);
                         if (!Directory.Exists(savepath))
@@ -48,7 +66,7 @@ namespace Demo
 
                         string filename = postedFile.FileName;
                         string files = savepath + @"\" + filename;
-                        postedFile.SaveAs(files); 
+                        postedFile.SaveAs(files);
                         plantilla.NombreArchivoHtml = filename;
                         plantilla.id_estado = 1;
                         plantilla.ruta_plantilla_html = files;
@@ -56,7 +74,7 @@ namespace Demo
                     else
                     {
                         plantilla_detalle = new Plantilla_Detalle();
-                        tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"] + "/Imagenes";
+                        tempPath = FolderPath + rutaimage.valor + hora;
                         string savepath = "";
                         savepath = context.Server.MapPath(tempPath);
                         if (!Directory.Exists(savepath))
@@ -68,16 +86,18 @@ namespace Demo
                         plantilla_detalle.NombreArchivoImagen = filename;
                         plantilla_detalle.ruta_imagen = files;
                         plantilla_detalle.id_estado = 1;
+                        plantilla_detalle.ruta_site_imagen = ruta_hota_name + "/" + FolderPath + rutaimage.valor + hora + "/" + filename;
                         list_plantilla_detalle.Add(plantilla_detalle);
-                    }                    
+                    }
                 }
+                
                 plantilla.list_plantilla_detalle = list_plantilla_detalle;
-                ClientResponse response;               
+                ClientResponse response;
                 using (PlantillaDAO dbPlanilla = new PlantillaDAO())
                 {
                     response = dbPlanilla.InsertPantilla(plantilla);
-                }               
-               
+                }
+
                 //if ((System.IO.File.Exists(files)))
                 //{
                 //    System.IO.File.Delete(files);

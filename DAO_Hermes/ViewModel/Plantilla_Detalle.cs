@@ -8,13 +8,22 @@ namespace DAO_Hermes.ViewModel
 {
     public class Plantilla_Detalle
     {
-        public int _id { get; set; }
-        public string _NombreArchivoImagen { get; set; }
-        public string _ruta_imagen { get; set; }
-        public int _id_estado { get; set; }
-        public string _fec_reg { get; set; }
+        public int _id;
+        public string _NombreArchivoImagen;
+        public string _ruta_imagen;
+        public string _ruta_site_imagen;
+        public int _id_estado;
+        public string _fec_reg;
+        public int _fl_nuevo;//fl_nuevo : 0 Nuevo fl_nuevo: 1 registro existente en la bd
 
-        public int _fl_nuevo { get; set; } //fl_nuevo : 0 Nuevo fl_nuevo: 1 registro existente en la bd
+        public string ruta_site_imagen
+        {
+            get { return _ruta_site_imagen; }
+            set
+            {
+                _ruta_site_imagen = value;
+            }
+        }
         public int fl_nuevo
         {
             get { return _fl_nuevo; }

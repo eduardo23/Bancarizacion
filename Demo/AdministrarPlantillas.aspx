@@ -146,7 +146,7 @@
 
                                 </div>
                                 <div class="col-lg-4 text-center">
-                                    <button type="button" class="btnHermes" id="btn_vista_previa" onclick="modalRegistrar();">
+                                    <button type="button" class="btnHermes" id="btn_vista_previa">
                                         Vista Previa
                                     </button>
                                 </div>
@@ -155,7 +155,7 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <div class="col-sm-12 col-lg-12">
-                                    <h4>Planilla</h4>
+                                    <h4>Plantilla</h4>
                                     <div class="contenedo-planilla">
                                         <div class="list-group" id="listgroup">
                                         </div>
@@ -169,6 +169,54 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" data-dismiss="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <img src="" class="imagepreview" style="width: 100%;">
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Vista previa - Plantilla</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div style="width: 100%; height: 440px; padding: 0px 40px;" id="contentplantilla">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%--      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>--%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%-- <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" data-dismiss="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div  style="width: 100%; height:auto;" id="contentplantilla"></div>
+                </div>
+                <div class="modal-footer">                 
+                </div>
+            </div>
+        </div>
+    </div>--%>
+
     <input type="hidden" id="flag_accion" value="INS" />
     <script type="text/javascript">
         Alert = {
@@ -206,7 +254,7 @@
             'placeholder': 'adjunte archivo',
             text: ' Examinar',
             btnClass: 'btn-success'
-        });        
+        });
 
         $('#input09').filestyle({
             'placeholder': 'adjunte archivo',
@@ -234,24 +282,50 @@
             $("#txt_descripcion").val(data.descripcion);
             cargarTablaImagenBD(data.list_plantilla_detalle);
             $('#btn_anular_planilla').attr('onclick', 'AnularPlantilla(' + data.id + ')');
-            $("#flag_accion").val('UPD');            
+            $('#btn_vista_previa').attr('onclick', 'modalPreview(' + data.id + ')');
+            $("#flag_accion").val('UPD');
+        }
+        function modalPreview(id_plantilla) {
+            $.ajax({
+                type: "POST",
+                url: "AdministrarPlantillas.aspx/Preview",
+                contentType: "application/json",
+                data: '{plantilla:"' + id_plantilla + '"}',
+                dataType: "json",
+                success: function (response) {
+                    var result = response.d.Status;
+                    var ViewResult = response.d.ViewResult;
+                    if (result == "OK") {
+                        $('#contentplantilla').html(ViewResult);
+                        $('#preview').modal('show');
+                    } else {
+                        Alert.danger(mensaje);
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        Alert.danger(mensaje);
+                }
+            });
         }
 
         function cargarTablaImagenBD(listImagen) {
             var HTML = "";
             var verimagen = "";
+            debugger;
             document.getElementById("tbodygrupocorreo").innerHTML = "";
             if (listImagen.length > 0) {
                 for (var index = 0; index < listImagen.length; index++) {
                     var vals = {
-                        id: parseInt(listImagen[index].id)
+                        id: parseInt(listImagen[index].id),
+                        ruta_site_imagen: listImagen[index].ruta_site_imagen
                     };
                     var Vals = JSON.stringify(vals);
                     verimagen = "VerImagen(" + Vals + ")";
                     HTML += "<tr>";
                     HTML += "<td>" + listImagen[index].NombreArchivoImagen + "</td>";
                     HTML += "<td>";
-                    HTML += "<a href='" + listImagen[index].ruta_imagen + "' target='_blank' title='Ver Imagen' ><span class=''></span> Ver Imagen</a>";
+                    HTML += "<a onclick='" + verimagen + "' href='javascript:void(0);' title='Ver Imagen' ><span class=''></span> Ver Imagen</a>";
                     HTML += "</td>";
                     HTML += "</tr>";
                 }
@@ -262,6 +336,11 @@
             }
             document.getElementById("tbodygrupocorreo").innerHTML = HTML;
         }
+        function VerImagen(data) {
+            $('.imagepreview').attr('src', data.ruta_site_imagen);
+            $('#imagemodal').modal('show');
+        }
+
 
         function AnularPlantilla(id_plantilla) {
             $.ajax({
@@ -336,11 +415,11 @@
             listImagen.splice(listImagen.indexOf(data.id), 1);
             cargarTablaImagen(listImagen);
         }
-
+        /*
         function VerImagen(data) {
             listImagen.splice(listImagen.indexOf(data.id), 1);
             cargarTablaImagen(listImagen);
-        }        
+        }        */
 
         function listarPlanilla() {
             $.ajax({
@@ -370,6 +449,7 @@
                                     id: listPlantillaDet[i]["id"],
                                     NombreArchivoImagen: listPlantillaDet[i]["NombreArchivoImagen"],
                                     ruta_imagen: listPlantillaDet[i]["ruta_imagen"],
+                                    ruta_site_imagen: listPlantillaDet[i]["ruta_site_imagen"],
                                     id_estado: listPlantillaDet[i]["id_estado"],
                                     fl_nuevo: listPlantillaDet[i]["fl_nuevo"]
                                 }
@@ -381,7 +461,7 @@
                                 descripcion: descripcion,
                                 NombreArchivoHtml: NombreArchivoHtml,
                                 ruta_plantilla_html: ruta_plantilla_html,
-                                fl_nuevo:fl_nuevo,
+                                fl_nuevo: fl_nuevo,
                                 list_plantilla_detalle: listDet
                             }
 
@@ -445,6 +525,11 @@
                         Alert.info(objeto.Mensaje);
                         listarPlanilla();
                         listImagen = [];
+                        document.getElementById("tbodygrupocorreo").innerHTML = "";
+                        $('#txt_descripcion').val('');
+                        //$('#input08').filestyle('clear');
+
+                        // $('#input08').replaceWith($('#input08').clone());
                     } else {
                         Alert.danger(objeto.Mensaje);
                     }

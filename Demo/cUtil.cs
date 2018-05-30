@@ -276,7 +276,8 @@ namespace Demo
 
         public static void EnvioMailSegundo(
                         string asunto, 
-                        List<GestionCorreo> liscorreos, 
+                        string para, 
+                        string body,
                         List<string> listrutas, 
                         string De, 
                         string Clave, 
@@ -287,12 +288,12 @@ namespace Demo
             SmtpClient smtp = new SmtpClient();
 
             correo.From = new MailAddress(De, "Hermes Seguros", System.Text.Encoding.UTF8);
-            correo.To.Add("ccarhuas.mike@gmail.com");
+            correo.To.Add(para);
             correo.SubjectEncoding = System.Text.Encoding.UTF8;
             correo.Subject = asunto;
-            //correo.Body = Mensaje;
+            correo.Body = body;
             correo.BodyEncoding = System.Text.Encoding.UTF8;
-           // correo.IsBodyHtml = EsHTML;
+           correo.IsBodyHtml = true;
             correo.Priority = MailPriority.High;
             foreach (var item in listrutas)
             {

@@ -223,6 +223,22 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Mensaje de Confirmacion
+                </div>
+                <div class="modal-body">
+                    Esta seguro que desea eliminar el registro?                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <input type="hidden" name="name" id="flag" value="true" />
     <input type="hidden" name="name" id="flag_accion" value="" />
     <!-- /.modal -->
@@ -231,8 +247,6 @@
             show: function ($div, msg) {
                 $div.find('.alert-msg').text(msg);
                 if ($div.css('display') === 'none') {
-                    // fadein, fadeout.
-                    //$div.fadeIn(1000).delay(2000).fadeOut(2000);
                     $div.fadeIn(1000).delay(2000).fadeOut(2000);
                 }
             },
@@ -285,7 +299,6 @@
                                 descripcion: result[index]["descripcion"]
                             };
                             var Vals = JSON.stringify(vals);
-                            //modalEliminar = "modalEliminar(" + parseInt(result[index]["ID"]) + ")";
                             modalEliminar = "modalEliminar(" + Vals + ")";
                             modalActualizar = "modalActualizar(" + Vals + ")";
                             HTML += "<tr>";
@@ -297,10 +310,8 @@
                             HTML += "<a href='#' onclick='" + modalEliminar + "' title='Editar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
                             HTML += "</td>";
                             HTML += "</tr>";
-                        }                        
+                        }
                         document.getElementById("tbodygrupocorreo").innerHTML = HTML;
-                        /*if ($pagination.data("twbs-pagination"))
-                            $pagination.twbsPagination('destroy');*/
                         $pagination.twbsPagination('destroy');
                         $pagination.twbsPagination($.extend({}, defaultOpts, {
                             startPage: currentPage,
@@ -350,7 +361,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    var models = JSON.parse(response.d.DataJson);//(typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                    var models = JSON.parse(response.d.DataJson);
                     $('#cbo_estado').empty();
                     $('#cbo_estado').append("<option value='0'>--SELECCIONE--</option>");
                     for (var i = 0; i < models.length; i++) {
@@ -373,8 +384,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-
-                    var models = JSON.parse(response.d.DataJson);// (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                    var models = JSON.parse(response.d.DataJson);
                     $('#cbo_origen').empty();
                     $('#cbo_origen').append("<option value='0'>--SELECCIONE--</option>");
                     for (var i = 0; i < models.length; i++) {
@@ -454,12 +464,15 @@
                         Alert.info(mensaje);
                 }
             });
-            //listarCheques(1);
         }
 
         function modalEliminar(data) {
+            $("#confirm-submit").modal("show");
+            $('#btn-submit-confirmacion').attr('onclick', 'btnEliminar(' + data.id + ')');
+        }
+        function btnEliminar(id) {
             var data = {
-                id: data.id,
+                id: id,
                 estado: 0
             };
             $.ajax({
@@ -479,7 +492,7 @@
                         alert(response);
                 }
             });
-
+            $("#confirm-submit").modal("hide");
         }
 
         function modalActualizar(data) {
@@ -501,7 +514,5 @@
             $("#divcodigo").css("display", "none");
             $('#myModal').modal('show');
         }
-
-
     </script>
 </asp:Content>

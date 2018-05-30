@@ -177,7 +177,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-4 text-center">
-                            <button type="button" class="btnHermes" data-toggle="modal" onclick="modalRegistrar();">
+                           <button type="button" class="btnHermes" id="btn_vista_previa" onclick="modalPreview();">
                                 Vista Previa
                             </button>
                         </div>
@@ -189,11 +189,31 @@
 
                         </div>
                         <div class="col-lg-4 text-center">
-                            <button type="button" class="btnHermes" data-toggle="modal" onclick="modalRegistrar();">
+                            <button type="button" class="btnHermes" data-toggle="modal" onclick="">
                                 Salir
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Vista previa - Plantilla</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div style="width: 100%; height: 440px; padding: 0px 40px;" id="contentplantilla">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%--      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>--%>
                 </div>
             </div>
         </div>
@@ -242,6 +262,36 @@
                 $(opcion).appendTo(destino);
             }
         }
+
+        function modalPreview() {
+            var cbo_plantilla = $("#cbo_plantilla").val();
+            if (cbo_plantilla == "0") {
+                $("#cbo_plantilla").focus();
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "EnvioCorreo.aspx/Preview",
+                contentType: "application/json",
+                data: '{plantilla:"' + cbo_plantilla + '"}',
+                dataType: "json",
+                success: function (response) {
+                    var result = response.d.Status;
+                    var ViewResult = response.d.ViewResult;
+                    if (result == "OK") {
+                        $('#contentplantilla').html(ViewResult);
+                        $('#preview').modal('show');
+                    } else {
+                        Alert.danger(mensaje);
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        Alert.danger(mensaje);
+                }
+            });
+        }
+
 
         function loadOrigen() {
             $.ajax({
@@ -324,9 +374,9 @@
             var list = [];
             for (i = 0; i < selO.length; i++) {
                 //var objeto = {
-                    id= selO.options[i].value
-               // };
-                    list.push(id);
+                id = selO.options[i].value
+                // };
+                list.push(id);
             }
             var cbo_origen = $("#cbo_origen").val();
             var cbo_plantilla = $("#cbo_plantilla").val();
@@ -349,7 +399,7 @@
                 return false;
             }
             var data = new FormData();
-            
+
             //var files = $("#input08").get(0).files;
             //var inputfile = document.getElementById('input08').files;
             //for (var x = 0; x < inputfile.length; x++) {
@@ -360,8 +410,8 @@
                 data.append("Files" + i, document.getElementById('input08').files[i]);
             }
 
-
-           // data.append("Files", files[0]);
+            debugger;
+            // data.append("Files", files[0]);
             data.append("cbo_origen", cbo_origen);
             data.append("cbo_plantilla", cbo_plantilla);
             data.append("txt_asunto", txt_asunto);
