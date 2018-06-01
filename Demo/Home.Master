@@ -513,6 +513,22 @@
                                     </ul>
                                 </li>
 
+                                <li class="treeview" runat="server" id="F">
+                                    <a href="#">
+                                        <i class="fa fa-edit"></i><span>Promociones</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="MantGrupoCorreo.aspx"><i class="fa fa-circle-o"></i>Grupo de Correos</a></li>
+                                        <li><a href="CargarCorreosViaExcel.aspx"><i class="fa fa-circle-o"></i>Cargar Correos por Plantilla</a></li>
+                                        <li><a href="GestionarCorreos.aspx"><i class="fa fa-circle-o"></i>Administrar Correos</a></li>                                        
+                                        <li><a href="AdministrarPlantillas.aspx"><i class="fa fa-circle-o"></i>Administrar Plantillas</a></li>                                        
+                                        <li><a href="EnvioCorreo.aspx"><i class="fa fa-circle-o"></i>Enviar Promociones</a></li>                                        
+                                    </ul>
+                                </li>
+
                                 <li class="treeview" runat="server" id="E">
                                     <a href="#">
                                         <i class="fa fa-table"></i><span>Seguridad</span>
