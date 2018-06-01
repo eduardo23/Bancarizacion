@@ -14,6 +14,16 @@ namespace DAO_Hermes.ViewModel
         private string _descestado = "";
         private int _origen = 0;
         private string _descorigen = "";
+        private int _flag = 0;
+        public int flag
+        {
+            get { return _flag; }
+            set
+            {
+                _flag = value;
+            }
+        }
+
         public int id
         {
             get { return _id; }

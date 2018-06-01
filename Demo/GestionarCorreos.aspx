@@ -222,8 +222,7 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #D6EAF8">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="modal-header" style="background-color: #D6EAF8">                    
                     <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Correo</h4>
                 </div>
                 <div class="modal-body">
@@ -302,6 +301,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btnHermes" data-dismiss="modal" aria-label="Close">Cerrar</button>
                         <button type="button" class="btnHermes" onclick="Grabar();">Grabar</button>
                     </div>
                 </div>
@@ -518,7 +518,8 @@
             $("#txt_materno").val("");
             $("#txt_email").val("");
             $("#cbo_grupo_crear").val("0");
-            $("#cbo_estado").val("0");
+            $('#cbo_estado option[value="1"]').attr("selected", "selected");
+            $('#cbo_estado').prop('disabled', 'disabled');
             $("#divcodigo").css("display", "none");
             $("#flag_accion").val("INS");
             $('#myModal').modal('show');
@@ -589,6 +590,7 @@
             $("#txt_email").val(data.Email);
             $("#cbo_grupo_crear").val(data.id_grupo_correo);
             $("#cbo_estado").val(data.id_estado);
+            $('#cbo_estado').prop('disabled', false);
             $("#flag_accion").val("UPD");
             $('#myModal').modal('show');
         }
@@ -634,7 +636,7 @@
                 Alert.danger(mensaje);
                 return false;
             }
-            if (cbo_estado == "0") {
+            if (cbo_estado == "") {
                 mensaje = mensaje + "- Seleccione estado \n";
                 Alert.danger(mensaje);
                 return false;
@@ -675,7 +677,7 @@
                             $("#txt_materno").val("");
                             $("#txt_email").val("");
                             $("#cbo_grupo_crear").val("0");
-                            $("#cbo_estado").val("0");
+                            //$("#cbo_estado").val("0");
                         }
                         Alert.info(mensaje);
                         $("#flag").val("true");
@@ -701,7 +703,7 @@
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);
                     $('#cbo_grupo_consultar').empty();
-                    $('#cbo_grupo_consultar').append("<option value='0'>--SELECCIONE--</option>");
+                    $('#cbo_grupo_consultar').append("<option value='0'>--Todos--</option>");
                     for (var i = 0; i < models.length; i++) {
                         var valor = models[i].id;
                         var text = models[i].descripcion;
@@ -749,7 +751,7 @@
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);
                     $('#cbo_estado').empty();
-                    $('#cbo_estado').append("<option value='0'>--SELECCIONE--</option>");
+                    $('#cbo_estado').append("<option value=''>--SELECCIONE--</option>");
                     for (var i = 0; i < models.length; i++) {
                         var valor = models[i].valor;
                         var text = models[i].descripcion;

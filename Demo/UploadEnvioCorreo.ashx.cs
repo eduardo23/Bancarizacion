@@ -102,7 +102,7 @@ namespace Demo
                     cUtil.EnvioMailSegundo(txt_asunto, item.Email, bodyaux, listrutas, usuario, clave, smtp, puerto);
                 }
 
-               // Directory.Delete(savepath, true);
+                //Directory.Delete(savepath, true);
 
                 //plantilla.list_plantilla_detalle = list_plantilla_detalle;
                 //ClientResponse response;

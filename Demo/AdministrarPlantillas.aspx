@@ -75,7 +75,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="form-group row">
                                 <div class="col-lg-12">
                                     <div id="alert-info" class="alert alert-info alert-top" role="alert">
@@ -133,26 +133,29 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-lg-4 text-center">
+                                <div class="col-lg-3 text-center">
                                     <button type="button" class="btnHermes" id="btn_grabar_planilla" onclick="GrabarPlanilla();">
                                         Grabar
                                     </button>
                                 </div>
-                                <div class="col-lg-4 text-center">
-
-                                    <button type="button" class="btnHermes" id="btn_anular_planilla">
+                                <div class="col-lg-3 text-center">
+                                    <button type="button" class="btnHermes" id="btn_anular_planilla" style="display:none;">
                                         Anular Plantilla
                                     </button>
-
                                 </div>
-                                <div class="col-lg-4 text-center">
+                                <div class="col-lg-3 text-center">
                                     <button type="button" class="btnHermes" id="btn_vista_previa">
                                         Vista Previa
                                     </button>
                                 </div>
+                                <div class="col-lg-3 text-center">
+                                    <button type="button" class="btnHermes" onclick="nuevaplantillar()">
+                                        Nuevo
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group row">
                                 <div class="col-sm-12 col-lg-12">
                                     <h4>Plantilla</h4>
@@ -202,8 +205,23 @@
                 </div>
             </div>
         </div>
-    </div> 
-
+    </div>
+    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Mensaje de Confirmacion
+                </div>
+                <div class="modal-body">
+                    Esta seguro que desea anular la plantilla?                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <input type="hidden" id="flag_accion" value="INS" />
     <script type="text/javascript">
         Alert = {
@@ -261,16 +279,34 @@
             }
             else return true;
         }
-
+        function confirmar_AnularPlantilla(id) {
+            $("#confirm-submit").modal("show");
+            $('#btn-submit-confirmacion').attr('onclick', 'AnularPlantilla(' + id + ')');
+        }
         function notify(el, data) {
             resetElements();
             console.log(el.innerHTML);
             el.classList.add('active');
             $("#txt_descripcion").val(data.descripcion);
             cargarTablaImagenBD(data.list_plantilla_detalle);
-            $('#btn_anular_planilla').attr('onclick', 'AnularPlantilla(' + data.id + ')');
+            $('#btn_anular_planilla').attr('onclick', 'confirmar_AnularPlantilla(' + data.id + ')');
             $('#btn_vista_previa').attr('onclick', 'modalPreview(' + data.id + ')');
             $("#flag_accion").val('UPD');
+            $("#btn_grabar_planilla").css('display', 'none');
+            $("#btn_anular_planilla").css('display', 'block');
+            
+        }
+        function nuevaplantillar() {
+            $("#btn_grabar_planilla").css('display', 'block');
+            $("#btn_anular_planilla").css('display', 'none');
+            document.getElementById("tbodygrupocorreo").innerHTML = "";
+            var HTML = "";
+            HTML += "<tr>";
+            HTML += "<td colspan='2'>No existen registros</td>";
+            HTML += "</tr>";
+            document.getElementById("tbodygrupocorreo").innerHTML = HTML;
+
+            $("#txt_descripcion").val("");
         }
         function modalPreview(id_plantilla) {
             $.ajax({
@@ -402,6 +438,8 @@
             listImagen.splice(listImagen.indexOf(data.id), 1);
             cargarTablaImagen(listImagen);
         }
+
+
         /*
         function VerImagen(data) {
             listImagen.splice(listImagen.indexOf(data.id), 1);

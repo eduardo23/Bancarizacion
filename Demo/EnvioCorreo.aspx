@@ -123,12 +123,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-1 control-label">Seleccione Archivo:</label>
-                        <div class="col-sm-11">
-                            <input type="file" id="input08" onchange="checkfile(this);" multiple>
-                        </div>
-                    </div>
+
                     <div class="form-group row">
                         <div class="containerpanel">
                             <div class="col-sm-12 col-lg-5">
@@ -137,7 +132,7 @@
                                         <label for="exampleInputEmail1">Grupo Correo Origen</label>
                                     </div>
                                     <div>
-                                        <select multiple="multiple" name="origen[]" id="cbogrupocorreoorigen" class="form-control" style="height: 152px;">
+                                        <select multiple="multiple" name="cbogrupocorreoorigen[]" id="cbogrupocorreoorigen" class="form-control" style="height: 152px;">
                                         </select>
                                     </div>
                                 </div>
@@ -170,20 +165,25 @@
                                         <select multiple="multiple" name="cbogrupocorreodestino[]" id="cbogrupocorreodestino" class="form-control" style="height: 152px;">
                                         </select>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-1 control-label">Seleccione Archivo:</label>
+                        <div class="col-sm-11">
+                            <input type="file" id="input08" onchange="checkfile(this);" multiple>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-lg-4 text-center">
-                           <button type="button" class="btnHermes" id="btn_vista_previa" onclick="modalPreview();">
+                            <button type="button" class="btnHermes" id="btn_vista_previa" onclick="modalPreview();">
                                 Vista Previa
                             </button>
                         </div>
                         <div class="col-lg-4 text-center">
 
-                            <button type="button" class="btnHermes" data-toggle="modal" onclick="EnviarCorreo();">
+                            <button type="button" class="btnHermes" onclick="confirmarEnvioCorreo();">
                                 Enviar Correo
                             </button>
 
@@ -194,6 +194,7 @@
                             </button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -218,12 +219,64 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Mensaje de Confirmacion
+                </div>
+                <div class="modal-body">
+                    Esta seguro que desea enviar el correo?                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
+        var listOrigen = [];
+        var listDestino = [];
         $('#input08').filestyle({
             'placeholder': 'adjunte archivo',
             text: ' Examinar',
             btnClass: 'btn-success'
         });
+        //var list = [];
+        function confirmarEnvioCorreo() {
+            //var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
+            //for (i = 0; i < selO.length; i++) {
+            //    id = selO.options[i].value;
+            //    list.push(id);
+            //}
+            var cbo_origen = $("#cbo_origen").val();
+            var cbo_plantilla = $("#cbo_plantilla").val();
+            var txt_asunto = $("#txt_asunto").val();
+
+            if (txt_asunto == "") {
+                Alert.warn("Por favor Ingrese Asunto");
+                return false;
+            }
+            if (cbo_origen == "0") {
+                Alert.warn("Por favor seleccione Fuentes de Datos");
+                return false;
+            }
+            if (cbo_plantilla == "0") {
+                Alert.warn("Por favor seleccione Plantilla");
+                return false;
+            }
+            if (listDestino.length == 0) {
+                Alert.warn("Por favor agregue datos a la seccion Grupo Correo Destino.");
+                return false;
+            }
+            if (document.getElementById('input08').files.length == 0) {
+                Alert.warn("Por favor adjunte por los menos un archivo.");
+                return false;
+            }
+            $("#confirm-submit").modal("show");
+            $('#btn-submit-confirmacion').attr('onclick', 'EnviarCorreo()');
+        }
 
         function checkfile(sender) {
             var validExts = new Array(".xlsx", ".xls", ".jpg", "JPEG", "png", ".doc", ".pdf", ".docx");
@@ -256,6 +309,7 @@
                 this.show($('#alert-danger'), msg);
             }
         }
+
         function copiarOpcion(opcion, destino) {
             var valor = $(opcion).val();
             if ($(destino + " option[value=" + valor + "]").length == 0) {
@@ -292,7 +346,6 @@
             });
         }
 
-
         function loadOrigen() {
             $.ajax({
                 type: "POST",
@@ -317,6 +370,7 @@
                 }
             });
         }
+
         function selectChange() {
             var origen = $("#cbo_origen").val();
             loadGrupoCorreoXOrigen(origen);
@@ -330,12 +384,23 @@
                 dataType: "json",
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);//(typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-                    $('#cbogrupocorreoorigen').empty();
-                    for (var i = 0; i < models.length; i++) {
-                        var valor = models[i].id;
-                        var text = models[i].descripcion;
-                        $("#cbogrupocorreoorigen").append($("<option></option>").val(valor).html(text));
+
+
+                    if (models.length > 0) {
+                        debugger;
+                        if (listOrigen.length > 0) {
+                            for (var j = 0; j < models.length; j++) {
+                                var objeto = listOrigen.find(obj => obj.id === models[j].id);
+                                if (objeto === undefined || objeto === null) {
+                                    listOrigen.push(models[j]);
+                                }
+                            }
+                        }
+                        else {
+                            listOrigen = models;
+                        }
                     }
+                    cargargrupocorre_origen();
                 },
                 error: function (response) {
                     if (response.length != 0)
@@ -343,6 +408,28 @@
                 }
             });
         }
+
+        function cargargrupocorre_origen() {
+            $('#cbogrupocorreoorigen').empty();
+            for (var i = 0; i < listOrigen.length; i++) {
+                if (listOrigen[i].flag == 0) {
+                    var valor = listOrigen[i].id;
+                    var text = listOrigen[i].descripcion;
+                    $("#cbogrupocorreoorigen").append($("<option></option>").val(valor).html(text));
+                }
+            }
+        }
+        function cargargrupocorre_destino() {
+            $('#cbogrupocorreodestino').empty();
+            for (var i = 0; i < listDestino.length; i++) {
+                //if (listOrigen[i].flag == 0) {
+                var valor = listDestino[i].id;
+                var text = listDestino[i].descripcion;
+                $("#cbogrupocorreodestino").append($("<option></option>").val(valor).html(text));
+                //}
+            }
+        }
+
 
         function loadPlantilla() {
             $.ajax({
@@ -370,51 +457,23 @@
 
 
         function EnviarCorreo() {
-            var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
-            var list = [];
-            for (i = 0; i < selO.length; i++) {
-                //var objeto = {
-                id = selO.options[i].value
-                // };
-                list.push(id);
-            }
             var cbo_origen = $("#cbo_origen").val();
             var cbo_plantilla = $("#cbo_plantilla").val();
             var txt_asunto = $("#txt_asunto").val();
 
-            if (txt_asunto == "") {
-                Alert.warn("Por favor Ingrese Asunto");
-                return false;
-            }
-            if (cbo_origen == "0") {
-                Alert.warn("Por favor seleccione Fuentes de Datos");
-                return false;
-            }
-            if (cbo_plantilla == "0") {
-                Alert.warn("Por favor seleccione Plantilla");
-                return false;
-            }
-            if (list.length == 0) {
-                Alert.warn("Por favor agregue datos a la seccion Grupo Correo Destino.");
-                return false;
-            }
             var data = new FormData();
-
-            //var files = $("#input08").get(0).files;
-            //var inputfile = document.getElementById('input08').files;
-            //for (var x = 0; x < inputfile.length; x++) {
-            //    fd.append("Files[]", inputfile[x]);
-            //}
-
             for (var i = 0, len = document.getElementById('input08').files.length; i < len; i++) {
                 data.append("Files" + i, document.getElementById('input08').files[i]);
             }
-
-            debugger;
-            // data.append("Files", files[0]);
             data.append("cbo_origen", cbo_origen);
             data.append("cbo_plantilla", cbo_plantilla);
             data.append("txt_asunto", txt_asunto);
+            debugger;
+            var list = [];
+            for (var i = 0; i < listDestino.length; i++) {
+                var id = listDestino[i].id.toString();
+                list.push(id);
+            }
             data.append("list", list);
             $.ajax({
                 type: 'post',
@@ -434,34 +493,88 @@
                     Alert.danger("Error Consulte con el Administrador de Sistema.");
                 }
             });
+            $("#confirm-submit").modal("hide");
         }
 
         $(document).ready(function () {
             loadOrigen();
             loadPlantilla();
             $('#pasar').click(function () {
-                copiarOpcion($('#cbogrupocorreoorigen option:selected').clone(), "#cbogrupocorreodestino");
-                $('#cbogrupocorreoorigen option:selected').remove();
+                var selO = document.getElementsByName('cbogrupocorreoorigen[]')[0];
+                for (i = 0; i < selO.length; i++) {
+                    if (selO.options[i].selected == true) {
+                        id = parseInt(selO.options[i].value);
+                        var objeto = listOrigen.find(obj => obj.id === id);
+                        listOrigen.find(obj => obj.id === id).flag = 1;
+                        listDestino.push(objeto);
+                        //var index = listOrigen.indexOf(objeto);
+                        //listOrigen.splice(index, 1);
+                    }
+                }
+                cargargrupocorre_origen();
+                cargargrupocorre_destino();
+                //copiarOpcion($('#cbogrupocorreoorigen option:selected').clone(), "#cbogrupocorreodestino");
+                //$('#cbogrupocorreoorigen option:selected').remove();
             });
             $('#pasartodos').click(function () {
-                $('#cbogrupocorreoorigen option').each(function () {
-                    copiarOpcion($(this).clone(), "#cbogrupocorreodestino");
-                });
-                $('#cbogrupocorreoorigen option').each(function () {
-                    $(this).remove();
-                });
+                var selO = document.getElementsByName('cbogrupocorreoorigen[]')[0];
+                for (i = 0; i < selO.length; i++) {
+                    //if (selO.options[i].selected == true) {
+                    id = parseInt(selO.options[i].value);
+                    var objeto = listOrigen.find(obj => obj.id === id);
+                    listOrigen.find(obj => obj.id === id).flag = 1;
+                    listDestino.push(objeto);
+                    //var index = listOrigen.indexOf(objeto);
+                    //listOrigen.splice(index, 1);
+                    //}
+                }
+                cargargrupocorre_origen();
+                cargargrupocorre_destino();
+                //$('#cbogrupocorreoorigen option').each(function () {
+                //    copiarOpcion($(this).clone(), "#cbogrupocorreodestino");
+                //});
+                //$('#cbogrupocorreoorigen option').each(function () {
+                //    $(this).remove();
+                //});
             });
             $('#quitar').click(function () {
-                copiarOpcion($('#cbogrupocorreodestino option:selected').clone(), "#cbogrupocorreoorigen");
-                $('#cbogrupocorreodestino option:selected').remove();
+                debugger;
+                var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
+                for (i = 0; i < selO.length; i++) {
+                    if (selO.options[i].selected == true) {
+                        id = parseInt(selO.options[i].value);
+                        var objeto = listDestino.find(obj => obj.id === id);
+                        listOrigen.find(obj => obj.id === id).flag = 0;
+                        //listDestino.push(objeto);
+                        var index = listOrigen.indexOf(objeto);
+                        listDestino.splice(index, 1);
+                    }
+                }
+                cargargrupocorre_origen();
+                cargargrupocorre_destino();
+                //copiarOpcion($('#cbogrupocorreodestino option:selected').clone(), "#cbogrupocorreoorigen");
+                //$('#cbogrupocorreodestino option:selected').remove();
             });
             $('#quitartodos').click(function () {
-                $('#cbogrupocorreodestino option').each(function () {
-                    copiarOpcion($(this).clone(), "#cbogrupocorreoorigen");
-                });
-                $('#cbogrupocorreodestino option').each(function () {
-                    $(this).remove();
-                });
+                var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
+                for (i = 0; i < selO.length; i++) {
+                    //if (selO.options[i].selected == true) {
+                    id = parseInt(selO.options[i].value);
+                    var objeto = listDestino.find(obj => obj.id === id);
+                    listOrigen.find(obj => obj.id === id).flag = 0;
+                    //listDestino.push(objeto);
+                    var index = listOrigen.indexOf(objeto);
+                    listDestino.splice(index, 1);
+                    //}
+                }
+                cargargrupocorre_origen();
+                cargargrupocorre_destino();
+                //$('#cbogrupocorreodestino option').each(function () {
+                //    copiarOpcion($(this).clone(), "#cbogrupocorreoorigen");
+                //});
+                //$('#cbogrupocorreodestino option').each(function () {
+                //    $(this).remove();
+                //});
             });
         });
     </script>

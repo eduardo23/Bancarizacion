@@ -98,9 +98,9 @@
                             <table class="table-style-one" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th>Grupo</th>
-                                        <th>Estado</th>
+                                        <th>Grupo</th>                                        
                                         <th>Origen</th>
+                                        <th>Estado</th>
                                         <th>Acción</th>
                                     </tr>
                                 </thead>
@@ -143,7 +143,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #D6EAF8">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    
                     <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Grupo</h4>
                 </div>
                 <div class="modal-body">
@@ -176,6 +176,13 @@
                                 <input name="txt_grupo" type="text" value="" id="txt_grupo" class="form-control" placeholder="Ingrese Grupo" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
                             </div>
                         </div>
+                         <div class="form-group">
+                            <label for="Departamento" class="col-lg-4 control-label">Origen</label>
+                            <div class="col-lg-8">
+                                <select name="cbo_origen" id="cbo_origen" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Origen">
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="Departamento" class="col-lg-4 control-label">Estado</label>
                             <div class="col-lg-8">
@@ -183,13 +190,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="Departamento" class="col-lg-4 control-label">Origen</label>
-                            <div class="col-lg-8">
-                                <select name="cbo_origen" id="cbo_origen" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Origen">
-                                </select>
-                            </div>
-                        </div>
+                       
                         <div class="form-inline">
                             <div class="col-lg-2">
                             </div>
@@ -198,7 +199,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                        <button type="button" class="btnHermes" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                        
                         <button type="button" class="btnHermes" onclick="Grabar();">Grabar</button>
                     </div>
                 </div>
@@ -303,8 +305,8 @@
                             modalActualizar = "modalActualizar(" + Vals + ")";
                             HTML += "<tr>";
                             HTML += "<td>" + result[index]["descripcion"] + "</td>";
-                            HTML += "<td>" + result[index]["descestado"] + "</td>";
                             HTML += "<td>" + result[index]["descorigen"] + "</td>";
+                            HTML += "<td>" + result[index]["descestado"] + "</td>";
                             HTML += "<td>";
                             HTML += "<a href='#' onclick='" + modalActualizar + "' title='Elimnar registro' ><span class='fa fa-trash'></span> Editar</a> ";
                             HTML += "<a href='#' onclick='" + modalEliminar + "' title='Editar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
@@ -363,12 +365,16 @@
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);
                     $('#cbo_estado').empty();
-                    $('#cbo_estado').append("<option value='0'>--SELECCIONE--</option>");
+                    $('#cbo_estado').append("<option value=''>--SELECCIONE--</option>");
                     for (var i = 0; i < models.length; i++) {
                         var valor = models[i].valor;
                         var text = models[i].descripcion;
                         $("#cbo_estado").append($("<option></option>").val(valor).html(text));
                     }
+                    //debugger;
+                    //$("#cbo_estado").val("1");
+                    $('#cbo_estado option[value="1"]').attr("selected", "selected");
+                    //$('#cbo_estado option:eq(1)').attr('selected', 'selected')
                 },
                 error: function (response) {
                     if (response.length != 0)
@@ -412,16 +418,17 @@
                 Alert.danger(mensaje);
                 return false;
             }
-            if (estado == "0") {
-                mensaje = mensaje + "- Seleccione Estado \n";
-                Alert.danger(mensaje);
-                return false;
-            }
             if (origen == "0") {
                 mensaje = mensaje + "- Seleccione Origen \n";
                 Alert.danger(mensaje);
                 return false;
             }
+            if (estado == "") {
+                mensaje = mensaje + "- Seleccione Estado \n";
+                Alert.danger(mensaje);
+                return false;
+            }
+           
             var data = {
                 descripcion: $("#txt_grupo").val(),
                 estado: $("#cbo_estado").val(),
@@ -436,7 +443,7 @@
             } else if (estado == "INS") {
                 url = "MantGrupoCorreo.aspx/InsertGrupoCorreo";
             }
-
+            debugger;
             $.ajax({
                 type: "POST",
                 url: url,
@@ -449,7 +456,7 @@
                     if (result == "OK") {
                         if (estado == "INS") {
                             $("#txt_grupo").val("");
-                            $("#cbo_estado").val("0");
+                            //$("#cbo_estado").val("0");
                             $("#cbo_origen").val("0");
                         }
                         Alert.info(mensaje);
@@ -500,6 +507,7 @@
             $("#divcodigo").css("display", "block");
             $("#txt_grupo").val(data.descripcion);
             $("#cbo_estado").val(data.estado);
+            $('#cbo_estado').prop('disabled', false);
             $("#cbo_origen").val(data.origen);
             $("#txt_codigo").val(data.id);
             $("#flag_accion").val("UPD");
@@ -508,7 +516,9 @@
         function modalRegistrar() {
             $("#gridSystemModalLabel").text("Nuevo Grupo");
             $("#txt_grupo").val("");
-            $("#cbo_estado").val("0");
+            //$("#cbo_estado").val("0");
+            $('#cbo_estado option[value="1"]').attr("selected", "selected");
+            $('#cbo_estado').prop('disabled', 'disabled');
             $("#cbo_origen").val("0");
             $("#flag_accion").val("INS");
             $("#divcodigo").css("display", "none");
