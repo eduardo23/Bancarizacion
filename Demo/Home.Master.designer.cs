@@ -103,6 +103,15 @@ namespace Demo {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl D;
         
         /// <summary>
+        /// Control F.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl F;
+        
+        /// <summary>
         /// Control E.
         /// </summary>
         /// <remarks>
