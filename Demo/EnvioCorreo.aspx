@@ -614,7 +614,7 @@
                     listDestino.splice(Index, 1);
                 }
 
-                
+                //segundo mike
                 cargargrupocorre_origen();
                 cargargrupocorre_destino();
                 //$('#cbogrupocorreodestino option').each(function () {
