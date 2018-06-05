@@ -19,6 +19,22 @@
             transition-duration: 0.4s;
         }
 
+          .btnHermesNegro {
+            background-color: #3c454f;
+            border: none;
+            color: white;
+            padding: 10px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            /* border-radius: 12px; */
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+        }
+
         .containerpanel {
             width: 100%;
             height: auto;
@@ -200,7 +216,7 @@
         </div>
     </div>
     <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -208,7 +224,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <div style="width: 100%; height: 440px; padding: 0px 40px;" id="contentplantilla">
+                        <div class="col-lg-12">
+                            <div style="width: 100%; height: auto; padding: 0px 40px;" id="contentplantilla">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,15 +240,17 @@
     <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header"  style="background-color: #D6EAF8">
                     Mensaje de Confirmacion
                 </div>
                 <div class="modal-body">
                     Esta seguro que desea enviar el correo?                
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Ok</button>
+                    <%--<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>--%>
                 </div>
             </div>
         </div>
@@ -425,10 +445,10 @@
             $('#cbogrupocorreoorigen').empty();
             for (var i = 0; i < listOrigen.length; i++) {
                 //if (listOrigen[i].flag == 0) {
-                    var valor = listOrigen[i].id;
-                    var text = listOrigen[i].descripcion;
-                    $("#cbogrupocorreoorigen").append($("<option></option>").val(valor).html(text));
-               // }
+                var valor = listOrigen[i].id;
+                var text = listOrigen[i].descripcion;
+                $("#cbogrupocorreoorigen").append($("<option></option>").val(valor).html(text));
+                // }
             }
         }
         function cargargrupocorre_destino() {
@@ -576,7 +596,7 @@
                 for (i = 0; i < selO.length; i++) {
                     if (selO.options[i].selected == true) {
                         id = parseInt(selO.options[i].value);
-                        var objeto = listDestino.find(obj => obj.id === id);                        
+                        var objeto = listDestino.find(obj => obj.id === id);
                         arrayId += objeto.id + ",";
                         listOrigen.push(objeto);
                     }
@@ -603,7 +623,7 @@
                     id = parseInt(selO.options[i].value);
                     var objeto = listDestino.find(obj => obj.id === id);
                     arrayId += objeto.id + ",";
-                    listOrigen.push(objeto);                    
+                    listOrigen.push(objeto);
                 }
                 arrayId = arrayId.slice(0, -1);
                 var arrayID = arrayId.split(",");

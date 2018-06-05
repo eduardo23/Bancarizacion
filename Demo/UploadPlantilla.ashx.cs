@@ -1,10 +1,14 @@
 ﻿using DAO_Hermes.Repositorios;
 using DAO_Hermes.ViewModel;
+using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Demo
@@ -90,19 +94,36 @@ namespace Demo
                         list_plantilla_detalle.Add(plantilla_detalle);
                     }
                 }
-                
+
                 plantilla.list_plantilla_detalle = list_plantilla_detalle;
+                
+                //Replace SRC  plantilla html
+                HtmlDocument document = new HtmlDocument();
+                document.Load(plantilla.ruta_plantilla_html);
+                document.DocumentNode.Descendants("img")
+                            .Where(e =>
+                            {
+                                string src = e.GetAttributeValue("src", null) ?? "";
+                                return !string.IsNullOrEmpty(src);// && src.StartsWith("data:image");
+                            })
+                            .ToList()
+                            .ForEach(x =>
+                            {
+                                string currentSrcValue = string.Empty;
+                                currentSrcValue = x.GetAttributeValue("src", null);
+                                Plantilla_Detalle objeto = plantilla.list_plantilla_detalle.Where(i => i.NombreArchivoImagen.ToUpper().Equals(currentSrcValue.ToUpper())).FirstOrDefault();
+                                if(objeto !=null)
+                                {
+                                    x.SetAttributeValue("src", objeto.ruta_site_imagen);
+                                }
+                                
+                            });
+                document.Save(plantilla.ruta_plantilla_html);
                 ClientResponse response;
                 using (PlantillaDAO dbPlanilla = new PlantillaDAO())
                 {
                     response = dbPlanilla.InsertPantilla(plantilla);
                 }
-
-                //if ((System.IO.File.Exists(files)))
-                //{
-                //    System.IO.File.Delete(files);
-                //}
-
                 var result = new
                 {
                     Result = response.Status,

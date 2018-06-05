@@ -19,7 +19,8 @@
             -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
         }
-            .btnHermesNegro {
+
+        .btnHermesNegro {
             background-color: #3c454f;
             border: none;
             color: white;
@@ -202,7 +203,7 @@
     </div>
 
     <div class="modal fade" id="preview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -210,7 +211,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <div style="width: 100%; height: 440px; padding: 0px 40px;" id="contentplantilla">
+                        <div class="col-lg-12">
+                            <div style="width: 100%; height: auto; padding: 0px 40px;" id="contentplantilla">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,8 +240,27 @@
             </div>
         </div>
     </div>
+
     <input type="hidden" id="flag_accion" value="INS" />
     <script type="text/javascript">
+        $('#input08').filestyle({
+            'placeholder': 'adjunte archivo',
+            text: ' Examinar',
+            btnClass: 'btn-success'
+        });
+
+
+        $('#input09').filestyle({
+            'placeholder': 'adjunte archivo',
+            text: ' Examinar',
+            btnClass: 'btn-success'
+        });
+
+
+        $(document).ready(function (e) {
+
+            listarPlanilla();
+        });
         Alert = {
             show: function ($div, msg) {
                 $div.find('.alert-msg').text(msg);
@@ -270,18 +292,6 @@
             else return true;
         }
 
-        $('#input08').filestyle({
-            'placeholder': 'adjunte archivo',
-            text: ' Examinar',
-            btnClass: 'btn-success'
-        });
-
-        $('#input09').filestyle({
-            'placeholder': 'adjunte archivo',
-            text: ' Examinar',
-            btnClass: 'btn-success'
-        });
-
         function checkfileImgen(sender) {
             var validExts = new Array(".jpg", "JPEG ", "png");
             var fileExt = sender.value;
@@ -294,10 +304,12 @@
             }
             else return true;
         }
+
         function confirmar_AnularPlantilla(id) {
             $("#confirm-submit").modal("show");
             $('#btn-submit-confirmacion').attr('onclick', 'AnularPlantilla(' + id + ')');
         }
+
         function notify(el, data) {
             resetElements();
             console.log(el.innerHTML);
@@ -311,6 +323,7 @@
             $("#btn_anular_planilla").css('display', 'block');
 
         }
+
         function nuevaplantillar() {
             $("#btn_grabar_planilla").css('display', 'block');
             $("#btn_anular_planilla").css('display', 'none');
@@ -323,6 +336,7 @@
 
             $("#txt_descripcion").val("");
         }
+
         function modalPreview(id_plantilla) {
             $.ajax({
                 type: "POST",
@@ -374,11 +388,11 @@
             }
             document.getElementById("tbodygrupocorreo").innerHTML = HTML;
         }
+
         function VerImagen(data) {
             $('.imagepreview').attr('src', data.ruta_site_imagen);
             $('#imagemodal').modal('show');
         }
-
 
         function AnularPlantilla(id_plantilla) {
             $.ajax({
@@ -407,6 +421,7 @@
                         Alert.danger(mensaje);
                 }
             });
+            $("#confirm-submit").modal("hide");
         }
 
         function resetElements() {
@@ -580,8 +595,6 @@
             });
         }
 
-        $(document).ready(function (e) {
-            listarPlanilla();
-        });
+
     </script>
 </asp:Content>
