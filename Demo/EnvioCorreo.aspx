@@ -139,20 +139,20 @@
                             </div>
                             <div class="col-sm-12 col-lg-2">
                                 <div class="panelButton">
-                                    <button type="button" class="btnHermesEnvioCorreo" id="quitartodos">
-                                        |<<
-                                    </button>
-                                    <br />
-                                    <button type="button" class="btnHermesEnvioCorreo" id="quitar">
-                                        |<
+                                    <button type="button" class="btnHermesEnvioCorreo" id="pasartodos">
+                                        >>|
                                     </button>
                                     <br />
                                     <button type="button" class="btnHermesEnvioCorreo" id="pasar">
                                         >|
                                     </button>
                                     <br />
-                                    <button type="button" class="btnHermesEnvioCorreo" id="pasartodos">
-                                        >>|
+                                    <button type="button" class="btnHermesEnvioCorreo" id="quitar">
+                                        |<
+                                    </button>
+                                    <br />
+                                    <button type="button" class="btnHermesEnvioCorreo" id="quitartodos">
+                                        |<<
                                     </button>
                                 </div>
                             </div>
