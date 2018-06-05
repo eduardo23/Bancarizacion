@@ -18,6 +18,21 @@
             -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
         }
+         .btnHermesNegro {
+            background-color: #3c454f;
+            border: none;
+            color: white;
+            padding: 10px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            /* border-radius: 12px; */
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+        }
 
         .btn-link-tabla {
             width: 100%;
@@ -108,6 +123,9 @@
                                 </div>
                             </div>
                             <div class="pull-right">
+                                 <button type="button" class="btnHermesNegro"  onclick="buscar();">
+                                    Buscar
+                                </button>
                                 <button type="button" class="btnHermes" data-toggle="modal" onclick="ImportarCorreos();">
                                     Importar Correo desde el sistema de Bancarizacion
                                 </button>
@@ -193,6 +211,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btnHermes" onclick="cargarArchivo();">Grabar</button>
+                        <button type="button"  class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -204,15 +223,16 @@
     <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background-color: #D6EAF8">
                     Mensaje de Confirmacion
                 </div>
                 <div class="modal-body">
                     Esta seguro que desea eliminar el registro?                
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+                     <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancel</button>
+                      <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Ok</button>
+                    
                 </div>
             </div>
         </div>
@@ -222,7 +242,8 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #D6EAF8">                    
+                <div class="modal-header" style="background-color: #D6EAF8">    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>                
                     <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Correo</h4>
                 </div>
                 <div class="modal-body">
@@ -271,7 +292,7 @@
                         <div class="form-group">
                             <label for="Departamento" class="col-lg-4 control-label">Paterno</label>
                             <div class="col-lg-8">
-                                <input name="txt_paterno" type="text" value="" id="txt_paterno" class="form-control" placeholder="Ingrese apellido paterno" data-toggle="tooltip" data-placement="left" data-original-title="Ape. Paterno 2">
+                                <input name="txt_paterno" type="text" value="" id="txt_paterno" class="form-control" placeholder="Ingrese apellido paterno" data-toggle="tooltip" data-placement="left" data-original-title="Ape. Paterno ">
                             </div>
                         </div>
                         <div class="form-group">
@@ -300,9 +321,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btnHermes" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                    <div class="modal-footer">                        
                         <button type="button" class="btnHermes" onclick="Grabar();">Grabar</button>
+                        <button type="button"  class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -401,8 +422,8 @@
         });
 
         function selectChange() {
-            $("#flag").val("true");
-            listarCheques(1);
+            //$("#flag").val("true");
+            //listarCheques(1);
         }
 
         function checkfile(sender) {
@@ -416,6 +437,10 @@
                 return false;
             }
             else return true;
+        }
+        function buscar() {
+            $("#flag").val("true");
+            listarCheques(1);
         }
 
         function listarCheques(pagina) {
@@ -468,8 +493,8 @@
                             HTML += "<td>" + result[index]["descestado"] + "</td>";
                             HTML += "<td>" + result[index]["fechabaja"] + "</td>";
                             HTML += "<td>";
-                            HTML += "<a href='#' onclick='" + modalActualizar + "' title='Elimnar registro' ><span class='fa fa-trash'></span> Editar</a> ";
-                            HTML += "<a href='#' onclick='" + modalEliminar + "' title='Editar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
+                            HTML += "<a href='#' onclick='" + modalActualizar + "' title='Actualizar registro' ><span class='fa fa-trash'></span> Editar</a> ";
+                            HTML += "<a href='#' onclick='" + modalEliminar + "' title='Eliminar registro' ><span class='fa fa-edit'></span> Eliminar</a>";
                             HTML += "</td>";
                             HTML += "</tr>";
                         }
@@ -590,7 +615,7 @@
             $("#txt_email").val(data.Email);
             $("#cbo_grupo_crear").val(data.id_grupo_correo);
             $("#cbo_estado").val(data.id_estado);
-            $('#cbo_estado').prop('disabled', false);
+            $('#cbo_estado').prop('disabled', true);
             $("#flag_accion").val("UPD");
             $('#myModal').modal('show');
         }

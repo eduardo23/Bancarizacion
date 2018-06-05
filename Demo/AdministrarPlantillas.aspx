@@ -19,6 +19,21 @@
             -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
         }
+            .btnHermesNegro {
+            background-color: #3c454f;
+            border: none;
+            color: white;
+            padding: 10px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            /* border-radius: 12px; */
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+        }
 
         table.table-style-one {
             font-family: verdana,arial,sans-serif;
@@ -139,7 +154,7 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-3 text-center">
-                                    <button type="button" class="btnHermes" id="btn_anular_planilla" style="display:none;">
+                                    <button type="button" class="btnHermes" id="btn_anular_planilla" style="display: none;">
                                         Anular Plantilla
                                     </button>
                                 </div>
@@ -209,15 +224,15 @@
     <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background-color: #D6EAF8">
                     Mensaje de Confirmacion
                 </div>
                 <div class="modal-body">
                     Esta seguro que desea anular la plantilla?                
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancel</button>
+                    <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Ok</button>
                 </div>
             </div>
         </div>
@@ -294,7 +309,7 @@
             $("#flag_accion").val('UPD');
             $("#btn_grabar_planilla").css('display', 'none');
             $("#btn_anular_planilla").css('display', 'block');
-            
+
         }
         function nuevaplantillar() {
             $("#btn_grabar_planilla").css('display', 'block');
