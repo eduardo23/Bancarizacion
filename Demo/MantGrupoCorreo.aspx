@@ -253,8 +253,8 @@
                     Esta seguro que desea eliminar el registro?                
                 </div>
                 <div class="modal-footer">
-                      <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancel</button>
-                      <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Ok</button>
+                      <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Aceptar</button>
+                      <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
              
                 </div>
             </div>
