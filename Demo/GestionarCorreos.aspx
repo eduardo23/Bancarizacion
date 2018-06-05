@@ -127,7 +127,7 @@
                                     Buscar
                                 </button>
                                 <button type="button" class="btnHermes" data-toggle="modal" onclick="ImportarCorreos();">
-                                    Importar Correo desde el sistema de Bancarizacion
+                                    Importar Correo
                                 </button>
                                 <button type="button" class="btnHermes" data-toggle="modal" onclick="modalCargaMasivodeCorrreo();">
                                     Carga Masivo de Corrreo
@@ -230,9 +230,8 @@
                     Esta seguro que desea eliminar el registro?                
                 </div>
                 <div class="modal-footer">
-                     <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancel</button>
-                      <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Ok</button>
-                    
+                     <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Grabar</button>
+                     <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                 </div>
             </div>
         </div>
