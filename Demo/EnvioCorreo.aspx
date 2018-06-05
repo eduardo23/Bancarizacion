@@ -22,7 +22,7 @@
         .containerpanel {
             width: 100%;
             height: auto;
-            padding: 0px 85px;
+            /*padding: 0px 85px;*/
         }
 
         .panel1 {
@@ -126,7 +126,7 @@
 
                     <div class="form-group row">
                         <div class="containerpanel">
-                            <div class="col-sm-12 col-lg-5">
+                            <div class="col-sm-12 col-sm-offset-0 col-lg-4 col-md-offset-1">
                                 <div class="panel1">
                                     <div class="tilepanel">
                                         <label for="exampleInputEmail1">Grupo Correo Origen</label>
@@ -270,10 +270,10 @@
                 Alert.warn("Por favor agregue datos a la seccion Grupo Correo Destino.");
                 return false;
             }
-            if (document.getElementById('input08').files.length == 0) {
-                Alert.warn("Por favor adjunte por los menos un archivo.");
-                return false;
-            }
+            //if (document.getElementById('input08').files.length == 0) {
+            //    Alert.warn("Por favor adjunte por los menos un archivo.");
+            //    return false;
+            //}
             $("#confirm-submit").modal("show");
             $('#btn-submit-confirmacion').attr('onclick', 'EnviarCorreo()');
         }
@@ -285,7 +285,7 @@
             if (validExts.indexOf(fileExt) < 0) {
                 sender.value = "";
                 Alert.warn("El archivo seleccionado es inválido , los archivos válidos son de tipo " +
-                         validExts.toString() + "");
+                    validExts.toString() + "");
                 return false;
             }
             else return true;
@@ -384,21 +384,33 @@
                 dataType: "json",
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);//(typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                    // listOrigen = models;
 
-
-                    if (models.length > 0) {
-                        debugger;
-                        if (listOrigen.length > 0) {
-                            for (var j = 0; j < models.length; j++) {
-                                var objeto = listOrigen.find(obj => obj.id === models[j].id);
-                                if (objeto === undefined || objeto === null) {
-                                    listOrigen.push(models[j]);
-                                }
+                    //if (models.length > 0) {
+                    //    debugger;
+                    //    if (listOrigen.length > 0) {
+                    //        for (var j = 0; j < models.length; j++) {
+                    //            var objeto = listOrigen.find(obj => obj.id === models[j].id);
+                    //            if (objeto === undefined || objeto === null) {
+                    //                listOrigen.push(models[j]);
+                    //            }
+                    //        }
+                    //    }
+                    //    else {
+                    //        listOrigen = models;
+                    //    }
+                    //}
+                    if (listDestino.length > 0) {
+                        listOrigen = [];
+                        for (var j = 0; j < models.length; j++) {
+                            var objeto = listDestino.find(obj => obj.id === models[j].id);
+                            if (objeto === undefined || objeto === null) {
+                                listOrigen.push(models[j]);
                             }
                         }
-                        else {
-                            listOrigen = models;
-                        }
+
+                    } else {
+                        listOrigen = models;
                     }
                     cargargrupocorre_origen();
                 },
@@ -412,11 +424,11 @@
         function cargargrupocorre_origen() {
             $('#cbogrupocorreoorigen').empty();
             for (var i = 0; i < listOrigen.length; i++) {
-                if (listOrigen[i].flag == 0) {
+                //if (listOrigen[i].flag == 0) {
                     var valor = listOrigen[i].id;
                     var text = listOrigen[i].descripcion;
                     $("#cbogrupocorreoorigen").append($("<option></option>").val(valor).html(text));
-                }
+               // }
             }
         }
         function cargargrupocorre_destino() {
@@ -500,16 +512,26 @@
             loadOrigen();
             loadPlantilla();
             $('#pasar').click(function () {
+                var arrayId = "";
                 var selO = document.getElementsByName('cbogrupocorreoorigen[]')[0];
                 for (i = 0; i < selO.length; i++) {
                     if (selO.options[i].selected == true) {
                         id = parseInt(selO.options[i].value);
                         var objeto = listOrigen.find(obj => obj.id === id);
-                        listOrigen.find(obj => obj.id === id).flag = 1;
+                        arrayId += objeto.id + ",";
+                        //listOrigen.find(obj => obj.id === id).flag = 1;
                         listDestino.push(objeto);
                         //var index = listOrigen.indexOf(objeto);
                         //listOrigen.splice(index, 1);
                     }
+                }
+                arrayId = arrayId.slice(0, -1);
+                var arrayID = arrayId.split(",");
+                for (var e = 0; e < arrayID.length; e++) {
+                    var id = parseInt(arrayID[e]);
+                    var objeto = listOrigen.find(book => book.id === id);
+                    var Index = listOrigen.indexOf(objeto);
+                    listOrigen.splice(Index, 1);
                 }
                 cargargrupocorre_origen();
                 cargargrupocorre_destino();
@@ -517,17 +539,28 @@
                 //$('#cbogrupocorreoorigen option:selected').remove();
             });
             $('#pasartodos').click(function () {
+                var arrayId = "";
                 var selO = document.getElementsByName('cbogrupocorreoorigen[]')[0];
                 for (i = 0; i < selO.length; i++) {
                     //if (selO.options[i].selected == true) {
                     id = parseInt(selO.options[i].value);
                     var objeto = listOrigen.find(obj => obj.id === id);
-                    listOrigen.find(obj => obj.id === id).flag = 1;
+                    arrayId += objeto.id + ",";
                     listDestino.push(objeto);
                     //var index = listOrigen.indexOf(objeto);
                     //listOrigen.splice(index, 1);
                     //}
                 }
+
+                arrayId = arrayId.slice(0, -1);
+                var arrayID = arrayId.split(",");
+                for (var e = 0; e < arrayID.length; e++) {
+                    var id = parseInt(arrayID[e]);
+                    var objeto = listOrigen.find(book => book.id === id);
+                    var Index = listOrigen.indexOf(objeto);
+                    listOrigen.splice(Index, 1);
+                }
+
                 cargargrupocorre_origen();
                 cargargrupocorre_destino();
                 //$('#cbogrupocorreoorigen option').each(function () {
@@ -538,35 +571,50 @@
                 //});
             });
             $('#quitar').click(function () {
-                debugger;
+                var arrayId = "";
                 var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
                 for (i = 0; i < selO.length; i++) {
                     if (selO.options[i].selected == true) {
                         id = parseInt(selO.options[i].value);
-                        var objeto = listDestino.find(obj => obj.id === id);
-                        listOrigen.find(obj => obj.id === id).flag = 0;
-                        //listDestino.push(objeto);
-                        var index = listOrigen.indexOf(objeto);
-                        listDestino.splice(index, 1);
+                        var objeto = listDestino.find(obj => obj.id === id);                        
+                        arrayId += objeto.id + ",";
+                        listOrigen.push(objeto);
                     }
                 }
+
+                arrayId = arrayId.slice(0, -1);
+                var arrayID = arrayId.split(",");
+                for (var e = 0; e < arrayID.length; e++) {
+                    var id = parseInt(arrayID[e]);
+                    var objeto = listDestino.find(book => book.id === id);
+                    var Index = listDestino.indexOf(objeto);
+                    listDestino.splice(Index, 1);
+                }
+
                 cargargrupocorre_origen();
                 cargargrupocorre_destino();
                 //copiarOpcion($('#cbogrupocorreodestino option:selected').clone(), "#cbogrupocorreoorigen");
                 //$('#cbogrupocorreodestino option:selected').remove();
             });
             $('#quitartodos').click(function () {
+                var arrayId = "";
                 var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
                 for (i = 0; i < selO.length; i++) {
-                    //if (selO.options[i].selected == true) {
                     id = parseInt(selO.options[i].value);
                     var objeto = listDestino.find(obj => obj.id === id);
-                    listOrigen.find(obj => obj.id === id).flag = 0;
-                    //listDestino.push(objeto);
-                    var index = listOrigen.indexOf(objeto);
-                    listDestino.splice(index, 1);
-                    //}
+                    arrayId += objeto.id + ",";
+                    listOrigen.push(objeto);                    
                 }
+                arrayId = arrayId.slice(0, -1);
+                var arrayID = arrayId.split(",");
+                for (var e = 0; e < arrayID.length; e++) {
+                    var id = parseInt(arrayID[e]);
+                    var objeto = listDestino.find(book => book.id === id);
+                    var Index = listDestino.indexOf(objeto);
+                    listDestino.splice(Index, 1);
+                }
+
+                //segundo mike
                 cargargrupocorre_origen();
                 cargargrupocorre_destino();
                 //$('#cbogrupocorreodestino option').each(function () {
