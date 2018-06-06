@@ -19,6 +19,24 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <div class="col-sm-2">
+                                            <label  class="col-form-label">Tipo Seguro:</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <div class="col-sm-3">
+                                                <asp:DropDownList ID="DDLTipoSeguro" runat="server" AppendDataBoundItems="True" AutoPostBack="True" class="form-control" OnSelectedIndexChanged="DDLTipoSeguro_SelectedIndexChanged" >
+                                                    <asp:ListItem Selected="True" Value="0">SELECCIONE</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                            <div class="col-sm-3">
+                                            </div>
+                                            <div class="col-lg-1">
+
+                                            </div>
+                                            <div class="col-lg-3">
+
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-group">

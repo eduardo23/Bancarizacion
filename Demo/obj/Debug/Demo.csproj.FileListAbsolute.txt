@@ -130,3 +130,7 @@ C:\Bancarizacion\Demo\obj\Debug\RdlCompile.cache
 C:\Bancarizacion\Demo\obj\Debug\RdlCompile.compiled
 C:\Bancarizacion\Demo\obj\Debug\Demo.dll
 C:\Bancarizacion\Demo\obj\Debug\Demo.pdb
+C:\Bancarizacion\Demo\bin\HtmlAgilityPack.dll
+C:\Bancarizacion\Demo\bin\HtmlAgilityPack.pdb
+C:\Bancarizacion\Demo\bin\HtmlAgilityPack.xml
+C:\Bancarizacion\Demo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml

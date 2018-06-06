@@ -122,5 +122,10 @@ namespace Demo
             }
             return texto;
         }
+
+        protected void DDLTipoSeguro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
