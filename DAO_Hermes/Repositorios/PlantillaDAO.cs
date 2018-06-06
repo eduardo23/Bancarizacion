@@ -28,7 +28,51 @@ namespace DAO_Hermes.Repositorios
             clientResponse.Status = "OK";
         }
 
+        public ClientResponse getPlantillaXId_Anulacion(int Id_Plantilla)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_sel_plantilla_x_id", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@id_plantilla", Id_Plantilla);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
 
+                            if (reader.Read())
+                            {
+                                entidad = new Plantilla();
+                                entidad.id = Convert.ToInt32(reader["id"] == DBNull.Value ? "" : reader["id"]);
+                                entidad.descripcion = Convert.ToString(reader["descripcion"] == DBNull.Value ? "" : reader["descripcion"]);
+                                entidad.NombreArchivoHtml = Convert.ToString(reader["NombreArchivoHtml"] == DBNull.Value ? "" : reader["NombreArchivoHtml"]);
+                                entidad.ruta_plantilla_html = Convert.ToString(reader["ruta_plantilla_html"] == DBNull.Value ? "" : reader["ruta_plantilla_html"]);
+                                entidad.fl_nuevo = 1;
+                                entidad.list_plantilla_detalle = getPlantillaDetalle(entidad.id);
+                            }
+                        }
+                        clientResponse.DataJson = JsonConvert.SerializeObject(entidad).ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }
+
+            return clientResponse;
+        }
         public ClientResponse AnularPlantilla(int id_planilla)
         {
             try
