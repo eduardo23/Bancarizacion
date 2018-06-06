@@ -91,3 +91,4 @@ C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.dll
 C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.SqlServer.dll
 C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.xml
 C:\Bancarizacion\DAO_Hermes\bin\Debug\EntityFramework.SqlServer.xml
+C:\Bancarizacion\DAO_Hermes\obj\Debug\DAO_Hermes.csprojResolveAssemblyReference.cache

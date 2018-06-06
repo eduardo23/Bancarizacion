@@ -194,7 +194,7 @@ namespace DAO_Hermes.Repositorios
             }
         }
 
-        public DataSet LIST_Datos_Trama_Onco(string inidate, string findate)
+        public DataSet LIST_Datos_Trama_Onco(int TipoSeguro, string inidate, string findate)
         {
             string cnx = "";
             using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
@@ -205,7 +205,7 @@ namespace DAO_Hermes.Repositorios
             {
                 using (SqlCommand cmd = new SqlCommand("sp_altasOncosalud", cn))
                 {
-
+                    cmd.Parameters.AddWithValue("@TipoSeguro", TipoSeguro);
                     cmd.Parameters.AddWithValue("@StartDate", inidate);
                     cmd.Parameters.AddWithValue("@EndDate", findate);
                     cmd.CommandType = CommandType.StoredProcedure;

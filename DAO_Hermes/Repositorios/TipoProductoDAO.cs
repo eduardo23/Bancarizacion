@@ -74,6 +74,32 @@ namespace DAO_Hermes.Repositorios
             }
         }
 
+        public List<TipoProducto> ListarTipoProductosOnco()
+        {
+            using (SqlConnection cn = new SqlConnection(ConexionDAO.cnx))
+            {
+                using (SqlCommand cmd = new SqlCommand("USP_TipoProductoOncoSelectALL", cn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        List<TipoProducto> ListarProductos = new List<TipoProducto>();
+                        while (dr.Read())
+                        {
+                            TipoProducto Tipo_Producto = new TipoProducto();
+                            Tipo_Producto.ID = Convert.ToInt32(dr["ID"]);
+                            Tipo_Producto.Nombre = Convert.ToString(dr["Nombre"] == DBNull.Value ? "" : dr["Nombre"]);
+                            Tipo_Producto.Descripcion = Convert.ToString(dr["Descripcion"]);
+                            Tipo_Producto.Estado = Convert.ToInt32(dr["Estado"]);
+                            ListarProductos.Add(Tipo_Producto);
+                        }
+                        return ListarProductos;
+                    }
+                }
+            }
+        }
+
         public DataSet ListarTipoProductosxInstitucion(int Institucionid)
         {
             using (SqlConnection cn = new SqlConnection(ConexionDAO.cnx))

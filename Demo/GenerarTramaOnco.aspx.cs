@@ -11,13 +11,26 @@ namespace Demo
 {
     public partial class GenerarTramaOnco : System.Web.UI.Page
     {
+
+        TipoProductoDAO objn_TipoProducto = new TipoProductoDAO();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack) {
+                ListarTipoSeguro();
+            }
+            
         }
 
         protected void btnGenerar_Click(object sender, EventArgs e)
         {
+            //if (DDLTipoSeguro.SelectedValue== "0")
+            //{
+            //    txtmensaje.Text = "Debe de seleccionar el tipo de seguro.";
+            //    string jss = "openModal()";
+            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "invocarfuncion", jss, true);
+            //    return;
+            //}
 
             string RUTA = cUtil.ObtenerValorParametroDes("FILE", "RUTA", "GENERAR");
             string NombreArchivo = cUtil.ObtenerValorParametroDes("FILE", "ONCOLOGICO", "GENERAR");
@@ -29,7 +42,7 @@ namespace Demo
             DateTime fin = Convert.ToDateTime(txtFecPagoHasta.Text);
             string inidate = ini.ToString("yyyyMMdd");
             string findate = fin.ToString("yyyyMMdd");
-            detalle.Append(GenerarTrama(inidate, findate));
+            detalle.Append(GenerarTrama(Convert.ToInt32(DDLTipoSeguro.SelectedValue), inidate, findate));
 
             cUtil.EscribirArchivo(NombreArchivo, detalle.ToString());
             System.IO.FileInfo toDownload = new System.IO.FileInfo(NombreArchivo);
@@ -42,12 +55,12 @@ namespace Demo
 
         }
 
-        private string GenerarTrama(string inidate, string findate) {
+        private string GenerarTrama(int TipoSeguro, string inidate, string findate) {
             DataTable dt = new DataTable();
             DataTable dtc = new DataTable();
             ConfiguracionArchivo_DAO db = new ConfiguracionArchivo_DAO();
             System.Text.StringBuilder detalle = new System.Text.StringBuilder();
-            DataSet ds = db.LIST_Datos_Trama_Onco(inidate, findate);
+            DataSet ds = db.LIST_Datos_Trama_Onco(TipoSeguro, inidate, findate);
 
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -126,6 +139,14 @@ namespace Demo
         protected void DDLTipoSeguro_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        void ListarTipoSeguro()
+        {
+            DDLTipoSeguro.DataSource = objn_TipoProducto.ListarTipoProductosOnco();
+            DDLTipoSeguro.DataTextField = "Nombre";
+            DDLTipoSeguro.DataValueField = "ID";
+            DDLTipoSeguro.DataBind();
         }
     }
 }

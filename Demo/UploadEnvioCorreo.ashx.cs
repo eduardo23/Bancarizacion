@@ -99,9 +99,10 @@ namespace Demo
                 {
                     bodyaux = body.Replace("{NombreUsuario}", item.Nombre1 + " " + item.Nombre2);
                     bodyaux = bodyaux.Replace("{linkdardebaja}", desafiliacion.valor+"?tokens=" +item.Tokens);
+                    bodyaux = HttpUtility.HtmlDecode(bodyaux);
                     cUtil.EnvioMailSegundo(txt_asunto, item.Email, bodyaux, listrutas, usuario, clave, smtp, puerto);
                 }
-
+              
                 //Directory.Delete(savepath, true);
 
                 //plantilla.list_plantilla_detalle = list_plantilla_detalle;

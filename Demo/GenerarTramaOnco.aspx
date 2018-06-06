@@ -25,7 +25,7 @@
                                         <div class="col-sm-10">
                                             <div class="col-sm-3">
                                                 <asp:DropDownList ID="DDLTipoSeguro" runat="server" AppendDataBoundItems="True" AutoPostBack="True" class="form-control" OnSelectedIndexChanged="DDLTipoSeguro_SelectedIndexChanged" >
-                                                    <asp:ListItem Selected="True" Value="0">SELECCIONE</asp:ListItem>
+                                                    <asp:ListItem Selected="True" Value="0">--TODOS--</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
                                             <div class="col-sm-3">
