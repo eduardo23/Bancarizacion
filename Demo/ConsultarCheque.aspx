@@ -287,7 +287,7 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button"  class="button" data-dismiss="modal">Cerrar</button>
         </div>
     </div>
 </div>
@@ -684,6 +684,7 @@
                     $("#myDialog").modal("toggle");
                     $("#getCode").html(mensaje);
                 } else {
+                    $("#myDialog").modal("toggle");
                     $("#getCode").html(mensaje);
                 }
 
@@ -697,6 +698,7 @@
             }
         });
     }
+
     function btnEliminar(Id) {
         $.ajax({
             type: "POST",

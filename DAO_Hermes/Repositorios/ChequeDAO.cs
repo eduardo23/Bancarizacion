@@ -47,12 +47,23 @@ namespace DAO_Hermes.Repositorios
                         comando.Parameters.AddWithValue("@FechaCreacion", cheque.Fecha);
                         comando.Parameters.AddWithValue("@Activo", cheque.Activo);
                         comando.Parameters.Add("@id", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        comando.Parameters.Add("@mensaje", SqlDbType.VarChar,100).Direction = ParameterDirection.Output;
+                        comando.Parameters.Add("@status", SqlDbType.VarChar,5).Direction = ParameterDirection.Output;
                         comando.CommandType = CommandType.StoredProcedure;
                         conexion.Open();
-                        comando.ExecuteNonQuery();                     
-                        clientResponse.Id = Convert.ToInt32(comando.Parameters["@id"].Value); 
-                        clientResponse.Mensaje = "El cheque se ha Emitido Satisfactoriamente.";
-                        clientResponse.Status = "OK";
+                        comando.ExecuteNonQuery();
+
+                        //clientResponse.Id = Convert.ToInt32(comando.Parameters["@id"].Value); 
+                        //clientResponse.Mensaje = "El cheque se ha Emitido Satisfactoriamente.";
+                        //clientResponse.Status = "OK";
+
+                        clientResponse.Id = Convert.ToInt32(comando.Parameters["@id"].Value);
+                        clientResponse.Mensaje = comando.Parameters["@mensaje"].Value.ToString();
+                        clientResponse.Status = comando.Parameters["@status"].Value.ToString();
+
+                        if (clientResponse.Status=="ERROR") {
+                            throw new Exception(clientResponse.Mensaje);
+                        }
                     }
                 }
             }
@@ -283,12 +294,22 @@ namespace DAO_Hermes.Repositorios
                         comando.Parameters.AddWithValue("@UsuarioActualizacion", cheque.UsuarioActualizacion);
                         comando.Parameters.AddWithValue("@FechaActualizacion", cheque.FechaActualizacion);
                         comando.Parameters.AddWithValue("@Activo", cheque.Activo);
-                        comando.Parameters.AddWithValue("@id", cheque.ID);                        
+                        comando.Parameters.AddWithValue("@id", cheque.ID);
+                        comando.Parameters.Add("@mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
+                        comando.Parameters.Add("@status", SqlDbType.VarChar, 5).Direction = ParameterDirection.Output;
                         comando.CommandType = CommandType.StoredProcedure;
                         conexion.Open();
                         comando.ExecuteNonQuery();
-                        clientResponse.Mensaje = "El cheque se ha Actualizado Satisfactoriamente.";
-                        clientResponse.Status = "OK";
+                        //clientResponse.Mensaje = "El cheque se ha Actualizado Satisfactoriamente.";
+                        //clientResponse.Status = "OK";
+
+                        clientResponse.Mensaje = comando.Parameters["@mensaje"].Value.ToString();
+                        clientResponse.Status = comando.Parameters["@status"].Value.ToString();
+
+                        if (clientResponse.Status == "ERROR")
+                        {
+                            throw new Exception(clientResponse.Mensaje);
+                        }
                     }
                 }
             }
