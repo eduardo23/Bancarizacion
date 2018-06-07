@@ -10,14 +10,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 namespace Demo
 {
+   
     public partial class ConsultarCheque : System.Web.UI.Page
     {
+        public static String UserId = "";
         public static ClientResponse response;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-
+                UserId= Session["Usuario"].ToString();
             }
         }
 
@@ -99,7 +101,7 @@ namespace Demo
                     {
                         pCheque.FechaCreacion = DateTime.Now.Date;
                         pCheque.Activo = true;
-                        pCheque.UsuarioCreacion = "eduardo23@gmail.com";
+                        pCheque.UsuarioCreacion = UserId;
                         response = dbChq.Agregar(pCheque);
 
                     }
@@ -107,7 +109,7 @@ namespace Demo
                     {
                         pCheque.FechaActualizacion = DateTime.Now.Date;
                         pCheque.Activo = true;
-                        pCheque.UsuarioActualizacion = "eduardo23@gmail.com";
+                        pCheque.UsuarioActualizacion = UserId;
                         response = dbChq.Grabar(pCheque);
                         //dbChq.Grabar(pCheque);
                         //sRet = "'El cheque se ha Actualizado Satisfactoriamente.'";
