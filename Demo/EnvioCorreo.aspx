@@ -19,7 +19,7 @@
             transition-duration: 0.4s;
         }
 
-          .btnHermesNegro {
+        .btnHermesNegro {
             background-color: #3c454f;
             border: none;
             color: white;
@@ -240,7 +240,7 @@
     <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header"  style="background-color: #D6EAF8">
+                <div class="modal-header" style="background-color: #D6EAF8">
                     Mensaje de Confirmacion
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -249,9 +249,45 @@
                 </div>
                 <div class="modal-footer">
                     <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Aceptar</button>
-                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancelar</button>                    
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancelar</button>
                     <%--<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <a id="btn-submit-confirmacion" class="btn btn-success success">Ok</a>--%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalpromt" class="modal fade in" style="padding-left: 17px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="ezAlerts-header" class="modal-header alert-primary" style="padding: 15px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                    <button id="close-button" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 id="ezAlerts-title" class="modal-title">Attention</h4>
+                </div>
+                <div id="ezAlerts-body" class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <div id="alert-info-promt" class="alert alert-info alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-warn-promt" class="alert alert-warning alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-danger-promt" class="alert alert-danger alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <textarea class="form-control" id="txt_prompt"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div id="ezAlerts-footer" class="modal-footer">
+                    <input class="btnHermes" id="btnpront" value="Aceptar" />
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancelar</button>                    
                 </div>
             </div>
         </div>
@@ -291,14 +327,26 @@
                 Alert.warn("Por favor agregue datos a la seccion Grupo Correo Destino.");
                 return false;
             }
-            //if (document.getElementById('input08').files.length == 0) {
-            //    Alert.warn("Por favor adjunte por los menos un archivo.");
-            //    return false;
-            //}
+            if (cbo_plantilla.split("-")[1] > 0) {
+                $("#modalpromt").modal("show");
+                $('#btnpront').attr('onclick', 'aceptarPromt()');
+            } else {
+                $("#confirm-submit").modal("show");
+                $('#btn-submit-confirmacion').attr('onclick', 'EnviarCorreo()');
+            }
+        }
+        function aceptarPromt() {
+            var txtpromt = $("#txt_prompt").val();
+            if (txtpromt == "")
+            {
+                AlertPromt.warn("Por favor ingrese parrafo");
+                return false;
+            }
+            $("#modalpromt").modal("hide");
             $("#confirm-submit").modal("show");
             $('#btn-submit-confirmacion').attr('onclick', 'EnviarCorreo()');
+            return false;
         }
-
         function checkfile(sender) {
             var validExts = new Array(".xlsx", ".xls", ".jpg", "JPEG", "png", ".doc", ".pdf", ".docx");
             var fileExt = sender.value;
@@ -310,6 +358,24 @@
                 return false;
             }
             else return true;
+        }
+        AlertPromt = {
+            show: function ($div, msg) {
+                $div.find('.alert-msg').text(msg);
+                if ($div.css('display') === 'none') {
+                    // fadein, fadeout.                    
+                    $div.fadeIn(1000).delay(2000).fadeOut(2000);
+                }
+            },
+            info: function (msg) {
+                this.show($('#alert-info-promt'), msg);
+            },
+            warn: function (msg) {
+                this.show($('#alert-warn-promt'), msg);
+            },
+            danger: function (msg) {
+                this.show($('#alert-danger-promt'), msg);
+            }
         }
 
         Alert = {
@@ -344,6 +410,7 @@
                 $("#cbo_plantilla").focus();
                 return false;
             }
+            cbo_plantilla = cbo_plantilla.split("-")[0];
             $.ajax({
                 type: "POST",
                 url: "EnvioCorreo.aspx/Preview",
@@ -404,23 +471,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    var models = JSON.parse(response.d.DataJson);//(typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-                    // listOrigen = models;
+                    var models = JSON.parse(response.d.DataJson);
 
-                    //if (models.length > 0) {
-                    //    debugger;
-                    //    if (listOrigen.length > 0) {
-                    //        for (var j = 0; j < models.length; j++) {
-                    //            var objeto = listOrigen.find(obj => obj.id === models[j].id);
-                    //            if (objeto === undefined || objeto === null) {
-                    //                listOrigen.push(models[j]);
-                    //            }
-                    //        }
-                    //    }
-                    //    else {
-                    //        listOrigen = models;
-                    //    }
-                    //}
                     if (listDestino.length > 0) {
                         listOrigen = [];
                         for (var j = 0; j < models.length; j++) {
@@ -445,21 +497,17 @@
         function cargargrupocorre_origen() {
             $('#cbogrupocorreoorigen').empty();
             for (var i = 0; i < listOrigen.length; i++) {
-                //if (listOrigen[i].flag == 0) {
                 var valor = listOrigen[i].id;
                 var text = listOrigen[i].descripcion;
                 $("#cbogrupocorreoorigen").append($("<option></option>").val(valor).html(text));
-                // }
             }
         }
         function cargargrupocorre_destino() {
             $('#cbogrupocorreodestino').empty();
             for (var i = 0; i < listDestino.length; i++) {
-                //if (listOrigen[i].flag == 0) {
                 var valor = listDestino[i].id;
                 var text = listDestino[i].descripcion;
                 $("#cbogrupocorreodestino").append($("<option></option>").val(valor).html(text));
-                //}
             }
         }
 
@@ -476,7 +524,7 @@
                     $('#cbo_plantilla').empty();
                     $('#cbo_plantilla').append("<option value='0'>--SELECCIONE--</option>");
                     for (var i = 0; i < models.length; i++) {
-                        var valor = models[i].id;
+                        var valor = models[i].id + "-" + models[i].fl_parrafo;
                         var text = models[i].descripcion;
                         $("#cbo_plantilla").append($("<option></option>").val(valor).html(text));
                     }
@@ -490,18 +538,21 @@
 
 
         function EnviarCorreo() {
-            var cbo_origen = $("#cbo_origen").val();
+            var cbo_origen = $("#cbo_origen").val().split("");
             var cbo_plantilla = $("#cbo_plantilla").val();
             var txt_asunto = $("#txt_asunto").val();
+            var txt_prompt = $("#txt_prompt").val();
 
             var data = new FormData();
             for (var i = 0, len = document.getElementById('input08').files.length; i < len; i++) {
                 data.append("Files" + i, document.getElementById('input08').files[i]);
             }
+            cbo_plantilla = cbo_plantilla.split("-")[0];
             data.append("cbo_origen", cbo_origen);
             data.append("cbo_plantilla", cbo_plantilla);
             data.append("txt_asunto", txt_asunto);
-            debugger;
+            data.append("txt_prompt", txt_prompt);
+
             var list = [];
             for (var i = 0; i < listDestino.length; i++) {
                 var id = listDestino[i].id.toString();

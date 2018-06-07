@@ -14,7 +14,17 @@ namespace DAO_Hermes.ViewModel
         public string _ruta_plantilla_html;
         public int _id_estado;
         public string _fec_reg;
+        public int _fl_parrafo;
         public int _fl_nuevo; //fl_nuevo : 0 Nuevo fl_nuevo: 1 registro existente en la bd
+
+        public int fl_parrafo
+        {
+            get { return _fl_parrafo; }
+            set
+            {
+                _fl_parrafo = value;
+            }
+        }
         public int fl_nuevo
         {
             get { return _fl_nuevo; }

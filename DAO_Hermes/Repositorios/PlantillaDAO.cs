@@ -126,7 +126,8 @@ namespace DAO_Hermes.Repositorios
                                 entidad.descripcion = Convert.ToString(reader["descripcion"] == DBNull.Value ? "" : reader["descripcion"]);
                                 entidad.NombreArchivoHtml = Convert.ToString(reader["NombreArchivoHtml"] == DBNull.Value ? "" : reader["NombreArchivoHtml"]);
                                 entidad.ruta_plantilla_html = Convert.ToString(reader["ruta_plantilla_html"] == DBNull.Value ? "" : reader["ruta_plantilla_html"]);
-                             
+                                entidad.fl_parrafo = Convert.ToInt32(reader["fl_parrafo"] == DBNull.Value ? "" : reader["fl_parrafo"]);
+
                             }
                         }
                         clientResponse.DataJson = JsonConvert.SerializeObject(entidad).ToString();
@@ -170,6 +171,7 @@ namespace DAO_Hermes.Repositorios
                                 entidad.descripcion = Convert.ToString(reader["descripcion"] == DBNull.Value ? "" : reader["descripcion"]);
                                 entidad.NombreArchivoHtml = Convert.ToString(reader["NombreArchivoHtml"] == DBNull.Value ? "" : reader["NombreArchivoHtml"]);
                                 entidad.ruta_plantilla_html = Convert.ToString(reader["ruta_plantilla_html"] == DBNull.Value ? "" : reader["ruta_plantilla_html"]);
+                                entidad.fl_parrafo = Convert.ToInt32(reader["fl_parrafo"] == DBNull.Value ? "" : reader["fl_parrafo"]);
                                 entidad.fl_nuevo = 1; 
                                 entidad.list_plantilla_detalle = getPlantillaDetalle(entidad.id);
                                 list_plantilla.Add(entidad);
@@ -264,7 +266,8 @@ namespace DAO_Hermes.Repositorios
                     using (comando = new SqlCommand("usp_ins_planilla", conexion))
                     {
                         comando.Parameters.AddWithValue("@xml", xml);
-                        comando.Parameters.AddWithValue("@descripcion", objeto.descripcion);
+                        comando.Parameters.AddWithValue("@fl_parrafo", objeto.fl_parrafo);
+                        comando.Parameters.AddWithValue("@descripcion", objeto.descripcion);                        
                         comando.Parameters.AddWithValue("@NombreArchivoHtml", objeto.NombreArchivoHtml);
                         comando.Parameters.AddWithValue("@ruta_plantilla_html", objeto.ruta_plantilla_html);
                         comando.Parameters.AddWithValue("@id_estado", objeto.id_estado);

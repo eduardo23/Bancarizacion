@@ -29,26 +29,26 @@ namespace Demo
                 int cbo_plantilla = 0;
                 int.TryParse(context.Request["cbo_origen"], out cbo_origen);
                 int.TryParse(context.Request["cbo_plantilla"], out cbo_plantilla);
-            
-                string txt_asunto = context.Request["txt_asunto"];              
+                string txt_prompt = context.Request["txt_prompt"];
+                string txt_asunto = context.Request["txt_asunto"];
                 string id_grupo_correo = context.Request.Form.Get("list");
                 HttpFileCollection uploadFiles = context.Request.Files;
                 List<string> listrutas = new List<string>();
-               
+
                 ClientResponse responseruta;
                 using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
                 {
                     responseruta = dbParametrosMaestro.getObjParametroMaestro("RUTA_ADJUNTO_ENVIO_CORREOS");
                 }
                 ParametrosMaestros rutaadjunto = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responseruta.DataJson);
-           
-                
-                
+
+
+
                 for (int i = 0; i < uploadFiles.Count; i++)
                 {
 
                     HttpPostedFile postedFile = uploadFiles[i];
-                    tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"] + rutaadjunto.valor+ hora;
+                    tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"] + rutaadjunto.valor + hora;
 
                     savepath = context.Server.MapPath(tempPath);
                     if (!Directory.Exists(savepath))
@@ -97,12 +97,17 @@ namespace Demo
                 string bodyaux = string.Empty;
                 foreach (GestionCorreo item in liscorreos)
                 {
-                    bodyaux = body.Replace("{NombreUsuario}", item.Nombre1 + " " + item.Nombre2);
-                    bodyaux = bodyaux.Replace("{linkdardebaja}", desafiliacion.valor+"?tokens=" +item.Tokens);
+                    bodyaux = body;
+                    if (objetoplantilla.fl_parrafo == 1)
+                    {
+                        bodyaux = bodyaux.Replace("{parrafo}", txt_prompt);
+                    }
+                    bodyaux = bodyaux.Replace("{NombreUsuario}", item.Nombre1 + " " + item.Nombre2);
+                    bodyaux = bodyaux.Replace("{linkdardebaja}", desafiliacion.valor + "?tokens=" + item.Tokens);
                     bodyaux = HttpUtility.HtmlDecode(bodyaux);
                     cUtil.EnvioMailSegundo(txt_asunto, item.Email, bodyaux, listrutas, usuario, clave, smtp, puerto);
                 }
-              
+
                 //Directory.Delete(savepath, true);
 
                 //plantilla.list_plantilla_detalle = list_plantilla_detalle;
