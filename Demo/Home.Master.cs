@@ -63,6 +63,7 @@ namespace Demo
                             C.Visible = true;
                             D.Visible = true;
                             E.Visible = true;
+                            F.Visible = true;
                             CL1.Visible = true;
                             CL2.Visible = true;
                         }
@@ -75,7 +76,8 @@ namespace Demo
                             C.Visible = false;
                             D.Visible = false;
                             E.Visible = false;
-                        }
+                            F.Visible = false;
+                    }
                     }
                     else
                     {

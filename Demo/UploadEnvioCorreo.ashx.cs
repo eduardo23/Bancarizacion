@@ -88,7 +88,7 @@ namespace Demo
                 {
                     body = reader.ReadToEnd();
                 }
-                body = "<div style='padding: 0px 220px; '>" + body + "</div>";
+                body = "<div style='padding: 0px 2px; '>" + body + "</div>";
                 using (GestionCorreoDAO dbGestionCorreoDAO = new GestionCorreoDAO())
                 {
                     response = dbGestionCorreoDAO.getLstGestionCorreoXGrupo(id_grupo_correo);

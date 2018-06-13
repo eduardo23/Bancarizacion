@@ -111,7 +111,7 @@ namespace DAO_Hermes.Repositorios
 
             return clientResponse;
         }
-        public ClientResponse getLstGrupoCorreo(int paginaActual, int RegistroXPagina)
+        public ClientResponse getLstGrupoCorreo(int origen, string grupo, int estado, int paginaActual, int RegistroXPagina)
         {
             try
             {
@@ -121,6 +121,9 @@ namespace DAO_Hermes.Repositorios
                     using (comando = new SqlCommand("usp_sel_grupocorreo", conexion))
                     {
                         //cmd.Parameters.AddWithValue("@skey", skey);
+                        comando.Parameters.AddWithValue("@origen", origen);
+                        comando.Parameters.AddWithValue("@grupo", grupo);
+                        comando.Parameters.AddWithValue("@estado", estado);
                         comando.Parameters.AddWithValue("@vi_Pagina", paginaActual);
                         comando.Parameters.AddWithValue("@vi_RegistrosporPagina", RegistroXPagina);
                         comando.Parameters.Add("@vi_RecordCount", SqlDbType.Int).Direction = ParameterDirection.Output;

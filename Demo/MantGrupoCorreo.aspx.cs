@@ -51,14 +51,14 @@ namespace Demo
             return response;
         }
         [WebMethod]
-        public static ClientResponse getListGrupoCorreo(int paginaActual, int RegistroXpagina)
+        public static ClientResponse getListGrupoCorreo(int origen, string grupo, int estado, int paginaActual, int RegistroXpagina)
         {
             ClientResponse response;
             try
             {
                 using (GrupoCorreoDAO dbGrupoCorreo = new GrupoCorreoDAO())
                 {
-                    response = dbGrupoCorreo.getLstGrupoCorreo(paginaActual, RegistroXpagina);
+                    response = dbGrupoCorreo.getLstGrupoCorreo(origen, grupo, estado, paginaActual, RegistroXpagina);
                 }
             }
             catch (Exception exception)

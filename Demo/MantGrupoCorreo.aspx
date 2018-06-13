@@ -98,18 +98,48 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
-                        <div class="col-sm-12 col-lg-12">
-                            <div class="pull-left"></div>
-                            <div class="pull-right">
-                                <button type="button" class="btnHermesNegro"  onclick="buscar();">
-                                    Buscar
-                                </button>
-                                <button type="button" class="btnHermes"  onclick="modalRegistrar();">
-                                    Nuevo
-                                </button>
-                            </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <label for="cbo_origenfil" class="control-label">Origen</label>
+                                    </div>
+                                    <div class="col-sm-8 col-md-8 col-lg-8">
+                                        <select name="cbo_origenfil" id="cbo_origenfil" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Origen">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-md-5 col-lg-4">
+                                   <div class="col-sm-2 col-md-2 col-lg-2">
+                                        <label for="txt_grupofil" class="control-label">Grupo</label>
+                                    </div>
+                                   <div class="col-sm-10 col-md-10 col-lg-10">
+                                        <input name="txt_grupofil" type="text"  style="text-transform: uppercase;" id="txt_grupofil" class="form-control" placeholder="Ingrese Grupo" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        <label for="cbo_estadofil" class="control-label">Estado</label>
+                                    </div>
+                                    <div class="col-sm-9 col-md-9 col-lg-9">
+                                        <select name="cbo_estadofil" id="cbo_estadofil" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Estado">
+                                        </select>
+                                    </div>                                
+                                </div>
+                                <div class="col-sm-2 col-md-2 col-lg-2" style="text-align:right;">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <button type="button" class="btnHermesNegro"  onclick="buscar();">
+                                            Buscar
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <button type="button" class="btnHermes"  onclick="modalRegistrar();">
+                                            Nuevo
+                                        </button>
+                                    </div>
+                                </div>
                         </div>
                     </div>
+                </div>
 
 
                     <div class="form-group row">
@@ -295,6 +325,18 @@
             listarCheques(1);
         }
         function listarCheques(pagina) {
+            debugger
+            var id_cbo_origenfil = $("#cbo_origenfil").val();
+            if (id_cbo_origenfil == null) {
+                id_cbo_origenfil = 0;
+            }
+            var id_cbo_estadofil = $("#cbo_estadofil").val();
+            if (id_cbo_estadofil == null) {
+                id_cbo_estadofil = 1;
+            }
+
+            var id_txt_grupo = $("#txt_grupofil").val();
+
             var currentPage = 0;
             if (firstPageClick) {
                 currentPage = $pagination.twbsPagination('getCurrentPage');
@@ -304,7 +346,7 @@
             $.ajax({
                 type: "POST",
                 url: "MantGrupoCorreo.aspx/getListGrupoCorreo",
-                data: "{'paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "'}",
+                data: "{'origen':'" + id_cbo_origenfil + "','grupo':'" + id_txt_grupo + "','estado':'" + id_cbo_estadofil + "','paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -388,16 +430,22 @@
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);
                     $('#cbo_estado').empty();
+                    $('#cbo_estadofil').empty();
                     $('#cbo_estado').append("<option value=''>--SELECCIONE--</option>");
                     for (var i = 0; i < models.length; i++) {
                         var valor = models[i].valor;
                         var text = models[i].descripcion;
                         $("#cbo_estado").append($("<option></option>").val(valor).html(text));
                     }
-                    //debugger;
-                    //$("#cbo_estado").val("1");
                     $('#cbo_estado option[value="1"]').attr("selected", "selected");
-                    //$('#cbo_estado option:eq(1)').attr('selected', 'selected')
+
+                    //$('#cbo_estadofil').append("<option value=''>--SELECCIONE--</option>");
+                    for (var i = 0; i < models.length; i++) {
+                        var valor = models[i].valor;
+                        var text = models[i].descripcion;
+                        $("#cbo_estadofil").append($("<option></option>").val(valor).html(text));
+                    }
+                    //$('#cbo_estadofil option[value="1"]').attr("selected", "selected");
                 },
                 error: function (response) {
                     if (response.length != 0)
@@ -415,12 +463,20 @@
                 success: function (response) {
                     var models = JSON.parse(response.d.DataJson);
                     $('#cbo_origen').empty();
+                    $('#cbo_origenfil').empty();
                     $('#cbo_origen').append("<option value='0'>--SELECCIONE--</option>");
                     for (var i = 0; i < models.length; i++) {
                         var valor = models[i].valor;
                         var text = models[i].descripcion;
                         $("#cbo_origen").append($("<option></option>").val(valor).html(text));
                     }
+                    $('#cbo_origenfil').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < models.length; i++) {
+                        var valor = models[i].valor;
+                        var text = models[i].descripcion;
+                        $("#cbo_origenfil").append($("<option></option>").val(valor).html(text));
+                    }
+                    //$('#cbo_origenfil option[value="1"]').attr("selected", "selected");
                 },
                 error: function (response) {
                     if (response.length != 0)
@@ -530,7 +586,7 @@
             $("#divcodigo").css("display", "block");
             $("#txt_grupo").val(data.descripcion);
             $("#cbo_estado").val(data.estado);
-            $('#cbo_estado').prop('disabled', true);
+            $('#cbo_estado').prop('disabled', false);
             $("#cbo_origen").val(data.origen);
             $("#txt_codigo").val(data.id);
             $("#flag_accion").val("UPD");

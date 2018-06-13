@@ -122,8 +122,16 @@ namespace Demo
 
                 HtmlDocument document1 = new HtmlDocument();
                 document1.Load(plantilla.ruta_plantilla_html);
-                List<HtmlNode> list = document1.DocumentNode.SelectNodes("//pre").ToList();
-                plantilla.fl_parrafo = list.Count > 0 ? 1 : 0;
+                try
+                {
+                    List<HtmlNode> list = document1.DocumentNode.SelectNodes("//pre").ToList();
+                    plantilla.fl_parrafo = list.Count > 0 ? 1 : 0;
+                }
+                catch (Exception)
+                {
+                    plantilla.fl_parrafo = 0;
+                }
+
                 ClientResponse response;
                 using (PlantillaDAO dbPlanilla = new PlantillaDAO())
                 {
