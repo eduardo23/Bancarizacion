@@ -260,7 +260,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div id="ezAlerts-header" class="modal-header alert-primary" style="padding: 15px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
-                    <button id="close-button" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 id="ezAlerts-title" class="modal-title">Attention</h4>
+                    <button id="close-button" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 id="ezAlerts-title" class="modal-title">Ingrese parrafo</h4>
                 </div>
                 <div id="ezAlerts-body" class="modal-body">
                     <div class="form-group row">

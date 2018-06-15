@@ -69,8 +69,9 @@ namespace Demo
                 ClientResponse response;
                 using (GrupoCorreoDAO dbGrupoCorreo = new GrupoCorreoDAO())
                 {
-                    response = dbGrupoCorreo.getGrupoCorreoCombo();
+                    response = dbGrupoCorreo.getGrupoCorreoCombo(2);
                 }
+
                 List<GrupoCorreo> list = JsonConvert.DeserializeObject<List<GrupoCorreo>>(response.DataJson);
 
                 for (rCnt = 1; rCnt <= rw; rCnt++)

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="GestionarCorreos.aspx.cs" Inherits="Demo.GestionarCorreos" %>
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="GestionarCorreos.aspx.cs" Inherits="Demo.GestionarCorreos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
@@ -115,12 +115,55 @@
                         </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
-                            <div class="pull-left">
-                                <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
-                                <div class="col-lg-8">
-                                    <select name="cbo_grupo_consultar" onchange="selectChange()" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
-                                    </select>
+                            <div class="col-sm-1 col-lg-1">                                
+                                 <label for="cbo_origenfil" class="col-lg-4 control-label">Origen</label>
+                            </div>
+                            <div class="col-sm-2 col-lg-2">
+                                <select name="cbo_origenfil" onchange="selectChange()" id="cbo_origenfil" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Origen">
+                                </select>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="col-sm-1 col-lg-1">                                
+                                 <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
+                            </div>
+                            <div class="col-sm-2 col-lg-2">
+                                <%--<select name="cbo_grupo_consultar" onchange="selectChange()" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">--%>
+                                <select name="cbo_grupo_consultar" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
+                                </select>
+                            </div>
+                            <div class="col-sm-9 col-lg-9">
+                                <div class="pull-right">
+                                     <button type="button" class="btnHermesNegro"  onclick="buscar();">
+                                        Buscar
+                                    </button>
+                                    <button type="button" class="btnHermes" data-toggle="modal" onclick="ImportarCorreos();">
+                                        Importar Correo
+                                    </button>
+                                    <button type="button" class="btnHermes" data-toggle="modal" onclick="modalCargaMasivodeCorrreo();">
+                                        Carga Masivo de Corrreo
+                                    </button>
+                                    <button type="button" class="btnHermes" data-toggle="modal" onclick="modalRegistrar();">
+                                        Nuevo
+                                    </button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--<div class="form-group row">
+                        <div class="col-sm-12 col-lg-12">
+                            <div class="col-sm-1 col-lg-1">
+                                <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
+                            </div>
+                            <div class="col-sm-11 col-lg-11">
+                            <div class="col-lg-8">
+                                <select name="cbo_grupo_consultar" onchange="selectChange()" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">
+                                </select>
+                            </div>
                             </div>
                             <div class="pull-right">
                                  <button type="button" class="btnHermesNegro"  onclick="buscar();">
@@ -137,7 +180,8 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                        </div>
+                    </div>--%>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
                             <table class="table-style-one" style="width: 100%">
@@ -443,6 +487,10 @@
         }
 
         function listarCheques(pagina) {
+            var id_cbo_origenfil = $("#cbo_origenfil").val();
+            if (id_cbo_origenfil == null) {
+                id_cbo_origenfil = 1;
+            }
             var id_cbo_grupo_consultar = $("#cbo_grupo_consultar").val();
             if (id_cbo_grupo_consultar == null) {
                 id_cbo_grupo_consultar = 0;
@@ -456,7 +504,7 @@
             $.ajax({
                 type: "POST",
                 url: "GestionarCorreos.aspx/getListGestionCorreo",
-                data: "{'paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "','id_cbo_grupo_consultar':'" + id_cbo_grupo_consultar + "'}",
+                data: "{'paginaActual':'" + currentPage + "','RegistroXpagina':'" + RegistroXpagina + "','id_cbo_origenfil':'" + id_cbo_origenfil + "','id_cbo_grupo_consultar':'" + id_cbo_grupo_consultar + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -542,6 +590,7 @@
             $("#txt_materno").val("");
             $("#txt_email").val("");
             $("#cbo_grupo_crear").val("0");
+            $('#cbo_grupo_crear').prop('disabled', false);
             $('#cbo_estado option[value="1"]').attr("selected", "selected");
             $('#cbo_estado').prop('disabled', 'disabled');
             $("#divcodigo").css("display", "none");
@@ -613,8 +662,9 @@
             $("#txt_materno").val(data.ApeMaterno);
             $("#txt_email").val(data.Email);
             $("#cbo_grupo_crear").val(data.id_grupo_correo);
+            $('#cbo_grupo_crear').prop('disabled', true);
             $("#cbo_estado").val(data.id_estado);
-            $('#cbo_estado').prop('disabled', true);
+            $('#cbo_estado').prop('disabled', false);
             $("#flag_accion").val("UPD");
             $('#myModal').modal('show');
         }
@@ -717,11 +767,45 @@
             });
         }
 
-        function loadGrupoConsultar() {
+        function loadOrigen() {
             $.ajax({
                 type: "POST",
-                url: "GestionarCorreos.aspx/getGrupoCorreoCombo",
-                data: '{}',
+                url: "GestionarCorreos.aspx/getListParametrosMaestro",
+                data: '{skey:"ORIGEN_GRUPOCORREO"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var models = JSON.parse(response.d.DataJson);
+                    $('#cbo_origenfil').empty();
+                    $('#cbo_origenfil').append("<option value='0'>--SELECCIONE--</option>");
+                    for (var i = 0; i < models.length; i++) {
+                        var valor = models[i].valor;
+                        var text = models[i].descripcion;
+                        $("#cbo_origenfil").append($("<option></option>").val(valor).html(text));
+                    }
+                    $('#cbo_origenfil option[value="1"]').attr("selected", "selected");
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
+        }
+
+        function selectChange() {
+            var origen = $("#cbo_origenfil").val();
+            loadGrupoConsultar(origen);
+        }
+
+        function loadGrupoConsultar(origen) {
+            if (origen == null) {
+                origen = 1;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "MantGrupoCorreo.aspx/getListGrupoCorreoXOrigen",
+                data: '{origen:"' + origen + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -739,13 +823,37 @@
                         alert(response);
                 }
             });
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "GestionarCorreos.aspx/getGrupoCorreoCombo",
+            //    data: '{}',
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (response) {
+            //        var models = JSON.parse(response.d.DataJson);
+            //        $('#cbo_grupo_consultar').empty();
+            //        $('#cbo_grupo_consultar').append("<option value='0'>--Todos--</option>");
+            //        for (var i = 0; i < models.length; i++) {
+            //            var valor = models[i].id;
+            //            var text = models[i].descripcion;
+            //            $("#cbo_grupo_consultar").append($("<option></option>").val(valor).html(text));
+            //        }
+            //    },
+            //    error: function (response) {
+            //        if (response.length != 0)
+            //            alert(response);
+            //    }
+            //});
         }
 
         function loadGrupo() {
+            origen = 2;
+
             $.ajax({
                 type: "POST",
                 url: "GestionarCorreos.aspx/getGrupoCorreoCombo",
-                data: '{}',
+                data: "{'origen':'" + origen + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -843,6 +951,7 @@
         }
 
         $(document).ready(function (e) {
+            loadOrigen();
             loadGrupoConsultar();
             loadEstado();
             loadGrupo();

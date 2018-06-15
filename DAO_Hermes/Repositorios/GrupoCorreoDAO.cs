@@ -70,7 +70,7 @@ namespace DAO_Hermes.Repositorios
 
             return clientResponse;
         }
-        public ClientResponse getGrupoCorreoCombo()
+        public ClientResponse getGrupoCorreoCombo(int origen)
         {
             try
             {
@@ -79,6 +79,7 @@ namespace DAO_Hermes.Repositorios
                     using (comando = new SqlCommand("usp_sel_grupo_correo_combo", conexion))
                     {                        
                         comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@origen", origen);
                         conexion.Open();
                         using (reader = comando.ExecuteReader())
                         {

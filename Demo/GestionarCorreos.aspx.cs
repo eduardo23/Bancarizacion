@@ -17,14 +17,14 @@ namespace Demo
 
         }
         [WebMethod]
-        public static ClientResponse getGrupoCorreoCombo()
+        public static ClientResponse getGrupoCorreoCombo(int origen)
         {
             ClientResponse response;
             try
             {
                 using (GrupoCorreoDAO dbGrupoCorreo = new GrupoCorreoDAO())
                 {
-                    response = dbGrupoCorreo.getGrupoCorreoCombo();
+                    response = dbGrupoCorreo.getGrupoCorreoCombo(origen);
                 }
             }
             catch (Exception exception)
@@ -52,14 +52,14 @@ namespace Demo
             return response;
         }
         [WebMethod]
-        public static ClientResponse getListGestionCorreo(int paginaActual, int RegistroXpagina, int id_cbo_grupo_consultar)
+        public static ClientResponse getListGestionCorreo(int paginaActual, int RegistroXpagina, int id_cbo_origenfil, int id_cbo_grupo_consultar)
         {
             ClientResponse response;
             try
             {
                 using (GestionCorreoDAO dbGestionCorreo = new GestionCorreoDAO())
                 {
-                    response = dbGestionCorreo.getLstGestionCorreo(paginaActual, RegistroXpagina, id_cbo_grupo_consultar);
+                    response = dbGestionCorreo.getLstGestionCorreo(paginaActual, RegistroXpagina, id_cbo_origenfil, id_cbo_grupo_consultar);
                 }
             }
             catch (Exception exception)

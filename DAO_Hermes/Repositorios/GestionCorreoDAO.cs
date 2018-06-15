@@ -82,7 +82,7 @@ namespace DAO_Hermes.Repositorios
             return clientResponse;
 
         }
-        public ClientResponse getLstGestionCorreo(int paginaActual, int RegistroXPagina, int id_cbo_grupo_consultar)
+        public ClientResponse getLstGestionCorreo(int paginaActual, int RegistroXPagina, int id_cbo_origenfil, int id_cbo_grupo_consultar)
         {
             try
             {
@@ -91,6 +91,7 @@ namespace DAO_Hermes.Repositorios
                 {
                     using (comando = new SqlCommand("usp_sel_gestioncorreo", conexion))
                     {
+                        comando.Parameters.AddWithValue("@id_cbo_origenfil", id_cbo_origenfil);
                         comando.Parameters.AddWithValue("@id_grupo_correo", id_cbo_grupo_consultar);
                         comando.Parameters.AddWithValue("@vi_Pagina", paginaActual);
                         comando.Parameters.AddWithValue("@vi_RegistrosporPagina", RegistroXPagina);
