@@ -1256,6 +1256,7 @@ namespace Demo
                     alu.TipoDocumentoID = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
                     alu.NumeroDocumento = txtNumeroDocumento.Text;
                     alu.FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text);
+                    alu.ID = Convert.ToInt32(hdnAlumnoID.Value);
                     db.Agregar(alu);
 
                     if (hdnProductoID.Value == "2")

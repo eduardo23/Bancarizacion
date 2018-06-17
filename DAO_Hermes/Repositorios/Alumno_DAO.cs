@@ -73,13 +73,13 @@ namespace DAO_Hermes.Repositorios
         {
             using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
             {
-                if (ExisteAlumno(Convert.ToInt32(alumno.TipoDocumentoID), alumno.NumeroDocumento) == false)
+                if (Existe(alumno.ID) == false)
                 {
                     db.Alumno.Add(alumno);
                 }
                 else
                 {
-                    Alumno alu1 = db.Alumno.Where(p => p.TipoDocumentoID == alumno.TipoDocumentoID && p.NumeroDocumento == alumno.NumeroDocumento).FirstOrDefault();
+                    Alumno alu1 = db.Alumno.Where(p => p.ID == alumno.ID).FirstOrDefault();
 
                     alu1.Nombre = alumno.Nombre;
                     alu1.ApellidoPaternno = alumno.ApellidoPaternno.ToUpper();
@@ -94,6 +94,30 @@ namespace DAO_Hermes.Repositorios
                 }
                 return db.SaveChanges();
             }
+
+            //using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
+            //{
+            //    if (ExisteAlumno(Convert.ToInt32(alumno.TipoDocumentoID), alumno.NumeroDocumento) == false)
+            //    {
+            //        db.Alumno.Add(alumno);
+            //    }
+            //    else
+            //    {
+            //        Alumno alu1 = db.Alumno.Where(p => p.TipoDocumentoID == alumno.TipoDocumentoID && p.NumeroDocumento == alumno.NumeroDocumento).FirstOrDefault();
+
+            //        alu1.Nombre = alumno.Nombre;
+            //        alu1.ApellidoPaternno = alumno.ApellidoPaternno.ToUpper();
+            //        alu1.ApellidoMaterno = alumno.ApellidoMaterno.ToUpper();
+            //        alu1.FechaNacimiento = alumno.FechaNacimiento;
+            //        alu1.GradoID = alumno.GradoID;
+            //        alu1.Seccion = alumno.Seccion;
+            //        alu1.Sexo = alumno.Sexo;
+            //        alu1.FechaCreacion = DateTime.Now;
+            //        alu1.TipoDocumentoID = alumno.TipoDocumentoID;
+            //        alu1.NumeroDocumento = alumno.NumeroDocumento;
+            //    }
+            //    return db.SaveChanges();
+            //}
         }
         //public int AgregarAfiliadoAccidentes(Alumno alumno, AfiliacionSeguro AFIL_SEGURO, int CodigoID)
         //        {

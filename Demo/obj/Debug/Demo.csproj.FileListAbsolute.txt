@@ -133,4 +133,3 @@ C:\Bancarizacion\Demo\obj\Debug\Demo.pdb
 C:\Bancarizacion\Demo\bin\HtmlAgilityPack.dll
 C:\Bancarizacion\Demo\bin\HtmlAgilityPack.pdb
 C:\Bancarizacion\Demo\bin\HtmlAgilityPack.xml
-C:\Bancarizacion\Demo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
