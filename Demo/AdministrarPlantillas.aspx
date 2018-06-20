@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="AdministrarPlantillas.aspx.cs" Inherits="Demo.AdministrarPlantillas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="Css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
-    <script type="text/javascript" src="Scripts/FileStyle/bootstrap-filestyle.js"></script>
+    <%--<link href="Css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />--%>
+
 
     <style>
         .btnHermes {
@@ -82,6 +82,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="content-header">
         <div class="container-fluid">
 
@@ -117,10 +118,19 @@
                             <div class="form-group row">
                                 <div class="col-sm-12 col-lg-12">
                                     <label>Seleccione Archivo - HTML</label>
-                                    <input type="file" id="input08" onchange="checkfile(this);">
+                                    <div class="input-group">
+                                        <input type="text" readonly="readonly" id="file_path_input08" class="form-control" placeholder="Adjunte Archivo">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default btn-success" style="color: white" type="button" id="file_browser_input08">
+                                                <i class="fa fa-search"></i>Examinar</button>
+                                        </span>
+                                    </div>
+                                    <input type="file" class="hidden" id="input08" name="input08">
+                                    <%--<label>Seleccione Archivo - HTML</label>
+                                    <input type="file" id="input08" onchange="checkfile(this);">--%>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <%-- <div class="form-group row">
                                 <div class="col-sm-12 col-lg-8">
                                     <label>Seleccione Archivo - Imagen</label>
                                     <input type="file" id="input09" onchange="checkfileImgen(this);">
@@ -130,7 +140,28 @@
                                         Agregar Imagen
                                     </button>
                                 </div>
+                            </div>--%>
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 col-lg-8">
+                                    <label>Seleccione Archivo - Imagen</label>
+                                    <div class="input-group">
+                                        <input type="text" readonly="readonly" id="file_path" class="form-control" placeholder="Adjunte Archivo">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default btn-success" style="color: white" type="button" id="file_browser">
+                                                <i class="fa fa-search"></i>Examinar</button>
+                                        </span>
+                                    </div>
+                                    <input type="file" class="hidden" id="input09" name="input09">
+                                </div>
+                                <div class="col-sm-12 col-lg-4" style="margin-top: 23px;">
+                                    <button type="button" class="btnHermes" style="width: 100%;" onclick="AgregarImagen();">
+                                        Agregar Imagen
+                                    </button>
+                                </div>
                             </div>
+
+
                             <div class="form-group row">
                                 <div class="col-sm-12 col-lg-12">
                                     <table class="table-style-one" style="width: 100%">
@@ -236,25 +267,51 @@
                 </div>
                 <div class="modal-footer">
                     <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Aceptar</button>
-                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancelar</button>                    
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-
+   <%-- <script type="text/javascript" src="Scripts/FileStyle/bootstrap-filestyle.js"></script>--%>
     <input type="hidden" id="flag_accion" value="INS" />
     <script type="text/javascript">
-        $('#input08').filestyle({
-            'placeholder': 'adjunte archivo',
-            text: ' Examinar',
-            btnClass: 'btn-success'
+        //$('#input08').filestyle({
+        //    'placeholder': 'adjunte archivo',
+        //    text: ' Examinar',
+        //    btnClass: 'btn-success'
+        //});
+        //$('#input09').filestyle({
+        //    'placeholder': 'adjunte archivo',
+        //    text: ' Examinar',
+        //    btnClass: 'btn-success'
+        //});
+
+        $('#file_browser_input08').click(function (e) {
+            e.preventDefault();
+            $('#input08').click();
+        });
+        $('#input08').change(function () {
+            debugger;
+            $('#file_path_input08').val($(this).val());
+            var fl_result = checkfile($('#file_path_input08').val());
+            if (!fl_result) {
+                $('#file_path_input08').val("");
+                $('#input08').val("");
+            }
         });
 
 
-        $('#input09').filestyle({
-            'placeholder': 'adjunte archivo',
-            text: ' Examinar',
-            btnClass: 'btn-success'
+        $('#file_browser').click(function (e) {
+            e.preventDefault();
+            $('#input09').click();
+        });
+        $('#input09').change(function () {
+            $('#file_path').val($(this).val());
+            var fl_result = checkfileImgen($('#file_path').val());
+            if (!fl_result) {
+                $('#file_path').val("");
+                $('#input09').val("");
+            }
         });
 
 
@@ -282,7 +339,7 @@
 
         function checkfile(sender) {
             var validExts = new Array(".html");
-            var fileExt = sender.value;
+            var fileExt = sender;//sender.value;
             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
             if (validExts.indexOf(fileExt) < 0) {
                 sender.value = "";
@@ -295,7 +352,8 @@
 
         function checkfileImgen(sender) {
             var validExts = new Array(".jpg", "JPEG ", "png");
-            var fileExt = sender.value;
+            var fileExt = sender//sender.value;
+            console.log(fileExt);
             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
             if (validExts.indexOf(fileExt) < 0) {
                 sender.value = "";
@@ -431,12 +489,17 @@
                 els[i].classList.remove('active')
             }
         }
-
         var listImagen = [];
         function AgregarImagen() {
-            var files = $("#input09").get(0).files;
-            listImagen.push(files);
-            cargarTablaImagen(listImagen);
+            var file_text = $('#file_path').val();
+            if (file_text != "") {
+                var files = $("#input09").get(0).files;
+                listImagen.push(files);
+                cargarTablaImagen(listImagen);
+                $('#file_path').val("");
+            } else {
+                Alert.danger("Por favor agregue Archivo - Imagen");
+            }
         }
 
         function cargarTablaImagen(listImagen) {
@@ -555,8 +618,6 @@
                 data.append("FiledataHTMLName", files[0].name);
             } else {
                 Alert.danger("Por favor Seleccione Archivo - HTML");
-                //$("#input08").focus();
-                //$('#input08').focus().trigger('click');
                 return false;
             }
             if (listImagen.length > 0) {
@@ -583,9 +644,8 @@
                         listImagen = [];
                         document.getElementById("tbodygrupocorreo").innerHTML = "";
                         $('#txt_descripcion').val('');
-                        //$('#input08').filestyle('clear');
-
-                        // $('#input08').replaceWith($('#input08').clone());
+                        $('#file_path_input08').val("");
+                        $('#input08').val("");                        
                     } else {
                         Alert.danger(objeto.Mensaje);
                     }

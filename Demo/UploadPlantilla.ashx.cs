@@ -28,7 +28,7 @@ namespace Demo
 
             context.Response.ContentType = "text/plain";
             context.Response.Expires = -1;
-            string ruta_hota_name = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+            //string ruta_hota_name = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
             try
 
             {
@@ -39,7 +39,7 @@ namespace Demo
                 HttpFileCollection uploadFiles = context.Request.Files;
                 plantilla.descripcion = txt_descripcion;
 
-                string FolderPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"];
+                //string FolderPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"];
 
                 ClientResponse responserutahtml;
                 using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
@@ -48,7 +48,7 @@ namespace Demo
                 }
                 ParametrosMaestros rutahtml = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responserutahtml.DataJson);
 
-
+     
                 ClientResponse responserutaimage;
                 using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
                 {
@@ -56,15 +56,24 @@ namespace Demo
                 }
                 ParametrosMaestros rutaimage = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responserutaimage.DataJson);
 
+                ClientResponse responserutasiteimage;
+                using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
+                {
+                    responserutasiteimage = dbParametrosMaestro.getObjParametroMaestro("RUTA_SITE_CARGAIMAGENPLANTILLACORREOS");
+                }
+                ParametrosMaestros rutasiteimage = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responserutasiteimage.DataJson);
+
+
 
                 for (int i = 0; i < uploadFiles.Count; i++)
                 {
                     HttpPostedFile postedFile = uploadFiles[i];
                     if (postedFile.FileName.Equals(FiledataHTMLName))
                     {
-                        tempPath = FolderPath + rutahtml.valor + hora;
+                        tempPath = rutahtml.valor + hora;
                         string savepath = "";
-                        savepath = context.Server.MapPath(tempPath);
+                        // savepath = context.Server.MapPath(tempPath);
+                        savepath = tempPath;// context.Server.MapPath(tempPath);
                         if (!Directory.Exists(savepath))
                             Directory.CreateDirectory(savepath);
 
@@ -78,9 +87,10 @@ namespace Demo
                     else
                     {
                         plantilla_detalle = new Plantilla_Detalle();
-                        tempPath = FolderPath + rutaimage.valor + hora;
+                        tempPath =  rutaimage.valor + hora;
                         string savepath = "";
-                        savepath = context.Server.MapPath(tempPath);
+                        //savepath = context.Server.MapPath(tempPath);
+                        savepath = tempPath;// context.Server.MapPath(tempPath);
                         if (!Directory.Exists(savepath))
                             Directory.CreateDirectory(savepath);
 
@@ -90,7 +100,8 @@ namespace Demo
                         plantilla_detalle.NombreArchivoImagen = filename;
                         plantilla_detalle.ruta_imagen = files;
                         plantilla_detalle.id_estado = 1;
-                        plantilla_detalle.ruta_site_imagen = ruta_hota_name + "/" + FolderPath + rutaimage.valor + hora + "/" + filename;
+                        // plantilla_detalle.ruta_site_imagen = ruta_hota_name + "/" + FolderPath + rutaimage.valor + hora + "/" + filename;
+                        plantilla_detalle.ruta_site_imagen = rutasiteimage.valor + hora + "/" + filename;
                         list_plantilla_detalle.Add(plantilla_detalle);
                     }
                 }
@@ -124,7 +135,7 @@ namespace Demo
                 document1.Load(plantilla.ruta_plantilla_html);
                 try
                 {
-                    List<HtmlNode> list = document1.DocumentNode.SelectNodes("//pre").ToList();
+                    List<HtmlNode> list = document1.DocumentNode.SelectNodes("//a").ToList();
                     plantilla.fl_parrafo = list.Count > 0 ? 1 : 0;
                 }
                 catch (Exception)
