@@ -351,7 +351,7 @@
         }
 
         function checkfileImgen(sender) {
-            var validExts = new Array(".jpg", "JPEG ", "png");
+            var validExts = new Array(".jpg", ".JPEG ", ".png");
             var fileExt = sender//sender.value;
             console.log(fileExt);
             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
