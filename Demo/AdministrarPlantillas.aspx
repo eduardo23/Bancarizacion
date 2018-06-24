@@ -290,8 +290,7 @@
             e.preventDefault();
             $('#input08').click();
         });
-        $('#input08').change(function () {
-            debugger;
+        $('#input08').change(function () {            
             $('#file_path_input08').val($(this).val());
             var fl_result = checkfile($('#file_path_input08').val());
             if (!fl_result) {
@@ -374,6 +373,7 @@
             console.log(el.innerHTML);
             el.classList.add('active');
             $("#txt_descripcion").val(data.descripcion);
+            $('#txt_descripcion').prop('readonly', true);
             cargarTablaImagenBD(data.list_plantilla_detalle);
             $('#btn_anular_planilla').attr('onclick', 'confirmar_AnularPlantilla(' + data.id + ')');
             $('#btn_vista_previa').attr('onclick', 'modalPreview(' + data.id + ')');
@@ -386,6 +386,10 @@
         function nuevaplantillar() {
             $("#btn_grabar_planilla").css('display', 'block');
             $("#btn_anular_planilla").css('display', 'none');
+            $('#file_path').val("");
+            $('#file_path_input08').val("");
+            $('#input08').val("");
+            $('#txt_descripcion').prop('readonly', false);
             document.getElementById("tbodygrupocorreo").innerHTML = "";
             var HTML = "";
             HTML += "<tr>";
@@ -611,15 +615,17 @@
                 $('#txt_descripcion').focus();
                 return false;
             }
-            var files = $("#input08").get(0).files;
             // Add the uploaded image content to the form data collection
-            if (files.length > 0) {
+            var file_text = $('#file_path_input08').val();
+            if (file_text != "") {
+                var files = $("#input08").get(0).files;
                 data.append("FiledataHTML", files[0]);
                 data.append("FiledataHTMLName", files[0].name);
             } else {
                 Alert.danger("Por favor Seleccione Archivo - HTML");
                 return false;
             }
+           
             if (listImagen.length > 0) {
                 for (var index = 0; index < listImagen.length; index++) {
                     data.append("FiledataImagenes" + index, listImagen[index][0]);

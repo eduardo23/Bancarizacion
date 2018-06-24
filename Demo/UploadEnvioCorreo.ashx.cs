@@ -48,9 +48,10 @@ namespace Demo
                 {
 
                     HttpPostedFile postedFile = uploadFiles[i];
-                    tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"] + rutaadjunto.valor + hora;
+                    //tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"] + rutaadjunto.valor + hora;
+                    tempPath = rutaadjunto.valor + hora;
 
-                    savepath = context.Server.MapPath(tempPath);
+                    savepath = tempPath;
                     if (!Directory.Exists(savepath))
                         Directory.CreateDirectory(savepath);
 

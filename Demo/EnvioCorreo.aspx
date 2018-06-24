@@ -129,11 +129,11 @@
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-1 control-label">Origen:</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <select id="cbo_origen" onchange="selectChange()" class="form-control">
                             </select>
                         </div>
-                        <label for="inputEmail3" class="col-sm-1 control-label">Plantilla:</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label text-right">Plantilla:</label>
                         <div class="col-sm-5">
                             <select id="cbo_plantilla" class="form-control">
                             </select>
@@ -188,7 +188,15 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-1 control-label">Seleccione Archivo:</label>
                         <div class="col-sm-11">
-                            <input type="file" id="input08" onchange="checkfile(this);" multiple>
+                            <%-- <input type="file" id="input08" onchange="checkfile(this);" multiple>--%>
+                            <div class="input-group">
+                                <input type="text" readonly="readonly" id="file_path" class="form-control" placeholder="Adjunte Archivo">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-success" style="color: white" type="button" id="file_browser">
+                                        <i class="fa fa-search"></i>Examinar</button>
+                                </span>
+                            </div>
+                            <input type="file" class="hidden" id="input08" name="input08">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -281,13 +289,13 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-12">
-                            <textarea class="form-control" id="txt_prompt"></textarea>
+                            <textarea class="form-control" rows="8" id="txt_prompt"></textarea>
                         </div>
                     </div>
                 </div>
                 <div id="ezAlerts-footer" class="modal-footer">
                     <input class="btnHermes" id="btnpront" value="Aceptar" />
-                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancelar</button>                    
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -295,11 +303,26 @@
     <script>
         var listOrigen = [];
         var listDestino = [];
-        $('#input08').filestyle({
-            'placeholder': 'adjunte archivo',
-            text: ' Examinar',
-            btnClass: 'btn-success'
+        //$('#input08').filestyle({
+        //    'placeholder': 'adjunte archivo',
+        //    text: ' Examinar',
+        //    btnClass: 'btn-success'
+        //});
+
+        $('#file_browser').click(function (e) {
+            e.preventDefault();
+            $('#input08').click();
         });
+        $('#input08').change(function () {
+            $('#file_path').val($(this).val());
+            var fl_result = checkfile($('#file_path').val());
+            if (!fl_result) {
+                $('#file_path').val("");
+                $('#input08').val("");
+            }
+        });
+
+
         //var list = [];
         function confirmarEnvioCorreo() {
             //var selO = document.getElementsByName('cbogrupocorreodestino[]')[0];
@@ -337,8 +360,7 @@
         }
         function aceptarPromt() {
             var txtpromt = $("#txt_prompt").val();
-            if (txtpromt == "")
-            {
+            if (txtpromt == "") {
                 AlertPromt.warn("Por favor ingrese parrafo");
                 return false;
             }
@@ -349,7 +371,7 @@
         }
         function checkfile(sender) {
             var validExts = new Array(".xlsx", ".xls", ".jpg", "JPEG", "png", ".doc", ".pdf", ".docx");
-            var fileExt = sender.value;
+            var fileExt = sender;//sender.value;
             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
             if (validExts.indexOf(fileExt) < 0) {
                 sender.value = "";
@@ -569,6 +591,16 @@
                     var objeto = JSON.parse(response);
                     if (objeto.Result == "Ok") {
                         Alert.info(objeto.Mensaje);
+                        $("#txt_asunto").val('');
+                        $("#cbo_origen").val('0');
+                        $("#cbo_plantilla").val('0');
+                        $("#txt_prompt").val('');
+                        listDestino = [];
+                        listOrigen = [];
+                        cargargrupocorre_origen();
+                        cargargrupocorre_destino();
+                        $('#file_path').val("");
+                        $('#input08').val("");
                     } else {
                         Alert.danger(objeto.Mensaje);
                     }
