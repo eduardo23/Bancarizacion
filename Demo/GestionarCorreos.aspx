@@ -385,7 +385,7 @@
                 <div class="modal-body" id="getCode" style="font-size: 18px">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -690,11 +690,11 @@
                 Alert.danger(mensaje);
                 return false;
             }
-            if (txt_nombre2 == "") {
-                mensaje = mensaje + "- Ingrese Nombre 1 \n";
-                Alert.danger(mensaje);
-                return false;
-            }
+            //if (txt_nombre2 == "") {
+            //    mensaje = mensaje + "- Ingrese Nombre 1 \n";
+            //    Alert.danger(mensaje);
+            //    return false;
+            //}
             if (txt_paterno == "") {
                 mensaje = mensaje + "- Ingrese Apellido Paterno \n";
                 Alert.danger(mensaje);

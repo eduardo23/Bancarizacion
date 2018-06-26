@@ -69,42 +69,42 @@ namespace Demo
             {
                 using (PlantillaDAO dbPlanilla = new PlantillaDAO())
                 {
-                    response = dbPlanilla.getPlantillaXId_Anulacion(plantilla);
+                    //response = dbPlanilla.getPlantillaXId_Anulacion(plantilla);
 
-                    Plantilla desafiliacion = Newtonsoft.Json.JsonConvert.DeserializeObject<Plantilla>(response.DataJson);
-                    //Eliminamos las el html adjuntado
-                    Char delimiter = '\\';
-                    string[] arrayruta_plantilla = desafiliacion.ruta_plantilla_html.Split(delimiter);
-                    List<string> listStr = arrayruta_plantilla.ToList();
-                    int index = 0;
-                    string ruta = string.Empty;
+                    //Plantilla desafiliacion = Newtonsoft.Json.JsonConvert.DeserializeObject<Plantilla>(response.DataJson);
+                    ////Eliminamos las el html adjuntado
+                    //Char delimiter = '\\';
+                    //string[] arrayruta_plantilla = desafiliacion.ruta_plantilla_html.Split(delimiter);
+                    //List<string> listStr = arrayruta_plantilla.ToList();
+                    //int index = 0;
+                    //string ruta = string.Empty;
 
-                    if (listStr.Count() > 0) {
-                        index = listStr.Count() - 1;
-                        listStr.RemoveAt(index);
-                        ruta = string.Empty;
-                        listStr.ForEach(delegate (string cadena)
-                        {
-                            ruta += cadena + "\\";
+                    //if (listStr.Count() > 0) {
+                    //    index = listStr.Count() - 1;
+                    //    listStr.RemoveAt(index);
+                    //    ruta = string.Empty;
+                    //    listStr.ForEach(delegate (string cadena)
+                    //    {
+                    //        ruta += cadena + "\\";
 
-                        });
-                        Directory.Delete(ruta, true);
-                    }
+                    //    });
+                    //    Directory.Delete(ruta, true);
+                    //}
                     
-                    //Eliminamos las imagenes adjuntadas
-                    arrayruta_plantilla = desafiliacion.list_plantilla_detalle[0].ruta_imagen.Split(delimiter);
-                    listStr = arrayruta_plantilla.ToList();
-                    if (listStr.Count() > 0) {
-                        index = listStr.Count() - 1;
-                        listStr.RemoveAt(index);
-                        ruta = string.Empty;
-                        listStr.ForEach(delegate (string cadena)
-                        {
-                            ruta += cadena + "\\";
+                    ////Eliminamos las imagenes adjuntadas
+                    //arrayruta_plantilla = desafiliacion.list_plantilla_detalle[0].ruta_imagen.Split(delimiter);
+                    //listStr = arrayruta_plantilla.ToList();
+                    //if (listStr.Count() > 0) {
+                    //    index = listStr.Count() - 1;
+                    //    listStr.RemoveAt(index);
+                    //    ruta = string.Empty;
+                    //    listStr.ForEach(delegate (string cadena)
+                    //    {
+                    //        ruta += cadena + "\\";
 
-                        });
-                        Directory.Delete(ruta, true);
-                    }
+                    //    });
+                    //    Directory.Delete(ruta, true);
+                    //}
                     response = dbPlanilla.AnularPlantilla(plantilla);
                 }
             }

@@ -442,12 +442,14 @@
     function loadFTipoSeguro() {
         $.ajax({
             type: "POST",
-            url: "ConsultarCheque.aspx/GetFLstProducto",
-            data: "{}",
+            url: "Services/WS_ServiceHermes.asmx/getLstSegbyCamp",
+            data: "{'CampId':'" + $('#ddlFCampana').val() + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
                 var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                $('#ddlFTipoSeguro').empty();
+                $('#ddlFTipoSeguro').append("<option value='0'>--SELECCIONE--</option>");
                 for (var i = 0; i < models.length; i++) {
                     var valor = models[i].ID;
                     var text = models[i].Nombre;
@@ -459,16 +461,46 @@
                     alert(response);
             }
         });
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: "ConsultarCheque.aspx/GetFLstProducto",
+        //    data: "{}",
+        //    contentType: "application/json; charset=utf-8",
+        //    dataType: "json",
+        //    success: function (response) {
+        //        var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+        //        for (var i = 0; i < models.length; i++) {
+        //            var valor = models[i].ID;
+        //            var text = models[i].Nombre;
+        //            $("#ddlFTipoSeguro").append($("<option></option>").val(valor).html(text));
+        //        }
+        //    },
+        //    error: function (response) {
+        //        if (response.length != 0)
+        //            alert(response);
+        //    }
+        //});
     }
+
     function loadFInstitucion() {
+        debugger;
+
+        //var id_tipo_seguro = $("#ddlFTipoSeguro").val();
+        //if (id_tipo_seguro == null) {
+        //    id_tipo_seguro = 0;
+        //}
+
         $.ajax({
             type: "POST",
-            url: "ConsultarCheque.aspx/GetFLstInstitucion",
-            data: "{}",
+            url: "Services/WS_ServiceHermes.asmx/getLstByCampaniaProducto",
+            data: "{'CampanaId':'" + $('#ddlFCampana').val() + "','ProductoId':'" + $("#ddlFTipoSeguro").val() + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
                 var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+                $('#ddlFInstitucion').empty();
+                $('#ddlFInstitucion').append("<option value='0'>--SELECCIONE--</option>");
                 for (var i = 0; i < models.length; i++) {
                     var valor = models[i].ID;
                     var text = models[i].Nombre;
@@ -480,6 +512,26 @@
                     alert(response);
             }
         });
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: "ConsultarCheque.aspx/GetFLstInstitucion",
+        //    data: "{}",
+        //    contentType: "application/json; charset=utf-8",
+        //    dataType: "json",
+        //    success: function (response) {
+        //        var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
+        //        for (var i = 0; i < models.length; i++) {
+        //            var valor = models[i].ID;
+        //            var text = models[i].Nombre;
+        //            $("#ddlFInstitucion").append($("<option></option>").val(valor).html(text));
+        //        }
+        //    },
+        //    error: function (response) {
+        //        if (response.length != 0)
+        //            alert(response);
+        //    }
+        //});
     }
     function loadCampana() {
         $.ajax({
@@ -722,8 +774,18 @@
 
     $(document).ready(function () {
         loadFCampana();
-        loadFTipoSeguro();
-        loadFInstitucion();
+
+        $("#ddlFCampana").change(function () {
+            loadFTipoSeguro();
+            loadFInstitucion();
+        });
+        //loadFTipoSeguro();
+
+        $("#ddlFTipoSeguro").change(function () {
+            loadFInstitucion();
+        });
+        //loadFInstitucion();
+
         $("#btnBuscar").click(function (e) {
             $("#flag").val("true");
             e.preventDefault();

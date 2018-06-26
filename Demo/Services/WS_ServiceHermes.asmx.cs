@@ -101,5 +101,29 @@ namespace Demo.Services
             }
             return LstBan;
         }
+
+        [WebMethod]
+        public List<Producto> getLstSegbyCamp(Int32 CampId)
+        {
+            List<Producto> LstPrd = new List<Producto>();
+            using (TipoSeguro_DAO db = new TipoSeguro_DAO())
+            {
+                LstPrd = db.getLstbyCamp(CampId);
+            }
+            return LstPrd;
+        }
+
+        [WebMethod]
+        public List<Institucion_Educativa> getLstByCampaniaProducto(Int32 CampanaId, Int32 ProductoId)
+        {
+            List<Institucion_Educativa> LstInst = new List<Institucion_Educativa>();
+            using (InstitucionEducativaDAO db = new InstitucionEducativaDAO())
+            {
+                LstInst = db.getLstByCampaniaProducto(CampanaId, ProductoId);
+            }
+            return LstInst;
+        }
+
+        
     }
 }

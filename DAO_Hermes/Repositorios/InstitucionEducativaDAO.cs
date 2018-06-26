@@ -183,6 +183,39 @@ namespace DAO_Hermes.Repositorios
                 }
             }
         }
+
+        public List<Institucion_Educativa> getLstByCampaniaProducto(int CampanaId, int ProductoId)
+        {
+            string cnx = "";
+            using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
+            {
+                cnx = db.Database.Connection.ConnectionString;
+            }
+            using (SqlConnection cn = new SqlConnection(cnx))
+            {
+                using (SqlCommand cmd = new SqlCommand("usp_Institucion_getLstByCampaniaProducto", cn))
+                {
+                    cmd.Parameters.AddWithValue("@CampanaId", CampanaId);
+                    cmd.Parameters.AddWithValue("@ProductoId", ProductoId);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        List<Institucion_Educativa> oLstInstitucion = new List<Institucion_Educativa>();
+                        while (dr.Read())
+                        {
+                            Institucion_Educativa oInst = new Institucion_Educativa();
+                            oInst.ID = Convert.ToInt32(dr["ID"] == DBNull.Value ? 0 : dr["ID"]);
+                            oInst.Nombre = Convert.ToString(dr["Nombre"] == DBNull.Value ? "" : dr["Nombre"]);
+                            oLstInstitucion.Add(oInst);
+                        }
+                        return oLstInstitucion;
+                    }
+                }
+            }
+        }
+
         public List<Institucion_Educativa> getLstCntPagosByInstCamp(int CampanaId, string inidate, string findate)
         {
             string cnx = "";

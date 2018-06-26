@@ -37,8 +37,8 @@ namespace Demo
                 string savepath = "";
                 string tempPath = "";
 
-                tempPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"] + rutaexcel.valor;
-                savepath = context.Server.MapPath(tempPath);
+                tempPath =  rutaexcel.valor;
+                savepath = tempPath;
                 string filename = postedFile.FileName;
 
                 if (!Directory.Exists(savepath))
