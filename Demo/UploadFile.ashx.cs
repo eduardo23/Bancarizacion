@@ -23,8 +23,10 @@ namespace Demo
 
             context.Response.ContentType = "text/plain";
             context.Response.Expires = -1;
+            
             try
             {
+                string hora = DateTime.Now.ToString("yyyyMMddhhmmss");
                 ClientResponse responseruta;
                 using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
                 {
@@ -37,14 +39,13 @@ namespace Demo
                 string savepath = "";
                 string tempPath = "";
 
-                tempPath =  rutaexcel.valor;
+                tempPath =  rutaexcel.valor+ hora;
                 savepath = tempPath;
                 string filename = postedFile.FileName;
 
                 if (!Directory.Exists(savepath))
                     Directory.CreateDirectory(savepath);
-
-                string files = savepath + @"\" + filename;
+                string files = savepath + "/" + filename;
                 postedFile.SaveAs(files);
 
                 Excel.Application xlApp;
