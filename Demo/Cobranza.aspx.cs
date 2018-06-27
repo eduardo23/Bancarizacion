@@ -136,7 +136,11 @@ namespace Demo
                 sRdlc = "RepCobbyPrd.rdlc";
             }
 
-            ds = oChqDao.getLstCobranza(nCam, nCia, nIns, nPrd);
+            //Int32 nPend = 1;
+            //ReportParameter[] parameters = new ReportParameter[1];
+            //parameters[0] = new ReportParameter("EstadoPago", "0");
+
+            ds = oChqDao.getLstCobranza(nCam, nCia, nIns, nPrd/*, nPend*/);
             ReportDataSource rptDs = new ReportDataSource();
             rptDs.Value = ds.Tables[0];
             rptDs.Name = "DSReportCobranza";
@@ -145,6 +149,8 @@ namespace Demo
 
             RptVCobranza.LocalReport.ReportEmbeddedResource = sRdlc;
             RptVCobranza.LocalReport.ReportPath = Server.MapPath(sRdlc);
+
+            //RptVCobranza.LocalReport.SetParameters(parameters);
 
             RptVCobranza.LocalReport.Refresh();
         }
