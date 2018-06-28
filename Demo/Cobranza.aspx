@@ -82,10 +82,10 @@
                                     <asp:DropDownList ID="ddlFCampana" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlFCampana_SelectedIndexChanged">
                                     </asp:DropDownList>
                                 </div>
-<%--                                <label  class="col-sm-2 col-form-label">Estado de Pago:</label>
+                                <label  class="col-sm-2 col-form-label">Estado de Pago:</label>
                                 <div class="col-sm-3">
                                    <asp:CheckBox ID="chkSoloPendiente" runat="server" /> &nbsp;<label  class="col-form-label">Solo Pendiente</label>
-                                </div>--%>
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label  class="col-sm-2 col-form-label">Tipo Reporte:</label>

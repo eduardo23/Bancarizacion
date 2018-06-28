@@ -49,6 +49,15 @@ namespace Demo {
         protected global::System.Web.UI.WebControls.DropDownList ddlFCampana;
         
         /// <summary>
+        /// Control chkSoloPendiente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkSoloPendiente;
+        
+        /// <summary>
         /// Control ddlFTipoReporte.
         /// </summary>
         /// <remarks>

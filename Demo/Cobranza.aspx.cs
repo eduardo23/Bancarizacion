@@ -136,11 +136,11 @@ namespace Demo
                 sRdlc = "RepCobbyPrd.rdlc";
             }
 
-            //Int32 nPend = 1;
+            Int32 nPend = Convert.ToInt32(chkSoloPendiente.Checked);
             //ReportParameter[] parameters = new ReportParameter[1];
             //parameters[0] = new ReportParameter("EstadoPago", "0");
 
-            ds = oChqDao.getLstCobranza(nCam, nCia, nIns, nPrd/*, nPend*/);
+            ds = oChqDao.getLstCobranza(nCam, nCia, nIns, nPrd, nPend);
             ReportDataSource rptDs = new ReportDataSource();
             rptDs.Value = ds.Tables[0];
             rptDs.Name = "DSReportCobranza";

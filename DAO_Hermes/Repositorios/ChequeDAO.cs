@@ -349,7 +349,7 @@ namespace DAO_Hermes.Repositorios
             //}
         }
 
-        public DataSet getLstCobranza(int CampaniaID, int CIASeguroID, int InstitucionEducativaID, int ProductID/*, int SoloPendiente*/)
+        public DataSet getLstCobranza(int CampaniaID, int CIASeguroID, int InstitucionEducativaID, int ProductID, int SoloPendiente)
         {
             string cnx = "";
             using (BDHermesBancarizacionEntities db = new BDHermesBancarizacionEntities())
@@ -364,7 +364,7 @@ namespace DAO_Hermes.Repositorios
                     cmd.Parameters.AddWithValue("@CIASeguroID", CIASeguroID);
                     cmd.Parameters.AddWithValue("@InstitucionEducativaID", InstitucionEducativaID);
                     cmd.Parameters.AddWithValue("@ProductID", ProductID);
-                    //cmd.Parameters.AddWithValue("@SoloPendiente", SoloPendiente);
+                    cmd.Parameters.AddWithValue("@SoloPendiente", SoloPendiente);
                     cmd.CommandType = CommandType.StoredProcedure;
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
