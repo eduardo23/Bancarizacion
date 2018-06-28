@@ -82,6 +82,64 @@ namespace DAO_Hermes.Repositorios
             return clientResponse;
 
         }
+
+        public ClientResponse getExportarCorreos( int id_cbo_origenfil, int id_cbo_grupo_consultar)
+        {
+            try
+            {
+                
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_sel_gestioncorreo_exportar", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@id_cbo_origenfil", id_cbo_origenfil);
+                        comando.Parameters.AddWithValue("@id_grupo_correo", id_cbo_grupo_consultar);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
+
+                            while (reader.Read())
+                            {
+                                entidad = new GestionCorreo();
+                                entidad.id = Convert.ToInt32(reader["id"] == DBNull.Value ? 0 : reader["id"]);
+                                entidad.Nombre1 = Convert.ToString(reader["Nombre1"] == DBNull.Value ? "" : reader["Nombre1"]);
+                                entidad.Nombre2 = Convert.ToString(reader["Nombre2"] == DBNull.Value ? "" : reader["Nombre2"]);
+                                entidad.ApePaterno = Convert.ToString(reader["apePaterno"] == DBNull.Value ? "" : reader["apePaterno"]);
+                                entidad.ApeMaterno = Convert.ToString(reader["apeMaterno"] == DBNull.Value ? "" : reader["apeMaterno"]);
+                                entidad.Email = Convert.ToString(reader["email"] == DBNull.Value ? "" : reader["email"]);
+
+                                entidad.id_estado = Convert.ToInt32(reader["id_estado"] == DBNull.Value ? 0 : reader["id_estado"]);
+                                entidad.descestado = Convert.ToString(reader["desestado"] == DBNull.Value ? "" : reader["desestado"]);
+                                GrupoCorreo grupocorreo = new GrupoCorreo();
+                                grupocorreo.id = Convert.ToInt32(reader["id_grupo_correo"] == DBNull.Value ? 0 : reader["id_grupo_correo"]);
+                                grupocorreo.descripcion = Convert.ToString(reader["descgrupo_correo"] == DBNull.Value ? "" : reader["descgrupo_correo"]);
+                                entidad.grupocorreo = grupocorreo;
+                                entidad.fechabaja = Convert.ToString(reader["fechabaja"] == DBNull.Value ? "" : reader["fechabaja"]);
+                                listgestioncorreo.Add(entidad);
+                            }
+                        }                        
+                        clientResponse.DataJson = JsonConvert.SerializeObject(listgestioncorreo).ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }
+
+            return clientResponse;
+
+        }
+
         public ClientResponse getLstGestionCorreo(int paginaActual, int RegistroXPagina, int id_cbo_origenfil, int id_cbo_grupo_consultar)
         {
             try

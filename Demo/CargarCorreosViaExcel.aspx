@@ -57,7 +57,14 @@
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
                             <label>Seleccione Archivo</label>
-                            <input type="file" id="input08" onchange="checkfile(this);">
+                            <div class="input-group">
+                                <input type="text" readonly="readonly" id="file_path_input08" class="form-control" placeholder="Adjunte Archivo">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-success" style="color: white" type="button" id="file_browser_input08">
+                                        <i class="fa fa-search"></i>Examinar</button>
+                                </span>
+                            </div>
+                            <input type="file" class="hidden" id="input08" name="input08">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -99,20 +106,33 @@
         }
         function checkfile(sender) {
             var validExts = new Array(".xlsx", ".xls");
-            var fileExt = sender.value;
+            var fileExt = value;
             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
             if (validExts.indexOf(fileExt) < 0) {
                 sender.value = "";
                 Alert.warn("El archivo seleccionado es inválido , los archivos válidos son de tipo " +
-                         validExts.toString() + "");
+                    validExts.toString() + "");
                 return false;
             }
             else return true;
         }
-        $('#input08').filestyle({
-            'placeholder': 'adjunte archivo',
-            text: ' Examinar',
-            btnClass: 'btn-success'
+        //$('#input08').filestyle({
+        //    'placeholder': 'adjunte archivo',
+        //    text: ' Examinar',
+        //    btnClass: 'btn-success'
+        //});
+
+        $('#file_browser_input08').click(function (e) {
+            e.preventDefault();
+            $('#input08').click();
+        });
+        $('#input08').change(function () {
+            $('#file_path_input08').val($(this).val());
+            var fl_result = checkfile($('#file_path_input08').val());
+            if (!fl_result) {
+                $('#file_path_input08').val("");
+                $('#input08').val("");
+            }
         });
 
         function cargarArchivo() {
@@ -125,12 +145,22 @@
             */
             var data = new FormData();
 
-            var files = $("#input08").get(0).files;
-
-            // Add the uploaded image content to the form data collection
-            if (files.length > 0) {
+            var file_text = $('#file_path_input08').val();
+            if (file_text != "") {
+                var files = $("#input08").get(0).files;
                 data.append("Filedata", files[0]);
+            } else {
+                Alert.danger("Por favor Seleccione Archivo");
+                return false;
             }
+
+            //var files = $("#input08").get(0).files;
+            //// Add the uploaded image content to the form data collection
+            //if (files.length > 0) {
+            //    data.append("Filedata", files[0]);
+            //}
+
+
             $("#idprogress").css('display', 'block');
             $.ajax({
                 xhr: function () {
@@ -151,7 +181,7 @@
                             //$('div.progress > div.progress-bar').html(percentComplete + '%');
                         }
                     },
-                   false);
+                        false);
                     return xhr;
                 },
                 type: 'post',
@@ -164,6 +194,7 @@
                     if (objeto.Result == "Ok") {
                         Alert.info(objeto.Mensaje);
                         $("div.progress > div.progress-bar").css({ "width": 0 + "%" });
+                        $('#file_path_input08').val("");
                     } else {
                         Alert.danger(objeto.Mensaje);
                     }

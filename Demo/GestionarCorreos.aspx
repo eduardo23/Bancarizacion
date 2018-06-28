@@ -1,4 +1,4 @@
-﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="GestionarCorreos.aspx.cs" Inherits="Demo.GestionarCorreos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="GestionarCorreos.aspx.cs" Inherits="Demo.GestionarCorreos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
@@ -18,7 +18,8 @@
             -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
         }
-         .btnHermesNegro {
+
+        .btnHermesNegro {
             background-color: #3c454f;
             border: none;
             color: white;
@@ -98,25 +99,25 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
-                            <div class="col-lg-12">
-                                <div id="alert-info-principal" class="alert alert-info alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
-                                <div id="alert-warn-principal" class="alert alert-warning alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
-                                <div id="alert-danger-principal" class="alert alert-danger alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
+                        <div class="col-lg-12">
+                            <div id="alert-info-principal" class="alert alert-info alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-warn-principal" class="alert alert-warning alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-danger-principal" class="alert alert-danger alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
                             </div>
                         </div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
-                            <div class="col-sm-1 col-lg-1">                                
-                                 <label for="cbo_origenfil" class="col-lg-4 control-label">Origen</label>
+                            <div class="col-sm-1 col-lg-1">
+                                <label for="cbo_origenfil" class="col-lg-4 control-label">Origen</label>
                             </div>
                             <div class="col-sm-2 col-lg-2">
                                 <select name="cbo_origenfil" onchange="selectChange()" id="cbo_origenfil" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Origen">
@@ -128,8 +129,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
-                            <div class="col-sm-1 col-lg-1">                                
-                                 <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
+                            <div class="col-sm-1 col-lg-1">
+                                <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
                             </div>
                             <div class="col-sm-2 col-lg-2">
                                 <%--<select name="cbo_grupo_consultar" onchange="selectChange()" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">--%>
@@ -138,8 +139,11 @@
                             </div>
                             <div class="col-sm-9 col-lg-9">
                                 <div class="pull-right">
-                                     <button type="button" class="btnHermesNegro"  onclick="buscar();">
+                                    <button type="button" class="btnHermesNegro" onclick="buscar();">
                                         Buscar
+                                    </button>
+                                    <button type="button" class="btnHermes" onclick="exportar();">
+                                        Exportar Correos
                                     </button>
                                     <button type="button" class="btnHermes" data-toggle="modal" onclick="ImportarCorreos();">
                                         Importar Correo
@@ -255,7 +259,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btnHermes" onclick="cargarArchivo();">Grabar</button>
-                        <button type="button"  class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                        <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -274,8 +278,8 @@
                     Esta seguro que desea eliminar el registro?                
                 </div>
                 <div class="modal-footer">
-                     <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Aceptar</button>
-                     <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                    <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Aceptar</button>
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -285,8 +289,8 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #D6EAF8">    
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>                
+                <div class="modal-header" style="background-color: #D6EAF8">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Correo</h4>
                 </div>
                 <div class="modal-body">
@@ -364,9 +368,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">                        
+                    <div class="modal-footer">
                         <button type="button" class="btnHermes" onclick="Grabar();">Grabar</button>
-                        <button type="button"  class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                        <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -390,7 +394,9 @@
             </div>
         </div>
     </div>
-
+    <div style="display:none">
+        <a id="id_download"></a>    
+    </div>    
     <input type="hidden" name="name" id="flag" value="true" />
     <input type="hidden" name="name" id="flag_accion" value="" />
     <script type="text/javascript">
@@ -484,6 +490,53 @@
         function buscar() {
             $("#flag").val("true");
             listarCheques(1);
+        }
+
+        function exportar() {
+            var id_cbo_origenfil = $("#cbo_origenfil").val();
+            if (id_cbo_origenfil == null) {
+                id_cbo_origenfil = 1;
+            }
+            var id_cbo_grupo_consultar = $("#cbo_grupo_consultar").val();
+            if (id_cbo_grupo_consultar == null) {
+                id_cbo_grupo_consultar = 0;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "GestionarCorreos.aspx/getExportarExcel",
+                data: "{'id_cbo_origenfil':'" + id_cbo_origenfil + "','id_cbo_grupo_consultar':'" + id_cbo_grupo_consultar + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var vals = new Object();
+                    var mensaje = response.d.Mensaje;
+                    if (mensaje == 'Ok') {
+                        var result = response.d.DataJson;
+                        console.log(result);
+                        var link = document.createElement('a');
+                        link.setAttribute('href', result);
+                        //link.setAttribute('href', 'http://10.10.101.62:8081/dashboard/ExcelData.xlsx');
+                        link.setAttribute('download', 'exportarcorreos.xlsx');
+                        //link.setAttribute('target', '_blank');
+                        link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        //$('#id_download')
+                        //    .attr('href', result)
+                        //    .attr('download', '')
+                        //    .attr('target', '_blank')
+                        //    .trigger("click");
+                    } else {
+                        AlertPrincial.danger("Ocurrio un error al exportar excel, comuniquese con el Administrador del Sistema.");
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        AlertPrincial.danger(response);
+                }
+            });
         }
 
         function listarCheques(pagina) {
@@ -619,7 +672,7 @@
                         listarCheques(1);
                     } else {
                     }
-                   
+
                 },
                 error: function (response) {
                     if (response.length != 0)
