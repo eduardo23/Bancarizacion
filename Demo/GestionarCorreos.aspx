@@ -143,6 +143,9 @@
                                         Buscar
                                    
                                     </button>
+                                    <button type="button" class="btnHermes" onclick="exportar();">
+                                        Exportar Correos
+                                    </button>
                                     <button type="button" class="btnHermes" data-toggle="modal" onclick="ImportarCorreos();">
                                         Importar Correo
                                    
@@ -405,7 +408,9 @@
             </div>
         </div>
     </div>
-
+    <div style="display:none">
+        <a id="id_download"></a>    
+    </div>    
     <input type="hidden" name="name" id="flag" value="true" />
     <input type="hidden" name="name" id="flag_accion" value="" />
     <script type="text/javascript">
@@ -512,6 +517,53 @@
         function buscar() {
             $("#flag").val("true");
             listarCheques(1);
+        }
+
+        function exportar() {
+            var id_cbo_origenfil = $("#cbo_origenfil").val();
+            if (id_cbo_origenfil == null) {
+                id_cbo_origenfil = 1;
+            }
+            var id_cbo_grupo_consultar = $("#cbo_grupo_consultar").val();
+            if (id_cbo_grupo_consultar == null) {
+                id_cbo_grupo_consultar = 0;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "GestionarCorreos.aspx/getExportarExcel",
+                data: "{'id_cbo_origenfil':'" + id_cbo_origenfil + "','id_cbo_grupo_consultar':'" + id_cbo_grupo_consultar + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var vals = new Object();
+                    var mensaje = response.d.Mensaje;
+                    if (mensaje == 'Ok') {
+                        var result = response.d.DataJson;
+                        console.log(result);
+                        var link = document.createElement('a');
+                        link.setAttribute('href', result);
+                        //link.setAttribute('href', 'http://10.10.101.62:8081/dashboard/ExcelData.xlsx');
+                        link.setAttribute('download', 'exportarcorreos.xlsx');
+                        //link.setAttribute('target', '_blank');
+                        link.style.display = 'none';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        //$('#id_download')
+                        //    .attr('href', result)
+                        //    .attr('download', '')
+                        //    .attr('target', '_blank')
+                        //    .trigger("click");
+                    } else {
+                        AlertPrincial.danger("Ocurrio un error al exportar excel, comuniquese con el Administrador del Sistema.");
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        AlertPrincial.danger(response);
+                }
+            });
         }
 
         function listarCheques(pagina) {
