@@ -116,6 +116,7 @@
         });
 
         function cargarArchivo() {
+            debugger;
             /*var formData = new FormData();
             var totalFiles = document.getElementById("input08").files.length;
             for (var i = 0; i < totalFiles; i++) {

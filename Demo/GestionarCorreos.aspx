@@ -1,4 +1,4 @@
-﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="GestionarCorreos.aspx.cs" Inherits="Demo.GestionarCorreos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="GestionarCorreos.aspx.cs" Inherits="Demo.GestionarCorreos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Css/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
@@ -18,7 +18,8 @@
             -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
         }
-         .btnHermesNegro {
+
+        .btnHermesNegro {
             background-color: #3c454f;
             border: none;
             color: white;
@@ -98,25 +99,25 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group row">
-                            <div class="col-lg-12">
-                                <div id="alert-info-principal" class="alert alert-info alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
-                                <div id="alert-warn-principal" class="alert alert-warning alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
-                                <div id="alert-danger-principal" class="alert alert-danger alert-top" role="alert">
-                                    <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="alert-msg"></span>
-                                </div>
+                        <div class="col-lg-12">
+                            <div id="alert-info-principal" class="alert alert-info alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-warn-principal" class="alert alert-warning alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
+                            </div>
+                            <div id="alert-danger-principal" class="alert alert-danger alert-top" role="alert">
+                                <button type="button" class="close alert-close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <span class="alert-msg"></span>
                             </div>
                         </div>
+                    </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
-                            <div class="col-sm-1 col-lg-1">                                
-                                 <label for="cbo_origenfil" class="col-lg-4 control-label">Origen</label>
+                            <div class="col-sm-1 col-lg-1">
+                                <label for="cbo_origenfil" class="col-lg-4 control-label">Origen</label>
                             </div>
                             <div class="col-sm-2 col-lg-2">
                                 <select name="cbo_origenfil" onchange="selectChange()" id="cbo_origenfil" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Origen">
@@ -128,8 +129,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12 col-lg-12">
-                            <div class="col-sm-1 col-lg-1">                                
-                                 <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
+                            <div class="col-sm-1 col-lg-1">
+                                <label for="RazonSocial" class="col-lg-4 control-label">Grupo</label>
                             </div>
                             <div class="col-sm-2 col-lg-2">
                                 <%--<select name="cbo_grupo_consultar" onchange="selectChange()" id="cbo_grupo_consultar" class="form-control" data-toggle="tooltip" data-placement="left" data-original-title="Grupo">--%>
@@ -138,17 +139,21 @@
                             </div>
                             <div class="col-sm-9 col-lg-9">
                                 <div class="pull-right">
-                                     <button type="button" class="btnHermesNegro"  onclick="buscar();">
+                                    <button type="button" class="btnHermesNegro" onclick="buscar();">
                                         Buscar
+                                   
                                     </button>
                                     <button type="button" class="btnHermes" data-toggle="modal" onclick="ImportarCorreos();">
                                         Importar Correo
+                                   
                                     </button>
                                     <button type="button" class="btnHermes" data-toggle="modal" onclick="modalCargaMasivodeCorrreo();">
                                         Carga Masivo de Corrreo
+                                   
                                     </button>
                                     <button type="button" class="btnHermes" data-toggle="modal" onclick="modalRegistrar();">
                                         Nuevo
+                                   
                                     </button>
                                 </div>
                             </div>
@@ -241,7 +246,15 @@
                         <div class="form-group row">
                             <div class="col-lg-12">
                                 <label>Seleccione Archivo</label>
-                                <input type="file" id="input08" onchange="checkfile(this);">
+                                <div class="input-group">
+                                    <input type="text" readonly="readonly" id="file_path_input08" class="form-control" placeholder="Adjunte Archivo">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-success" style="color: white" type="button" id="file_browser_input08">
+                                            <i class="fa fa-search"></i>Examinar</button>
+                                    </span>
+                                </div>
+                                <input type="file" class="hidden" id="input08" name="input08">
+                                <%-- <input type="file" id="input08" onchange="checkfile(this);">--%>
                             </div>
                         </div>
 
@@ -255,7 +268,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btnHermes" onclick="cargarArchivo();">Grabar</button>
-                        <button type="button"  class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                        <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -269,13 +282,15 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #D6EAF8">
                     Mensaje de Confirmacion
+               
                 </div>
                 <div class="modal-body">
                     Esta seguro que desea eliminar el registro?                
+               
                 </div>
                 <div class="modal-footer">
-                     <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Aceptar</button>
-                     <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                    <button id="btn-submit-confirmacion" type="button" class="btnHermes" onclick="Grabar();">Aceptar</button>
+                    <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -285,8 +300,8 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="background-color: #D6EAF8">    
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>                
+                <div class="modal-header" style="background-color: #D6EAF8">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="gridSystemModalLabel">Nuevo Correo</h4>
                 </div>
                 <div class="modal-body">
@@ -364,9 +379,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">                        
+                    <div class="modal-footer">
                         <button type="button" class="btnHermes" onclick="Grabar();">Grabar</button>
-                        <button type="button"  class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                        <button type="button" class="btnHermesNegro" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -394,11 +409,24 @@
     <input type="hidden" name="name" id="flag" value="true" />
     <input type="hidden" name="name" id="flag_accion" value="" />
     <script type="text/javascript">
-        $('#input08').filestyle({
-            'placeholder': 'adjunte archivo',
-            text: ' Examinar',
-            btnClass: 'btn-success'
+        //$('#input08').filestyle({
+        //    'placeholder': 'adjunte archivo',
+        //    text: ' Examinar',
+        //    btnClass: 'btn-success'
+        //});
+        $('#file_browser_input08').click(function (e) {
+            e.preventDefault();
+            $('#input08').click();
         });
+        $('#input08').change(function () {
+            $('#file_path_input08').val($(this).val());
+            var fl_result = checkfile($('#file_path_input08').val());
+            if (!fl_result) {
+                $('#file_path_input08').val("");
+                $('#input08').val("");
+            }
+        });
+
         AlertPrincial = {
             show: function ($div, msg) {
                 $div.find('.alert-msg').text(msg);
@@ -471,7 +499,7 @@
 
         function checkfile(sender) {
             var validExts = new Array(".xlsx", ".xls");
-            var fileExt = sender.value;
+            var fileExt = sender;
             fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
             if (validExts.indexOf(fileExt) < 0) {
                 sender.value = "";
@@ -619,7 +647,7 @@
                         listarCheques(1);
                     } else {
                     }
-                   
+
                 },
                 error: function (response) {
                     if (response.length != 0)
@@ -700,11 +728,11 @@
                 Alert.danger(mensaje);
                 return false;
             }
-            if (txt_materno == "") {
-                mensaje = mensaje + "- Ingrese Apellido Materno \n";
-                Alert.danger(mensaje);
-                return false;
-            }
+            //if (txt_materno == "") {
+            //    mensaje = mensaje + "- Ingrese Apellido Materno \n";
+            //    Alert.danger(mensaje);
+            //    return false;
+            //}
             if (txt_email == "") {
                 mensaje = mensaje + "- Ingrese email \n";
                 Alert.danger(mensaje);
@@ -904,10 +932,20 @@
         function cargarArchivo() {
             var data = new FormData();
 
-            var files = $("#input08").get(0).files;
-            if (files.length > 0) {
+            //var files = $("#input08").get(0).files;
+            //if (files.length > 0) {
+            //    data.append("Filedata", files[0]);
+            //}
+
+            var file_text = $('#file_path_input08').val();
+            if (file_text != "") {
+                var files = $("#input08").get(0).files;
                 data.append("Filedata", files[0]);
+            } else {
+                Alert.danger("Por favor Seleccione Archivo");
+                return false;
             }
+
             $("#idprogress").css('display', 'block');
             $.ajax({
                 xhr: function () {
@@ -939,6 +977,7 @@
                     if (objeto.Result == "Ok") {
                         AlertCarga.info(objeto.Mensaje);
                         $("div.progress > div.progress-bar").css({ "width": 0 + "%" });
+                        $('#file_path_input08').val("");
                     } else {
                         AlertCarga.danger(objeto.Mensaje);
                     }

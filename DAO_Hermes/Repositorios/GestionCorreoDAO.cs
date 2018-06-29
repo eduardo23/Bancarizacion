@@ -211,12 +211,12 @@ namespace DAO_Hermes.Repositorios
                     using (comando = new SqlCommand("usp_ins_gestioncorreo", conexion))
                     {
                         comando.Parameters.AddWithValue("@id_grupo_correo", objeto.grupocorreo.id);
-                        comando.Parameters.AddWithValue("@Nombre1", objeto.Nombre1);
-                        comando.Parameters.AddWithValue("@Nombre2", objeto.Nombre2);
-                        comando.Parameters.AddWithValue("@apePaterno", objeto.ApePaterno);
-                        comando.Parameters.AddWithValue("@apeMaterno", objeto.ApeMaterno);
-                        comando.Parameters.AddWithValue("@email", objeto.Email);
-                        comando.Parameters.AddWithValue("@id_estado", objeto.id_estado);
+                        comando.Parameters.AddWithValue("@Nombre1", objeto.Nombre1 == null ?"": objeto.Nombre1);
+                        comando.Parameters.AddWithValue("@Nombre2", objeto.Nombre2 == null ? "" : objeto.Nombre2);
+                        comando.Parameters.AddWithValue("@apePaterno", objeto.ApePaterno == null ? "" : objeto.ApePaterno);
+                        comando.Parameters.AddWithValue("@apeMaterno", objeto.ApeMaterno == null ? "" : objeto.ApeMaterno);
+                        comando.Parameters.AddWithValue("@email", objeto.Email == null ? "" : objeto.Email);
+                        comando.Parameters.AddWithValue("@id_estado", objeto.id_estado );
                         comando.Parameters.AddWithValue("@UsuarioCreacion", objeto.UsuarioCreacion);
                         comando.CommandType = CommandType.StoredProcedure;
                         conexion.Open();
