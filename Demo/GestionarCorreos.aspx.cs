@@ -77,8 +77,8 @@ namespace Demo
                 }
                 ParametrosMaestros rutaexcelsite = Newtonsoft.Json.JsonConvert.DeserializeObject<ParametrosMaestros>(responserutaexcelsite.DataJson);
 
-
-                Directory.Delete(rutaexcel.valor, true);
+                if (Directory.Exists(rutaexcel.valor))
+                    Directory.Delete(rutaexcel.valor, true);
 
                 string savepath = rutaexcel.valor + hora;
 

@@ -131,12 +131,54 @@ namespace Demo
                             });
                 document.Save(plantilla.ruta_plantilla_html);
 
+                document.DocumentNode.Descendants("a")
+                            .Where(e =>
+                            {
+                                string src = e.GetAttributeValue("href", null) ?? "";
+                                return !string.IsNullOrEmpty(src);// && src.StartsWith("data:image");
+                            })
+                            .ToList()
+                            .ForEach(x =>
+                            {
+                                string currentSrcValue = string.Empty;
+                                currentSrcValue = x.GetAttributeValue("href", null);
+
+                                if (currentSrcValue != "{linkdardebaja}") {
+                                    Plantilla_Detalle objeto = plantilla.list_plantilla_detalle.Where(i => i.NombreArchivoImagen.ToUpper().Equals(currentSrcValue.ToUpper())).FirstOrDefault();
+                                    if (objeto != null)
+                                    {
+                                        x.SetAttributeValue("href", objeto.ruta_site_imagen);
+                                    }
+                                }
+
+                            });
+                document.Save(plantilla.ruta_plantilla_html);
+
                 HtmlDocument document1 = new HtmlDocument();
                 document1.Load(plantilla.ruta_plantilla_html);
+                plantilla.fl_parrafo = 0;
                 try
                 {
-                    List<HtmlNode> list = document1.DocumentNode.SelectNodes("//a").ToList();
-                    plantilla.fl_parrafo = list.Count > 0 ? 1 : 0;
+                    //List<HtmlNode> list = document1.DocumentNode.SelectNodes("p").ToList();
+                    //plantilla.fl_parrafo = list.Count > 0 ? 1 : 0;
+                    document.DocumentNode.Descendants("p")
+                                .Where(e =>
+                                {
+                                    string src = e.GetAttributeValue("type", null) ?? "";
+                                    return !string.IsNullOrEmpty(src);
+                                })
+                                .ToList()
+                                .ForEach(x =>
+                                {
+                                    string currentSrcValue = string.Empty;
+                                    currentSrcValue = x.GetAttributeValue("type", null);
+
+                                    if (currentSrcValue == "por ingresar")
+                                    {
+                                        plantilla.fl_parrafo = 1;
+                                    }
+                                });
+
                 }
                 catch (Exception)
                 {
