@@ -124,6 +124,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-1 control-label">Asunto:</label>
                         <div class="col-sm-11">
+                            <input id="hdnUserSession" runat="server" name="hdnUserSession" type="hidden">
                             <input type="text" class="form-control" id="txt_asunto" placeholder="Ingrese Asunto">
                         </div>
                     </div>
@@ -560,10 +561,12 @@
 
 
         function EnviarCorreo() {
+            debugger;
             var cbo_origen = $("#cbo_origen").val().split("");
             var cbo_plantilla = $("#cbo_plantilla").val();
             var txt_asunto = $("#txt_asunto").val();
             var txt_prompt = $("#txt_prompt").val();
+            var txt_UserSession = $("#<%=hdnUserSession.ClientID %>").val();
 
             var data = new FormData();
             for (var i = 0, len = document.getElementById('input08').files.length; i < len; i++) {
@@ -574,6 +577,7 @@
             data.append("cbo_plantilla", cbo_plantilla);
             data.append("txt_asunto", txt_asunto);
             data.append("txt_prompt", txt_prompt);
+            data.append("txt_UserSession", txt_UserSession);
 
             var list = [];
             for (var i = 0; i < listDestino.length; i++) {

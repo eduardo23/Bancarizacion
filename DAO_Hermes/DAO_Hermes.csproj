@@ -232,6 +232,7 @@
     <Compile Include="Repositorios\GrupoCorreoDAO.cs" />
     <Compile Include="Repositorios\HistorialDAO.cs" />
     <Compile Include="Repositorios\InstitucionEducativaDAO.cs" />
+    <Compile Include="Repositorios\LogPromoDAO.cs" />
     <Compile Include="Repositorios\MonedaDAO.cs" />
     <Compile Include="Repositorios\OnlineDAO.cs" />
     <Compile Include="Repositorios\ChequeDAO.cs" />

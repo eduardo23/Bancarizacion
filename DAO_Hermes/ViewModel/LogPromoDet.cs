@@ -8,16 +8,19 @@ namespace DAO_Hermes.ViewModel
 {
     public class LogPromoDet
     {
-        private int _ID;
-        private int _logPromoID;
-        private int id_grupo_correo;
-        private string _destinatario;
+        public int ID { get; set; }
+        public int logPromoID { get; set; }
+        public int id_grupo_correo { get; set; }
+        public string destinatario { get; set; }
 
-        public int ID {
-            get { return _ID; }
-            set { _ID = value; }
+        public virtual LogPromo LogPromo { get; set; }
+        public virtual GrupoCorreo GrupoCorreo { get; set; }
+
+        public LogPromoDet()
+        {
+            LogPromo = new LogPromo();
+            GrupoCorreo = new GrupoCorreo();
         }
-
 
     }
 }

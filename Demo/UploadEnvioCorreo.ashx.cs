@@ -32,8 +32,10 @@ namespace Demo
                 string txt_prompt = context.Request["txt_prompt"];
                 string txt_asunto = context.Request["txt_asunto"];
                 string id_grupo_correo = context.Request.Form.Get("list");
+                string usuarioSession = context.Request.Form.Get("txt_UserSession");
                 HttpFileCollection uploadFiles = context.Request.Files;
                 List<string> listrutas = new List<string>();
+                List<LogPromoDet> lstLogPromoDet = new List<LogPromoDet>();
 
                 ClientResponse responseruta;
                 using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())
@@ -96,6 +98,12 @@ namespace Demo
                 }
                 List<GestionCorreo> liscorreos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<GestionCorreo>>(response.DataJson);
                 string bodyaux = string.Empty;
+
+                LogPromo oLogPromo = new LogPromo();
+                oLogPromo.remitente = usuarioSession;
+                oLogPromo.asunto = txt_asunto;
+                oLogPromo.PlantillaID = objetoplantilla.id;
+
                 foreach (GestionCorreo item in liscorreos)
                 {
                     bodyaux = body;
@@ -107,6 +115,18 @@ namespace Demo
                     bodyaux = bodyaux.Replace("{linkdardebaja}", desafiliacion.valor + "?tokens=" + item.Tokens);
                     bodyaux = HttpUtility.HtmlDecode(bodyaux);
                     cUtil.EnvioMailSegundo(txt_asunto, item.Email, bodyaux, listrutas, usuario, clave, smtp, puerto);
+
+                    LogPromoDet oLogPromoDet = new LogPromoDet();
+                    oLogPromoDet.id_grupo_correo = Convert.ToInt32(id_grupo_correo);
+                    oLogPromoDet.destinatario = item.Email.ToString();
+                    lstLogPromoDet.Add(oLogPromoDet);
+                }
+                oLogPromo.LogPromoDet= lstLogPromoDet;
+
+                ClientResponse responseLogPromo;
+                using (LogPromoDAO dbLogPromo = new LogPromoDAO())
+                {
+                    responseLogPromo = dbLogPromo.InsertLogPromo(oLogPromo);
                 }
 
                 //Directory.Delete(savepath, true);

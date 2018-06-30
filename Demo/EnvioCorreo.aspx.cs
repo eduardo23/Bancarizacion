@@ -13,9 +13,13 @@ namespace Demo
 {
     public partial class EnvioCorreo : System.Web.UI.Page
     {
+        public static String UserId = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                hdnUserSession.Value = Session["Usuario"].ToString();
+            }
         }
 
         [WebMethod]
