@@ -569,6 +569,8 @@
     <Compile Include="ViewModel\GestionCorreo.cs" />
     <Compile Include="ViewModel\GrupoCorreo.cs" />
     <Compile Include="ViewModel\Institucion_Educativa.cs" />
+    <Compile Include="ViewModel\LogPromo.cs" />
+    <Compile Include="ViewModel\LogPromoDet.cs" />
     <Compile Include="ViewModel\LoguearUsuario.cs" />
     <Compile Include="ViewModel\ParametrosMaestros.cs" />
     <Compile Include="ViewModel\Plantilla.cs" />
