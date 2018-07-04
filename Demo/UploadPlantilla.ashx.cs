@@ -141,9 +141,9 @@ namespace Demo
                             .ForEach(x =>
                             {
                                 string currentSrcValue = string.Empty;
-                                currentSrcValue = x.GetAttributeValue("href", null);
+                                currentSrcValue = x.GetAttributeValue("href", null);                                
 
-                                if (currentSrcValue != "{linkdardebaja}") {
+                                if (currentSrcValue != "{linkdardebaja}" && !currentSrcValue.Contains("http")) {
                                     Plantilla_Detalle objeto = plantilla.list_plantilla_detalle.Where(i => i.NombreArchivoImagen.ToUpper().Equals(currentSrcValue.ToUpper())).FirstOrDefault();
                                     if (objeto != null)
                                     {
