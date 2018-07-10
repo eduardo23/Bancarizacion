@@ -117,7 +117,7 @@ namespace Demo
                     cUtil.EnvioMailSegundo(txt_asunto, item.Email, bodyaux, listrutas, usuario, clave, smtp, puerto);
 
                     LogPromoDet oLogPromoDet = new LogPromoDet();
-                    oLogPromoDet.id_grupo_correo = Convert.ToInt32(id_grupo_correo);
+                    oLogPromoDet.id_grupo_correo = item.grupocorreo.id;// Convert.ToInt32(id_grupo_correo);
                     oLogPromoDet.destinatario = item.Email.ToString();
                     lstLogPromoDet.Add(oLogPromoDet);
                 }
