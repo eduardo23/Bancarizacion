@@ -16,6 +16,8 @@ namespace DAO_Hermes.ViewModel
         public virtual LogPromo LogPromo { get; set; }
         public virtual GrupoCorreo GrupoCorreo { get; set; }
 
+        public virtual int Cantidad { get; set; }
+
         public LogPromoDet()
         {
             LogPromo = new LogPromo();

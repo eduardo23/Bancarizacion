@@ -64,11 +64,10 @@ namespace Demo
                 }
 
                 ClientResponse response;
-                string usuario = cUtil.ObtenerValorParametro("CORREO", "USER");
-                string clave = cUtil.ObtenerValorParametro("CORREO", "CLAVE");
-                string smtp = cUtil.ObtenerValorParametro("CORREO", "SMTP");
-                int puerto = Convert.ToInt32(cUtil.ObtenerValorParametro("CORREO", "PUERTO"));
-
+                string usuario = cUtil.ObtenerValorParametro("CORREOPROMO", "USER");
+                string clave = cUtil.ObtenerValorParametro("CORREOPROMO", "CLAVE");
+                string smtp = cUtil.ObtenerValorParametro("CORREOPROMO", "SMTP");
+                int puerto = Convert.ToInt32(cUtil.ObtenerValorParametro("CORREOPROMO", "PUERTO"));
 
                 ClientResponse responsedesafiliacion;
                 using (ParametrosMaestrosDAO dbParametrosMaestro = new ParametrosMaestrosDAO())

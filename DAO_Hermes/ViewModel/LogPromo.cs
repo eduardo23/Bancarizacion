@@ -19,9 +19,12 @@ namespace DAO_Hermes.ViewModel
 
         public string fecha { get; set; }
 
+        public Users Users { get; set; }
+
         public LogPromo() {
             this.Plantilla = new Plantilla();
             this.LogPromoDet = new List<LogPromoDet>();
+            this.Users = new Users();
         }
 
     }
