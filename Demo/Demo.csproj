@@ -430,6 +430,9 @@
     <Content Include="ListaTiposSeguro.aspx" />
     <Content Include="ListaInstituciones.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="ConsultaLogPromo.aspx">
+      <BrowseToURL>~/ConsultaLogPromo.aspx</BrowseToURL>
+    </Content>
     <Content Include="MantGrupoCorreo.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -1712,6 +1715,13 @@
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultaLogPromo.aspx.cs">
+      <DependentUpon>ConsultaLogPromo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConsultaLogPromo.aspx.designer.cs">
+      <DependentUpon>ConsultaLogPromo.aspx</DependentUpon>
     </Compile>
     <Compile Include="MantGrupoCorreo.aspx.cs">
       <DependentUpon>MantGrupoCorreo.aspx</DependentUpon>

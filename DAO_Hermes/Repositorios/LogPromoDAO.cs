@@ -114,6 +114,8 @@ namespace DAO_Hermes.Repositorios
                                 grupocorreo.descripcion = Convert.ToString(reader["ds_grupo_correo"] == DBNull.Value ? "" : reader["ds_grupo_correo"]);
                                 entidad.Cantidad = Convert.ToInt32(reader["cantidad"] == DBNull.Value ? 0 : reader["cantidad"]);
 
+                                entidad.GrupoCorreo = grupocorreo;
+
                                 LogPromo logpromo = new LogPromo();
                                 logpromo.ID= Convert.ToInt32(reader["logPromoId"] == DBNull.Value ? 0 : reader["logPromoId"]);
                                 logpromo.asunto = Convert.ToString(reader["asunto"] == DBNull.Value ? "" : reader["asunto"]);

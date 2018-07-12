@@ -47,5 +47,24 @@ namespace Demo
             }
             return response;
         }
+
+        [WebMethod]
+        public static ClientResponse getListGrupoCorreoNxOrigen(int origen)
+        {
+            ClientResponse response;
+            try
+            {
+                using (GrupoCorreoDAO dbGrupoCorreo = new GrupoCorreoDAO())
+                {
+                    response = dbGrupoCorreo.getGrupoCorreoNxOrigen(origen);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return response;
+        }
+
     }
 }

@@ -489,7 +489,7 @@
         function loadGrupoCorreoXOrigen(origen) {
             $.ajax({
                 type: "POST",
-                url: "MantGrupoCorreo.aspx/getListGrupoCorreoXOrigen",
+                url: "EnvioCorreo.aspx/getListGrupoCorreoNxOrigen",
                 data: '{origen:"' + origen + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
