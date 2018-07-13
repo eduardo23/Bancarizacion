@@ -167,6 +167,51 @@ namespace DAO_Hermes.Repositorios
 
         }
 
+        public ClientResponse getLstRemitente()
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_lst_remitente_promo", conexion))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        using (reader = comando.ExecuteReader())
+                        {
+
+                            while (reader.Read())
+                            {
+                                entidad = new LogPromoDet();
+
+                                LogPromo logpromo = new LogPromo();
+                                logpromo.remitente= Convert.ToString(reader["remitente"] == DBNull.Value ? "" : reader["remitente"]);
+                                entidad.LogPromo = logpromo;
+
+                                listLogPromoDet.Add(entidad);
+                            }
+                        }
+                        clientResponse.DataJson = JsonConvert.SerializeObject(listLogPromoDet).ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+                reader.Dispose();
+            }
+
+            return clientResponse;
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // Para detectar llamadas redundantes
 

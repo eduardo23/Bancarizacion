@@ -77,7 +77,7 @@
             <thead>
             <tr class="header">
                 <th>Fecha</th>
-                <th>Remitente</th>
+                <th>Usuario</th>
                 <th>Plantilla</th>
                 <th>Asunto</th>
                 <th>Grupo Correo</th>
@@ -181,25 +181,28 @@
     }
 
     function loadRemitente() {
-        //$.ajax({
-        //    type: "POST",
-        //    url: "ConsultarCheque.aspx/GetFLstCampana",
-        //    data: "{}",
-        //    contentType: "application/json; charset=utf-8",
-        //    dataType: "json",
-        //    success: function (response) {
-        //        var models = (typeof response.d) == 'string' ? eval('(' + response.d + ')') : response.d;
-        //        for (var i = 0; i < models.length; i++) {
-        //            var valor = models[i].ID;
-        //            var text = models[i].Nombre;
-        //            $("#ddlRemitente").append($("<option></option>").val(valor).html(text));
-        //        }
-        //    },
-        //    error: function (response) {
-        //        if (response.length != 0)
-        //            alert(response);
-        //    }
-        //});
+        $.ajax({
+            type: "POST",
+            url: "ConsultaLogPromo.aspx/listar_remitente",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var models = JSON.parse(response.d.DataJson);
+                $('#ddlRemitente').empty();
+                $('#ddlRemitente').append("<option value=''>--SELECCIONE--</option>");
+                for (var i = 0; i < models.length; i++) {
+                    var valor = models[i].LogPromo.remitente;
+                    var text = models[i].LogPromo.remitente;
+                    $("#ddlRemitente").append($("<option></option>").val(valor).html(text));
+                }
+                $('#ddlRemitente option[value="1"]').attr("selected", "selected");
+            },
+            error: function (response) {
+                if (response.length != 0)
+                    alert(response);
+            }
+        });
     }
 
     $(document).ready(function () {

@@ -287,7 +287,7 @@ namespace Demo
             MailMessage correo = new MailMessage();
             SmtpClient smtp = new SmtpClient();
 
-            correo.From = new MailAddress(De, "Hermes Seguros", System.Text.Encoding.UTF8);
+            correo.From = new MailAddress(De, "Hermes", System.Text.Encoding.UTF8);
             correo.To.Add(para);
             correo.SubjectEncoding = System.Text.Encoding.UTF8;
             correo.Subject = asunto;

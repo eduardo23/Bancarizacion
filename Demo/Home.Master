@@ -526,6 +526,7 @@
                                         <li><a href="GestionarCorreos.aspx"><i class="fa fa-circle-o"></i>Administrar Correos</a></li>                                        
                                         <li><a href="AdministrarPlantillas.aspx"><i class="fa fa-circle-o"></i>Administrar Plantillas</a></li>                                        
                                         <li><a href="EnvioCorreo.aspx"><i class="fa fa-circle-o"></i>Enviar Promociones</a></li>                                        
+                                        <li><a href="ConsultaLogPromo.aspx"><i class="fa fa-circle-o"></i>Consulta Envio Promociones</a></li>                                        
                                     </ul>
                                 </li>
 

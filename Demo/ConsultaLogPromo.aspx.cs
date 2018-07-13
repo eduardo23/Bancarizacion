@@ -19,6 +19,25 @@ namespace Demo
 
         }
 
+
+        [WebMethod]
+        public static ClientResponse listar_remitente()
+        {
+            ClientResponse response;
+            try
+            {
+                using (LogPromoDAO dbLog = new LogPromoDAO())
+                {
+                    response = dbLog.getLstRemitente();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return response;
+        }
+
         [WebMethod]
         public static ClientResponse listar_reporte(string remitente, string FechaInicial, string FechaFinal, int paginaActual, int RegistroXpagina)
         {
