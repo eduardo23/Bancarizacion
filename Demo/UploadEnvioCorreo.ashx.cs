@@ -111,6 +111,7 @@ namespace Demo
                         bodyaux = bodyaux.Replace("{parrafo}", txt_prompt);
                     }
                     bodyaux = bodyaux.Replace("{NombreUsuario}", item.Nombre1 + " " + item.Nombre2);
+                    bodyaux = bodyaux.Replace("{Codigo}", item.codigo.Trim());
                     bodyaux = bodyaux.Replace("{linkdardebaja}", desafiliacion.valor + "?tokens=" + item.Tokens);
                     bodyaux = HttpUtility.HtmlDecode(bodyaux);
                     cUtil.EnvioMailSegundo(txt_asunto, item.Email, bodyaux, listrutas, usuario, clave, smtp, puerto);

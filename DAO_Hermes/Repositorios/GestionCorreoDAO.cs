@@ -57,7 +57,8 @@ namespace DAO_Hermes.Repositorios
                                 entidad.ApeMaterno = Convert.ToString(reader["apeMaterno"] == DBNull.Value ? "" : reader["apeMaterno"]);
                                 entidad.Email = Convert.ToString(reader["email"] == DBNull.Value ? "" : reader["email"]);
                                 entidad.Tokens = Convert.ToString(reader["tokens"] == DBNull.Value ? "" : reader["tokens"]);
-                                
+                                entidad.codigo = Convert.ToString(reader["codigo"] == DBNull.Value ? "" : reader["codigo"]);
+
                                 entidad.grupocorreo = grupocorreo;
                                 listgestioncorreo.Add(entidad);
                             }

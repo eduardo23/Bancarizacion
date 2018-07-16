@@ -21,6 +21,8 @@ namespace DAO_Hermes.ViewModel
         private string _usuariomodificacion = "";
         private string _tokens = "";
         private string _fechabaja = "";
+
+        private string _codigo = "";
         public GrupoCorreo grupocorreo { get; set; }
         public int id
         {
@@ -28,6 +30,15 @@ namespace DAO_Hermes.ViewModel
             set
             {
                 _id = value;
+            }
+        }
+
+        public string codigo
+        {
+            get { return _codigo; }
+            set
+            {
+                _codigo = value;
             }
         }
 
