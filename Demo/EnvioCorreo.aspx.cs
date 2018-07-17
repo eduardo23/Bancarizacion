@@ -66,5 +66,23 @@ namespace Demo
             return response;
         }
 
+        [WebMethod]
+        public static ClientResponse getNCorreobyLstGrupo(List<GrupoCorreo> grupoCorreo)
+        {
+            ClientResponse response;
+            try
+            {
+                using (GrupoCorreoDAO dbGrupoCorreo = new GrupoCorreoDAO())
+                {
+                    response = dbGrupoCorreo.getNCorreosbyLstGrupo(grupoCorreo);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return response;
+        }
+
     }
 }

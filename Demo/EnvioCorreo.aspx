@@ -186,6 +186,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-5">
+                            <label id="lblContador" class="control-label text-right"></label>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-1 control-label">Seleccione Archivo:</label>
                         <div class="col-sm-11">
@@ -532,8 +543,34 @@
                 var text = listDestino[i].descripcion;
                 $("#cbogrupocorreodestino").append($("<option></option>").val(valor).html(text));
             }
+
+            getNCorreosbyLstGrupo();
         }
 
+        function getNCorreosbyLstGrupo() {
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "EnvioCorreo.aspx/getNCorreobyLstGrupo",
+                data: JSON.stringify({ grupoCorreo: listDestino }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    debugger;
+                    $('#lblContador').html('');
+                    var x = Number(response.d.Id);
+                    if (x > 0)
+                    {
+                        var texto = response.d.Mensaje + ' ' + response.d.Id + ' Correos';
+                        $('#lblContador').html(texto);
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        alert(response);
+                }
+            });
+        }
 
         function loadPlantilla() {
             $.ajax({

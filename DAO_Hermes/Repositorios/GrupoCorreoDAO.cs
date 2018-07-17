@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace DAO_Hermes.Repositorios
 {
@@ -306,6 +307,63 @@ namespace DAO_Hermes.Repositorios
                         clientResponse.Mensaje = "Se elimino satisfactoriamente el registro";
                         clientResponse.Status = "OK";
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;
+        }
+
+        public ClientResponse getNCorreosbyLstGrupo(List<GrupoCorreo> objeto)
+        {
+            try
+            {
+                XElement root = new XElement("ROOT");
+                foreach (GrupoCorreo GrupoCorreo in objeto)
+                {
+                    XElement element = new XElement("Detalle",
+                    new XElement("id", GrupoCorreo.id)
+                    );
+                    root.Add(element);
+                }
+                string xml = root.ToString();
+
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_getNCorreosbyLstGrupo", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@xml", xml);
+                        comando.Parameters.Add("@Ind", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        comando.Parameters.Add("@Mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        int ind = Convert.ToInt32(comando.Parameters["@Ind"].Value);
+                        string mensaje = Convert.ToString(comando.Parameters["@Mensaje"].Value);
+
+                        if (ind > 0)
+                        {
+                            clientResponse.Id = ind;
+                            clientResponse.Mensaje = mensaje;
+                            clientResponse.Status = "Ok";
+                        }
+                        else
+                        {
+                            clientResponse.Id = ind;
+                            clientResponse.Mensaje = mensaje;
+                            clientResponse.Status = "ERROR";
+                        }
+                    }
+
                 }
             }
             catch (Exception ex)
