@@ -300,7 +300,7 @@ namespace Demo
                 correo.Attachments.Add(new Attachment(item));
             }
             smtp.Credentials = new System.Net.NetworkCredential(De, Clave);
-            smtp.Port = Puerto;
+            //smtp.Port = Puerto;
             smtp.Host = SMTPServer;
             smtp.EnableSsl = true;
 
