@@ -1,5 +1,6 @@
 ﻿using DAO_Hermes.Repositorios;
 using DAO_Hermes.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -61,6 +62,48 @@ namespace Demo
         }
 
 
+
+        [WebMethod]
+        public static ClientResponse listarImagenBD(int id_plantilla)
+        {
+            ClientResponse response = new ClientResponse(); 
+            try
+            {
+                using (PlantillaDAO dbPlanilla = new PlantillaDAO())
+                {
+                    List<Plantilla_Detalle> list = dbPlanilla.getPlantillaDetalle(id_plantilla);
+                    response.Id = id_plantilla;
+                    response.DataJson = JsonConvert.SerializeObject(list).ToString();
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return response;
+        }
+
+        [WebMethod]
+        public static ClientResponse EliminarImagenBD(int id_plantilla, int id_det_plantilla)
+        {
+            ClientResponse response;
+            try
+            {
+                using (PlantillaDAO dbPlanilla = new PlantillaDAO())
+                {
+
+                    Plantilla_Detalle oCheque = dbPlanilla.getPlantillaDetalle(id_plantilla).Where(p => p.id == id_det_plantilla).FirstOrDefault();
+                    FileInfo fi = new FileInfo(oCheque.ruta_imagen);
+                    fi.Delete();     
+                    response = dbPlanilla.EliminarImgen_DetallePlantilla(id_plantilla, id_det_plantilla);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+            return response;
+        }
         [WebMethod]
         public static ClientResponse AnularPlantilla(int plantilla)
         {
@@ -90,7 +133,7 @@ namespace Demo
                     //    });
                     //    Directory.Delete(ruta, true);
                     //}
-                    
+
                     ////Eliminamos las imagenes adjuntadas
                     //arrayruta_plantilla = desafiliacion.list_plantilla_detalle[0].ruta_imagen.Split(delimiter);
                     //listStr = arrayruta_plantilla.ToList();

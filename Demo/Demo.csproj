@@ -359,6 +359,7 @@
     <Content Include="dist\js\app.js" />
     <Content Include="dist\js\app.min.js" />
     <Content Include="dist\js\demo.js" />
+    <Content Include="dist\js\jquery.twbsPagination.js" />
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
     <Content Include="dll\Ionic.Zip.dll" />

@@ -35,8 +35,12 @@ namespace Demo
                 string hora = DateTime.Now.ToString("yyyyMMddhhmmss");
                 string tempPath = "";
                 string txt_descripcion = context.Request["txt_descripcion"];
+                int txt_codigo = Convert.ToInt32(context.Request["txt_codigo"]);
                 string FiledataHTMLName = context.Request["FiledataHTMLName"];
+                
                 HttpFileCollection uploadFiles = context.Request.Files;
+
+                plantilla.id = txt_codigo;
                 plantilla.descripcion = txt_descripcion;
 
                 //string FolderPath = System.Configuration.ConfigurationManager.AppSettings["FolderPath"];
@@ -78,7 +82,7 @@ namespace Demo
                             Directory.CreateDirectory(savepath);
 
                         string filename = postedFile.FileName;
-                        string files = savepath + @"\" + filename;
+                        string files = savepath + @"/" + filename;
                         postedFile.SaveAs(files);
                         plantilla.NombreArchivoHtml = filename;
                         plantilla.id_estado = 1;
@@ -95,7 +99,7 @@ namespace Demo
                             Directory.CreateDirectory(savepath);
 
                         string filename = postedFile.FileName;
-                        string files = savepath + @"\" + filename;
+                        string files = savepath + @"/" + filename;
                         postedFile.SaveAs(files);
                         plantilla_detalle.NombreArchivoImagen = filename;
                         plantilla_detalle.ruta_imagen = files;
@@ -110,85 +114,104 @@ namespace Demo
                 
                 //Replace SRC  plantilla html
                 HtmlDocument document = new HtmlDocument();
-                document.Load(plantilla.ruta_plantilla_html);
-                document.DocumentNode.Descendants("img")
-                            .Where(e =>
-                            {
-                                string src = e.GetAttributeValue("src", null) ?? "";
-                                return !string.IsNullOrEmpty(src);// && src.StartsWith("data:image");
-                            })
-                            .ToList()
-                            .ForEach(x =>
-                            {
-                                string currentSrcValue = string.Empty;
-                                currentSrcValue = x.GetAttributeValue("src", null);
-                                Plantilla_Detalle objeto = plantilla.list_plantilla_detalle.Where(i => i.NombreArchivoImagen.ToUpper().Equals(currentSrcValue.ToUpper())).FirstOrDefault();
-                                if(objeto !=null)
-                                {
-                                    x.SetAttributeValue("src", objeto.ruta_site_imagen);
-                                }
-                                
-                            });
-                document.Save(plantilla.ruta_plantilla_html);
-
-                document.DocumentNode.Descendants("a")
-                            .Where(e =>
-                            {
-                                string src = e.GetAttributeValue("href", null) ?? "";
-                                return !string.IsNullOrEmpty(src);// && src.StartsWith("data:image");
-                            })
-                            .ToList()
-                            .ForEach(x =>
-                            {
-                                string currentSrcValue = string.Empty;
-                                currentSrcValue = x.GetAttributeValue("href", null);                                
-
-                                if (currentSrcValue != "{linkdardebaja}" && !currentSrcValue.Contains("http")) {
-                                    Plantilla_Detalle objeto = plantilla.list_plantilla_detalle.Where(i => i.NombreArchivoImagen.ToUpper().Equals(currentSrcValue.ToUpper())).FirstOrDefault();
-                                    if (objeto != null)
-                                    {
-                                        x.SetAttributeValue("href", objeto.ruta_site_imagen);
-                                    }
-                                }
-
-                            });
-                document.Save(plantilla.ruta_plantilla_html);
-
-                HtmlDocument document1 = new HtmlDocument();
-                document1.Load(plantilla.ruta_plantilla_html);
-                plantilla.fl_parrafo = 0;
-                try
-                {
-                    //List<HtmlNode> list = document1.DocumentNode.SelectNodes("p").ToList();
-                    //plantilla.fl_parrafo = list.Count > 0 ? 1 : 0;
-                    document.DocumentNode.Descendants("p")
+                if (plantilla.ruta_plantilla_html != null) {
+                    document.Load(plantilla.ruta_plantilla_html);
+                    document.DocumentNode.Descendants("img")
                                 .Where(e =>
                                 {
-                                    string src = e.GetAttributeValue("type", null) ?? "";
-                                    return !string.IsNullOrEmpty(src);
-                                })
+                                    string src = e.GetAttributeValue("src", null) ?? "";
+                                    return !string.IsNullOrEmpty(src);// && src.StartsWith("data:image");
+                            })
                                 .ToList()
                                 .ForEach(x =>
                                 {
                                     string currentSrcValue = string.Empty;
-                                    currentSrcValue = x.GetAttributeValue("type", null);
-
-                                    if (currentSrcValue == "por ingresar")
+                                    currentSrcValue = x.GetAttributeValue("src", null);
+                                    Plantilla_Detalle objeto = plantilla.list_plantilla_detalle.Where(i => i.NombreArchivoImagen.ToUpper().Equals(currentSrcValue.ToUpper())).FirstOrDefault();
+                                    if (objeto != null)
                                     {
-                                        plantilla.fl_parrafo = 1;
+                                        x.SetAttributeValue("src", objeto.ruta_site_imagen);
                                     }
-                                });
 
-                }
-                catch (Exception)
-                {
+                                });
+                    document.Save(plantilla.ruta_plantilla_html);
+
+                    document.DocumentNode.Descendants("a")
+                                .Where(e =>
+                                {
+                                    string src = e.GetAttributeValue("href", null) ?? "";
+                                    return !string.IsNullOrEmpty(src);// && src.StartsWith("data:image");
+                            })
+                                .ToList()
+                                .ForEach(x =>
+                                {
+                                    string currentSrcValue = string.Empty;
+                                    currentSrcValue = x.GetAttributeValue("href", null);
+
+                                    if (currentSrcValue != "{linkdardebaja}" && !currentSrcValue.Contains("http"))
+                                    {
+                                        Plantilla_Detalle objeto = plantilla.list_plantilla_detalle.Where(i => i.NombreArchivoImagen.ToUpper().Equals(currentSrcValue.ToUpper())).FirstOrDefault();
+                                        if (objeto != null)
+                                        {
+                                            x.SetAttributeValue("href", objeto.ruta_site_imagen);
+                                        }
+                                    }
+
+                                });
+                    document.Save(plantilla.ruta_plantilla_html);
+
+                    HtmlDocument document1 = new HtmlDocument();
+                    document1.Load(plantilla.ruta_plantilla_html);
                     plantilla.fl_parrafo = 0;
+                    try
+                    {
+                        //List<HtmlNode> list = document1.DocumentNode.SelectNodes("p").ToList();
+                        //plantilla.fl_parrafo = list.Count > 0 ? 1 : 0;
+                        document.DocumentNode.Descendants("p")
+                                    .Where(e =>
+                                    {
+                                        string src = e.GetAttributeValue("type", null) ?? "";
+                                        return !string.IsNullOrEmpty(src);
+                                    })
+                                    .ToList()
+                                    .ForEach(x =>
+                                    {
+                                        string currentSrcValue = string.Empty;
+                                        currentSrcValue = x.GetAttributeValue("type", null);
+
+                                        if (currentSrcValue == "por ingresar")
+                                        {
+                                            plantilla.fl_parrafo = 1;
+                                        }
+                                    });
+
+                    }
+                    catch (Exception)
+                    {
+                        plantilla.fl_parrafo = 0;
+                    }
                 }
+                
 
                 ClientResponse response;
+              
                 using (PlantillaDAO dbPlanilla = new PlantillaDAO())
                 {
-                    response = dbPlanilla.InsertPantilla(plantilla);
+                    if (txt_codigo == 0)
+                    {
+                        response = dbPlanilla.InsertPantilla(plantilla);
+                    }
+                    else {
+                        if (plantilla.ruta_plantilla_html != null) //si adjunto html se elminar el existente  
+                        {
+                            ClientResponse responseplantilla = dbPlanilla.getPlantillaXId(plantilla.id);
+                            Plantilla objetoplantilla = Newtonsoft.Json.JsonConvert.DeserializeObject<Plantilla>(responseplantilla.DataJson);
+                            FileInfo fi = new FileInfo(objetoplantilla.ruta_plantilla_html);
+                            fi.Delete();
+                        }
+                        response = dbPlanilla.UpdatePantilla(plantilla);
+                    }
+                    
                 }
                 var result = new
                 {

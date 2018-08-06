@@ -184,6 +184,10 @@
                                     <button type="button" class="btnHermes" id="btn_grabar_planilla" onclick="GrabarPlanilla();">
                                         Grabar
                                     </button>
+                                    <button type="button" class="btnHermes" style="display: none;" id="btn_actualizar_planilla" onclick="ActualizarPlanilla();">
+                                        Actualizar
+                                    </button>
+
                                 </div>
                                 <div class="col-lg-3 text-center">
                                     <button type="button" class="btnHermes" id="btn_anular_planilla" style="display: none;">
@@ -196,7 +200,7 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-3 text-center">
-                                    <button type="button" class="btnHermes" onclick="nuevaplantillar()">
+                                    <button type="button" class="btnHermes" onclick="nuevaplantilla()">
                                         Nuevo
                                     </button>
                                 </div>
@@ -272,25 +276,21 @@
             </div>
         </div>
     </div>
-   <%-- <script type="text/javascript" src="Scripts/FileStyle/bootstrap-filestyle.js"></script>--%>
+    <%-- <script type="text/javascript" src="Scripts/FileStyle/bootstrap-filestyle.js"></script>--%>
     <input type="hidden" id="flag_accion" value="INS" />
-    <script type="text/javascript">
-        //$('#input08').filestyle({
-        //    'placeholder': 'adjunte archivo',
-        //    text: ' Examinar',
-        //    btnClass: 'btn-success'
-        //});
-        //$('#input09').filestyle({
-        //    'placeholder': 'adjunte archivo',
-        //    text: ' Examinar',
-        //    btnClass: 'btn-success'
-        //});
-
+    <input type="hidden" id="hidden_id_plantilla" value="0" />
+    <input type="hidden" id="hidden_fl_exists_registros" value="0" />
+    <%--
+        0:no existen reg
+        1:si existen reg agregado
+    --%>
+    <script type="text/javascript">       
+        var listImagen = [];
         $('#file_browser_input08').click(function (e) {
             e.preventDefault();
             $('#input08').click();
         });
-        $('#input08').change(function () {            
+        $('#input08').change(function () {
             $('#file_path_input08').val($(this).val());
             var fl_result = checkfile($('#file_path_input08').val());
             if (!fl_result) {
@@ -312,7 +312,6 @@
                 $('#input09').val("");
             }
         });
-
 
         $(document).ready(function (e) {
 
@@ -373,19 +372,21 @@
             console.log(el.innerHTML);
             el.classList.add('active');
             $("#txt_descripcion").val(data.descripcion);
-            $('#txt_descripcion').prop('readonly', true);
-            cargarTablaImagenBD(data.list_plantilla_detalle);
+            //$('#txt_descripcion').prop('readonly', true);
+            $("#hidden_id_plantilla").val(data.id);
+            cargarTablaImagenBD(data.list_plantilla_detalle, data.id);
             $('#btn_anular_planilla').attr('onclick', 'confirmar_AnularPlantilla(' + data.id + ')');
             $('#btn_vista_previa').attr('onclick', 'modalPreview(' + data.id + ')');
             $("#flag_accion").val('UPD');
             $("#btn_grabar_planilla").css('display', 'none');
             $("#btn_anular_planilla").css('display', 'block');
-
+            $("#btn_actualizar_planilla").css('display', 'block');
         }
 
-        function nuevaplantillar() {
+        function nuevaplantilla() {
             $("#btn_grabar_planilla").css('display', 'block');
             $("#btn_anular_planilla").css('display', 'none');
+            $("#btn_actualizar_planilla").css('display', 'none');
             $('#file_path').val("");
             $('#file_path_input08').val("");
             $('#input08').val("");
@@ -396,7 +397,8 @@
             HTML += "<td colspan='2'>No existen registros</td>";
             HTML += "</tr>";
             document.getElementById("tbodygrupocorreo").innerHTML = HTML;
-
+            $("#hidden_fl_exists_registros").val("0");
+            $("#hidden_id_plantilla").val("0")
             $("#txt_descripcion").val("");
         }
 
@@ -424,23 +426,28 @@
             });
         }
 
-        function cargarTablaImagenBD(listImagen) {
+        function cargarTablaImagenBD(listImagen, id) {
+            console.log(listImagen);
             var HTML = "";
             var verimagen = "";
-            debugger;
             document.getElementById("tbodygrupocorreo").innerHTML = "";
             if (listImagen.length > 0) {
+                $("#hidden_fl_exists_registros").val("1");
                 for (var index = 0; index < listImagen.length; index++) {
                     var vals = {
+                        id_plantilla: id,
                         id: parseInt(listImagen[index].id),
                         ruta_site_imagen: listImagen[index].ruta_site_imagen
                     };
                     var Vals = JSON.stringify(vals);
                     verimagen = "VerImagen(" + Vals + ")";
+                    Eliminar = "EliminarImagenBD(" + Vals + ")";
+
                     HTML += "<tr>";
                     HTML += "<td>" + listImagen[index].NombreArchivoImagen + "</td>";
                     HTML += "<td>";
-                    HTML += "<a onclick='" + verimagen + "' href='javascript:void(0);' title='Ver Imagen' ><span class=''></span> Ver Imagen</a>";
+                    HTML += "<a onclick='" + verimagen + "' href='javascript:void(0);' title='Ver Imagen' ><span class=''></span> Ver Imagen</a>|";
+                    HTML += "<a onclick='" + Eliminar + "' href='javascript:void(0);' title='Eliminar' ><span class=''></span> Eliminar</a>";
                     HTML += "</td>";
                     HTML += "</tr>";
                 }
@@ -451,7 +458,59 @@
             }
             document.getElementById("tbodygrupocorreo").innerHTML = HTML;
         }
+        function listarImagenBD(id_plantilla) {
+            $.ajax({
+                type: "POST",
+                url: "AdministrarPlantillas.aspx/listarImagenBD",
+                contentType: "application/json",
+                data: '{id_plantilla:"' + data.id_plantilla + '"}',
+                dataType: "json",
+                success: function (response) {
+                    var result = response.d.Status;
+                    var mensaje = response.d.Mensaje;
+                    if (result == "Ok") {
+                        
+                        var list_plantilla_detalle = JSON.parse(response.d.DataJson);
+                        var id = response.d.Id;
+                        cargarTablaImagenBD(list_plantilla_detalle, id);
+                    } else {
+                        Alert.danger(mensaje);
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        Alert.danger(mensaje);
+                }
+            });
+        }
 
+        function EliminarImagenBD(data) {
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "AdministrarPlantillas.aspx/EliminarImagenBD",
+                contentType: "application/json",
+                data: '{id_plantilla:"' + data.id_plantilla + '",id_det_plantilla:"' + data.id + '"}',
+                dataType: "json",
+                success: function (response) {
+                    var result = response.d.Status;
+                    var mensaje = response.d.Mensaje;
+                    if (result == "Ok") {
+                        Alert.info(mensaje);
+                        
+                        var list_plantilla_detalle = JSON.parse(response.d.DataJson);
+                        var id = response.d.Id;
+                        cargarTablaImagenBD(list_plantilla_detalle, id);
+                    } else {
+                        Alert.danger(mensaje);
+                    }
+                },
+                error: function (response) {
+                    if (response.length != 0)
+                        Alert.danger(mensaje);
+                }
+            });
+        }
         function VerImagen(data) {
             $('.imagepreview').attr('src', data.ruta_site_imagen);
             $('#imagemodal').modal('show');
@@ -493,48 +552,90 @@
                 els[i].classList.remove('active')
             }
         }
-        var listImagen = [];
+
         function AgregarImagen() {
             var file_text = $('#file_path').val();
             if (file_text != "") {
                 var files = $("#input09").get(0).files;
-                listImagen.push(files);
-                cargarTablaImagen(listImagen);
+                //if ($("#flag_accion").val() == 'UPD') {
+                //    AgregarImagenBD(files);
+                //} else {
+                var id_reg = Math.random().toString(36).substr(2, 9);
+                var obj = {
+                    id: id_reg,
+                    file: files
+                }
+                listImagen.push(obj);
+                cargarTablaImagen(files, id_reg);
+                //}
                 $('#file_path').val("");
             } else {
                 Alert.danger("Por favor agregue Archivo - Imagen");
             }
         }
 
-        function cargarTablaImagen(listImagen) {
+        function cargarTablaImagen(files, id) {
+            //var rowCount = document.getElementById('tbodygrupocorreo').rows.length;           
+            if ($("#hidden_fl_exists_registros").val() == "0") {
+                document.getElementById("tbodygrupocorreo").innerHTML = "";
+            }
             var HTML = "";
             var modalEliminar = "";
-            document.getElementById("tbodygrupocorreo").innerHTML = "";
-            if (listImagen.length > 0) {
-                for (var index = 0; index < listImagen.length; index++) {
-                    var vals = {
-                        id: parseInt(index)
-                    };
-                    var Vals = JSON.stringify(vals);
-                    modalEliminar = "modalEliminar(" + Vals + ")";
-                    HTML += "<tr>";
-                    HTML += "<td>" + listImagen[index][0].name + "</td>";
-                    HTML += "<td>";
-                    HTML += "<a href='#' onclick='" + modalEliminar + "' title='Eliminar registro' ><span class='fa fa-trash'></span> Eliminar</a>";
-                    HTML += "</td>";
-                    HTML += "</tr>";
-                }
-            } else {
+            var vals = {
+                id: id
+            };
+            var Vals = JSON.stringify(vals);
+            modalEliminar = "modalEliminar(" + Vals + ",this)";
+            HTML += "<tr>";
+            HTML += "<td>" + files[0].name + "</td>";
+            HTML += "<td>";
+            HTML += "<a href='#' onclick='" + modalEliminar + "' title='Eliminar registro' ><span class='fa fa-trash'></span> Eliminar</a>";
+            HTML += "</td>";
+            HTML += "</tr>";
+            $('#tbodygrupocorreo').append(HTML);
+            $("#hidden_fl_exists_registros").val("1");
+            //document.getElementById("tbodygrupocorreo").append(HTML);
+
+            //var HTML = "";
+            //var modalEliminar = "";
+            //document.getElementById("tbodygrupocorreo").innerHTML = "";
+            //if (listImagen.length > 0) {
+            //    for (var index = 0; index < listImagen.length; index++) {
+            //        var vals = {
+            //            id: parseInt(index)
+            //        };
+            //        var Vals = JSON.stringify(vals);
+            //        modalEliminar = "modalEliminar(" + Vals + ",this)";
+            //        HTML += "<tr>";
+            //        HTML += "<td>" + listImagen[index][0].name + "</td>";
+            //        HTML += "<td>";
+            //        HTML += "<a href='#' onclick='" + modalEliminar + "' title='Eliminar registro' ><span class='fa fa-trash'></span> Eliminar</a>";
+            //        HTML += "</td>";
+            //        HTML += "</tr>";
+            //    }
+            //} else {
+            //    HTML += "<tr>";
+            //    HTML += "<td colspan='2'>No existen registros</td>";
+            //    HTML += "</tr>";
+            //}
+            //document.getElementById("tbodygrupocorreo").innerHTML = HTML;
+        }
+
+        function modalEliminar(data, r) {
+            
+            listImagen.splice(listImagen.indexOf(data.id), 1);
+
+            var row = r.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            var rowCount = document.getElementById('tbodygrupocorreo').rows.length;
+            if (rowCount == 0) {
+                var HTML = "";
                 HTML += "<tr>";
                 HTML += "<td colspan='2'>No existen registros</td>";
                 HTML += "</tr>";
+                document.getElementById("tbodygrupocorreo").innerHTML = HTML;
+                $("#hidden_fl_exists_registros").val("0");
             }
-            document.getElementById("tbodygrupocorreo").innerHTML = HTML;
-        }
-
-        function modalEliminar(data) {
-            listImagen.splice(listImagen.indexOf(data.id), 1);
-            cargarTablaImagen(listImagen);
         }
 
 
@@ -606,6 +707,96 @@
                 }
             });
         }
+        //function AgregarImagenBD(files) {
+        //    var data = new FormData();
+        //    data.append("FiledataImagenes", files[0]);
+        //    data.append("flag_accion", $("#flag_accion").val());
+        //    $.ajax({
+        //        type: 'post',
+        //        url: "UploadPlantilla.ashx",
+        //        contentType: false,
+        //        processData: false,
+        //        data: data,
+        //        success: function (response) {
+        //            var objeto = JSON.parse(response);
+        //            if (objeto.Result == "Ok") {
+        //                Alert.info("Se agrego Imagen con exito");
+        //                var id_plantilla = $("#hidden_id_plantilla").val();
+        //                listarImagenBD(id_plantilla);
+        //                //listarPlanilla();
+        //                //listImagen = [];
+        //                //document.getElementById("tbodygrupocorreo").innerHTML = "";
+        //                //$('#txt_descripcion').val('');
+        //                //$('#file_path_input08').val("");
+        //                //$('#input08').val("");
+        //            } else {
+        //                Alert.danger(objeto.Mensaje);
+        //            }
+        //        },
+        //        error: function (error) {
+        //            Alert.danger("Error Consulte con el Administrador de Sistema.");
+        //        }
+        //    });
+
+        //}
+
+        function ActualizarPlanilla() {
+            var data = new FormData();
+            var txt_descripcion = $('#txt_descripcion').val();
+            if (txt_descripcion == "") {
+                Alert.danger("Por favor ingrese Descripcion ");
+                $('#txt_descripcion').focus();
+                return false;
+            }
+            // Add the uploaded image content to the form data collection
+            var file_text = $('#file_path_input08').val();
+            if (file_text != "") {
+                var files = $("#input08").get(0).files;
+                data.append("FiledataHTML", files[0]);
+                data.append("FiledataHTMLName", files[0].name);
+            }
+            //else {
+            //    Alert.danger("Por favor Seleccione Archivo - HTML");
+            //    return false;
+            //}
+
+            if (listImagen.length > 0) {
+                for (var index = 0; index < listImagen.length; index++) {
+                    data.append("FiledataImagenes" + index, listImagen[index].file[0]);
+                }
+            }
+            //else {
+            //    Alert.danger("Por favor agregue Archivo - Imagen");
+            //    // $("#input09").focus();
+            //    return false;
+            //}
+            data.append("txt_descripcion", txt_descripcion);
+            data.append("txt_codigo", $("#hidden_id_plantilla").val());
+            $.ajax({
+                type: 'post',
+                url: "UploadPlantilla.ashx",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (response) {
+                    var objeto = JSON.parse(response);
+                    if (objeto.Result == "Ok") {
+                        Alert.info(objeto.Mensaje);
+                        listarPlanilla();
+                        listImagen = [];
+                        document.getElementById("tbodygrupocorreo").innerHTML = "";
+                        $('#txt_descripcion').val('');
+                        $('#file_path_input08').val("");
+                        $('#input08').val("");
+                    } else {
+                        Alert.danger(objeto.Mensaje);
+                    }
+                },
+                error: function (error) {
+                    Alert.danger("Error Consulte con el Administrador de Sistema.");
+                }
+            });
+        }
 
         function GrabarPlanilla() {
             var data = new FormData();
@@ -625,10 +816,9 @@
                 Alert.danger("Por favor Seleccione Archivo - HTML");
                 return false;
             }
-           
             if (listImagen.length > 0) {
                 for (var index = 0; index < listImagen.length; index++) {
-                    data.append("FiledataImagenes" + index, listImagen[index][0]);
+                    data.append("FiledataImagenes" + index, listImagen[index].file[0]);
                 }
             } else {
                 Alert.danger("Por favor agregue Archivo - Imagen");
@@ -636,6 +826,7 @@
                 return false;
             }
             data.append("txt_descripcion", txt_descripcion);
+            data.append("txt_codigo", $("#hidden_id_plantilla").val());
             $.ajax({
                 type: 'post',
                 url: "UploadPlantilla.ashx",
@@ -651,7 +842,7 @@
                         document.getElementById("tbodygrupocorreo").innerHTML = "";
                         $('#txt_descripcion').val('');
                         $('#file_path_input08').val("");
-                        $('#input08').val("");                        
+                        $('#input08').val("");
                     } else {
                         Alert.danger(objeto.Mensaje);
                     }

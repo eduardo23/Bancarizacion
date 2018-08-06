@@ -73,6 +73,42 @@ namespace DAO_Hermes.Repositorios
 
             return clientResponse;
         }
+
+        public ClientResponse EliminarImgen_DetallePlantilla(int id_planilla, int id_planilla_det)
+        {
+            try
+            {
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_del_plantilla_det_x_id", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@id_plantilla", id_planilla);
+                        comando.Parameters.AddWithValue("@id_plantilla_det", id_planilla_det);
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        List<Plantilla_Detalle>  list  =  getPlantillaDetalle(id_planilla);
+                        clientResponse.Mensaje = "Se elimino la imagen seleccionada";
+                        clientResponse.Status = "Ok";
+                        clientResponse.Id = id_planilla;
+                        clientResponse.DataJson = JsonConvert.SerializeObject(list).ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;
+        }
+
         public ClientResponse AnularPlantilla(int id_planilla)
         {
             try
@@ -291,6 +327,67 @@ namespace DAO_Hermes.Repositorios
                         }                       
                     }
                                  
+                }
+            }
+            catch (Exception ex)
+            {
+                clientResponse.Mensaje = ex.Message;
+                clientResponse.Status = "ERROR";
+            }
+            finally
+            {
+                conexion.Close();
+                conexion.Dispose();
+                comando.Dispose();
+            }
+            return clientResponse;
+        }
+
+        public ClientResponse UpdatePantilla(Plantilla objeto)
+        {
+            try
+            {
+                XElement root = new XElement("ROOT");
+                foreach (Plantilla_Detalle detalle in objeto.list_plantilla_detalle)
+                {
+                    XElement address = new XElement("Detalle",
+                    new XElement("NombreArchivoImagen", detalle.NombreArchivoImagen),
+                    new XElement("ruta_imagen", detalle.ruta_imagen),
+                    new XElement("ruta_site_imagen", detalle.ruta_site_imagen)
+                    );
+                    root.Add(address);
+                }
+                string xml = root.ToString();
+                using (conexion = new SqlConnection(ConexionDAO.cnx))
+                {
+                    using (comando = new SqlCommand("usp_upd_planilla", conexion))
+                    {
+                        comando.Parameters.AddWithValue("@id", objeto.id);
+                        comando.Parameters.AddWithValue("@xml", xml);
+                        comando.Parameters.AddWithValue("@fl_parrafo", objeto.fl_parrafo);
+                        comando.Parameters.AddWithValue("@descripcion", objeto.descripcion);
+                        comando.Parameters.AddWithValue("@NombreArchivoHtml", objeto.NombreArchivoHtml == null ? "" : objeto.NombreArchivoHtml);
+                        comando.Parameters.AddWithValue("@ruta_plantilla_html", objeto.ruta_plantilla_html == null ? "": objeto.ruta_plantilla_html);
+                        comando.Parameters.Add("@Ind", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        comando.Parameters.Add("@Mensaje", SqlDbType.VarChar, 200).Direction = ParameterDirection.Output;
+                        comando.CommandType = CommandType.StoredProcedure;
+                        conexion.Open();
+                        comando.ExecuteNonQuery();
+                        int ind = Convert.ToInt32(comando.Parameters["@Ind"].Value);
+                        string mensaje = Convert.ToString(comando.Parameters["@Mensaje"].Value);
+
+                        if (ind > 0)
+                        {
+                            clientResponse.Mensaje = mensaje;
+                            clientResponse.Status = "Ok";
+                        }
+                        else
+                        {
+                            clientResponse.Mensaje = mensaje;
+                            clientResponse.Status = "ERROR";
+                        }
+                    }
+
                 }
             }
             catch (Exception ex)
