@@ -398,7 +398,7 @@
             HTML += "</tr>";
             document.getElementById("tbodygrupocorreo").innerHTML = HTML;
             $("#hidden_fl_exists_registros").val("0");
-            $("#hidden_id_plantilla").val("0")
+            $("#hidden_id_plantilla").val("0");
             $("#txt_descripcion").val("");
         }
 
@@ -455,6 +455,7 @@
                 HTML += "<tr>";
                 HTML += "<td colspan='2'>No existen registros</td>";
                 HTML += "</tr>";
+                $("#hidden_fl_exists_registros").val("0");
             }
             document.getElementById("tbodygrupocorreo").innerHTML = HTML;
         }
@@ -496,8 +497,7 @@
                     var result = response.d.Status;
                     var mensaje = response.d.Mensaje;
                     if (result == "Ok") {
-                        Alert.info(mensaje);
-                        
+                        Alert.info(mensaje);                        
                         var list_plantilla_detalle = JSON.parse(response.d.DataJson);
                         var id = response.d.Id;
                         cargarTablaImagenBD(list_plantilla_detalle, id);
@@ -533,7 +533,13 @@
                         document.getElementById("tbodygrupocorreo").innerHTML = "";
                         var tr = "<tr><td colspan='2'>No existen registros.</td></tr>";
                         document.getElementById("tbodygrupocorreo").innerHTML = tr;
+                        $("#hidden_fl_exists_registros").val("0");
+                        $("#hidden_id_plantilla").val("0");
                         $("#flag_accion").val('INS');
+                        $("#btn_grabar_planilla").css('display', 'block');
+                        $("#btn_anular_planilla").css('display', 'none');
+                        $("#btn_actualizar_planilla").css('display', 'none');                       
+
                     } else {
                         Alert.danger(mensaje);
                     }
